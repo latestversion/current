@@ -32,44 +32,47 @@ function Text(text,alphabet,canvas,wantedHeight)
 
     var lines = text.split("\n")
     var numlines = lines.length
-    var linedistance = 0.1 // part of alphabet line height
+    var linedistance = 0.1
+    var heightPart = 0.80
 
     var unscaledTextHeight = alphabet.rowheight*numlines + (numlines-1)*linedistance*alphabet.rowheight
 
     // Say we want 80% of available height
-    var wantedHeight = canvas.height * 0.80
+    var wantedHeight = canvas.height * heightPart
 
-    var scale = wantedHeight / unscaledTextHeight
+    this.scale = wantedHeight / unscaledTextHeight
 
+    this.scaledHeight = wantedHeight
 
-    var symbols = [];
-    var canvasWidth = canvas.width;
-    var canvasHeight = canvas.height;
-    var textHeight = 0;
+    this.lines = []
 
-    var maxHeightSymbol = 0;
+    var i,j
 
-    for(i = 0; i < lines.length; i++)
+    var maxlinewidth = 0
+
+    for (i = 0; i < lines.length; i++)
     {
-        line = lines[i];
-        line.width = this.letterspacing*(line.length-1);
-        line.height = 0;
+        this.lines[i] = []
+        this.lines[i].width = 0
+        line = lines[i]
 
-        for(j = 0; j < line.length; j++)
+        for (j = 0; j < line.length;j++)
         {
-            c = line.charAt(j);
-            var symbol = alphabet[c];
-
-            line.width += symbol.width;
-
-           if (symbol.height > line.height)
-           {
-               line.height = symbol.height;
-           }
+            var char = line.charAt(j)
+            var sym = alphabet[char].clone()
+            sym.scale(this.scale)
+            this.lines[i][j] = sym
+            this.lines[i].width += sym.width
         }
-
-        textHeight += line.height+line.height*this.rowspacing;
     }
+
+    for (i = 0; i < this.lines.length; i++)
+    {
+        line = this.lines[i]
+        line.x = (canvas.width-line.width)/2
+        line.y = (canvas.height-this.scaledHeight)/2+i*this.scale*alphabet.rowheight*(1+linedistance)
+    }
+
 
     this.view = new TextView(this);
 

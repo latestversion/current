@@ -8,6 +8,7 @@
 <br><br><br>
 </center>
 
+<script src="Array.js"></script>
 <script src="symbol.js"></script>
 <script src="alphabet.js"></script>
 <script src="text.js"></script>
@@ -16,6 +17,10 @@
 
 <script>
 
+var a = [1, 2, 3]
+console.log(a[444])
+//a.foreach(function(a){console.log(""+a)})
+
 var canvas = document.getElementById("thecanvas");
 var a = getURLParameter('a');
 letter = "A";
@@ -23,7 +28,7 @@ anaclown = alphabet["A"].clone()
 anaclown.scale(5)
 test_draw(anaclown,canvas);
 
-var text = "ROCK\nN\nROLL"
+var text = "JAVLA\nGUBBAR"
 var t = new Text(text,alphabet,canvas,2000)
 t.draw(canvas)
 //var demo = new RestlessDemo(a,canvas);

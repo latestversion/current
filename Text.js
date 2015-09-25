@@ -30,7 +30,18 @@ function Text(text,alphabet,canvas,wantedHeight)
 {
     TextModel.call(this,text,alphabet);
 
-    var lines = text.split("\n");
+    var lines = text.split("\n")
+    var numlines = lines.length
+    var linedistance = 0.1 // part of alphabet line height
+
+    var unscaledTextHeight = alphabet.rowheight*numlines + (numlines-1)*linedistance*alphabet.rowheight
+
+    // Say we want 80% of available height
+    var wantedHeight = canvas.height * 0.80
+
+    var scale = wantedHeight / unscaledTextHeight
+
+
     var symbols = [];
     var canvasWidth = canvas.width;
     var canvasHeight = canvas.height;

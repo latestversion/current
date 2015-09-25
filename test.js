@@ -2,7 +2,7 @@ function test_draw(symbol,canvas)
 {
     ctx = canvas.getContext("2d");
     ctx.strokeColor = "rgb(155,255,255)"
-    ctx.fillStyle = "rgba(231, 76, 60,0.5)"
+    ctx.fillStyle = "rgba(231, 76, 60,1.0)"
     paths = symbol.paths;
 
     for(i = 0;i< paths.length;i++)

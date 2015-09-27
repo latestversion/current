@@ -19,8 +19,7 @@ function TextView(model)
     {
         ctx = canvas.getContext("2d");
         ctx.save();
-        ctx.fillStyle = "rgb(255,255,0)";
-        ctx.fillRect(0,0,200,200);
+        ctx.fillStyle = "rgb(255,255,0)"
         ctx.restore();
 
 
@@ -108,3 +107,24 @@ function Text(text,alphabet,canvas,wantedHeight)
     }
 }
 
+Text.prototype = {}
+
+Text.prototype.copyPaths = function()
+{
+    var allPaths = []
+    var pathIdx = 0
+    for (var l = 0; l < this.lines.length; l++)
+    {
+        line = this.lines[l]
+         for(var i = 0; i < line.length;i++)
+         {
+            sym = line[i]
+            for (var j = 0; j < sym.paths.length; j++)
+            {
+                allPaths[pathIdx++] = sym.paths[j].splice()
+            }
+         }
+    }
+
+    return allPaths
+}

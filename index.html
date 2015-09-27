@@ -14,25 +14,60 @@
 <script src="text.js"></script>
 <script src="test.js"></script>
 <script src="earcut.js"></script>
+<script src="Triangle.js"></script>
+<script src="PathDrawer.js"></script>
+<script src="Path.js"></script>
+<script src="Colorbank.js"></script>
 
 <script>
 
-var a = [1, 2, 3]
-console.log(a[444])
-//a.foreach(function(a){console.log(""+a)})
-
 var canvas = document.getElementById("thecanvas");
 var a = getURLParameter('a');
-letter = "A";
-anaclown = alphabet["A"].clone()
-anaclown.scale(5)
-test_draw(anaclown,canvas);
 
-var text = "JAVLA\nGUBBAR"
-var t = new Text(text,alphabet,canvas,2000)
-t.draw(canvas)
-//var demo = new RestlessDemo(a,canvas);
-//demo.start();
+
+var text = "HABBA"
+var t = new Text(text,alphabet,canvas)
+//t.draw(canvas)
+
+// Get triangles from the symbols in text
+
+triangles = []
+
+
+paths = t.copyPaths()
+
+for (var lnIdx = 0; lnIdx < t.lines.length; lnIdx++)
+{
+    var line = t.lines[lnIdx]
+    for (var symIdx = 0; symIdx < line.length; symIdx++)
+    {
+        var sym = line[symIdx]
+        console.log("Letter " + sym.letter)
+        var paths = sym.paths
+
+        for (var i = 0; i < paths.length; i++)
+        {
+            var path = paths[i]
+            var triangleindices = earcut(path)
+            for(var j = 0; j < triangleindices.length; j += 3)
+            {
+                var trianglePath = new Path(path,triangleindices.slice(j,j+3))
+                var tri = new Triangle(trianglePath)
+                tri.color = ColorBank.getRandom("greyscale") //"rgb(0,255,0)"
+                triangles.push(tri)
+            }
+        }
+        console.log("Triangles: " + triangles.length)
+    }
+}
+
+for(var i = 0; i < triangles.length;i++)
+{
+    tri = triangles[i]
+    console.log("drawing number " +  i)
+    tri.draw(canvas)
+}
+
 
 </script>
 

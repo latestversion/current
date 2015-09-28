@@ -1,0 +1,94 @@
+<html>
+<body>
+<div class="hidden">
+<pre class="brush: html;">&lt;canvas id="canvas" width="300" height="227" style="float:left"&gt;&lt;/canvas&gt;
+&lt;div id="color" style="width:200px;height:50px;float:left"&gt;&lt;/div&gt;
+</pre>
+</div>
+
+
+<canvas id="canvas" width="600" height="400" style="float:left"></canvas>
+<div id="color" style="width:200px;height:50px;float:left"></div>
+
+<div id="report" style="width:200px;height:1000px;float:left"></div>
+
+<script>
+
+var lastdata = ""
+var accumulatedData = "["
+    var img = new Image();
+img.src = 'orange_revised.jpg';
+var canvas = document.getElementById('canvas');
+var ctx = canvas.getContext('2d');
+img.onload = function() {
+  ctx.drawImage(img, 0, 0);
+  img.style.display = 'none';
+
+   for(var y = 5; y < 400;y+= 80)
+  {
+   for(var x = 5; x < 600; x += 150)
+    {
+          var pixel = ctx.getImageData(x, y, 1, 1);
+          var data = pixel.data;
+          var rgba = 'rgba(' + data[0] + ',' + data[1] +
+                     ',' + data[2] + ',' + data[3] + ')';
+          color.style.background =  rgba;
+          color.textContent = rgba;
+          lastdata = rgba
+          accumulatedData += "\"" + lastdata + "\"" + ", "
+     }
+  }
+  report.textContent = accumulatedData
+};
+var color = document.getElementById('color');
+var report = document.getElementById('report');
+function pick(event) {
+  var x = event.layerX;
+  var y = event.layerY;
+
+}
+
+function clickReporter(event)
+{
+    accumulatedData += "\"" + lastdata + "\"" + ", "
+    console.log(accumulatedData)
+    report.textContent = accumulatedData
+
+}
+
+canvas.addEventListener('mousemove', pick);
+canvas.addEventListener('click', clickReporter, false);
+
+
+</script>
+
+<pre class="brush: js;">var img = new Image();
+img.src = 'https://mdn.mozillademos.org/files/5397/rhino.jpg';
+var canvas = document.getElementById('canvas');
+var ctx = canvas.getContext('2d');
+img.onload = function() {
+  ctx.drawImage(img, 0, 0);
+  img.style.display = 'none';
+};
+var color = document.getElementById('color');
+function pick(event) {
+  var x = event.layerX;
+  var y = event.layerY;
+  var pixel = ctx.getImageData(x, y, 1, 1);
+  var data = pixel.data;
+  var rgba = 'rgba(' + data[0] + ',' + data[1] +
+             ',' + data[2] + ',' + data[3] + ')';
+  color.style.background =  rgba;
+  color.textContent = rgba;
+}
+canvas.addEventListener('mousemove', pick);
+</pre>
+
+
+
+</body>
+
+
+
+
+</html>

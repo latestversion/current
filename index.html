@@ -8,6 +8,7 @@
 <br><br><br>
 </center>
 
+<script src="SceneHandler.js"></script>
 <script src="Array.js"></script>
 <script src="symbol.js"></script>
 <script src="alphabet.js"></script>
@@ -18,14 +19,15 @@
 <script src="PathDrawer.js"></script>
 <script src="Path.js"></script>
 <script src="Colorbank.js"></script>
+<script src="RestlessDemo.js"></script>
 
 <script>
 
 var canvas = document.getElementById("thecanvas");
 var a = getURLParameter('a');
 
-
-var text = "HABBA"
+/*
+var text = "REBECKA\nMY\nLOVELY\nLOVE"
 var t = new Text(text,alphabet,canvas)
 //t.draw(canvas)
 
@@ -53,7 +55,7 @@ for (var lnIdx = 0; lnIdx < t.lines.length; lnIdx++)
             {
                 var trianglePath = new Path(path,triangleindices.slice(j,j+3))
                 var tri = new Triangle(trianglePath)
-                tri.color = ColorBank.getRandom("greyscale") //"rgb(0,255,0)"
+                tri.color = ColorBank.getRandom("yellow") //"rgb(0,255,0)"
                 triangles.push(tri)
             }
         }
@@ -67,6 +69,10 @@ for(var i = 0; i < triangles.length;i++)
     console.log("drawing number " +  i)
     tri.draw(canvas)
 }
+*/
+var demo = new RestlessDemo("TEXT\nSAYS\nHELLO",canvas)
+demo.start()
+
 
 
 </script>

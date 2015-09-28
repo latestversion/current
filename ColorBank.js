@@ -20,7 +20,7 @@ var _colorDict = {
 
 ColorBank.getRandom = function(mainColor)
 {
-    return _colorDict["tan"].getRandomElement();
+    return _colorDict[mainColor].getRandomElement();
 }
 
 //pink: [    ],

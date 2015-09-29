@@ -1,10 +1,12 @@
 //SceneHandler
 function RestlessDemo(text,canvas)
 {
+    SceneHandler.call(this)
+
     // start timeouts
     this.update = function()
     {
-
+        this.getCurrentScene().update(0.0167)
     }
 
     this.onclick = function(event)
@@ -18,9 +20,10 @@ function RestlessDemo(text,canvas)
 
     this.start = function()
     {
-
+        var s = new TestScene(this,canvas)
+        this.pushScene(s)
     }
 }
 
 RestlessDemo.prototype = {}
-SceneHandler.call(RestlessDemo.prototype)
+copyPrototype(SceneHandler,RestlessDemo)

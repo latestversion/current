@@ -1,13 +1,18 @@
-//SceneHandler
 function RestlessDemo(text,canvas)
 {
     SceneHandler.call(this)
+    this.canvas = canvas
 
-    // start timeouts
+
     this.update = function()
-    {
-        this.getCurrentScene().update(0.0167)
-    }
+	{
+		this.getCurrentScene().update(0.0167);
+		this.getCurrentScene().draw(this.canvas);
+		requestAnimationFrame(this.update);
+	}
+
+	this.update = this.update.bind(this);
+
 
     this.onclick = function(event)
     {
@@ -22,8 +27,11 @@ function RestlessDemo(text,canvas)
     {
         var s = new TestScene(this,canvas)
         this.pushScene(s)
+        this.animationFrameRequestId = requestAnimationFrame(this.update);
     }
 }
+
+
 
 RestlessDemo.prototype = {}
 copyPrototype(SceneHandler,RestlessDemo)

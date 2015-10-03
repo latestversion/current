@@ -4,8 +4,8 @@
 function Path(coords,indices)
 {
     //console.log("coords: " + coords.length)
-    console.log("indices: " + indices.length)
-    console.log(indices)
+    //console.log("indices: " + indices.length)
+    //console.log(indices)
     var path = []
     var coord = 0
     var i = 0

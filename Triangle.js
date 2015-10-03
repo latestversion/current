@@ -20,14 +20,14 @@ function Triangle(path)
 }
 
 
-Triangle.prototype.draw = function(canvas)
+var _p = Triangle.prototype
+
+_p.draw = function(canvas)
 {
     this.view.draw(canvas)
 }
 
-Triangle.prototype.factory = {}
-
-Triangle.prototype.factory.produce = function(vertices,indices)
+_p.update = function(dt)
 {
 
 }

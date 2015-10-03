@@ -4,7 +4,7 @@
 </head>
 <body>
 <center>
-<canvas id="thecanvas" width="1280" height="800"></canvas>
+<canvas id="thecanvas" width="1180" height="700"></canvas>
 <br><br><br>
 </center>
 
@@ -27,58 +27,17 @@
 <script src="Path.js"></script>
 <script src="Colorbank.js"></script>
 <script src="TestScene.js"></script>
+<script src="LetterScene.js"></script>
 <script src="RestlessDemo.js"></script>
+<script src="Utils.js"></script>
 
 <script>
 
 var canvas = document.getElementById("thecanvas");
-var a = getURLParameter('a');
 
-/*
-var text = "REBECKA\nMY\nLOVELY\nLOVE"
-var t = new Text(text,alphabet,canvas)
-//t.draw(canvas)
+var text = "REBECKA\nGOS"
 
-// Get triangles from the symbols in text
-
-triangles = []
-
-
-paths = t.copyPaths()
-
-for (var lnIdx = 0; lnIdx < t.lines.length; lnIdx++)
-{
-    var line = t.lines[lnIdx]
-    for (var symIdx = 0; symIdx < line.length; symIdx++)
-    {
-        var sym = line[symIdx]
-        console.log("Letter " + sym.letter)
-        var paths = sym.paths
-
-        for (var i = 0; i < paths.length; i++)
-        {
-            var path = paths[i]
-            var triangleindices = earcut(path)
-            for(var j = 0; j < triangleindices.length; j += 3)
-            {
-                var trianglePath = new Path(path,triangleindices.slice(j,j+3))
-                var tri = new Triangle(trianglePath)
-                tri.color = ColorBank.getRandom("yellow") //"rgb(0,255,0)"
-                triangles.push(tri)
-            }
-        }
-        console.log("Triangles: " + triangles.length)
-    }
-}
-
-for(var i = 0; i < triangles.length;i++)
-{
-    tri = triangles[i]
-    console.log("drawing number " +  i)
-    tri.draw(canvas)
-}
-*/
-var demo = new RestlessDemo("TEXT\nSAYS\nHELLO",canvas)
+var demo = new RestlessDemo(text,canvas)
 demo.start()
 
 

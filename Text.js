@@ -45,11 +45,23 @@ function Text(text,alphabet,canvas,wantedHeight)
     var numlines = lines.length
     var linedistance = 0.1
     var letterdistance = 10
-    var heightPart = 0.80
+    var heightPart = 0.80 // omg the naming here really sucks
+    var widthPart = 0.90
+
+
+    var unscaledMaxLineWidth = 0;
+
+    for (var i = 0; i < lines.length; i++)
+    {
+        var line = lines[i]
+        for (var c = 0; c < line.length; c++)
+        {
+
+        }
+    }
 
     var unscaledTextHeight = alphabet.rowheight*numlines + (numlines-1)*linedistance*alphabet.rowheight
 
-    // Say we want 80% of available height
     var wantedHeight = canvas.height * heightPart
 
     this.scale = wantedHeight / unscaledTextHeight
@@ -58,14 +70,16 @@ function Text(text,alphabet,canvas,wantedHeight)
 
     this.lines = []
 
+    // Calculate width based on vertical scale
     var i,j
-
     var maxlinewidth = 0
+    var widestLineIdx = 1
 
     for (i = 0; i < lines.length; i++)
     {
         this.lines[i] = []
-        this.lines[i].width = letterdistance*(this.lines[i].length-1)
+        // Include only dynamic part of width (ie not letterspacing)
+        this.lines[i].width = 0 //letterdistance*(this.lines[i].length-1)
         line = lines[i]
 
         for (j = 0; j < line.length;j++)
@@ -76,12 +90,43 @@ function Text(text,alphabet,canvas,wantedHeight)
             this.lines[i][j] = sym
             this.lines[i].width += sym.width
         }
+        if (maxlinewidth < this.lines[i].width)
+        {
+            maxlinewidth = this.lines[i].width
+            widestLineIdx = i
+        }
+
+    }
+
+
+    // See if we have to adjust scale based on the widest line and the width of the text area
+    // Since we have a constant letterdistance we have to remove that from the scalable area
+    var availablewidth = widthPart*canvas.width-letterdistance*(lines[widestLineIdx].length-1)
+    var xscale = availablewidth/this.lines[widestLineIdx].width
+
+    console.log("xscale: " + xscale)
+
+    var rescale = 1
+    if ((xscale < 1) && rescale)
+    {
+        for (i = 0; i < this.lines.length; i++)
+        {
+            this.lines[i].width *= xscale
+
+            for (j = 0; j < lines[i].length;j++)
+            {
+                this.lines[i][j].scale(xscale)
+            }
+        }
+
+        this.scaledHeight *= xscale
+        this.scale *= xscale
     }
 
     for (i = 0; i < this.lines.length; i++)
     {
         line = this.lines[i]
-        line.x = (canvas.width-line.width)/2
+        line.x = (canvas.width-line.width-(line.length-1)*letterdistance)/2
         line.y = (canvas.height-this.scaledHeight)/2+i*this.scale*alphabet.rowheight*(1+linedistance)
     }
 
@@ -97,7 +142,6 @@ function Text(text,alphabet,canvas,wantedHeight)
             accumX += sym.width+letterdistance
         }
     }
-
 
     this.view = new TextView(this);
 

@@ -12,13 +12,21 @@ var _p = Scene.prototype
 
 _p.update = function(dt)
 {
-    throw "Implement Scene update plz"
+    var os = this.getObjects()
+    for (var i = 0; i < os.length; i++)
+    {
+        os[i].update(dt)
+    }
 }
 
 _p.draw = function(canvas)
-{
-    throw "Implement Scene draw plz"
-}
+    {
+        var os = this.getObjects()
+        for (var i = 0; i < os.length; i++)
+        {
+            os[i].draw(graphics)
+        }
+    }
 
 _p.getSceneHandler = function()
 {

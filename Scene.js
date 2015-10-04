@@ -12,9 +12,11 @@ var _p = Scene.prototype
 
 _p.update = function(dt)
 {
+
     var os = this.getObjects()
     for (var i = 0; i < os.length; i++)
     {
+        //console.log("fhfh")
         os[i].update(dt)
     }
 }

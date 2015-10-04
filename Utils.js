@@ -29,3 +29,11 @@ Utils.textObjectToTriangles = function(t)
     }
     return triangles
 }
+
+var Dates = {
+   time : function()
+	{
+		var d = new Date();
+		return d.getTime();
+	}
+};

@@ -2,16 +2,24 @@ function RestlessDemo(text,canvas)
 {
     SceneHandler.call(this)
     this.canvas = canvas
+    this.lastUpdate = 0
 
     this.update = function()
 	{
-		this.getCurrentScene().update(0.0167);
+	    var t = Dates.time()
+	    var dt = t-this.lastUpdate
+	    if(dt > 1/60)
+	    {
+	        dt = 1/60
+	    }
+	    console.log(dt/1000)
+		this.getCurrentScene().update(0.16);
+		this.lastUpdate = t
 		this.getCurrentScene().draw(this.canvas);
 		requestAnimationFrame(this.update);
 	}
 
 	this.update = this.update.bind(this);
-
 
     this.onclick = function(event)
     {
@@ -26,6 +34,7 @@ function RestlessDemo(text,canvas)
     {
         var s = new LetterScene(text,this,canvas)
         this.pushScene(s)
+        this.lastUpdate = Dates.time()
         this.animationFrameRequestId = requestAnimationFrame(this.update);
     }
 }

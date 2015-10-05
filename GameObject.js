@@ -11,3 +11,20 @@ function GameObject()
 }
 
 GameObject.prototype = {}
+
+var _p = GameObject.prototype
+
+ _p.updatePositionAndRotation = function(dt)
+ {
+    this.velocity.x += this.acceleration.x*dt
+    this.velocity.y += this.acceleration.y*dt
+
+    if (this.maxvelocity && this.velocity.length() > this.maxvelocity)
+    {
+        this.velocity.normalize()
+        this.velocity.multiply(this.maxvelocity)
+    }
+
+    this.position.x += this.velocity.x*dt
+    this.position.y += this.velocity.y*dt
+ }

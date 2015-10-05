@@ -1,51 +1,5 @@
 
 
-function debugDraw(model,ctx)
-{
-    if (model.avgposition)
-        {
-            ctx.strokeStyle = "rgb(255,0,0)"
-            ctx.beginPath()
-            ctx.moveTo(model.position.x,model.position.y)
-            ctx.lineTo(model.position.x+model.avgposition.x,model.position.y+model.avgposition.y)
-            ctx.stroke()
-        }
-
-        if (model.avgvelocity)
-        {
-            ctx.strokeStyle = "rgb(0,255,0)"
-            ctx.beginPath()
-            ctx.moveTo(model.position.x,model.position.y)
-            ctx.lineTo(model.position.x+model.avgvelocity.x,model.position.y+model.avgvelocity.y)
-            ctx.stroke()
-        }
-
-        if (false && model.NEIGHBOR_RADIUS)
-        {
-            ctx.fillStyle = "rgba(255,0,255,0.1)"
-            ctx.beginPath()
-            ctx.arc(model.position.x,model.position.y,model.NEIGHBOR_RADIUS,0,2*Math.PI);
-            ctx.fill()
-        }
-
-        if (model.separation)
-        {
-            ctx.strokeStyle = "rgb(0,0,255)"
-            ctx.beginPath()
-            ctx.moveTo(model.position.x,model.position.y)
-            ctx.lineTo(model.position.x+model.separation.x,model.position.y+model.separation.y)
-            ctx.stroke()
-        }
-
-        if (model.WANTED_SEPARATION)
-        {
-            ctx.fillStyle = "rgba(0,0,255,0.1)"
-            ctx.beginPath()
-            ctx.arc(model.position.x,model.position.y,model.WANTED_SEPARATION,0,2*Math.PI);
-            ctx.fill()
-        }
-}
-
 function TriangleView(model)
 {
     this.model = model
@@ -66,17 +20,18 @@ function TriangleView(model)
         ctx.closePath()
         ctx.fill()
 
-
+        /*
         ctx.save()
         ctx.fillStyle = "rgb(255,0,0)"
         ctx.beginPath()
         ctx.arc(model.position.x,model.position.y,5,0,2*Math.PI);
         ctx.fill()
 
+        ctx.fillStyle = "rgb(255,0,0)"
         ctx.beginPath()
         ctx.arc(pos.x + model.path[2*model.sharpPointIdx],pos.y + model.path[2*model.sharpPointIdx+1],5,0,2*Math.PI);
         ctx.fill()
-
+        */
 
         ctx.restore()
 
@@ -84,34 +39,57 @@ function TriangleView(model)
     }
 }
 
-function PositionUpdateController(model)
-{
-    this.model = model
-    this.maxvelocity = 5
-    this.update = function(dt)
+
+var TriangleBreakState = {
+    BREAK_TIME: 3,
+    lastEnterTime: 0,
+    enter: function(model)
     {
-        //console.log("Acceleration: " + this.model.acceleration)
-
-        this.model.velocity.x += this.model.acceleration.x*dt
-        this.model.velocity.y += this.model.acceleration.y*dt
-
-        if (this.model.velocity.length() > this.maxvelocity)
+        model.acceleration.x = -1*model.velocity.x/this.BREAK_TIME
+        model.acceleration.y = -1*model.velocity.y/this.BREAK_TIME
+        this.lastEnterTime = Dates.stime()
+    },
+    update: function(dt,model)
+    {
+        var now = Dates.stime()
+        if(now-this.lastEnterTime >= this.BREAK_TIME)
         {
-            this.model.velocity.normalize()
-            this.model.velocity.multiply(this.maxvelocity)
+        }
+        else
+        {
+            model.updatePositionAndRotation(dt)
         }
 
-        this.model.position.x += this.model.velocity.x*dt
-        this.model.position.y += this.model.velocity.y*dt
     }
 }
 
 
-function Triangle(path)
+function PositionUpdateController(model)
+{
+    this.model = model
+
+    this.update = function(dt)
+    {
+        this.model.updatePositionAndRotation(dt)
+    }
+}
+
+var TrianglePositionUpdateState = {
+update: function(dt,model)
+{
+    model.updatePositionAndRotation(dt)
+}}
+
+function Triangle(path,scene)
 {
     GameObject.call(this)
 
     this.path = path.splice(0)
+    this.scene = scene
+
+    this.maxvelocity = 10 + Math.floor(Math.random()*40)
+
+    // Set position to midpoint and set path coordinates relative midpoint
     var numVertices = 3
     for (var i = 0; i < numVertices; i++)
     {
@@ -125,16 +103,27 @@ function Triangle(path)
         this.path[2*i+1] -= this.position.y
     }
 
-    //console.log("Tri ctpr This position is " + this.position)
-    // console.log("This ")
+    // Save original position and path positions
+    this.originalPosition = this.position.clone()
+    this.originalPath = this.path.splice()
 
+    // Figure out a sort of midpoint line
     this.sharpPointIdx = this.calcSharpestPointIdx()
-    this.color = "rgb(0,255,0)"
     this.view = new TriangleView(this)
-    this.controller = new PositionUpdateController(this)
-    //console.log("Tri ctpr This position is " + this.position)
+    this.controller = TrianglePositionUpdateState
+
+    this.onReturnToHomeEvent = function()
+    {
+        this.controller = TriangleBreakState
+        TriangleBreakState.enter(this)
+    }
+
+    this.onReturnToHomeEvent = this.onReturnToHomeEvent.bind(this)
+
+    this.scene.on(Triangle.returnHomeEventName,this.onReturnToHomeEvent)
 }
 
+Triangle.returnHomeEventName = "trianglesBackToHome"
 
 var _p = Triangle.prototype
 
@@ -170,5 +159,13 @@ _p.draw = function(canvas)
 
 _p.update = function(dt)
 {
-    this.controller.update(dt)
+    this.controller.update(dt,this)
 }
+
+_p.rotate = function(a)
+{
+
+    this.rot += a
+}
+
+copyPrototype(GameObject,Triangle)

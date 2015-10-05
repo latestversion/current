@@ -16,6 +16,7 @@ _p.addObject = function(o)
 
 _p.removeObject = function(o)
 {
+    console.log("removing object")
     for(var i = 0;i < this.objects.length;i++)
     {
         if(this.objects[i] == o)

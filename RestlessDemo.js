@@ -8,12 +8,12 @@ function RestlessDemo(text,canvas)
 	{
 	    var t = Dates.time()
 	    var dt = t-this.lastUpdate
+	    dt = dt/1000
 	    if(dt > 1/60)
 	    {
 	        dt = 1/60
 	    }
-	    console.log(dt/1000)
-		this.getCurrentScene().update(0.16);
+		this.getCurrentScene().update(dt);
 		this.lastUpdate = t
 		this.getCurrentScene().draw(this.canvas);
 		requestAnimationFrame(this.update);
@@ -24,6 +24,10 @@ function RestlessDemo(text,canvas)
     this.onclick = function(event)
     {
         console.log("CLICK " + event.x + "," + event.y)
+        if(this.getCurrentScene().onclick)
+        {
+            this.getCurrentScene().onclick(event)
+        }
     }
 
     this.onclick = this.onclick.bind(this)

@@ -81,18 +81,20 @@ function FlockController(boids,world)
                 vectortoavgposition.multiply(2)
                 b.acceleration.vectoradd(vectortoavgposition)
 
-
                 avgvelocity.divide(numneighbors)
                 avgvelocity.multiply(20)
                 b.acceleration.vectoradd(avgvelocity)
             }
 
-            b.acceleration.vectoradd(separation)
-            b.separation = separation
-            b.avgvelocity = avgvelocity
-            b.avgposition = vectortoavgposition
-            b.NEIGHBOR_RADIUS = NEIGHBOR_RADIUS
-            b.WANTED_SEPARATION = WANTED_SEPARATION
+            if(false)
+            {
+                b.acceleration.vectoradd(separation)
+                b.separation = separation
+                b.avgvelocity = avgvelocity
+                b.avgposition = vectortoavgposition
+                b.NEIGHBOR_RADIUS = NEIGHBOR_RADIUS
+                b.WANTED_SEPARATION = WANTED_SEPARATION
+            }
         }
 
     }

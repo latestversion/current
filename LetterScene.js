@@ -3,6 +3,7 @@ function LetterScene(text,scenehandler,canvas)
     Scene.call(this,scenehandler,canvas)
     EventEmitter.call(this)
 
+
     this.backgroundFillStyle = "rgb(255,200,255)"
 
     var t = new Text(text,alphabet,canvas)
@@ -55,10 +56,10 @@ function LetterScene(text,scenehandler,canvas)
         }
     }
 
-    for(var i = 0; i < 4000;i++)
+    /*for(var i = 0; i < 4000;i++)
     {
         this.update(0.0167)
-    }
+    }*/
 
     this.onclick = function(event)
     {

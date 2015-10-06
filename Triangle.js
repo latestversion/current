@@ -20,18 +20,26 @@ function TriangleView(model)
         ctx.closePath()
         ctx.fill()
 
+        // LINE TO ORIGIN
+        ctx.beginPath()
+        ctx.strokeStyle = "rgb(255,0,0)"
+        ctx.moveTo(pos.x,pos.y)
+        ctx.lineTo(model.originalPosition.x,model.originalPosition.y)
+        ctx.stroke()
+
         /*
+        // DRAW MIDPOINT
         ctx.save()
         ctx.fillStyle = "rgb(255,0,0)"
         ctx.beginPath()
         ctx.arc(model.position.x,model.position.y,5,0,2*Math.PI);
         ctx.fill()
-
+*/
         ctx.fillStyle = "rgb(255,0,0)"
         ctx.beginPath()
         ctx.arc(pos.x + model.path[2*model.sharpPointIdx],pos.y + model.path[2*model.sharpPointIdx+1],5,0,2*Math.PI);
         ctx.fill()
-        */
+
 
         ctx.restore()
 
@@ -39,9 +47,67 @@ function TriangleView(model)
     }
 }
 
+function DoNothingController()
+{
+    this.update = function(dt,model)
+    {
+    }
+}
+
+var TriangleAimForOriginalPositionState = {
+AIM_TIME : 2,
+lastEnterTime : 0,
+stfu : false,
+enter: function(model)
+{
+    // Get vector from midpoint to sharpest point
+    var sharpestPoint = new v2d(model.path[2*model.sharpPointIdx],model.path[2*model.sharpPointIdx+1])
+    var currentDirection = model.position.vectorTo(sharpestPoint)
+    var wantedDirection = model.position.vectorTo(model.originalPosition)
+
+    var value = currentDirection.dotproduct(wantedDirection)/(currentDirection.length()*wantedDirection.length())
+
+    var angle = Math.acos(value)
+
+    // Do not care about direction of rotation for now
+    model.rot = 0
+    model.rot_v = angle/this.AIM_TIME
+
+    console.log("The angle is " + 180*(angle/Math.PI))
+
+    this.lastEnterTime = Dates.stime()
+},
+update : function(dt,model)
+{
+    var now = Dates.stime()
+    if(now-this.lastEnterTime >= this.AIM_TIME)
+    {
+        if(!this.stfu)
+        {
+        console.log("WOW, that rotation was havy work!")
+            this.stfu = true
+        }
+        console.log("this model has ortate " + model.rot*(180/Math.PI))
+        model.controller = new DoNothingController()
+
+
+    }
+    else
+    {
+
+        /*var dv = model.rot_a*dt
+        model.rot_v += dv*/
+        var da = model.rot_v*dt
+        model.rotate(da)
+        model.rot += da
+        //model.updatePositionAndRotation(dt)
+    }
+}
+
+}
 
 var TriangleBreakState = {
-    BREAK_TIME: 3,
+    BREAK_TIME: 0.2,
     lastEnterTime: 0,
     enter: function(model)
     {
@@ -54,6 +120,8 @@ var TriangleBreakState = {
         var now = Dates.stime()
         if(now-this.lastEnterTime >= this.BREAK_TIME)
         {
+            model.controller = TriangleAimForOriginalPositionState
+            TriangleAimForOriginalPositionState.enter(model)
         }
         else
         {
@@ -164,8 +232,16 @@ _p.update = function(dt)
 
 _p.rotate = function(a)
 {
-
-    this.rot += a
+    for (var i = 0; i < 3;i++)
+    {
+        var oldx = this.path[2*i]
+        var oldy = this.path[2*i+1]
+        var newx = oldx*Math.cos(a) - oldy*Math.sin(a)
+        var newy = oldx*Math.sin(a) + oldy*Math.cos(a)
+        this.path[2*i] = newx
+        this.path[2*i+1] = newy
+        //console.log("so eh... updated path....")
+    }
 }
 
 copyPrototype(GameObject,Triangle)

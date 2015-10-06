@@ -14,7 +14,7 @@ GameObject.prototype = {}
 
 var _p = GameObject.prototype
 
- _p.updatePositionAndRotation = function(dt)
+ _p.updatePosition = function(dt)
  {
     this.velocity.x += this.acceleration.x*dt
     this.velocity.y += this.acceleration.y*dt
@@ -28,6 +28,4 @@ var _p = GameObject.prototype
     this.position.x += this.velocity.x*dt
     this.position.y += this.velocity.y*dt
 
-    this.rot_v += this.rot_a*dt
-    this.rot += this.rot_v*dt
  }

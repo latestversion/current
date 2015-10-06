@@ -20,30 +20,7 @@ function TriangleView(model)
         ctx.closePath()
         ctx.fill()
 
-        // LINE TO ORIGIN
-        ctx.beginPath()
-        ctx.strokeStyle = "rgb(255,0,0)"
-        ctx.moveTo(pos.x,pos.y)
-        ctx.lineTo(model.originalPosition.x,model.originalPosition.y)
-        ctx.stroke()
-
-        /*
-        // DRAW MIDPOINT
-        ctx.save()
-        ctx.fillStyle = "rgb(255,0,0)"
-        ctx.beginPath()
-        ctx.arc(model.position.x,model.position.y,5,0,2*Math.PI);
-        ctx.fill()
-*/
-        ctx.fillStyle = "rgb(255,0,0)"
-        ctx.beginPath()
-        ctx.arc(pos.x + model.path[2*model.sharpPointIdx],pos.y + model.path[2*model.sharpPointIdx+1],5,0,2*Math.PI);
-        ctx.fill()
-
-
         ctx.restore()
-
-        //debugDraw(model,ctx)
     }
 }
 
@@ -54,83 +31,66 @@ function DoNothingController()
     }
 }
 
-var TriangleAimForOriginalPositionState = {
-AIM_TIME : 2,
-lastEnterTime : 0,
-stfu : false,
-enter: function(model)
+function TriangleAimForOriginalPositionState(model)
 {
-    // Get vector from midpoint to sharpest point
-    var sharpestPoint = new v2d(model.path[2*model.sharpPointIdx],model.path[2*model.sharpPointIdx+1])
-    var currentDirection = model.position.vectorTo(sharpestPoint)
+    this.AIM_TIME = 5
+    this.timeCount = 0
+}
+
+TriangleAimForOriginalPositionState.prototype = {}
+
+var _p = TriangleAimForOriginalPositionState.prototype
+
+_p.enter = function(model)
+{
+    model.acceleration.x = -1*model.velocity.x/this.AIM_TIME
+    model.acceleration.y = -1*model.velocity.y/this.AIM_TIME
+
+    var sharpestPoint = model.getSharpestPointPosition()//new v2d(model.position.x + model.path[2*model.sharpPointIdx],model.position.y+model.path[2*model.sharpPointIdx+1])
+    var currentDirection = model.getCurrentDirection()
     var wantedDirection = model.position.vectorTo(model.originalPosition)
 
-    var value = currentDirection.dotproduct(wantedDirection)/(currentDirection.length()*wantedDirection.length())
+    var angle = v2d.signedanglebetweenvectors(currentDirection,wantedDirection)
 
-    var angle = Math.acos(value)
+    model.rot = angle
+    model.rot_v = 0
+    model.rot_a = 2*angle/(this.AIM_TIME*this.AIM_TIME)
+}
 
-    // Do not care about direction of rotation for now
-    model.rot = 0
-    model.rot_v = angle/this.AIM_TIME
-
-    console.log("The angle is " + 180*(angle/Math.PI))
-
-    this.lastEnterTime = Dates.stime()
-},
-update : function(dt,model)
+_p.update = function(dt,model)
 {
-    var now = Dates.stime()
-    if(now-this.lastEnterTime >= this.AIM_TIME)
+
+    if(this.timeCount >= this.AIM_TIME)
     {
-        if(!this.stfu)
-        {
         console.log("WOW, that rotation was havy work!")
-            this.stfu = true
-        }
-        console.log("this model has ortate " + model.rot*(180/Math.PI))
         model.controller = new DoNothingController()
-
-
     }
     else
     {
-
-        /*var dv = model.rot_a*dt
-        model.rot_v += dv*/
+        model.updatePosition(dt)
+        var dv = model.rot_a*dt
+        model.rot_v += dv
         var da = model.rot_v*dt
-        model.rotate(da)
-        model.rot += da
-        //model.updatePositionAndRotation(dt)
-    }
-}
 
-}
-
-var TriangleBreakState = {
-    BREAK_TIME: 0.2,
-    lastEnterTime: 0,
-    enter: function(model)
-    {
-        model.acceleration.x = -1*model.velocity.x/this.BREAK_TIME
-        model.acceleration.y = -1*model.velocity.y/this.BREAK_TIME
-        this.lastEnterTime = Dates.stime()
-    },
-    update: function(dt,model)
-    {
-        var now = Dates.stime()
-        if(now-this.lastEnterTime >= this.BREAK_TIME)
+        model.rot -= da
+        console.log("model.rot: " + model.rot)
+        if(model.rot <= 0)
         {
-            model.controller = TriangleAimForOriginalPositionState
-            TriangleAimForOriginalPositionState.enter(model)
+            model.rot_a = 0
+            model.rot_v = 0
         }
         else
         {
-            model.updatePositionAndRotation(dt)
+        model.rotate(da)
         }
 
-    }
-}
 
+        console.log("dt: "+dt)
+        console.log("da: " + 180*da/Math.PI)
+
+    }
+    this.timeCount += dt
+}
 
 function PositionUpdateController(model)
 {
@@ -138,40 +98,27 @@ function PositionUpdateController(model)
 
     this.update = function(dt)
     {
-        this.model.updatePositionAndRotation(dt)
+        this.model.updatePosition(dt)
     }
 }
 
 var TrianglePositionUpdateState = {
 update: function(dt,model)
 {
-    model.updatePositionAndRotation(dt)
+    model.updatePosition(dt)
 }}
 
-function Triangle(path,scene)
+function Triangle(position,path,scene)
 {
     GameObject.call(this)
 
     this.path = path.splice(0)
     this.scene = scene
 
-    this.maxvelocity = 10 + Math.floor(Math.random()*40)
-
-    // Set position to midpoint and set path coordinates relative midpoint
-    var numVertices = 3
-    for (var i = 0; i < numVertices; i++)
-    {
-        this.position.add(this.path[2*i],this.path[2*i+1])
-    }
-    this.position.divide(3)
-
-    for (var i = 0; i < numVertices; i++)
-    {
-        this.path[2*i] -= this.position.x
-        this.path[2*i+1] -= this.position.y
-    }
+    this.maxvelocity = 30 + Math.floor(Math.random()*40)
 
     // Save original position and path positions
+    this.position = position
     this.originalPosition = this.position.clone()
     this.originalPath = this.path.splice()
 
@@ -182,8 +129,8 @@ function Triangle(path,scene)
 
     this.onReturnToHomeEvent = function()
     {
-        this.controller = TriangleBreakState
-        TriangleBreakState.enter(this)
+        this.controller = new TriangleAimForOriginalPositionState(this)
+        this.controller.enter(this)
     }
 
     this.onReturnToHomeEvent = this.onReturnToHomeEvent.bind(this)
@@ -242,6 +189,21 @@ _p.rotate = function(a)
         this.path[2*i+1] = newy
         //console.log("so eh... updated path....")
     }
+}
+
+_p.getSharpestPointPosition = function()
+{
+    return new v2d(this.position.x + this.path[2*this.sharpPointIdx],this.position.y+this.path[2*this.sharpPointIdx+1])
+}
+
+_p.getCurrentDirection = function()
+{
+    return this.position.vectorTo(this.getSharpestPointPosition())
+}
+
+_p.getMidpointToOriginalPositionVector = function()
+{
+    return this.position.vectorTo(this.originalPosition)
 }
 
 copyPrototype(GameObject,Triangle)

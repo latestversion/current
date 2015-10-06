@@ -14,7 +14,10 @@ function LetterScene(text,scenehandler,canvas)
 
     for(var i = 0; i < trianglePaths.length; i++)
     {
-        triangles[i] = new Triangle(trianglePaths[i],this)
+        var path = trianglePaths[i]
+        var midpoint = Path.avgPoint(path)
+        Path.setRelativeToPoint(path,midpoint)
+        triangles[i] = new Triangle(midpoint,trianglePaths[i],this)
     }
 
     // Add color and randomize position
@@ -24,14 +27,27 @@ function LetterScene(text,scenehandler,canvas)
         tri.color = ColorBank.getRandom("pink")
         tri.position.x = Math.random()*canvas.width
         tri.position.y = Math.random()*canvas.height
-        this.addObject(tri)
+        //this.addObject(tri)
+        var vision = new TriangleVision(tri)
+        //this.addObject(vision)
     }
 
     var flockController = new FlockController(triangles,canvas)
     this.flockController = flockController
 
-    this.addObject(flockController)
+    //this.addObject(flockController)
 
+
+    var testpath = [-100,-100,100,-100,20,100]
+    var position = new v2d(200,200)
+
+    var t = new Triangle(position,testpath,this)
+    var v = new TriangleVision(t)
+    t.color = "rgba(0,255,0,0.5)"
+    t.position.add(100,0)
+
+    this.addObject(t)
+    this.addObject(v)
 
     this.draw = function(graphics)
     {

@@ -105,4 +105,26 @@ _p.dotproduct = function(v)
     return this.x*v.x+this.y*v.y
 }
 
+v2d.crossproductzcomponent = function(a,b)
+{
+    return a.x*b.y-a.y*b.x
+}
 
+v2d.signedanglebetweenvectors = function(a,b)
+{
+    var dp = a.dotproduct(b)
+    var cosangle = dp/(a.length() * b.length())
+    var angle = Math.acos(cosangle)
+
+    var zcomponent = v2d.crossproductzcomponent(a,b)
+    var direction = Math.sign(zcomponent)
+
+    return angle*direction
+}
+
+v2d.signedangleforpositions = function(common,alignFrom,alignTo)
+{
+    var moving = common.vectorTo(alignFrom)
+    var align = common.vectorTo(alignTo)
+    return v2d.signedanglebetweenvectors(moving,align)
+}

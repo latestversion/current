@@ -27,15 +27,15 @@ function LetterScene(text,scenehandler,canvas)
         tri.color = ColorBank.getRandom("pink")
         tri.position.x = Math.random()*canvas.width
         tri.position.y = Math.random()*canvas.height
-        //this.addObject(tri)
+        this.addObject(tri)
         var vision = new TriangleVision(tri)
-        //this.addObject(vision)
+        this.addObject(vision)
     }
 
     var flockController = new FlockController(triangles,canvas)
     this.flockController = flockController
 
-    //this.addObject(flockController)
+    this.addObject(flockController)
 
 
     var testpath = [-100,-100,100,-100,20,100]

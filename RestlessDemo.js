@@ -36,7 +36,7 @@ function RestlessDemo(text,canvas)
 
     this.start = function()
     {
-        var s = new LetterScene(text,this,canvas)
+        var s = new TestScene(text,this,canvas)
         this.pushScene(s)
         this.lastUpdate = Dates.time()
         this.animationFrameRequestId = requestAnimationFrame(this.update);

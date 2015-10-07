@@ -90,9 +90,20 @@ _p.length = function()
     return Math.sqrt(Math.pow(this.x,2) + Math.pow(this.y,2))
 }
 
+_p.setlength = function(newlength)
+{
+    this.normalize()
+    this.multiply(newlength)
+}
+
 _p.normalize = function()
 {
-    this.multiply(1/this.length())
+    var newlength = 1
+    if(0 != arguments.length)
+    {
+        newlength = arguments[0]
+    }
+    this.multiply(newlength/this.length())
 }
 
 v2d.distance = function(x1,y1,x2,y2)

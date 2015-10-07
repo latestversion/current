@@ -1,3 +1,4 @@
+
 var Utils = {}
 
 Utils.textObjectToTrianglePaths = function(t)
@@ -99,4 +100,3 @@ var Random = {
         return Math.floor(Random.randomFloat(maxValue))
     }
 }
-

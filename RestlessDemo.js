@@ -3,6 +3,7 @@ function RestlessDemo(text,canvas)
     SceneHandler.call(this)
     this.canvas = canvas
     this.lastUpdate = 0
+    this.simulationTimeFactor = 4
 
     this.update = function()
 	{
@@ -13,7 +14,11 @@ function RestlessDemo(text,canvas)
 	    {
 	        dt = 1/60
 	    }
-		this.getCurrentScene().update(dt);
+	    for(var simStep = 0;simStep < this.simulationTimeFactor;simStep++)
+		{
+		    this.getCurrentScene().update(dt/this.simulationTimeFactor);
+		}
+
 		this.lastUpdate = t
 		this.getCurrentScene().draw(this.canvas);
 		requestAnimationFrame(this.update);
@@ -36,7 +41,7 @@ function RestlessDemo(text,canvas)
 
     this.start = function()
     {
-        var s = new TestScene(text,this,canvas)
+        var s = new LetterScene(text,this,canvas)
         this.pushScene(s)
         this.lastUpdate = Dates.time()
         this.animationFrameRequestId = requestAnimationFrame(this.update);

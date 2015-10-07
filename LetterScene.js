@@ -24,30 +24,22 @@ function LetterScene(text,scenehandler,canvas)
     for(var i = 0; i < triangles.length;i++)
     {
         tri = triangles[i]
-        tri.color = ColorBank.getRandom("pink")
+        tri.color = ColorBank.getRandom("tan")
         tri.position.x = Math.random()*canvas.width
         tri.position.y = Math.random()*canvas.height
         this.addObject(tri)
-        var vision = new TriangleVision(tri)
-        this.addObject(vision)
+        var debug = false
+        if(debug)
+        {
+            var vision = new TriangleVision(tri)
+            this.addObject(vision)
+        }
     }
 
     var flockController = new FlockController(triangles,canvas)
     this.flockController = flockController
 
     this.addObject(flockController)
-
-
-    var testpath = [-100,-100,100,-100,20,100]
-    var position = new v2d(200,200)
-
-    var t = new Triangle(position,testpath,this)
-    var v = new TriangleVision(t)
-    t.color = "rgba(0,255,0,0.5)"
-    t.position.add(100,0)
-
-    this.addObject(t)
-    this.addObject(v)
 
     this.draw = function(graphics)
     {
@@ -72,10 +64,10 @@ function LetterScene(text,scenehandler,canvas)
         }
     }
 
-    /*for(var i = 0; i < 4000;i++)
+    for(var i = 0; i < 4000;i++)
     {
         this.update(0.0167)
-    }*/
+    }
 
     this.onclick = function(event)
     {

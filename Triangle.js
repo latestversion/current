@@ -1,5 +1,4 @@
 
-
 function TriangleView(model)
 {
     this.model = model
@@ -24,7 +23,6 @@ function TriangleView(model)
     }
 }
 
-
 function Triangle(position,path,scene)
 {
     GameObject.call(this)
@@ -41,8 +39,12 @@ function Triangle(position,path,scene)
 
     // Figure out a sort of midpoint line
     this.sharpPointIdx = this.calcSharpestPointIdx()
+
+    this.originalDirection = this.getCurrentDirection()
+
     this.view = new TriangleView(this)
     this.controller = TrianglePositionUpdateState
+
 
     this.onReturnToHomeEvent = function()
     {
@@ -56,7 +58,9 @@ function Triangle(position,path,scene)
 }
 
 Triangle.returnHomeEventName = "trianglesBackToHome"
-Triangle.AIM_TIME = 0.2
+Triangle.AIM_TIME = 1
+Triangle.BACK_TO_POS_TIME = 3
+Triangle.ALIGN_TIME = 3
 
 var _p = Triangle.prototype
 
@@ -95,6 +99,13 @@ _p.update = function(dt)
     this.controller.update(dt,this)
 }
 
+_p.stopMoving = function()
+{
+    this.acceleration.set(0,0)
+    this.velocity.set(0,0)
+
+}
+
 _p.rotate = function(a)
 {
     for (var i = 0; i < 3;i++)
@@ -117,6 +128,11 @@ _p.getSharpestPointPosition = function()
 _p.getCurrentDirection = function()
 {
     return this.position.vectorTo(this.getSharpestPointPosition())
+}
+
+_p.getOriginalDirection = function()
+{
+    return this.originalDirection
 }
 
 _p.getMidpointToOriginalPositionVector = function()

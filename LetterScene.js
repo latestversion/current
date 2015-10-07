@@ -1,7 +1,6 @@
 function LetterScene(text,colortheme,scenehandler,canvas)
 {
     Scene.call(this,scenehandler,canvas)
-    EventEmitter.call(this)
 
     this.colortheme = colortheme
     this.backgroundFillStyle = "rgb(255,200,255)"
@@ -72,14 +71,10 @@ function LetterScene(text,colortheme,scenehandler,canvas)
     this.onclick = function(event)
     {
         this.removeObject(this.flockController)
-        console.log("CLICK IN THE LETTER SCENE!!!")
-        this.emit(Triangle.returnHomeEventName)
+        this.returnLetters = true
     }
 }
 
 LetterScene.prototype = {}
 
-
-
 copyPrototype(Scene,LetterScene)
-copyPrototype(EventEmitter,LetterScene)

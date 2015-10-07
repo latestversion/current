@@ -1,7 +1,6 @@
 
 function ObjectHandler()
 {
-    console.log("ctor testscene")
 	this.objects = []
 }
 

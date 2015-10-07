@@ -43,23 +43,12 @@ function Triangle(position,path,scene)
     this.originalDirection = this.getCurrentDirection()
 
     this.view = new TriangleView(this)
-    this.controller = TrianglePositionUpdateState
+    this.controller = new TriangleController(this)
 
-
-    this.onReturnToHomeEvent = function()
-    {
-        this.controller = new TriangleAimForOriginalPositionState(this)
-        this.controller.enter(this)
-    }
-
-    this.onReturnToHomeEvent = this.onReturnToHomeEvent.bind(this)
-
-    this.scene.on(Triangle.returnHomeEventName,this.onReturnToHomeEvent)
 }
 
-Triangle.returnHomeEventName = "trianglesBackToHome"
-Triangle.AIM_TIME = 1
-Triangle.BACK_TO_POS_TIME = 3
+Triangle.AIM_TIME = 3
+Triangle.BACK_TO_POS_TIME = 2.5
 Triangle.ALIGN_TIME = 3
 
 var _p = Triangle.prototype
@@ -116,7 +105,6 @@ _p.rotate = function(a)
         var newy = oldx*Math.sin(a) + oldy*Math.cos(a)
         this.path[2*i] = newx
         this.path[2*i+1] = newy
-        //console.log("so eh... updated path....")
     }
 }
 

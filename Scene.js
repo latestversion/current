@@ -1,6 +1,5 @@
 function Scene(scenehandler,canvas)
 {
-    console.log("ctor scene")
     ObjectHandler.call(this)
     this.scenehandler = scenehandler
     this.canvas = canvas

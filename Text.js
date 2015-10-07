@@ -104,8 +104,6 @@ function Text(text,alphabet,canvas,wantedHeight)
     var availablewidth = widthPart*canvas.width-letterdistance*(lines[widestLineIdx].length-1)
     var xscale = availablewidth/this.lines[widestLineIdx].width
 
-    console.log("xscale: " + xscale)
-
     var rescale = 1
     if ((xscale < 1) && rescale)
     {
@@ -137,7 +135,6 @@ function Text(text,alphabet,canvas,wantedHeight)
         for (j = 0; j < line.length;j++)
         {
             sym = line[j]
-            console.log("translating")
             sym.translate(accumX,line.y)
             accumX += sym.width+letterdistance
         }

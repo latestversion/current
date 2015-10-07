@@ -1,7 +1,8 @@
-function RestlessDemo(text,canvas)
+function RestlessDemo(text,colortheme,canvas)
 {
     SceneHandler.call(this)
     this.canvas = canvas
+    this.color = colortheme
     this.lastUpdate = 0
     this.simulationTimeFactor = 4
 
@@ -41,7 +42,7 @@ function RestlessDemo(text,canvas)
 
     this.start = function()
     {
-        var s = new LetterScene(text,this,canvas)
+        var s = new LetterScene(text,colortheme,this,canvas)
         this.pushScene(s)
         this.lastUpdate = Dates.time()
         this.animationFrameRequestId = requestAnimationFrame(this.update);

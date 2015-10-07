@@ -39,12 +39,40 @@
 
 var canvas = document.getElementById("thecanvas");
 
+var text = GetURLParameter("t")
 
+if(!text)
+{
+    text = "YOU\nWIN"
+}
 
+var color = GetURLParameter("c")
+if (!color)
+{
+    color = "pink"
+}
 
-var text = "YOU\nWIN"
-var color = "grey"
-var demo = new RestlessDemo(text,canvas)
+var user = GetURLParameter("u")
+
+if("k" == user)
+{
+    text = "KARINA\nKICKS\nASS"
+    color = "purple"
+}
+
+if("l" == user)
+{
+    text = "LOUISA\nRULES"
+    color = "purple"
+}
+
+if("demo" == user)
+{
+    text = "LETTER\nDEMO"
+    color = "yellow"
+}
+
+var demo = new RestlessDemo(text,color,canvas)
 demo.start()
 
 

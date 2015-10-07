@@ -1,9 +1,9 @@
-function LetterScene(text,scenehandler,canvas)
+function LetterScene(text,colortheme,scenehandler,canvas)
 {
     Scene.call(this,scenehandler,canvas)
     EventEmitter.call(this)
 
-
+    this.colortheme = colortheme
     this.backgroundFillStyle = "rgb(255,200,255)"
 
     var t = new Text(text,alphabet,canvas)
@@ -24,7 +24,7 @@ function LetterScene(text,scenehandler,canvas)
     for(var i = 0; i < triangles.length;i++)
     {
         tri = triangles[i]
-        tri.color = ColorBank.getRandom("tan")
+        tri.color = ColorBank.getRandom(this.colortheme)
         tri.position.x = Math.random()*canvas.width
         tri.position.y = Math.random()*canvas.height
         this.addObject(tri)

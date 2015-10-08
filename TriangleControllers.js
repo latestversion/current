@@ -45,7 +45,6 @@ _p.update = function(dt,model)
     this.tcount += dt
 }
 
-
 function GoToOriginalPositionController(model,toposition,time)
 {
     this.model = model
@@ -61,6 +60,25 @@ GoToOriginalPositionController.prototype.update = function(dt,model)
     if(!this.translationaction.update(dt))
     {
         this.model.controller = new AlignWithOriginController(this.model,Triangle.ALIGN_TIME)
+    }
+}
+
+
+function GoTowardsOriginalPositionController(model,toposition,time)
+{
+    this.model = model
+    model.maxvelocity = 10000
+    var d = 9*model.position.distance(toposition)/10
+
+    this.translationaction = new TranslationAction(model,d,model.position.vectorTo(toposition),time,true)
+}
+
+GoTowardsOriginalPositionController.prototype = {}
+GoTowardsOriginalPositionController.prototype.update = function(dt,model)
+{
+    if(!this.translationaction.update(dt))
+    {
+        this.model.controller = new GoToOriginalPositionController(model,model.originalPosition,Triangle.BACK_TO_POS_TIME)
     }
 }
 
@@ -88,15 +106,12 @@ function TriangleAimForOriginalPositionState(model)
 {
     this.AIM_TIME = Triangle.AIM_TIME
 
-    model.acceleration.x = -1*model.velocity.x/this.AIM_TIME
-    model.acceleration.y = -1*model.velocity.y/this.AIM_TIME
-
     var currentDirection = model.getCurrentDirection()
     var wantedDirection = model.position.vectorTo(model.originalPosition)
-
     var angle = v2d.signedanglebetweenvectors(currentDirection,wantedDirection)
 
     this.rotaction = new RotationAction(model,angle,this.AIM_TIME,true)
+    this.breakaction = new ConstantAccelerationToZeroAction(model,this.AIM_TIME)
 }
 
 TriangleAimForOriginalPositionState.prototype = {}
@@ -104,14 +119,14 @@ var _p = TriangleAimForOriginalPositionState.prototype
 
 _p.update = function(dt,model)
 {
-    if(!this.rotaction.update(dt))
+
+    var a = this.rotaction.update(dt)
+    var b = this.breakaction.update(dt)
+
+    if(!a && !b)
     {
         console.log("WOW, that rotation was heavy work!")
-        model.controller = new GoToOriginalPositionController(model,model.originalPosition,Triangle.BACK_TO_POS_TIME)
-    }
-    else
-    {
-        model.updatePosition(dt)
+        model.controller = new GoTowardsOriginalPositionController(model,model.originalPosition,Triangle.BACK_TO_POS_TIME)
     }
 }
 

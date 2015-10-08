@@ -76,3 +76,27 @@ RotationAction.prototype.update = function(dt)
 
     return true
 }
+
+function ConstantAccelerationToZeroAction(model,time)
+{
+    this.time = time
+    this.timecount = 0
+    model.acceleration.x = -1*model.velocity.x/time
+    model.acceleration.y = -1*model.velocity.y/time
+    this.model = model
+}
+
+ConstantAccelerationToZeroAction.prototype = {}
+ConstantAccelerationToZeroAction.prototype.update = function(dt)
+{
+    if(this.timecount >= this.time)
+    {
+        return false
+    }
+    console.log("wtf")
+
+    this.model.updatePosition(dt)
+
+    this.timecount += dt
+    return true
+}

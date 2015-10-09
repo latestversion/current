@@ -235,6 +235,8 @@ for letter in alphabet:
     handle.write(letter + ":" + "new Symbol(" + "\"" + letter + "\"," + str(sym.width) + "," + str(
         sym.height) + "," + pathsToJscript(sym.paths) + ")")
     handle.write(",\n")
+handle.write("\" \":new Symbol(\" \",36.9141,72.90039,[]),")
 handle.write("};")
 handle.close()
 # for letter in alphabet:
+

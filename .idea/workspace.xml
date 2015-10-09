@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7c682a99-a18f-43aa-9d8c-8803e07e6808" name="Default" comment="Text class OK">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Actions.js" afterPath="$PROJECT_DIR$/Actions.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TriangleControllers.js" afterPath="$PROJECT_DIR$/TriangleControllers.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/V2D.js" afterPath="$PROJECT_DIR$/V2D.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alphabet.js" afterPath="$PROJECT_DIR$/alphabet.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/parsepaths.py" afterPath="$PROJECT_DIR$/parsepaths.py" />
     </list>
     <ignored path="RestlessLetters.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -56,11 +54,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TriangleControllers.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TriangleControllers.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TriangleControllers.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.8091604">
+            <state vertical-scroll-proportion="0.0">
               <caret line="79" column="93" selection-start-line="79" selection-start-column="93" selection-end-line="79" selection-end-column="93" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="alphabet.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/alphabet.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="40" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="parsepaths.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/parsepaths.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.58917195">
+              <caret line="227" column="0" selection-start-line="227" selection-start-column="0" selection-end-line="227" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -80,7 +98,27 @@
         <entry file="file://$PROJECT_DIR$/LetterScene.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="2" column="1" selection-start-line="2" selection-start-column="1" selection-end-line="2" selection-end-column="1" />
+              <caret line="16" column="27" selection-start-line="16" selection-start-column="27" selection-end-line="16" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Utils.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Utils.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="98" column="5" selection-start-line="98" selection-start-column="5" selection-end-line="98" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Text.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Text.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="156" column="29" selection-start-line="156" selection-start-column="29" selection-end-line="156" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -113,9 +151,7 @@
         <option value="$PROJECT_DIR$/OOP.js" />
         <option value="$PROJECT_DIR$/CopyPrototype.js" />
         <option value="$PROJECT_DIR$/Circle.js" />
-        <option value="$PROJECT_DIR$/parsepaths.py" />
         <option value="$PROJECT_DIR$/PathDrawer.js" />
-        <option value="$PROJECT_DIR$/alphabet.js" />
         <option value="$PROJECT_DIR$/FlockController.js" />
         <option value="$PROJECT_DIR$/Path.js" />
         <option value="$PROJECT_DIR$/TestScene.js" />
@@ -135,6 +171,8 @@
         <option value="$PROJECT_DIR$/Actions.js" />
         <option value="$PROJECT_DIR$/Triangle.js" />
         <option value="$PROJECT_DIR$/TriangleControllers.js" />
+        <option value="$PROJECT_DIR$/alphabet.js" />
+        <option value="$PROJECT_DIR$/parsepaths.py" />
       </list>
     </option>
   </component>
@@ -616,13 +654,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/parsepaths.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36762226">
-          <caret line="220" column="0" selection-start-line="220" selection-start-column="0" selection-end-line="220" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Circle.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.36451614">
@@ -634,13 +665,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.024193548">
           <caret line="16" column="25" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/alphabet.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -693,13 +717,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Utils.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7932619">
-          <caret line="106" column="12" selection-start-line="106" selection-start-column="12" selection-end-line="106" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5283308">
@@ -718,13 +735,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6094946">
           <caret line="63" column="56" selection-start-line="63" selection-start-column="56" selection-end-line="63" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Text.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="136" column="25" selection-start-line="136" selection-start-column="25" selection-end-line="136" selection-end-column="25" />
         </state>
       </provider>
     </entry>
@@ -764,14 +774,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/LetterScene.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="2" column="1" selection-start-line="2" selection-start-column="1" selection-end-line="2" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Triangle.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -798,8 +800,48 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/TriangleControllers.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.8091604">
+        <state vertical-scroll-proportion="0.0">
           <caret line="79" column="93" selection-start-line="79" selection-start-column="93" selection-end-line="79" selection-end-column="93" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Text.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="156" column="29" selection-start-line="156" selection-start-column="29" selection-end-line="156" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LetterScene.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="27" selection-start-line="16" selection-start-column="27" selection-end-line="16" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Utils.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="98" column="5" selection-start-line="98" selection-start-column="5" selection-end-line="98" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/alphabet.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/parsepaths.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.58917195">
+          <caret line="227" column="0" selection-start-line="227" selection-start-column="0" selection-end-line="227" selection-end-column="0" />
           <folding />
         </state>
       </provider>

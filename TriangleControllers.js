@@ -48,8 +48,22 @@ _p.update = function(dt,model)
 function GoToOriginalPositionController(model,toposition,time)
 {
     this.model = model
+    this.maxtime = time
+    this.t = time
     model.maxvelocity = 10000
     var d = model.position.distance(toposition)
+
+    this.A = model.velocity.clone()
+    this.A.multiply(1/(Math.pow(time,2)))
+    var temp = -1*2*d/Math.pow(time,3)
+    this.A.add(temp,temp)
+
+    this.B = model.velocity.clone()
+    this.B.multiply(-2/time)
+    temp = 3*d/Math.pow(time,2)
+    this.B.add(temp,temp)
+
+    this.C = model.velocity.clone()
 
     this.translationaction = new TranslationAction(model,d,model.position.vectorTo(toposition),time,true)
 }
@@ -61,6 +75,22 @@ GoToOriginalPositionController.prototype.update = function(dt,model)
     {
         this.model.controller = new AlignWithOriginController(this.model,Triangle.ALIGN_TIME)
     }
+
+    /*
+    if(this.tcount > this.time)
+    {
+        this.model.controller = new AlignWithOriginController(this.model,Triangle.ALIGN_TIME)
+    }
+    else
+    {
+        var t = this.tcount
+        var t2 = t*t
+        var t3 = t2*t
+
+    }
+
+    this.tcount += dt
+    */
 }
 
 

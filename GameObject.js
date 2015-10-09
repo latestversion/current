@@ -1,6 +1,7 @@
 function GameObject()
 {
     this.tag = ""
+    this.force = new v2d(0,0)
     this.acceleration = new v2d(0,0)
     this.velocity = new v2d(0,0)
     this.position = new v2d(0,0)

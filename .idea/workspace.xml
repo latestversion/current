@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="7c682a99-a18f-43aa-9d8c-8803e07e6808" name="Default" comment="Text class OK">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/V2D.js" afterPath="$PROJECT_DIR$/V2D.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="RestlessLetters.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -24,11 +24,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="V2D.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="V2D.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/V2D.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.55877864">
-              <caret line="43" column="24" selection-start-line="43" selection-start-column="24" selection-end-line="43" selection-end-column="24" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="89" column="25" selection-start-line="89" selection-start-column="25" selection-end-line="89" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -44,11 +44,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TriangleControllers.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TriangleControllers.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/TriangleControllers.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="99" column="29" selection-start-line="99" selection-start-column="29" selection-end-line="99" selection-end-column="29" />
+            <state vertical-scroll-proportion="0.27480915">
+              <caret line="73" column="4" selection-start-line="73" selection-start-column="4" selection-end-line="73" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -120,9 +120,9 @@
         <option value="$PROJECT_DIR$/TranslationAction.js" />
         <option value="$PROJECT_DIR$/Actions.js" />
         <option value="$PROJECT_DIR$/GameObject.js" />
-        <option value="$PROJECT_DIR$/TriangleControllers.js" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/V2D.js" />
+        <option value="$PROJECT_DIR$/TriangleControllers.js" />
       </list>
     </option>
   </component>
@@ -775,18 +775,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TriangleControllers.js">
+    <entry file="file://$PROJECT_DIR$/V2D.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="99" column="29" selection-start-line="99" selection-start-column="29" selection-end-line="99" selection-end-column="29" />
+          <caret line="89" column="25" selection-start-line="89" selection-start-column="25" selection-end-line="89" selection-end-column="25" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/V2D.js">
+    <entry file="file://$PROJECT_DIR$/TriangleControllers.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.55877864">
-          <caret line="43" column="24" selection-start-line="43" selection-start-column="24" selection-end-line="43" selection-end-column="24" />
+        <state vertical-scroll-proportion="0.27480915">
+          <caret line="73" column="4" selection-start-line="73" selection-start-column="4" selection-end-line="73" selection-end-column="4" />
           <folding />
         </state>
       </provider>

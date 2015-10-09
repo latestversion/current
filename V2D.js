@@ -83,11 +83,16 @@ _p.vectorTo = function(v)
 
 _p.multiply = function(num)
 {
-    //console.log(num)
     this.x *= num
     this.y *= num
-    //console.log("x: " + this.x)
 }
+
+_p.multiply_ip = function(num)
+{
+    this.x *= num
+    this.y *= num
+}
+
 
 _p.divide = function(num)
 {

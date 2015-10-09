@@ -30,6 +30,7 @@ _p.vectorset = function(v)
     this.y = v.y
 }
 
+
 _p.add_ip = function(dx,dy)
 {
     this.x += dx
@@ -38,7 +39,7 @@ _p.add_ip = function(dx,dy)
 
 _p.addv = function(v)
 {
-    return new v2d(this.x+v.x,this.y+vy)
+    return new v2d(this.x+v.x,this.y+v.y)
 }
 
 _p.addv_ip = function(v)
@@ -93,6 +94,11 @@ _p.multiply_ip = function(num)
     this.y *= num
 }
 
+
+_p.scale = function(s)
+{
+    return new v2d(this.x*s,this.y*s)
+}
 
 _p.divide = function(num)
 {

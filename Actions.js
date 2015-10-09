@@ -36,6 +36,7 @@ TranslationAction.prototype.update = function(dt)
     this.velocity.vectoradd(dv)
     var dp = this.velocity.clone()
     dp.multiply(dt)
+    this.model.velocity = this.velocity.clone()
     this.model.position.vectoradd(dp)
 
     return true
@@ -93,7 +94,6 @@ ConstantAccelerationToZeroAction.prototype.update = function(dt)
     {
         return false
     }
-    console.log("wtf")
 
     this.model.updatePosition(dt)
 

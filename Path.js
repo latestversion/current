@@ -22,7 +22,7 @@ Path.avgPoint = function(path)
 
     for (var i = 0; i < path.length/2; i++)
     {
-        p.add(path[2*i],path[2*i+1])
+        p.add_ip(path[2*i],path[2*i+1])
     }
     p.divide(path.length/2)
     return p

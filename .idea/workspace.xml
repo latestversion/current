@@ -2,8 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7c682a99-a18f-43aa-9d8c-8803e07e6808" name="Default" comment="Text class OK">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Actions.js" afterPath="$PROJECT_DIR$/Actions.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Array.js" afterPath="$PROJECT_DIR$/Array.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Circle.js" afterPath="$PROJECT_DIR$/Circle.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ColorBank.js" afterPath="$PROJECT_DIR$/ColorBank.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CopyPrototype.js" afterPath="$PROJECT_DIR$/CopyPrototype.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EventEmitter.js" afterPath="$PROJECT_DIR$/EventEmitter.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GameObject.js" afterPath="$PROJECT_DIR$/GameObject.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LetterScene.js" afterPath="$PROJECT_DIR$/LetterScene.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ObjectHandler.js" afterPath="$PROJECT_DIR$/ObjectHandler.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Path.js" afterPath="$PROJECT_DIR$/Path.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Point.js" afterPath="$PROJECT_DIR$/Point.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RequestAnimationframe.js" afterPath="$PROJECT_DIR$/RequestAnimationframe.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RestlessDemo.js" afterPath="$PROJECT_DIR$/RestlessDemo.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SceneHandler.js" afterPath="$PROJECT_DIR$/SceneHandler.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TestScene.js" afterPath="$PROJECT_DIR$/TestScene.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Text.js" afterPath="$PROJECT_DIR$/Text.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TriangleControllers.js" afterPath="$PROJECT_DIR$/TriangleControllers.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/V2D.js" afterPath="$PROJECT_DIR$/V2D.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alphabet.js" afterPath="$PROJECT_DIR$/alphabet.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="RestlessLetters.iws" />
@@ -25,21 +42,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="V2D.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="V2D.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/V2D.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="32" column="24" selection-start-line="32" selection-start-column="24" selection-end-line="32" selection-end-column="24" />
+            <state vertical-scroll-proportion="0.32061067">
+              <caret line="33" column="1" selection-start-line="33" selection-start-column="1" selection-end-line="33" selection-end-column="1" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TriangleControllers.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TriangleControllers.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TriangleControllers.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.47166923">
-              <caret line="79" column="4" selection-start-line="79" selection-start-column="4" selection-end-line="79" selection-end-column="4" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="99" column="29" selection-start-line="99" selection-start-column="29" selection-end-line="99" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -59,7 +76,7 @@
         <entry file="file://$PROJECT_DIR$/LetterScene.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="1" column="1" selection-start-line="1" selection-start-column="1" selection-end-line="1" selection-end-column="1" />
+              <caret line="2" column="1" selection-start-line="2" selection-start-column="1" selection-end-line="2" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -98,7 +115,6 @@
         <option value="$PROJECT_DIR$/FlockController.js" />
         <option value="$PROJECT_DIR$/Path.js" />
         <option value="$PROJECT_DIR$/TestScene.js" />
-        <option value="$PROJECT_DIR$/V2D.js" />
         <option value="$PROJECT_DIR$/TriangleVision.js" />
         <option value="$PROJECT_DIR$/test.js" />
         <option value="$PROJECT_DIR$/Utils.js" />
@@ -114,6 +130,7 @@
         <option value="$PROJECT_DIR$/Actions.js" />
         <option value="$PROJECT_DIR$/GameObject.js" />
         <option value="$PROJECT_DIR$/TriangleControllers.js" />
+        <option value="$PROJECT_DIR$/V2D.js" />
       </list>
     </option>
   </component>
@@ -148,8 +165,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -170,6 +185,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -395,9 +412,9 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16441621" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.06901615" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.06901615" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -434,7 +451,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -724,7 +740,7 @@
     <entry file="file://$PROJECT_DIR$/LetterScene.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="1" column="1" selection-start-line="1" selection-start-column="1" selection-end-line="1" selection-end-column="1" />
+          <caret line="2" column="1" selection-start-line="2" selection-start-column="1" selection-end-line="2" selection-end-column="1" />
           <folding />
         </state>
       </provider>
@@ -748,7 +764,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.06870229">
           <caret line="3" column="27" selection-start-line="3" selection-start-column="27" selection-end-line="3" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -756,7 +771,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33587787">
           <caret line="78" column="0" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -764,22 +778,21 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="15" column="20" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TriangleControllers.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="99" column="29" selection-start-line="99" selection-start-column="29" selection-end-line="99" selection-end-column="29" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/V2D.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="32" column="24" selection-start-line="32" selection-start-column="24" selection-end-line="32" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TriangleControllers.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.47166923">
-          <caret line="79" column="4" selection-start-line="79" selection-start-column="4" selection-end-line="79" selection-end-column="4" />
+        <state vertical-scroll-proportion="0.32061067">
+          <caret line="33" column="1" selection-start-line="33" selection-start-column="1" selection-end-line="33" selection-end-column="1" />
           <folding />
         </state>
       </provider>

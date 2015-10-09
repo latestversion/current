@@ -13,7 +13,7 @@ function TestScene(text,scenehandler,canvas)
     var t = new Triangle(position,testpath,this)
     var v = new TriangleVision(t)
     t.color = "rgba(0,255,0,0.5)"
-    t.position.add(100,0)
+    t.position.add_ip(100,0)
 
     this.addObject(t)
     this.addObject(v)

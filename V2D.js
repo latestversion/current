@@ -30,16 +30,15 @@ _p.vectorset = function(v)
     this.y = v.y
 }
 
-_p.add = function(dx,dy)
+_p.add_ip = function(dx,dy)
 {
-    //console.log("Adding " + dx + " " + dy)
     this.x += dx
     this.y += dy
 }
 
 _p.vectoradd = function(v)
 {
-    this.add(v.x,v.y)
+    this.add_ip(v.x,v.y)
 }
 
 _p.distance = function(v)

@@ -56,12 +56,12 @@ function GoToOriginalPositionController(model,toposition,time)
     this.A = model.velocity.clone()
     this.A.multiply(1/(Math.pow(time,2)))
     var temp = -1*2*d/Math.pow(time,3)
-    this.A.add(temp,temp)
+    this.A.add_ip(temp,temp)
 
     this.B = model.velocity.clone()
     this.B.multiply(-2/time)
     temp = 3*d/Math.pow(time,2)
-    this.B.add(temp,temp)
+    this.B.add_ip(temp,temp)
 
     this.C = model.velocity.clone()
 

@@ -2,26 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7c682a99-a18f-43aa-9d8c-8803e07e6808" name="Default" comment="Text class OK">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Actions.js" afterPath="$PROJECT_DIR$/Actions.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Array.js" afterPath="$PROJECT_DIR$/Array.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Circle.js" afterPath="$PROJECT_DIR$/Circle.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ColorBank.js" afterPath="$PROJECT_DIR$/ColorBank.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CopyPrototype.js" afterPath="$PROJECT_DIR$/CopyPrototype.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EventEmitter.js" afterPath="$PROJECT_DIR$/EventEmitter.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GameObject.js" afterPath="$PROJECT_DIR$/GameObject.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LetterScene.js" afterPath="$PROJECT_DIR$/LetterScene.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ObjectHandler.js" afterPath="$PROJECT_DIR$/ObjectHandler.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Path.js" afterPath="$PROJECT_DIR$/Path.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Point.js" afterPath="$PROJECT_DIR$/Point.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RequestAnimationframe.js" afterPath="$PROJECT_DIR$/RequestAnimationframe.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RestlessDemo.js" afterPath="$PROJECT_DIR$/RestlessDemo.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SceneHandler.js" afterPath="$PROJECT_DIR$/SceneHandler.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TestScene.js" afterPath="$PROJECT_DIR$/TestScene.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Text.js" afterPath="$PROJECT_DIR$/Text.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TriangleControllers.js" afterPath="$PROJECT_DIR$/TriangleControllers.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/V2D.js" afterPath="$PROJECT_DIR$/V2D.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/alphabet.js" afterPath="$PROJECT_DIR$/alphabet.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
     </list>
     <ignored path="RestlessLetters.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -45,8 +27,18 @@
       <file leaf-file-name="V2D.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/V2D.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.32061067">
-              <caret line="33" column="1" selection-start-line="33" selection-start-column="1" selection-end-line="33" selection-end-column="1" />
+            <state vertical-scroll-proportion="0.55877864">
+              <caret line="43" column="24" selection-start-line="43" selection-start-column="24" selection-end-line="43" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-11.916667">
+              <caret line="44" column="9" selection-start-line="44" selection-start-column="9" selection-end-line="44" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -126,10 +118,10 @@
         <option value="$PROJECT_DIR$/Text.js" />
         <option value="$PROJECT_DIR$/Triangle.js" />
         <option value="$PROJECT_DIR$/TranslationAction.js" />
-        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/Actions.js" />
         <option value="$PROJECT_DIR$/GameObject.js" />
         <option value="$PROJECT_DIR$/TriangleControllers.js" />
+        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/V2D.js" />
       </list>
     </option>
@@ -451,6 +443,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -776,8 +769,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="20" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
+        <state vertical-scroll-proportion="-11.916667">
+          <caret line="44" column="9" selection-start-line="44" selection-start-column="9" selection-end-line="44" selection-end-column="9" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -791,8 +785,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/V2D.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.32061067">
-          <caret line="33" column="1" selection-start-line="33" selection-start-column="1" selection-end-line="33" selection-end-column="1" />
+        <state vertical-scroll-proportion="0.55877864">
+          <caret line="43" column="24" selection-start-line="43" selection-start-column="24" selection-end-line="43" selection-end-column="24" />
           <folding />
         </state>
       </provider>

@@ -36,6 +36,17 @@ _p.add_ip = function(dx,dy)
     this.y += dy
 }
 
+_p.addv = function(v)
+{
+    return new v2d(this.x+v.x,this.y+vy)
+}
+
+_p.addv_ip = function(v)
+{
+    this.x += v.x
+    this.y += v.y
+}
+
 _p.vectoradd = function(v)
 {
     this.add_ip(v.x,v.y)

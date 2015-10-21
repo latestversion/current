@@ -8,10 +8,8 @@ function Entity()
 }
 
 
-Entity.prototype = {}
+var _p = Entity.prototype = {}
 
-
-var _p = Entity.protoype
 
 _p.Name = function()
 {return this.name}

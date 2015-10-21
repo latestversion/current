@@ -68,6 +68,28 @@ HasContainer.getPrototypeInstance = function(items)
     return this[items].length
   }
 
+
+  _p["Begin" + Items] = function()
+  {
+    this[items].idx = 0
+  }
+
+  _p["IsValid" + Item] = function()
+  {
+    return this[items].idx < this[items].length ? true : false
+  }
+
+  _p["Current" + Item] = function()
+  {
+    return this[items][this[items].idx]
+  }
+
+  _p["Next" + Item] = function()
+  {
+    this[items].idx++
+  }
+
+
   hasContainerPrototypes[items] = _p
 
   return _p

@@ -1,4 +1,4 @@
-function copyPrototype(fromclass,toclass)
+function CopyPrototype(fromclass,toclass)
 {
     var fromp = fromclass.prototype
     var top = toclass.prototype

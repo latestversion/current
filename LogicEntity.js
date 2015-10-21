@@ -1,5 +1,6 @@
 function LogicEntity()
 {
+  Entity.call(this)
   this.logics = {}
 }
 
@@ -30,6 +31,8 @@ _p.DoActionObject = function(action)
 (
 )
 
-_p.DoActionArgs = function()
+_p.DoActionArgs = function(alotofargs)
 (
 )
+
+CopyPrototype(Entity,LogicEntity)

@@ -20,3 +20,14 @@ function CopyPrototype(fromclass,toclass)
     }
 
 }
+
+function CopyProperties(fromobj,toobj)
+{
+    var from = fromobj
+    var to = toobj
+
+    for (var key in from)
+    {
+        to[key] = from[key]
+    }
+}

@@ -1,20 +1,31 @@
 
 var i = 3
+var evalFile = null
 
 // load all global stuff
 
 if("node" == PLATFORM)
 {
   // do node specific loading
-  loadFile = function(){}
+  evalFile = function(file,refscope){
+  {
+    var s = fs.readFileSync(file,"ascii")
+    refscope.eval(s)}
+  }
 }
-
 
 if("ios" == PLATFORM)
 {
-  // do the
+  evalFile = function(file,refscope){
+  {
+    var s = fs.readFileSync(file,"ascii")
+    refscope.eval(s)}
+  }
 }
 
+
+var inbuffer = ""
+var outbuffer = ""
 
 function gameloop()
 {

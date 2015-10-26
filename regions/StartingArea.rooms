@@ -1,0 +1,10 @@
+<room>
+ <id>1</id>
+ <name>Muddy Fields</name>
+ <description>A lovely little pice of land. Or rather... mud. *sigh*</description>
+</room>
+<room>
+ <id>2</id>
+ <name>Muddier Fields</name>
+ <description>This field is even muddier. You have spent many a day here, working your back off.</description>
+</room>

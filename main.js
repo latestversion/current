@@ -9,15 +9,18 @@ if(PLATFORM_NODE == PLATFORM)
 {
   var net = require('net');
   var fs = require('fs')
-  evalFile = function(file,refscope){
-  {
-    var s = fs.readFileSync(file,"ascii")
-    refscope.eval(s)}
+    evalFile = function(file,refscope){
+    {
+      var s = fs.readFileSync(file,"ascii")
+      refscope.eval(s)
+    }
   }
 
   this.eval = eval
   evalFile("./TelnetHandler.js",this)
   evalFile("./LoginHandler.js",this)
+  evalFile("./CopyPrototype.js",this)
+  evalFile("./DatabaseInstances.js",this)
 
   var telnethandler = ""
 

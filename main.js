@@ -1,42 +1,57 @@
 
-var i = 3
-var evalFile = null
+PLATFORM_NODE = "node"
+PLATFORM_IOS = "ios"
 
-// load all global stuff
+PLATFORM = PLATFORM_NODE
 
-if("node" == PLATFORM)
+
+if(PLATFORM_NODE == PLATFORM)
 {
-  // do node specific loading
+  var net = require('net');
+  var fs = require('fs')
   evalFile = function(file,refscope){
   {
     var s = fs.readFileSync(file,"ascii")
     refscope.eval(s)}
   }
-}
 
-if("ios" == PLATFORM)
-{
-  evalFile = function(file,refscope){
+  this.eval = eval
+  evalFile("./TelnetHandler.js",this)
+  evalFile("./LoginHandler.js",this)
+
+  var telnethandler = ""
+
+  function newConnectionHandler(c)
   {
-    var s = fs.readFileSync(file,"ascii")
-    refscope.eval(s)}
+    console.log("Client connected.")
+    telnethandler = new LoginHandler(new TelnetHandler(c))
   }
-}
 
-
-var inbuffer = ""
-var outbuffer = ""
-
-function gameloop()
-{
-
-  console.log("i is now: " + i)
-  if(i-- > 0)
+  function serverBoundHandler()
   {
-    setTimeout(gameloop,500)
+    console.log('server bound')
   }
+
+  var server = net.createServer(newConnectionHandler)
+  server.listen(8124, serverBoundHandler)
 }
 
-gameloop()
+var delay = 5
+var userinput = ""
+
+function loop()
+{
+  var l = ""
+  var th = telnethandler
+  
+  if(telnethandler)
+  {
+    telnethandler.tick()
+  }
+
+  setTimeout(loop,delay)
+}
+
+setTimeout(loop,0)
 
 

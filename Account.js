@@ -1,3 +1,7 @@
+
+evalFile("./HasContainer.js",this)
+evalFile("./Entity.js",this)
+
 function Account()
 {
   Entity.call(this)

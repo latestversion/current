@@ -11,8 +11,13 @@ if(PLATFORM_NODE == PLATFORM)
   var fs = require('fs')
     evalFile = function(file,refscope){
     {
+      console.log("eval " + file)
       var s = fs.readFileSync(file,"ascii")
       refscope.eval(s)
+    }
+    readFile = function(file){
+      var s = fs.readFileSync(file,"ascii")
+      return s
     }
   }
 

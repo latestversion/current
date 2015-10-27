@@ -47,7 +47,6 @@ _p.put = function(line)
 {
 	if(this.connection)
 	{
-	
 		this.connection.write(line)
 	}
 }

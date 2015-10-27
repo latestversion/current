@@ -1,7 +1,7 @@
 When the client starts the user decides whether to
 
 How to start a new game:
-1. Load databases from /pristineworld
+1. Load databases from /pristineworld /startstate
 2. Save databases to /savedgames/savedirX
 
 How to continue a saved game:
@@ -49,3 +49,19 @@ Liked by cats - cats follow them. There is a prob of falling over cats. Hahaha.
 
 
 2 ->
+
+playertemplates
+
+1) New game -> start game with databases from newstate, and add char with template id
+   as specified and mark as player.
+2) Continue -> load databases from save state and find the one with player flag.
+
+
+savedir
+description.data -> {char:"Tom Boff",id:34,room:"Temple of Snoozing"}
+regions
+rooms
+characters
+
+
+

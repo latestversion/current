@@ -1,0 +1,51 @@
+When the client starts the user decides whether to
+
+How to start a new game:
+1. Load databases from /pristineworld
+2. Save databases to /savedgames/savedirX
+
+How to continue a saved game:
+1. Load databases from /savedgames/savedirX
+
+charid_charnamewithoutspaces
+
+savedgames
+   savedir1
+      regions.data
+      rooms.data
+      characters.data
+
+
+1) Start new game
+2) Continue quest
+
+1 ->
+
+Choose your character:
+
+1. Tom Finkdorf
+   Scrawny.
+2. Esma Blargle
+   Misplaces things.
+3. Goward Rotchest
+   Can't make heads or tails of a two-tailed horse.
+4. Frannie Beet
+   Picky when it comes to food.
+5. Ludo Bog
+   Too fond of berries.
+6. Greta Fogeyes
+   Couldn't hit the side of a barn from within.
+7. Dick Dogwood
+   Nudist.
+8. Fred Fishmonger
+   Liked by cats.
+
+Random (?) weakness.
+weak (-str), clumsy (drops items), dizzy (acts randomly canceled due to dizziness)
+allergic to potatoes (ie some healing items), stupid (can't use some items)
+dope fiend - addicted to something
+clumsy - to hit reduction.
+Liked by cats - cats follow them. There is a prob of falling over cats. Hahaha.
+
+
+2 ->

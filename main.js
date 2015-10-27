@@ -9,12 +9,23 @@ if(PLATFORM_NODE == PLATFORM)
 {
   var net = require('net');
   var fs = require('fs')
+  var evalFiles = {}
     evalFile = function(file,refscope){
     {
+
+      if(evalFiles[s])
+      {
+        return
+      }
+
       console.log("eval " + file)
       var s = fs.readFileSync(file,"ascii")
       refscope.eval(s)
+      evalFiles[s] = true
     }
+
+    evalFiles = {}
+
     readFile = function(file){
       var s = fs.readFileSync(file,"ascii")
       return s
@@ -51,7 +62,7 @@ function loop()
 {
   var l = ""
   var th = telnethandler
-  
+
   if(telnethandler)
   {
     telnethandler.tick()

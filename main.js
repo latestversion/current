@@ -12,19 +12,17 @@ if(PLATFORM_NODE == PLATFORM)
   var evalFiles = {}
     evalFile = function(file,refscope){
     {
-
-      if(evalFiles[s])
+      console.log(evalFiles)
+      if(evalFiles[file])
       {
         return
       }
 
-      console.log("eval " + file)
       var s = fs.readFileSync(file,"ascii")
       refscope.eval(s)
-      evalFiles[s] = true
+      evalFiles[file] = true
     }
 
-    evalFiles = {}
 
     readFile = function(file){
       var s = fs.readFileSync(file,"ascii")
@@ -34,16 +32,18 @@ if(PLATFORM_NODE == PLATFORM)
 
   this.eval = eval
   evalFile("./TelnetHandler.js",this)
+  evalFile("./MenuHandler.js",this)
   evalFile("./LoginHandler.js",this)
   evalFile("./CopyPrototype.js",this)
   evalFile("./DatabaseInstances.js",this)
+  evalFile("./Game.js",this)
 
   var telnethandler = ""
 
   function newConnectionHandler(c)
   {
     console.log("Client connected.")
-    telnethandler = new LoginHandler(new TelnetHandler(c))
+    telnethandler = new MenuHandler(new TelnetHandler(c))
   }
 
   function serverBoundHandler()

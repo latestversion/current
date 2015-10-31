@@ -12,10 +12,21 @@ function Game()
 var _p = Game.prototype = {}
 
 
+_p.LoadGame(dir)
+{
+  idb.LoadDir(dir)
+  rgndb.LoadDir(dir)
+  rdb.LoadDir(dir)
+  cdb.LoadDir(dir)
+}
+
 _p.StartNewGame = function()
 {
-	this.loadpath = "./newgame/"
-	
+	this.loaddir = "./newgamestate"
+  this.savedir = "./savedgame_VIXEN"
+
+  this.LoadGame(this.loadpath)
+
 }
 
 var Game = new Game()

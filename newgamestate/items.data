@@ -1,0 +1,12 @@
+[
+  {
+    "name": "A carrot",
+    "description":"It's orange. Like a carrot.",
+    "id":1,
+  },
+  {
+    "name": "The legendary ring of FIRE",
+    "description":"A flame burns eternally within its dark gold.",
+    "id":2,
+  }
+]

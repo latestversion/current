@@ -1,0 +1,8 @@
+[
+  {
+    "name":"Fields of Mud",
+    "description":"Some fields of mud where as a youngling you worked.",
+    "id":1,
+    "rooms": [1,2]
+  }
+]

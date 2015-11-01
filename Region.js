@@ -1,6 +1,6 @@
 
-evalFile("Entity.js")
-evalFile("HasRooms.js")
+evalFile("Entity.js",this)
+evalFile("HasRooms.js",this)
 
 function Region()
 {

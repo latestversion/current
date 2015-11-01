@@ -3,14 +3,14 @@
     "name": "A field of mud",
     "description":"The ground is cold and hard. But still muddy enough to cling to your boots, somehow.",
     "id":1,
-    "items":[1],
+    "items":[],
     "characters":[]
   },
   {
     "name": "Another field of mud",
     "description":"So yeah. This is where cabbages come from.",
     "id":2,
-    "items":[2],
+    "items":[],
     "characters":[]
   }
 ]

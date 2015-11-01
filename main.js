@@ -1,4 +1,6 @@
 
+defaultscope = this
+
 PLATFORM_NODE = "node"
 PLATFORM_IOS = "ios"
 
@@ -9,18 +11,25 @@ if(PLATFORM_NODE == PLATFORM)
 {
   var net = require('net');
   var fs = require('fs')
-  var evalFiles = {}
+  var evaledFiles = {}
     evalFile = function(file,refscope){
     {
-      console.log(evalFiles)
-      if(evalFiles[file])
+      console.log(evaledFiles)
+      if(evaledFiles[file])
       {
         return
       }
 
       var s = fs.readFileSync(file,"ascii")
-      refscope.eval(s)
-      evalFiles[file] = true
+      if(refscope)
+      {
+        refscope.eval(s)
+      }
+      else
+      {
+        defaultscope.eval(s)
+      }
+      evaledFiles[file] = true
     }
 
 
@@ -31,10 +40,12 @@ if(PLATFORM_NODE == PLATFORM)
   }
 
   this.eval = eval
+  evalFile("./CopyPrototype.js")
+  evalFile("./Entity.js")
+  evalFile("./HasContainer.js",this)
   evalFile("./TelnetHandler.js",this)
   evalFile("./MenuHandler.js",this)
   evalFile("./LoginHandler.js",this)
-  evalFile("./CopyPrototype.js",this)
   evalFile("./DatabaseInstances.js",this)
   evalFile("./Game.js",this)
 

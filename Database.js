@@ -1,21 +1,37 @@
 function Database(savefile,typeprototype)
 {
-  this.savefile = defaultsavefilename
+  this.defaultsavefile = savefile
   this.typeprototype = typeprototype
   this.database = []
+  this.factory = {}
 }
 
 var _p = Database.prototype = {}
 
+
+
 _p.FindName = function(name){}
 _p.Get = function(id){}
-_p.Create = function(id){}
+_p.Create = function(tid)
+{
+  if(this.factory)
+  {
+    return this.factory.Produce(tid)
+  }
+  else
+  {
+    throw "No factory in Create call for database, tid " + tid
+  }
+}
 _p.Size = function(){return this.database.length}
 _p.Save = function(){}
 _p.Load = function(){}
 _p.LoadEntity = function(id){}
 _p.SaveEntity = function(entity){}
-
+_p.SetFactory = function(factory)
+{
+  this.factory = factory
+}
 _p.LoadDirectory = function(dir)
 {
   var file = dir + "/" + this.defaultsavefilename

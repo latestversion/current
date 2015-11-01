@@ -1,3 +1,9 @@
+
+evalFile("./BasicDataClasses.js",this)
+evalFile("./HasItems.js",this)
+evalFile("./DataEntity.js",this)
+evalFile("./LogicEntity.js",this)
+
 function Character()
 {
   HasRegion.call(this)
@@ -12,6 +18,7 @@ function Character()
   this.verbose = false
   this.loggedin = false
   this.lastcommand = ""
+  this.connection = 0
 }
 
 var _p = Character.prototype = {}
@@ -36,6 +43,21 @@ _p.SetAccount = function(acc)
 _p.IsPlayer = function()
 {
   return this.account ? true : false
+}
+
+_p.TurnToPlayer = function()
+{
+  this.account = 77
+}
+
+_p.GetConnection = function()
+{
+  return this.connection
+}
+
+_p.SetConnection = function(connection)
+{
+  this.connection = connection
 }
 
 

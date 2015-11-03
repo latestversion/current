@@ -9,14 +9,29 @@ function Database(savefile,typeprototype)
 var _p = Database.prototype = {}
 
 
-
+_p.AddEntity = function(e)
+{
+  this.database.push(e)
+}
 _p.FindName = function(name){}
-_p.Get = function(id){}
+
+_p.Get = function(id)
+{
+  for (var k in this.database)
+  {
+    if(this.database[k].ID() == id)
+    {
+      return this.database[k]
+    }
+  }
+
+  return false
+}
 _p.Create = function(tid)
 {
   if(this.factory)
   {
-    return this.factory.Produce(tid)
+    return this.factory.Create(tid)
   }
   else
   {
@@ -34,7 +49,7 @@ _p.SetFactory = function(factory)
 }
 _p.LoadDirectory = function(dir)
 {
-  var file = dir + "/" + this.defaultsavefilename
+  var file = dir + "/" + this.defaultsavefile
   var s = readFile(file)
   var parsed = JSON.parse(s)
   for(var i in parsed)

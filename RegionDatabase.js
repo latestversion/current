@@ -1,6 +1,6 @@
-evalFile("./Database.js",this)
-evalFile("./CopyPrototype.js",this)
-evalFile("./Region.js",this)
+evalFile("Database.js",this)
+evalFile("CopyPrototype.js",this)
+evalFile("Region.js",this)
 
 function RegionDatabase()
 {

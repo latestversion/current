@@ -1,5 +1,5 @@
 
-evalFile("./DatabaseInstances.js",this)
+evalFile("DatabaseInstances.js",this)
 
 
 function Game()
@@ -24,16 +24,20 @@ _p.LoadDatabases = function(dir)
 
 _p.StartNewGame = function()
 {
+  console.log("Starting new game")
 	this.loaddir = "./newgamestate"
   this.savedir = "./savedgame_VIXEN"
 
-  this.LoadDatabases(this.loadpath)
+  this.LoadDatabases(this.loaddir)
 }
 
 
 
-_p.DoCommand = function(cmd,pid)
+_p.DoCommand = function(input,cid)
 {
+  var tokens = input.split(" ")
+  var cmd = tokens[0]
+  var c = cdb.Get(cid)
 
 }
 
@@ -49,7 +53,8 @@ _p.AddActionAbsolute = function()
 
 _p.tick = function()
 {
-
+  // Increment time
+  // Check actions
 }
 
 var Game = new Game()

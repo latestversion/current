@@ -40,7 +40,7 @@ _p.parse = function(s)
 		}
 		nidx = this.buffer.indexOf("\n")
 	}
-	
+
 }
 
 _p.put = function(line)

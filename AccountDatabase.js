@@ -1,8 +1,8 @@
 
 
-evalFile("./Database.js",this)
-evalFile("./CopyPrototype.js",this)
-evalFile("./Account.js",this)
+evalFile("Database.js",this)
+evalFile("CopyPrototype.js",this)
+evalFile("Account.js",this)
 
 function AccountDatabase()
 {

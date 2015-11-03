@@ -1,8 +1,9 @@
 
-evalFile("./BasicDataClasses.js",this)
-evalFile("./HasItems.js",this)
-evalFile("./DataEntity.js",this)
-evalFile("./LogicEntity.js",this)
+evalFile("BasicDataClasses.js",this)
+evalFile("HasItems.js",this)
+evalFile("DataEntity.js",this)
+evalFile("LogicEntity.js",this)
+evalFile("HasCommands.js",this)
 
 function Character()
 {
@@ -12,6 +13,7 @@ function Character()
   HasTemplate.call(this)
   DataEntity.call(this)
   LogicEntity.call(this)
+  HasCommands.call(this)
 
   this.account = 0
   this.quiet = false
@@ -29,6 +31,7 @@ CopyPrototype(HasTemplate,Character)
 CopyPrototype(HasItems,Character)
 CopyPrototype(DataEntity,Character)
 CopyPrototype(LogicEntity,Character)
+CopyPrototype(HasCommands,Character)
 
 _p.GetAccount = function()
 {

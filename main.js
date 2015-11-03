@@ -14,7 +14,7 @@ if(PLATFORM_NODE == PLATFORM)
   var evaledFiles = {}
     evalFile = function(file,refscope){
     {
-      console.log(evaledFiles)
+      //console.log(evaledFiles)
       if(evaledFiles[file])
       {
         return
@@ -40,14 +40,14 @@ if(PLATFORM_NODE == PLATFORM)
   }
 
   this.eval = eval
-  evalFile("./CopyPrototype.js")
-  evalFile("./Entity.js")
-  evalFile("./HasContainer.js",this)
-  evalFile("./TelnetHandler.js",this)
-  evalFile("./MenuHandler.js",this)
-  evalFile("./LoginHandler.js",this)
-  evalFile("./DatabaseInstances.js",this)
-  evalFile("./Game.js",this)
+  evalFile("CopyPrototype.js")
+  evalFile("Entity.js")
+  evalFile("HasContainer.js",this)
+  evalFile("TelnetHandler.js",this)
+  evalFile("MenuHandler.js",this)
+  evalFile("LoginHandler.js",this)
+  evalFile("DatabaseInstances.js",this)
+  evalFile("Game.js",this)
 
   var telnethandler = ""
 
@@ -57,29 +57,24 @@ if(PLATFORM_NODE == PLATFORM)
     telnethandler = new MenuHandler(new TelnetHandler(c))
   }
 
-  function serverBoundHandler()
-  {
-    console.log('server bound')
-  }
-
   var server = net.createServer(newConnectionHandler)
-  server.listen(8124, serverBoundHandler)
+  server.listen(8124, function serverBoundHandler(){console.log('server bound')})
 }
 
-var delay = 5
-var userinput = ""
 
 function loop()
 {
-  var l = ""
-  var th = telnethandler
 
   if(telnethandler)
   {
     telnethandler.tick()
   }
 
-  setTimeout(loop,delay)
+  /*InputHandler.tick()*/
+
+  Game.tick()
+
+  setTimeout(loop,5)
 }
 
 setTimeout(loop,0)

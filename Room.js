@@ -7,4 +7,4 @@ function Room()
 
 var _P = Room.prototype = {}
 
-CopyPrototype(Entity,Item)
+CopyPrototype(Entity,Room)

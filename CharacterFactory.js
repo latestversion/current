@@ -5,26 +5,26 @@ evalFile("Character.js",this)
 
 CharacterTemplateIdCount = 0
 
-function TomFinkdorf()
-{
-  Character.call(this)
-  this.SetName("Tom Finkdorf")
-  this.SetDescription("His name is Tom Finkdorf. You get the picture.")
-  this.SetTemplate(TomFinkdorf.tid)
-}
+var CharacterTemplateIds = {}
 
-TomFinkdorf.tid = CharacterTemplateIdCount++
-CopyPrototype(Character,TomFinkdorf)
+CharacterTemplateIds.TomFinkdorf = CharacterTemplateIdCount++
 
 
 CharacterFactory = {}
 
-CharacterFactory.Produce = function(tid)
+CharacterFactory.Create = function(tid)
 {
-  if (TomFinkdorf.tid == tid)
+  var c = new Character()
+  c.SetTemplate(tid)
+
+  if (CharacterTemplateIds.TomFinkdorf == tid)
   {
-    return new TomFinkdorf()
+    var name = "Tom Finkdorf"
+    c.SetName(name)
+    c.SetDescription("His name is " + name + ". You get the picture.")
   }
+
+  return c
 }
 
 

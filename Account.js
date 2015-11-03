@@ -1,6 +1,6 @@
 
-evalFile("./HasContainer.js",this)
-evalFile("./Entity.js",this)
+evalFile("HasContainer.js",this)
+evalFile("Entity.js",this)
 
 function Account()
 {

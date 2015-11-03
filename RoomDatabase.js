@@ -1,7 +1,7 @@
 
-evalFile("./Database.js",this)
-evalFile("./CopyPrototype.js",this)
-evalFile("./Room.js",this)
+evalFile("Database.js",this)
+evalFile("CopyPrototype.js",this)
+evalFile("Room.js",this)
 
 function RoomDatabase()
 {

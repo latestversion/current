@@ -54,7 +54,8 @@ if(PLATFORM_NODE == PLATFORM)
   function newConnectionHandler(c)
   {
     console.log("Client connected.")
-    telnethandler = new MenuHandler(new TelnetHandler(c))
+    telnethandler = new RootHandler(new TelnetHandler(c))
+    telnethandler.setCurrentHandler(new MenuHandler(telnethandler))
   }
 
   var server = net.createServer(newConnectionHandler)

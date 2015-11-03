@@ -1,5 +1,5 @@
 
-function GameHandler(stream,cid)
+function GameHandler(manager,stream,cid)
 {
   this.stream = stream
   this.cid = cid
@@ -7,13 +7,7 @@ function GameHandler(stream,cid)
 
 var _p = GameHandler.prototype = {}
 
-_p.tick = function()
+_p.onInput = function(input)
 {
-  var stream = this.stream
-  var input = this.stream.get()
-
-  if(input)
-  {
-    Game.DoCommand(input,cid)
-  }
+  Game.DoCommand(input,cid)
 }

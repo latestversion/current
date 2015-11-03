@@ -1,10 +1,10 @@
 
 evalFile("CharacterFactory.js",this)
 
-function MenuHandler(stream)
+function MenuHandler(manager,outstream)
 {
-	this.stream = stream
-	this.state = 0
+	this.manager = manager
+	this.stream = outstream
 
 	stream.putn()
 	stream.putn()
@@ -15,13 +15,8 @@ function MenuHandler(stream)
 
 var _p = MenuHandler.prototype = {}
 
-_p.tick = function()
+_p.onInput = function(input)
 {
-	var stream = this.stream
-	var input = this.stream.get()
-
-	if(input)
-	{
 		if(input == "1")
 		{
 			stream.putn("I will start the game")
@@ -29,15 +24,16 @@ _p.tick = function()
 			var c = Game.cdb.Create(CharacterTemplateIds.TomFinkdorf)
 			c.TurnToPlayer()
 			c.SetRoom(1)
+			c.SetId(77)
 			c.SetConnection(this.stream)
 			this.stream.putn("You are " + c.Name())
 			this.stream.putn("Description: " + c.Description())
+			this.manager.setCurrentHandler(new GameHandler(this.manager,this.outstream)
 		}
 		else
 		{
 			stream.putn("Unknown choice.")
 		}
-	}
 }
 
 

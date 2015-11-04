@@ -32,7 +32,6 @@ _p.StartNewGame = function()
 }
 
 
-
 _p.DoCommand = function(input,cid)
 {
   var tokens = input.split(" ")

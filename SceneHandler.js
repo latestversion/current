@@ -1,32 +1,51 @@
-var SceneManager = function()
+var SceneHandler = function(inputstream)
 {
-	this._scenes = [];
-	this.pushScene = function(Scene)
-	{
-		this._scenes.push(Scene);
-	}
-	this.popScene = function()
-	{
-		return this._scenes.pop();
-	}
-	this.clearScenes = function()
-	{
-		this._scenes = [];
-	}
-	this.getCurrentScene  = function()
-	{
-		var numScenes = this._scenes.length;
-		if(numScenes)
-		{
-			return this._scenes[numScenes-1];
-		}
+	this.stream = inputstream
+	this.scenes = [];
+}
 
-		return null;
+var _p = SceneHandler.prototype = {}
+
+
+_p.PushScene = function(Scene)
+{
+	this.scenes.push(Scene);
+}
+_p.PopScene = function()
+{
+	return this.scenes.pop();
+}
+_p.ClearScenes = function()
+{
+	this.scenes = [];
+}
+_p.GetCurrentScene  = function()
+{
+	var numScenes = this.scenes.length;
+	if(numScenes)
+	{
+		return this.scenes[numScenes-1];
 	}
 
-	this.setCurrentScene = function(scene)
-	{
-		this.popScene()
-		this.pushScene(scene)
-	}
+	return null;
+}
+
+_p.ReplaceCurrentScene = function(scene)
+{
+	this.PopScene()
+	this.PushScene(scene)
+}
+
+
+_p.tick = function()
+{
+  var input = this.stream.get()
+  if(input)
+  {
+    var ch = this.GetCurrentScene()
+    if(ch)
+    {
+      ch.onInput(input)
+    }
+  }
 }

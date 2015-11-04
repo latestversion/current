@@ -44,18 +44,20 @@ if(PLATFORM_NODE == PLATFORM)
   evalFile("Entity.js")
   evalFile("HasContainer.js",this)
   evalFile("TelnetHandler.js",this)
-  evalFile("MenuHandler.js",this)
+  evalFile("MenuScene.js",this)
   evalFile("LoginHandler.js",this)
   evalFile("DatabaseInstances.js",this)
+  evalFile("SceneHandler.js",this)
   evalFile("Game.js",this)
 
-  var telnethandler = ""
+  var scenehandler = ""
 
   function newConnectionHandler(c)
   {
     console.log("Client connected.")
-    telnethandler = new RootHandler(new TelnetHandler(c))
-    telnethandler.setCurrentHandler(new MenuHandler(telnethandler))
+    var stream = new TelnetHandler(c)
+    scenehandler = new SceneHandler(stream)
+    scenehandler.PushScene(new MenuScene(scenehandler,stream))
   }
 
   var server = net.createServer(newConnectionHandler)
@@ -66,9 +68,9 @@ if(PLATFORM_NODE == PLATFORM)
 function loop()
 {
 
-  if(telnethandler)
+  if(scenehandler)
   {
-    telnethandler.tick()
+    scenehandler.tick()
   }
 
   /*InputHandler.tick()*/

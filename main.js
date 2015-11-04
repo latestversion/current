@@ -40,6 +40,7 @@ if(PLATFORM_NODE == PLATFORM)
   }
 
   this.eval = eval
+  evalFile("Action.js")
   evalFile("CopyPrototype.js")
   evalFile("Entity.js")
   evalFile("HasContainer.js",this)

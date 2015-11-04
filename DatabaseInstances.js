@@ -1,10 +1,8 @@
 
 
 evalFile("Database.js",this)
-evalFile("AccountDatabase.js",this)
-evalFile("CharacterDatabase.js",this)
-evalFile("RegionDatabase.js",this)
 evalFile("Room.js",this)
+evalFile("Region.js",this)
 
 var cdb = new Database("characters.data",Character.prototype)
 cdb.SetFactory(CharacterFactory)

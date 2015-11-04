@@ -1,8 +1,7 @@
 // Map<String,X>
 // NOT FINISHED
-// TBREMOVED
 function MapIterator(map)
-{-
+{
   this.map = map
   this.array = Object.keys(map)
   this.idx = 0
@@ -18,7 +17,7 @@ _p.Next = function()
     return undefined
   }
 
-  return this.map[this.array[this.idx++]
+  return this.map[this.array[this.idx++]]
 }
 
 
@@ -27,6 +26,7 @@ var hasMapPrototypes = {}
 function HasMap(items)
 {
   this[items] = {}
+  this[items]["_count"] = 0
 }
 
 // NOT FINISHED
@@ -44,55 +44,41 @@ HasMap.getPrototypeInstance = function(items)
   var _p = {}
 
 
-  _p["Add" + Item] = function(id)
+  _p["Add" + Item] = function(key,value)
   {
-    this[items].push(id)
+    this[items][key] = value
+    this[items]["_count"]++
   }
 
-  _p["Del" + Item] = function(id)
+  _p["Del" + Item] = function(key)
   {
-    var idx = this[items].indexOf(id)
-    if(-1 != idx)
-    {
-      this[items].splice(idx,1)
-    }
-
+      delete this[items][key]
+      this[items]["_count"]--   
   }
 
   _p[Items + "Iterator"] = function()
   {
-    return new ArrayIterator(this[container])
+    return new MapIterator(this[items])
   }
 
 
   _p["Num" + Items] = function()
   {
-    return this[items].length
+    return this[items]["_count"]
   }
 
-
-  _p["Begin" + Items] = function()
+  _p["Has" + Item] = function(key)
   {
-    this[items].idx = 0
+    return this[items][key]
   }
 
-  _p["IsValid" + Item] = function()
+_p["Get" + Item] = function(key)
   {
-    return this[items].idx < this[items].length ? true : false
-  }
-
-  _p["Current" + Item] = function()
-  {
-    return this[items][this[items].idx]
-  }
-
-  _p["Next" + Item] = function()
-  {
-    this[items].idx++
+    return this[items][key]
   }
 
 
-  hasContainerPrototypes[items] = _p
+  hasMapPrototypes[items] = _p
 
   return _p
 }

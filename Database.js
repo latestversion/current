@@ -13,6 +13,7 @@ _p.AddEntity = function(e)
 {
   this.database.push(e)
 }
+
 _p.FindName = function(name){}
 
 _p.Get = function(id)

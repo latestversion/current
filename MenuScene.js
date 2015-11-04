@@ -2,6 +2,7 @@
 evalFile("CharacterFactory.js",this)
 evalFile("Scene.js")
 evalFile("GameScene.js")
+evalFile("ErrorLogic.js")
 
 function MenuScene(sceneHandler,stream)
 {
@@ -30,6 +31,10 @@ _p.onInput = function(input)
 			c.SetRoom(1)
 			c.SetID(77)
 			c.SetConnection(this.stream)
+			var elogic = new ErrorLogic(c)
+			c.AddLogic(elogic)
+
+			Game.cdb.AddEntity(c)
 			this.stream.putn("You are " + c.Name())
 			this.stream.putn("Description: " + c.Description())
 			this.sceneHandler.ReplaceCurrentScene(new GameScene(this.sceneHandler,this.outstream,c.ID()))

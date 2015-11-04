@@ -53,7 +53,7 @@ _p.TurnToPlayer = function()
   this.account = 77
 }
 
-_p.GetConnection = function()
+_p.Connection = function()
 {
   return this.connection
 }

@@ -19,7 +19,7 @@ CharacterFactory.Create = function(tid)
 
   if (CharacterTemplateIds.TomFinkdorf == tid)
   {
-    var name = "Tom Finkdorf"
+    var name = "Tom Finkledorf"
     c.SetName(name)
     c.SetDescription("His name is " + name + ". You get the picture.")
   }

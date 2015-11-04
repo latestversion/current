@@ -7,8 +7,12 @@ function Game()
 	this.loadpath = ""
 	this.savepath = ""
   this.t = 0
-  this.rgndb = rgndb
+
+  this.startRoom = 1
+
   this.cdb = cdb
+  this.rdb = rdb
+  this.rgndb = rgndb
 }
 
 
@@ -35,8 +39,17 @@ _p.StartNewGame = function()
 _p.DoCommand = function(input,cid)
 {
   var tokens = input.split(" ")
-  var cmd = tokens[0]
+  var cmdname = tokens[0]
   var c = cdb.Get(cid)
+  if(c.HasCommand(cmdname))
+  {
+    var cmd = c.GetCommand(cmdname)
+    console.log("had command")
+  }
+  else
+  {
+    c.DoAction(new Action("error",0,0,0,"I did not recognize command " + cmdname))
+  }
 
 }
 

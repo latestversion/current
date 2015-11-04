@@ -1,8 +1,10 @@
+evalFile("HasMapContainer.js")
+
 function HasCommands()
 {
-  HasContainer.call(this,"commands")
+  HasMap.call(this,"commands")
 }
 
 var _p = HasCommands.prototype = {}
 
-CopyProperties(HasContainer.getPrototypeInstance("commands"),HasCommands.prototype)
+CopyProperties(HasMap.getPrototypeInstance("commands"),HasCommands.prototype)

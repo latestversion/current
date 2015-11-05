@@ -51,6 +51,7 @@ _p.SetFactory = function(factory)
 _p.LoadDirectory = function(dir)
 {
   var file = dir + "/" + this.defaultsavefile
+  l("Loading file " + file)
   var s = readFile(file)
   var parsed = JSON.parse(s)
   for(var i in parsed)

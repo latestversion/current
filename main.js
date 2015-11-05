@@ -40,10 +40,14 @@ if(PLATFORM_NODE == PLATFORM)
   }
 
   this.eval = eval
+  evalFile("log.js")
   evalFile("Action.js")
   evalFile("CopyPrototype.js")
   evalFile("Entity.js")
   evalFile("HasContainer.js",this)
+  evalFile("HasCharacters.js")
+  evalFile("HasItems.js")
+  evalFile("HasPortals.js")
   evalFile("TelnetHandler.js",this)
   evalFile("MenuScene.js",this)
   evalFile("LoginHandler.js",this)
@@ -55,7 +59,7 @@ if(PLATFORM_NODE == PLATFORM)
 
   function newConnectionHandler(c)
   {
-    console.log("Client connected.")
+    l("Client connected.")
     var stream = new TelnetHandler(c)
     scenehandler = new SceneHandler(stream)
     scenehandler.PushScene(new MenuScene(scenehandler,stream))

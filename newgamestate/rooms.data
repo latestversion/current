@@ -3,6 +3,7 @@
     "name": "A field of mud",
     "description":"The ground is cold and hard. But still muddy enough to cling to your boots, somehow.",
     "id":1,
+    "region":1,
     "items":[],
     "characters":[]
   },
@@ -10,7 +11,49 @@
     "name": "Another field of mud",
     "description":"So yeah. This is where cabbages come from.",
     "id":2,
+    "region":1,
+    "items":[],
+    "characters":[]
+  },
+  {
+    "name": "Path to scary forest",
+    "description":"A narrow scary path. It leads to the scary forest.",
+    "id":3,
+    "region":2,
+    "items":[],
+    "characters":[]
+  },
+  {
+    "name": "Spider's Den",
+    "description":"So this is place is actually cosy, and that GIANT SPIDER is closing in to eat you.",
+    "id":4,
+    "region":2,
+    "items":[],
+    "characters":[]
+  },
+  {
+    "name": "Clearing in the forest",
+    "description":"It's a clearing in the forest. Disregarding the old bones of unfortunate adventurers, it's quite cozy.",
+    "id":5,
+    "region":2,
+    "items":[],
+    "characters":[]
+  },
+  {
+    "name": "A small area",
+    "description":"This area is small.",
+    "id":6,
+    "region":2,
+    "items":[],
+    "characters":[]
+  },
+  {
+    "name": "Throne of the Goblin King",
+    "description":"From his throne of skulls, the Goblin King rules his kingdom!",
+    "id":7,
+    "region":2,
     "items":[],
     "characters":[]
   }
+
 ]

@@ -24,6 +24,7 @@ _p.LoadDatabases = function(dir)
   rgndb.LoadDirectory(dir)
   rdb.LoadDirectory(dir)
   cdb.LoadDirectory(dir)
+  idb.LoadDirectory(dir)
 }
 
 _p.StartNewGame = function()

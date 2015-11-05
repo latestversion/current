@@ -40,9 +40,9 @@ _p.Account = function()
   return this.account
 }
 
-_p.SetAccount = function(acc)
+_p.SetAccount = function(account)
 {
-  this.account = acc
+  this.account = account
 }
 
 _p.SetConnection = function(connection)

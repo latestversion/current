@@ -6,7 +6,6 @@ var SceneHandler = function(inputstream)
 
 var _p = SceneHandler.prototype = {}
 
-
 _p.PushScene = function(Scene)
 {
 	this.scenes.push(Scene);
@@ -19,7 +18,7 @@ _p.ClearScenes = function()
 {
 	this.scenes = [];
 }
-_p.GetCurrentScene  = function()
+_p.CurrentScene  = function()
 {
 	var numScenes = this.scenes.length;
 	if(numScenes)
@@ -36,16 +35,12 @@ _p.ReplaceCurrentScene = function(scene)
 	this.PushScene(scene)
 }
 
-
-_p.tick = function()
+_p.Tick = function()
 {
-  var input = this.stream.get()
-  if(input)
-  {
-    var ch = this.GetCurrentScene()
-    if(ch)
-    {
-      ch.onInput(input)
-    }
-  }
+  	var input = this.stream.get()
+	var currentScene = this.CurrentScene()
+	if(currentScene)
+	{
+	  currentScene.Tick(input)
+	}
 }

@@ -21,6 +21,8 @@ function Character()
   this.loggedin = false
   this.lastcommand = ""
   this.connection = 0
+  this.scenehandler = 0
+  this.isplayer = false
 }
 
 var _p = Character.prototype = {}
@@ -33,7 +35,7 @@ CopyPrototype(DataEntity,Character)
 CopyPrototype(LogicEntity,Character)
 CopyPrototype(HasCommands,Character)
 
-_p.GetAccount = function()
+_p.Account = function()
 {
   return this.account
 }
@@ -43,14 +45,9 @@ _p.SetAccount = function(acc)
   this.account = acc
 }
 
-_p.IsPlayer = function()
+_p.SetConnection = function(connection)
 {
-  return this.account ? true : false
-}
-
-_p.TurnToPlayer = function()
-{
-  this.account = 77
+  this.connection = connection
 }
 
 _p.Connection = function()
@@ -58,10 +55,26 @@ _p.Connection = function()
   return this.connection
 }
 
-_p.SetConnection = function(connection)
+_p.IsPlayer = function()
 {
-  this.connection = connection
+  return this.isplayer
 }
+
+_p.SetPlayer = function(flag)
+{
+  this.isplayer = flag
+}
+
+_p.SetSceneHandler = function(scenehandler)
+{
+  this.scenehandler = scenehandler
+}
+
+_p.SceneHandler = function()
+{
+  return this.scenehandler
+}
+
 
 
 

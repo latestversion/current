@@ -71,12 +71,8 @@ function loop()
 
   if(scenehandler)
   {
-    scenehandler.tick()
+    scenehandler.Tick()
   }
-
-  /*InputHandler.tick()*/
-
-  Game.tick()
 
   setTimeout(loop,5)
 }

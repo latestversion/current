@@ -63,7 +63,7 @@ _p.AddActionAbsolute = function()
 
 }
 
-_p.tick = function()
+_p.Tick = function()
 {
   // Increment time
   // Check actions

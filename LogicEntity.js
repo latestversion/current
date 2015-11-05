@@ -24,7 +24,6 @@ _p.GetLogic = function()
 _p.HasLogic = function()
 {}
 
-
 _p.DoAction = function(action)
 {
 	for (var k in this.logics)

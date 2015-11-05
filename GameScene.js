@@ -1,13 +1,17 @@
 
-function GameScene(scenehandler,outstream,cid)
+function GameScene(scenehandler,stream,cid)
 {
-    Scene.call(this,scenehandler,outstream)
+    Scene.call(this,scenehandler,stream)
     this.cid = cid
 }
 
 var _p = GameScene.prototype = {}
 
-_p.onInput = function(input)
+_p.Tick = function(input)
 {
-    Game.DoCommand(input,this.cid)
+	Game.Tick()
+	if(input)
+	{
+    	Game.DoCommand(input,this.cid)
+	}
 }

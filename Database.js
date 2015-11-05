@@ -26,6 +26,8 @@ _p.Get = function(id)
     }
   }
 
+  l("Did not find an entity with ID " + id)
+
   return false
 }
 _p.Create = function(tid)

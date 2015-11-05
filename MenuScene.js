@@ -3,6 +3,7 @@ evalFile("CharacterFactory.js",this)
 evalFile("Scene.js")
 evalFile("GameScene.js")
 evalFile("ErrorLogic.js")
+evalFile("VisionLogic.js")
 
 function MenuScene(scenehandler,stream)
 {
@@ -35,14 +36,20 @@ _p.Tick = function(input)
 		c.SetPlayer(true)
 		c.SetRoom(1)
 		c.SetID(77)
+		var room = rdb.Get(1)
+		room.AddCharacter(c.ID())
+		c.SetRegion(room.Region())
 		c.SetConnection(this.stream)
 		var logic = new ErrorLogic(c)
+		c.AddLogic(logic)
+		logic = new VisionLogic(c.ID())
 		c.AddLogic(logic)
 
 		Game.cdb.AddEntity(c)
 		this.stream.putn("You are " + c.Name())
 		this.stream.putn("Description: " + c.Description())
-		this.SceneHandler().ReplaceCurrentScene(new GameScene(this.SceneHandler(),this.outstream,c.ID()))
+		this.SceneHandler().ReplaceCurrentScene(new GameScene(this.SceneHandler(),this.stream,c.ID()))
+		Game.DoAction({name:"enterrealm",arg1:c.ID()})
 	}
 	else
 	{

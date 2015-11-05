@@ -42,6 +42,7 @@ _p.DoCommand = function(input,cid)
   var tokens = input.split(" ")
   var cmdname = tokens[0]
   var c = cdb.Get(cid)
+  l("Game.DoCommand: cmdname: " + cmdname)
   if(c.HasCommand(cmdname))
   {
     var cmd = c.GetCommand(cmdname)
@@ -50,8 +51,34 @@ _p.DoCommand = function(input,cid)
   else
   {
     c.DoAction(new Action("error",0,0,0,"I did not recognize command " + cmdname))
+    l(c.logics)
   }
+}
 
+_p.DoAction = function(a)
+{
+  if("enterrealm" == a.name)
+  {
+    var cid = a.arg1
+    var c = cdb.Get(a.arg1)
+    var r = rdb.Get(c.Room())
+
+    if(!c)
+    {
+      le("Did not get a valid character from cdb")
+      return
+    }
+
+    if(!r)
+    {
+      le("rdb did not return valid room for rid  " + c.Room() + " for cid " + c.ID())
+      c.DoAction(new Action("error",0,0,0,"You enter the V0iD..."))
+      return
+    }
+
+    c.DoAction({name:"vision",text:r.Name() + "\n" + r.Description()})
+
+  }
 }
 
 _p.AddAction = function()

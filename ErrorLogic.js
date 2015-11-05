@@ -13,11 +13,12 @@ var _p = ErrorLogic.prototype = {}
 CopyPrototype(Entity,ErrorLogic)
 
 
-_p.DoAction = function(action)
+_p.DoAction = function(a)
 {
-	if(action.name == this.Name())
+	if(a.name == this.Name())
 	{
+    l("eeeh")
 		var conn = this.player.Connection()
-		conn.putn(action.args)
+		conn.putn(a.text)
 	}
 }

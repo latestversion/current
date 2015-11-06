@@ -25,6 +25,8 @@ function Character()
   this.isplayer = false
 }
 
+Character.ENUM = 0
+
 var _p = Character.prototype = {}
 
 CopyPrototype(HasRegion,Character)

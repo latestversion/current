@@ -13,6 +13,7 @@ function Game()
   this.cdb = cdb
   this.rdb = rdb
   this.rgndb = rgndb
+  this.idb = idb
 }
 
 

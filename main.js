@@ -37,6 +37,11 @@ if(PLATFORM_NODE == PLATFORM)
       var s = fs.readFileSync(file,"ascii")
       return s
     }
+
+    writeFile = function(file,data)
+    {
+      fs.writeFileSync(file, data)
+    }
   }
 
   this.eval = eval

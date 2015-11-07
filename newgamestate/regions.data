@@ -1,14 +1,1 @@
-[
-  {
-    "name":"Fields of Mud",
-    "description":"Some fields of mud where as a youngling you worked.",
-    "id":1,
-    "rooms": [1,2]
-  },
-  {
-    "name":"Scary Forest",
-    "description":"This is a dark and haunting gathering of restless old trees",
-    "id":2,
-    "rooms":[3,4,5,6,7]
-  }
-]
+[{"id":1,"name":"Fields of Mud","description":"","ctor":"Object","rooms":[]},{"id":2,"name":"Forest of the Goblin King","description":"","ctor":"Object","rooms":[]}]

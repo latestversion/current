@@ -1,19 +1,21 @@
 
 evalFile("DatabaseInstances.js",this)
+evalFile("ProduceNewGameState.js",this)
 
 
 function Game()
 {
+  DatabaseInstanceBearer.call(this)
+
 	this.loadpath = ""
 	this.savepath = ""
   this.t = 0
 
   this.startRoom = 1
 
-  this.cdb = cdb
-  this.rdb = rdb
-  this.rgndb = rgndb
-  this.idb = idb
+  this.dbs = dbinstances
+
+  ProduceNewGameState(this.dbs,"./newgamestate")
 }
 
 
@@ -22,10 +24,10 @@ var _p = Game.prototype = {}
 
 _p.LoadDatabases = function(dir)
 {
-  rgndb.LoadDirectory(dir)
-  rdb.LoadDirectory(dir)
-  cdb.LoadDirectory(dir)
-  idb.LoadDirectory(dir)
+  for(var k in this.dbs)
+  {
+    this.dbs[k].LoadDirectory(dir)
+  }
 }
 
 _p.StartNewGame = function()

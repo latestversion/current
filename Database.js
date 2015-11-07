@@ -9,10 +9,11 @@ function Database(savefile,typeprototype)
 var _p = Database.prototype = {}
 
 
-_p.AddEntity = function(e)
+_p.Add = function(e)
 {
   this.database.push(e)
 }
+
 
 _p.FindName = function(name){}
 
@@ -50,6 +51,14 @@ _p.SetFactory = function(factory)
 {
   this.factory = factory
 }
+
+_p.SaveToDirectory = function(dir)
+{
+  var file = dir + "/" + this.defaultsavefile
+  var s = JSON.stringify(this.database)
+  writeFile(file,s)
+}
+
 _p.LoadDirectory = function(dir)
 {
   var file = dir + "/" + this.defaultsavefile
@@ -61,8 +70,12 @@ _p.LoadDirectory = function(dir)
     parsed[i].__proto__ = this.typeprototype
     this.database.push(parsed[i])
   }
-
 }
 _p.LoadFile = function(){}
+
+_p.Purge = function()
+{
+  this.database = []
+}
 
 

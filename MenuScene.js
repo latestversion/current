@@ -45,7 +45,7 @@ _p.Tick = function(input)
 		logic = new VisionLogic(c.ID())
 		c.AddLogic(logic)
 
-		Game.cdb.AddEntity(c)
+		Game.cdb.Add(c)
 		this.stream.putn("You are " + c.Name())
 		this.stream.putn("Description: " + c.Description())
 		this.SceneHandler().ReplaceCurrentScene(new GameScene(this.SceneHandler(),this.stream,c.ID()))

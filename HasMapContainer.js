@@ -53,7 +53,7 @@ HasMap.getPrototypeInstance = function(items)
   _p["Del" + Item] = function(key)
   {
       delete this[items][key]
-      this[items]["_count"]--   
+      this[items]["_count"]--
   }
 
   _p[Items + "Iterator"] = function()

@@ -1,0 +1,9 @@
+- logging framework. severity and groups. l("lla",1,LG_DB), l("muppmupp",4,LG_SAVE).
+- calling function traced automatically
+- ability to set outstream in loggin framework
+- create directory automatically (newgamestate etc) if missing
+- validity checkers. things that check valid databases.
+- somethign to save the name of the function that got the new operator on it in an object
+- possibly specific ctors for the databases
+-possibly create the databses in Game
+- portals

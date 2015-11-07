@@ -1,11 +1,11 @@
 
-evalFile("HasContainer.js",this)
+evalFile("HasArray.js",this)
 evalFile("Entity.js",this)
 
 function Account()
 {
   Entity.call(this)
-  HasContainer.call(this,"characters")
+  HasArray.call(this,"characters")
 
   this.password = ""
   this.logintime = 0
@@ -17,7 +17,7 @@ function Account()
 var _p = Account.prototype = {}
 
 CopyPrototype(Entity,Account)
-CopyProperties(HasContainer.getPrototypeInstance("characters"),Account.prototype)
+CopyProperties(HasArray.getPrototypeInstance("characters"),Account.prototype)
 
 _p.Load = function(){}
 _p.Save = function(){}

@@ -1,4 +1,4 @@
-evalFile("HasMapContainer.js")
+evalFile("HasMap.js")
 
 function HasCommands()
 {

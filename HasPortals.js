@@ -1,8 +1,8 @@
 function HasPortals()
 {
-  HasContainer.call(this,"portals")
+  HasArray.call(this,"portals")
 }
 
 var _p = HasPortals.prototype = {}
 
-CopyProperties(HasContainer.getPrototypeInstance("portals"),HasPortals.prototype)
+CopyProperties(HasArray.getPrototypeInstance("portals"),HasPortals.prototype)

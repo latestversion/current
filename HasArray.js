@@ -23,13 +23,13 @@ _p.Next = function()
 
 var hasContainerPrototypes = {}
 
-function HasContainer(items)
+function HasArray(items)
 {
 
   this[items] = []
 }
 
-HasContainer.getPrototypeInstance = function(items)
+HasArray.getPrototypeInstance = function(items)
 {
 
   if(hasContainerPrototypes[items])

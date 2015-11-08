@@ -1,1 +1,1 @@
-[{"id":1,"name":"Fields of Mud","description":"","ctor":"Region","rooms":[]},{"id":2,"name":"Forest of the Goblin King","description":"","ctor":"Region","rooms":[]}]
+[{"id":1,"name":"Fields of Mud","description":"","type":"Region","rooms":[]},{"id":2,"name":"Forest of the Goblin King","description":"","type":"Region","rooms":[]}]

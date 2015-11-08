@@ -12,7 +12,7 @@ function Room()
 
 Room.ENUM = 2
 
-var _p = Room.prototype = {}
+var _p = Room.prototype
 
 CopyPrototype(LogicEntity,Room)
 CopyPrototype(DataEntity,Room)

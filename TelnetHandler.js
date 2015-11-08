@@ -10,7 +10,7 @@ function TelnetHandler(connection)
 
 TelnetHandler.cid = 0
 
-var _p = TelnetHandler.prototype = {}
+var _p = TelnetHandler.prototype
 
 _p.onData = function(d)
 {

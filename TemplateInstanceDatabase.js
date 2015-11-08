@@ -5,7 +5,7 @@ function TemplateInstanceDatabase()
   this.templates = []
 }
 
-var _p = TemplateInstanceDatabase.prototype = {}
+var _p = TemplateInstanceDatabase.prototype
 
 _p.GetTemplate = function(entityid) {
   // body...

@@ -4,7 +4,7 @@ function RootHandler(stream)
   this.stream = stream
 }
 
-var _p = MasterHandler.prototype = {}
+var _p = MasterHandler.prototype
 
 CopyPrototype(HandlerManager,RootHandler)
 

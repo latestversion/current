@@ -6,7 +6,7 @@ function Database(savefile,typeprototype)
   this.factory = {}
 }
 
-var _p = Database.prototype = {}
+var _p = Database.prototype
 
 
 _p.Add = function(e)

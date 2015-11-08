@@ -25,7 +25,7 @@ LoginHandler.CheckUserNameState = LoginHandler.temp++
 LoginHandler.GetPassState = LoginHandler.temp++
 LoginHandler.CheckPassState = LoginHandler.temp++
 
-var _p = LoginHandler.prototype = {}
+var _p = LoginHandler.prototype
 
 _p.tick = function()
 {

@@ -19,7 +19,7 @@ function Game()
 }
 
 
-var _p = Game.prototype = {}
+var _p = Game.prototype
 
 
 _p.LoadDatabases = function(dir)

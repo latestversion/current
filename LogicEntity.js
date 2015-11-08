@@ -4,7 +4,7 @@ function LogicEntity()
   this.logics = []
 }
 
-LogicEntity.prototype = {}
+LogicEntity.prototype
 var _p = LogicEntity.prototype
 
 _p.AddLogic = function(logic)

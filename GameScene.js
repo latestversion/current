@@ -5,7 +5,7 @@ function GameScene(scenehandler,stream,cid)
     this.cid = cid
 }
 
-var _p = GameScene.prototype = {}
+var _p = GameScene.prototype
 
 _p.Tick = function(input)
 {

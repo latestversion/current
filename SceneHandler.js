@@ -4,7 +4,7 @@ var SceneHandler = function(inputstream)
 	this.scenes = [];
 }
 
-var _p = SceneHandler.prototype = {}
+var _p = SceneHandler.prototype
 
 _p.PushScene = function(Scene)
 {

@@ -8,7 +8,7 @@ function Item()
 
 Item.ENUM = 1
 
-var _P = Item.prototype = {}
+var _P = Item.prototype
 
 CopyPrototype(Entity,Item)
 

@@ -10,7 +10,7 @@ function Region()
 
 Region.ENUM = 4
 
-var _p = Region.prototype = {}
+var _p = Region.prototype
 
 CopyPrototype(Entity,Region)
 CopyPrototype(HasRooms,Region)

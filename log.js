@@ -21,7 +21,9 @@ Log.log = function(text,level,group)
 
   if(level >= Log.logLevel)
   {
-    Log.logFunc(text)
+    var d = new Date()
+    var timestamp = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds() + ":" + d.getMilliseconds() + " "
+    Log.logFunc( timestamp + text)
   }
 }
 
@@ -29,7 +31,7 @@ function addConvenienceLoggers(obj)
 {
   for (var i = 0; i < 10; i++)
   {
-    var funcname = "l" + i
+    var funcname = "l" + (i > 0 ? i : "")
     var logfunc = function(text,group)
     {
       Log.log(text, i, group)

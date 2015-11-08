@@ -16,7 +16,7 @@ function MenuScene(scenehandler,stream)
 	stream.putn()
 }
 
-var _p = MenuScene.prototype = {}
+var _p = MenuScene.prototype
 
 CopyPrototype(Scene,MenuScene)
 

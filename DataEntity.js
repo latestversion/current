@@ -3,7 +3,7 @@ function DataEntity()
   this.data = {}
 }
 
-DataEntity.prototype = {}
+DataEntity.prototype
 
 var _p = DataEntity.prototype
 

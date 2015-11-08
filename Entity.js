@@ -9,7 +9,7 @@ function Entity()
 }
 
 
-var _p = Entity.prototype = {}
+var _p = Entity.prototype
 
 
 _p.Name = function()

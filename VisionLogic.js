@@ -5,7 +5,7 @@ function VisionLogic(id)
   this.SetName("vision")
 }
 
-var _p = VisionLogic.prototype = {}
+var _p = VisionLogic.prototype
 
 CopyPrototype(Entity,VisionLogic)
 

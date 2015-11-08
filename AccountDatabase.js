@@ -9,7 +9,7 @@ function AccountDatabase()
 	Database.call(this)
 }
 
-var _p = AccountDatabase.prototype = {}
+var _p = AccountDatabase.prototype
 
 CopyPrototype(Database,AccountDatabase)
 

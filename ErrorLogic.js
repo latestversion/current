@@ -8,7 +8,7 @@ function ErrorLogic(player)
 	this.player = player
 }
 
-var _p = ErrorLogic.prototype = {}
+var _p = ErrorLogic.prototype
 
 CopyPrototype(Entity,ErrorLogic)
 

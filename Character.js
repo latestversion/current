@@ -27,7 +27,7 @@ function Character()
 
 Character.ENUM = 0
 
-var _p = Character.prototype = {}
+var _p = Character.prototype
 
 CopyPrototype(HasRegion,Character)
 CopyPrototype(HasRoom,Character)

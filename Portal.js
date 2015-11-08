@@ -8,7 +8,7 @@ function Portal()
 
 Portal.ENUM = 3
 
-var _p = Portal.prototype = {}
+var _p = Portal.prototype
 
 CopyPrototype(HasRegion,Portal)
 CopyPrototype(DataEntity,Portal)
@@ -32,6 +32,6 @@ function PortalEntry(startroom,direction,destroom)
   this.destroom = destroom
 }
 
-var _p = PortalEntry.prototype = {}
+var _p = PortalEntry.prototype
 
 

@@ -7,7 +7,7 @@ function ArrayIterator(array)
   this.idx = 0
 }
 
-ArrayIterator.prototype = {}
+ArrayIterator.prototype
 var _p = ArrayIterator.prototype
 
 _p.Next = function()

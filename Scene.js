@@ -4,7 +4,7 @@ function Scene(scenehandler,stream)
 	this.stream = stream
 }
 
-var _p = Scene.prototype = {}
+var _p = Scene.prototype
 
 _p.Tick = function(input)
 {

@@ -7,7 +7,7 @@ function MapIterator(map)
   this.idx = 0
 }
 
-MapIterator.prototype = {}
+MapIterator.prototype
 var _p = MapIterator.prototype
 
 _p.Next = function()

@@ -7,6 +7,6 @@ function ItemDatabase()
   Database.call(this)
 }
 
-var _p = AccountDatabase.prototype = {}
+var _p = AccountDatabase.prototype
 
 CopyPrototype(Database,ItemDatabase)

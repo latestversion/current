@@ -14,7 +14,7 @@ function Account()
   this.banned = false
 }
 
-var _p = Account.prototype = {}
+var _p = Account.prototype
 
 CopyPrototype(Entity,Account)
 CopyProperties(HasArray.getPrototypeInstance("characters"),Account.prototype)

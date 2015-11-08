@@ -6,7 +6,7 @@ function HasRoom()
   this.room = 0
 }
 
-HasRoom.prototype = {}
+HasRoom.prototype
 var _p = HasRoom.prototype
 
 _p.Room = function()
@@ -24,7 +24,7 @@ function HasRegion()
   this.region = 0
 }
 
-HasRegion.prototype = {}
+HasRegion.prototype
 var _p = HasRegion.prototype
 
 _p.Region = function()
@@ -43,7 +43,7 @@ function HasTemplate()
 }
 
 
-HasTemplate.prototype = {}
+HasTemplate.prototype
 var _p = HasTemplate.prototype
 
 _p.Template = function()

@@ -36,3 +36,9 @@ function DatabaseInstanceBearer()
   this.pdb = pdb
   this.rdb = rdb
 }
+
+
+function CheckDatabaseConsistency(dbs)
+{
+
+}

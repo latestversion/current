@@ -4,7 +4,7 @@ function Portal()
   LogicEntity.call(this)
   DataEntity.call(this)
   HasRegion.call(this)
-  HasArray.call(this,"entries")
+  HasPortals.call(this)
 }
 
 Portal.ENUM = 3
@@ -15,7 +15,7 @@ CopyPrototype(Entity,Portal)
 CopyPrototype(HasRegion,Portal)
 CopyPrototype(DataEntity,Portal)
 CopyPrototype(LogicEntity,Portal)
-CopyPrototype(HasArray.getPrototypeInstance("entries"),Portal)
+CopyPrototype(HasPortals,Portal)
 
 _p.Add = function()
 {

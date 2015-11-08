@@ -1,26 +1,5 @@
 
 
-
-function ArrayIterator(array)
-{
-  this.array = array
-  this.idx = 0
-}
-
-ArrayIterator.prototype
-var _p = ArrayIterator.prototype
-
-_p.Next = function()
-{
-  if(this.idx >= this.array.length)
-  {
-    return false
-  }
-
-  return this.array[this.idx++]
-}
-
-
 var hasContainerPrototypes = {}
 
 function HasArray(items)
@@ -54,7 +33,12 @@ HasArray.getPrototypeInstance = function(items)
     {
       this[items].splice(idx,1)
     }
+  }
 
+  _p["Has" + Item] = function(id)
+  {
+    var idx = this[items].indexOf(id)
+    return idx > -1 ? true : false
   }
 
   _p[Items + "Iterator"] = function()
@@ -86,7 +70,12 @@ HasArray.getPrototypeInstance = function(items)
 
   _p["Next" + Item] = function()
   {
-    this[items].idx++
+    if(this[items].idx >= this[items].length)
+    {
+      return false
+    }
+
+    return this[items][this[items].idx++]
   }
 
 

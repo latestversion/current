@@ -21,6 +21,45 @@ function Game()
 
 var _p = Game.prototype
 
+_p.ConsistencyCheckDatabases = function(dbs,addmissing)
+{
+  l1("Consistency check databases",LG_DB_CHECK)
+
+  var idb = dbs[Item.ENUM]
+  var cdb = dbs[Character.ENUM]
+  var rdb = dbs[Room.ENUM]
+  var rgndb = dbs[Region.ENUM]
+  var pdb = dbs[Portal.ENUM]
+
+  l1(dbs.length + " databases provided",LG_DB_CHECK)
+
+  // Rooms
+  l5("Checking " + rdb.Size() + " rooms")
+  var riter = rdb.Iterator()
+  var room
+  while(room = riter.Next())
+  {
+    var rid = room.ID()
+    var rgnid = room.Region()
+    var region = rgndb.Get(rgnid)
+    if(!region)
+    {
+      l7("No region for id " + rgnid)
+      throw("Fatal error no room for id " + rgnid)
+    }
+    if(!region.HasRoom(rid))
+    {
+      l7("'" + room.Name()  + "' not in region '" +  region.Name() + "'")
+      if(addmissing)
+      {
+        region.AddRoom(rid)
+        l1("'" + room.Name()  + "' added to region '" +  region.Name() + "'")
+      }
+    }
+  }
+
+
+}
 
 _p.LoadDatabases = function(dir)
 {
@@ -32,11 +71,13 @@ _p.LoadDatabases = function(dir)
 
 _p.StartNewGame = function()
 {
-  console.log("Starting new game")
+  l1("Starting new game")
 	this.loaddir = "./newgamestate"
   this.savedir = "./savedgame_VIXEN"
 
-  this.LoadDatabases(this.loaddir)
+  var purge = true
+  this.LoadDatabases(this.loaddir,purge)
+  this.ConsistencyCheckDatabases(this.dbs,true)
 }
 
 
@@ -49,12 +90,11 @@ _p.DoCommand = function(input,cid)
   if(c.HasCommand(cmdname))
   {
     var cmd = c.GetCommand(cmdname)
-    console.log("had command")
+    l("had command")
   }
   else
   {
     c.DoAction(new Action("error",0,0,0,"I did not recognize command " + cmdname))
-    l(c.logics)
   }
 }
 

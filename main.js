@@ -46,6 +46,7 @@ if(PLATFORM_NODE == PLATFORM)
 
   this.eval = eval
   evalFile("log.js")
+  evalFile("ArrayIterator.js")
   evalFile("Action.js")
   evalFile("CopyPrototype.js")
   evalFile("Entity.js")

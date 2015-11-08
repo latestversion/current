@@ -11,7 +11,9 @@ var _p = Database.prototype
 
 _p.Add = function(e)
 {
+  l1("Added an entity to database: ("  + e.Name() + "," + e.ID() + ")",LG_DB)
   this.database.push(e)
+  l1("The size is now " + this.Size())
 }
 
 
@@ -27,7 +29,7 @@ _p.Get = function(id)
     }
   }
 
-  l("Did not find an entity with ID " + id)
+  l5("Did not find an entity with ID " + id,LG_ERR)
 
   return false
 }
@@ -59,16 +61,21 @@ _p.SaveToDirectory = function(dir)
   writeFile(file,s)
 }
 
-_p.LoadDirectory = function(dir)
+_p.LoadDirectory = function(dir,purge)
 {
+  if(purge)
+  {
+    this.Purge()
+  }
   var file = dir + "/" + this.defaultsavefile
   l("Loading file " + file)
   var s = readFile(file)
   var parsed = JSON.parse(s)
-  for(var i in parsed)
+  l1("Parsed an array of length " + parsed.length)
+  for(var idx in parsed)
   {
-    parsed[i].__proto__ = this.typeprototype
-    this.database.push(parsed[i])
+    parsed[idx].__proto__ = this.typeprototype
+    this.Add(parsed[idx])
   }
 }
 _p.LoadFile = function(){}
@@ -78,4 +85,7 @@ _p.Purge = function()
   this.database = []
 }
 
-
+_p.Iterator = function()
+{
+  return new ArrayIterator(this.database)
+}

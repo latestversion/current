@@ -1,1 +1,1 @@
-[]
+[{"id":1,"name":"","description":"","type":"Portal","logics":[],"data":{},"region":0,"portals":[{"startroom":1,"direction":"north","destroom":2},{"startroom":2,"direction":"south","destroom":1}]}]

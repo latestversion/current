@@ -1,10 +1,13 @@
 var Log = {}
 
-Log.logLevel = 3
+Log.logLevel = 1
 Log.logGroups = []
 Log.logFunc = console.log
 
-Log.LG_SPAM = "LG_SPAM"
+LG_SPAM = "LG_SPAM"
+LG_ERR = "LG_ERR"
+LG_DB_CHECK = "LG_DB_CHECK"
+LG_DB = "LG_DB"
 
 Log.log = function(text,level,group)
 {
@@ -16,7 +19,7 @@ Log.log = function(text,level,group)
 
   if(!group)
   {
-    group = Log.LG_SPAM
+    group = LG_SPAM
   }
 
   if(level >= Log.logLevel)

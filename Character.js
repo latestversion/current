@@ -7,13 +7,15 @@ evalFile("HasCommands.js",this)
 
 function Character()
 {
+  Entity.call(this)
+  LogicEntity.call(this)
+  DataEntity.call(this)
+  HasCommands.call(this)
   HasRegion.call(this)
   HasRoom.call(this)
   HasItems.call(this)
   HasTemplate.call(this)
-  DataEntity.call(this)
-  LogicEntity.call(this)
-  HasCommands.call(this)
+
 
   this.account = 0
   this.quiet = false
@@ -29,6 +31,7 @@ Character.ENUM = 0
 
 var _p = Character.prototype
 
+CopyPrototype(Entity,Character)
 CopyPrototype(HasRegion,Character)
 CopyPrototype(HasRoom,Character)
 CopyPrototype(HasTemplate,Character)

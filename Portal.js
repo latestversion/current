@@ -1,5 +1,6 @@
 function Portal()
 {
+  Entity.call(this)
   LogicEntity.call(this)
   DataEntity.call(this)
   HasRegion.call(this)
@@ -10,6 +11,7 @@ Portal.ENUM = 3
 
 var _p = Portal.prototype
 
+CopyPrototype(Entity,Portal)
 CopyPrototype(HasRegion,Portal)
 CopyPrototype(DataEntity,Portal)
 CopyPrototype(LogicEntity,Portal)

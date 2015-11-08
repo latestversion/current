@@ -1,10 +1,8 @@
 function LogicEntity()
 {
-  Entity.call(this)
   this.logics = []
 }
 
-LogicEntity.prototype
 var _p = LogicEntity.prototype
 
 _p.AddLogic = function(logic)
@@ -38,4 +36,3 @@ _p.DoActionObject = function(action)
 _p.DoActionArgs = function(alotofargs)
 {}
 
-CopyPrototype(Entity,LogicEntity)

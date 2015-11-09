@@ -4,16 +4,28 @@ function Database(savefile,typeprototype)
   this.typeprototype = typeprototype
   this.database = []
   this.factory = {}
+  this.maxid = 0
 }
 
 var _p = Database.prototype
 
 
+_p.GetFreeID = function()
+{
+  this.maxid += 1
+  l1("The max id is now " + this.maxid,LG_DB)
+  return this.maxid
+}
+
 _p.Add = function(e)
 {
   l1("Added an entity to database: ("  + e.Name() + "," + e.ID() + ")",LG_DB)
   this.database.push(e)
-  l1("The size is now " + this.Size())
+  if(e.ID() > this.maxid)
+  {
+    this.maxid = e.ID()
+  }
+  l1("The db size is now " + this.Size(),LG_DB)
 }
 
 
@@ -83,6 +95,7 @@ _p.LoadFile = function(){}
 _p.Purge = function()
 {
   this.database = []
+  this.maxid = 0
 }
 
 _p.Iterator = function()

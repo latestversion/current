@@ -1,5 +1,6 @@
 function Database(savefile,typeprototype)
 {
+  Entity.call(this)
   this.defaultsavefile = savefile
   this.typeprototype = typeprototype
   this.database = []
@@ -9,6 +10,7 @@ function Database(savefile,typeprototype)
 
 var _p = Database.prototype
 
+CopyPrototype(Entity,Database)
 
 _p.GetFreeID = function()
 {

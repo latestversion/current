@@ -5,15 +5,20 @@ evalFile("Room.js",this)
 evalFile("Region.js",this)
 evalFile("Item.js",this)
 evalFile("Portal.js",this)
+evalFile("ItemDatabase.js",this)
+evalFile("CharacterDatabase.js",this)
+evalFile("PortalDatabase.js",this)
+evalFile("RoomDatabase.js",this)
+evalFile("RegionDatabase.js",this)
 
 
 // Let's encapsulate this nicely. In the future. Some day.
-var cdb = new Database("characters.data",Character.prototype)
+var cdb = new CharacterDatabase()
 cdb.SetFactory(CharacterFactory)
-var rgndb = new Database("regions.data",Region.prototype)
-var rdb = new Database("rooms.data",Room.prototype)
-var idb = new Database("items.data",Item.prototype)
-var pdb = new Database("portals.data", Portal.prototype)
+var rgndb = new RegionDatabase()
+var rdb = new RoomDatabase()
+var idb = new ItemDatabase()
+var pdb = new PortalDatabase()
 
 l("Database Instances created")
 
@@ -21,6 +26,8 @@ idb.Purge()
 
 dbinstances = []
 
+// In a truly cool design with shared id pool and only non-specified entities,
+// these enums would not be here.
 dbinstances[Character.ENUM] = cdb
 dbinstances[Region.ENUM] = rgndb
 dbinstances[Room.ENUM] = rdb

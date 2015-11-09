@@ -4,9 +4,10 @@ evalFile("Item.js",this)
 
 function ItemDatabase()
 {
-  Database.call(this)
+  Database.call(this,"items.data",Item.prototype)
+  this.SetName("ItemDB")
 }
 
-var _p = AccountDatabase.prototype
+var _p = ItemDatabase.prototype
 
 CopyPrototype(Database,ItemDatabase)

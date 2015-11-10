@@ -20,6 +20,10 @@ if(PLATFORM_NODE == PLATFORM)
         return
       }
 
+      if(typeof l1 !== "undefined")
+      {
+        l1("evaling file " + file,LG_EVAL)
+      }
       var s = fs.readFileSync(file,"ascii")
       if(refscope)
       {

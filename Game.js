@@ -1,15 +1,19 @@
 
 evalFile("DatabaseInstances.js",this)
 evalFile("ProduceNewGameState.js",this)
+evalFile("TickerClock.js",this)
 
 
 function Game()
 {
   DatabaseInstanceBearer.call(this)
+  TickerClock.call(this)
 
 	this.loadpath = ""
 	this.savepath = ""
   this.t = 0
+  this.maxdt = 1000
+  this.lastTick = 0
 
   this.startRoom = 1
 
@@ -20,6 +24,8 @@ function Game()
 
 
 var _p = Game.prototype
+
+CopyPrototype(TickerClock,Game)
 
 _p.ConsistencyCheckDatabases = function(dbs,addmissing)
 {
@@ -136,8 +142,10 @@ _p.AddActionAbsolute = function()
 
 _p.Tick = function()
 {
-  // Increment time
+  this.TickTime()
   // Check actions
 }
 
 var Game = new Game()
+
+

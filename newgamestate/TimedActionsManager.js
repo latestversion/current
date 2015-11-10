@@ -1,40 +1,41 @@
+
+// ... and then we could make it into a generic class that sorts Comparable objects!!! ...
+// EVENT SCHEDULER!!!!
+
 function TimedActionsManager()
 {
 	this.timedactions = []
 }
-
-
+// EVENT SCHEDULER!!!!
 
 var _p = TimedActionsManager.prototype
 
-_p.AddTimedAction(time,action)
+_p.AddTimedAction = function(action)
 {
 	// O(n) ftw
-	if(0 == this.timedactions.length)
+	var i
+	for (i = 0; i < this.timedactions.length; id++)
 	{
-		this.timedactions.push(new Boff(time,action))
-		return
-	}
-
-	var idx
-	for (idx = 0; idx < this.timedactions.length; id++)
-	{
-		if (time <= this.timedactions[idx])
+		if (action.timestamp <= this.timedactions[i].timestamp)
 		{
 			break
 		}
 	}
 
-
-
+	this.timedactions.splice(i,i,action)
 }
 
-function Boff(time,object)
+// EVENT SCHEDULER!!!!
+_p.GetPassedTimedActions = function(currtime)
 {
-	this.time = time
-	this.object = object
+	var i = 0
+	for (i = 0; i < this.timedactions.length;i++)
+	{
+		if(currtime < this.timedactions[i].timestamp)
+		{
+			break
+		}
+	}
+
+	return this.timedactions.splice(0,i)
 }
-
-
-
-

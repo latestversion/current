@@ -3,7 +3,7 @@ function TickerClock()
   this.tc = {}
   this.tc.t = 0
   this.tc.lastTick = 0
-  this.tc.maxdt = 1000
+  this.tc.maxdt = 1
 }
 
 var _p = TickerClock.prototype

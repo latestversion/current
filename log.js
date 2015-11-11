@@ -10,6 +10,7 @@ LG_DB_CHECK = "LG_DB_CHECK"
 LG_DB = "LG_DB"
 LG_TIME = "LG_TIME"
 LG_EVAL = "LG_EVAL"
+LG_ACTIONS = "LG_ACTIONS"
 
 Log.log = function(text,level,group)
 {

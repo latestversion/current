@@ -2,12 +2,14 @@
 evalFile("DatabaseInstances.js",this)
 evalFile("ProduceNewGameState.js",this)
 evalFile("TickerClock.js",this)
+evalFile("EventScheduler.js",this)
 
 
 function Game()
 {
   DatabaseInstanceBearer.call(this)
   TickerClock.call(this)
+  EventScheduler.call(this)
 
 	this.loadpath = ""
 	this.savepath = ""
@@ -26,6 +28,7 @@ function Game()
 var _p = Game.prototype
 
 CopyPrototype(TickerClock,Game)
+CopyPrototype(EventScheduler,Game)
 
 _p.ConsistencyCheckDatabases = function(dbs,addmissing)
 {
@@ -130,19 +133,31 @@ _p.DoAction = function(a)
   }
 }
 
-_p.AddAction = function()
+_p.AddAction = function(action,timeoffset)
 {
-
+  var schedtime = this.Time()+timeoffset
+  l1("Adding action " + action.Name() + " sched for time " + schedtime,LG_ACTIONS)
+  action.SetTimestamp(schedtime)
+  this.AddEvent(action)
 }
 
-_p.AddActionAbsolute = function()
+_p.AddActionAbsolute = function(action,absolutetime)
 {
-
+  l1("Adding absolute action " + action.Name() + " sched for time " + absolutetime,LG_ACTIONS)
+  action.SetTimestamp(absolutetime)
+  this.AddEvent(action)
 }
 
 _p.Tick = function()
 {
   this.TickTime()
+
+  var actions = this.GetPassedEvents(this.Time())
+  if(actions.length)
+  {
+    l1("I have " + actions.length + " actions to carry out",LG_ACTIONS)
+  }
+
   // Check actions
 }
 

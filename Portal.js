@@ -7,8 +7,6 @@ function Portal()
   HasPortals.call(this)
 }
 
-Portal.ENUM = 3
-
 var _p = Portal.prototype
 
 CopyPrototype(Entity,Portal)

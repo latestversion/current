@@ -82,10 +82,10 @@ _p.LoadDirectory = function(dir,purge)
     this.Purge()
   }
   var file = dir + "/" + this.defaultsavefile
-  l("Loading file " + file)
+  l(this.Name() + " Loading file " + file,LG_DB)
   var s = readFile(file)
   var parsed = JSON.parse(s)
-  l1("Parsed an array of length " + parsed.length)
+  l1(this.Name() + " Parsed an array of length " + parsed.length,LG_DB)
   for(var idx in parsed)
   {
     parsed[idx].__proto__ = this.typeprototype

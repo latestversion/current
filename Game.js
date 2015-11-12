@@ -92,17 +92,19 @@ _p.StartNewGame = function()
 
 _p.DoCommand = function(input,cid)
 {
-  var tokens = input.split(" ")
-  var cmdname = tokens[0]
+  var args = input.split(" ")
+  var cmdname = args.shift()
   var c = cdb.Get(cid)
-  l("Game.DoCommand: cmdname: " + cmdname)
+  l1("Game.DoCommand: " + cmdname + " for char " + c.Name(),LG_CMDS)
   if(c.HasCommand(cmdname))
   {
     var cmd = c.GetCommand(cmdname)
-    l("had command")
+    l1("had command",LG_CMDS)
+    cmd.Execute(args)
   }
   else
   {
+    l5(c.Name() + " did not have command " + cmdname)
     c.DoAction(new Action("error",0,0,0,"I did not recognize command " + cmdname))
   }
 }

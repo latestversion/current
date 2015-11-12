@@ -11,8 +11,6 @@ function Room()
   HasRegion.call(this)
 }
 
-Room.ENUM = 2
-
 var _p = Room.prototype
 
 CopyPrototype(Entity,Room)

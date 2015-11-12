@@ -10,17 +10,20 @@ evalFile("CharacterDatabase.js",this)
 evalFile("PortalDatabase.js",this)
 evalFile("RoomDatabase.js",this)
 evalFile("RegionDatabase.js",this)
+evalFile("CommandDatabase.js",this)
+
+LG_INIT = "LG_INIT"
 
 
 // Let's encapsulate this nicely. In the future. Some day.
 var cdb = new CharacterDatabase()
-cdb.SetFactory(CharacterFactory)
 var rgndb = new RegionDatabase()
 var rdb = new RoomDatabase()
 var idb = new ItemDatabase()
 var pdb = new PortalDatabase()
+var cmddb = new CommandDatabase()
 
-l("Database Instances created")
+l1("Database Instances created",LG_INIT)
 
 idb.Purge()
 
@@ -33,6 +36,7 @@ dbinstances[Region.ENUM] = rgndb
 dbinstances[Room.ENUM] = rdb
 dbinstances[Item.ENUM] = idb
 dbinstances[Portal.ENUM] = pdb
+dbinstances[Command.ENUM] = pdb
 
 
 function DatabaseInstanceBearer()
@@ -42,10 +46,5 @@ function DatabaseInstanceBearer()
   this.rgndb = rgndb
   this.pdb = pdb
   this.rdb = rdb
-}
-
-
-function CheckDatabaseConsistency(dbs)
-{
-
+  this.cmddb = cmddb
 }

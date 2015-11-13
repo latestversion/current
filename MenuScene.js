@@ -51,6 +51,9 @@ _p.Tick = function(input)
 		cmd = new ExitCommand(c.ID())
 		c.AddCommand(cmd.Name(),cmd)
 
+		cmd = new InfoCommand(c.ID())
+		c.AddCommand(cmd.Name(),cmd)
+
 		Game.cdb.Add(c)
 		this.stream.putn("You are " + c.Name())
 		this.stream.putn("Description: " + c.Description())

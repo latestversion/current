@@ -6,6 +6,7 @@ function Database(savefile,typeprototype)
   this.database = []
   this.factory = {}
   this.maxid = 0
+  this.loopidx = 0
 }
 
 var _p = Database.prototype
@@ -99,6 +100,16 @@ _p.Purge = function()
   l1(this.Name() + ": " + "Purging.",LG_DB)
   this.database = []
   this.maxid = 0
+}
+
+_p.Start = function()
+{
+  this.loopidx = 0
+}
+
+_p.Next = function()
+{
+  return this.database[this.loopidx++]
 }
 
 _p.Iterator = function()

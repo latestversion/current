@@ -16,7 +16,6 @@ HasArray.getPrototypeInstance = function(items)
     return hasContainerPrototypes[items]
   }
 
-
   var Item
   if(-1 != items.indexOf('ies'))
   {

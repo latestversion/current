@@ -5,6 +5,7 @@ CommandNames = {}
 CommandNames.Go = "go"
 CommandNames.Get = "get"
 CommandNames.Exit = "exit"
+CommandNames.Info = "info"
 
 
 function GoCommand(cid)
@@ -24,12 +25,11 @@ _p.Execute = function(args,c)
   
   if(args[0])
   {
-    c.DoAction({name:"error",text:"You are going " + args + "!"})
-    Game.DoAction({name:"move",cid:this.cid,text:args[0]})
+    Game.DoAction({name:"move",arg1:this.cid,text:args[0]})
   }
   else
   {
-    l1("There was no direction to the go",LG_CMDS)
+    l1("No direction given in go cmd",LG_CMDS)
     c.DoAction({name:"error",text:"Which direction?"})
   }
 }
@@ -70,6 +70,26 @@ _p.Execute = function(args,c)
   l1("Executing " + this.Name(),LG_CMDS)
   process.exit()
 
+  // Check arguments
+}
+
+
+function InfoCommand(cid)
+{
+  Command.call(this,cid)
+}
+
+var _p = InfoCommand.prototype
+CopyPrototype(Command,InfoCommand)
+
+_p.Name = function(){return CommandNames.Info}
+_p.Description = function(){return "info"}
+
+_p.Execute = function(args,c)
+{
+  l1("Executing " + this.Name(),LG_CMDS)
+  room = Game.rdb.Get(c.Room())
+  c.DoAction({name:"error",text:JSON.stringify(room)})
   // Check arguments
 }
 

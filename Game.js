@@ -43,7 +43,7 @@ _p.ConsistencyCheckDatabases = function(dbs,addmissing)
   l1(dbs.length + " databases provided",LG_DB_CHECK)
 
   // Rooms
-  l5("Checking " + rdb.Size() + " rooms")
+  l1("Checking " + rdb.Size() + " rooms",LG_DB_CHECK)
   var riter = rdb.Iterator()
   var room
   while(room = riter.Next())
@@ -53,12 +53,12 @@ _p.ConsistencyCheckDatabases = function(dbs,addmissing)
     var region = rgndb.Get(rgnid)
     if(!region)
     {
-      l7("No region for id " + rgnid)
-      throw("Fatal error no room for id " + rgnid)
+      l9("No region for id " + rgnid)
+      throw("Fatal error no region for id " + rgnid)
     }
     if(!region.HasRoom(rid))
     {
-      l7("'" + room.Name()  + "' not in region '" +  region.Name() + "'")
+      l9("'" + room.Name()  + "' not in region '" +  region.Name() + "'")
       if(addmissing)
       {
         region.AddRoom(rid)
@@ -67,6 +67,35 @@ _p.ConsistencyCheckDatabases = function(dbs,addmissing)
     }
   }
 
+  // Portals found in rooms
+  l1("Checking " + pdb.Size() + " portals",LG_DB_CHECK)
+  
+  var portal, entry, pid
+  pdb.Start()
+  while(portal = pdb.Next())
+  {
+    pid = portal.ID()
+    l1("pid " + pid + " has " + portal.NumEntries() + " entries",LG_DB_CHECK)
+    
+    portal.BeginEntries()
+
+    while(entry = portal.NextEntry())
+    {
+      l1("entry " + JSON.stringify(entry),LG_SPAM)
+      if(!entry)
+      {throw "wtf no entry " + JSON.stringify(entry)}
+      var room = rdb.Get(entry.StartRoom())
+      if(!room.HasPortal(pid))
+      {
+        l9("Portal pid " + pid + " not in room '" + room.Name() + "'")
+        if(addmissing)
+        {
+          room.AddPortal(pid)
+          l1("'" + pid  + "' added to room '" +  room.Name() + "'")
+        }
+      }
+    }
+  }
 
 }
 
@@ -117,46 +146,88 @@ _p.DoCommand = function(input,cid)
   }
 }
 
+
+_p.DoEnterRealmAction = function(a)
+{
+  var cid = a.arg1
+  var c = cdb.Get(a.arg1)
+  var r = rdb.Get(c.Room())
+
+  if(!c)
+  {
+    l1("Did not get a valid character from cdb",LG_CMDS)
+    return
+  }
+
+  if(!r)
+  {
+    l1("rdb did not return valid room for rid  " + c.Room() + " for cid " + c.ID(),LG_CMDS)
+    c.DoAction(new Action("error",0,0,0,"You enter the V0iD..."))
+    return
+  }
+
+  c.DoAction({name:"vision",text:r.Name() + "\n" + r.Description()})
+}
+
+
+_p.DoMoveAction = function(a)
+{
+  // "move" arg1 = cid, text = direction
+
+  var direction = a.text
+  var cid = a.arg1
+
+  l1("DoMoveAction with action " + JSON.stringify(a),LG_CMDS)
+
+  var character = this.cdb.Get(cid)
+  if(!character){l5("No character for cid " + cid,LG_CMDS);return}
+  
+  // Get room
+  var room = this.rdb.Get(character.Room())
+  if(!room){l5("No room for rid " + character.GetRoom(),LG_CMDS);return}
+  
+  // Find portal with direction
+  var pid,portal
+
+  room.BeginPortals()
+  while(pid = room.NextPortal())
+  {
+    portal = pdb.Get(pid)
+    if(!portal){l5("No portal for pid " + pid,LG_CMDS);return}
+
+    if(portal.HasEntryForRoomAndDirection(rid,direction))
+    {
+      break
+    }
+  }
+
+  if(!portal)
+  {
+    l1("No portal found for direction " + direction,LG_SPAM)
+    character.DoAction({name:"error",text:"It's impossible to go that way."})
+    return
+  }
+
+  character.DoAction({name:"error",text:"Found portal! Next up: Actually going that way!"})
+
+}
+
+
+
 _p.DoAction = function(a)
 {
 
-  l1("e Game.DoAction with action " + a.name,LG_SPAM)
+  l1("e Game.DoAction with action " + a,LG_SPAM)
 
   if("enterrealm" == a.name)
   {
-    var cid = a.arg1
-    var c = cdb.Get(a.arg1)
-    var r = rdb.Get(c.Room())
-
-    if(!c)
-    {
-      le("Did not get a valid character from cdb")
-      return
-    }
-
-    if(!r)
-    {
-      le("rdb did not return valid room for rid  " + c.Room() + " for cid " + c.ID())
-      c.DoAction(new Action("error",0,0,0,"You enter the V0iD..."))
-      return
-    }
-
-    c.DoAction({name:"vision",text:r.Name() + "\n" + r.Description()})
+    this.DoEnterRealmAction(a) 
   }
 
-
-  // "move" arg1 = cid, text = direction
   if("move" == a.name)
   {
-    var direction = a.text
-    var arg1 = a.arg1
-
-    // Get room
-
-    // Find portal with direction
+    this.DoMoveAction(a)
   }
-
-
 
 }
 

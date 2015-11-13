@@ -45,6 +45,12 @@ _p.Tick = function(input)
 		logic = new VisionLogic(c.ID())
 		c.AddLogic(logic)
 
+		var cmd = new GoCommand(c.ID())
+		c.AddCommand(cmd.Name(),cmd)
+
+		cmd = new ExitCommand(c.ID())
+		c.AddCommand(cmd.Name(),cmd)
+
 		Game.cdb.Add(c)
 		this.stream.putn("You are " + c.Name())
 		this.stream.putn("Description: " + c.Description())

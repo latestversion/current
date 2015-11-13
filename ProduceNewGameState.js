@@ -1,20 +1,25 @@
 
+
+LG_NGS = "LG_NGS"
+
 function ProduceNewGameState(dbs,savedir)
 {
+  l1("Producing the new game state")
 
-  var idb = dbs[Item.ENUM]
-  var cdb = dbs[Character.ENUM]
-  var rdb = dbs[Room.ENUM]
-  var rgndb = dbs[Region.ENUM]
-  var pdb = dbs[Portal.ENUM]
+  var idb = dbs[TypeEnums.Item]
+  var cdb = dbs[TypeEnums.Character]
+  var rdb = dbs[TypeEnums.Room]
+  var rgndb = dbs[TypeEnums.Region]
+  var pdb = dbs[TypeEnums.Portal]
 
   // Items
-
+  l1("Adding items",LG_NGS)
   idb.Purge()
   // Characters
   cdb.Purge()
 
   // Rooms
+  l1("Adding rooms",LG_NGS)
   rdb.Purge()
 
   var id = 1
@@ -49,6 +54,7 @@ function ProduceNewGameState(dbs,savedir)
   rdb.Add(r)
 
   // Regions
+  l1("Adding regions",LG_NGS)
   rgndb.Purge()
 
   id = 1
@@ -64,6 +70,7 @@ function ProduceNewGameState(dbs,savedir)
   rgndb.Add(r)
 
   // Portals
+  l1("Adding portals",LG_NGS)
   pdb.Purge()
 
   var p = new Portal()
@@ -75,7 +82,7 @@ function ProduceNewGameState(dbs,savedir)
 
   for (var k in dbs)
   {
-    l("Saving to directory " + savedir)
+    l("Saving database " + dbs[k].Name() + " to directory " + savedir)
     dbs[k].SaveToDirectory(savedir)
   }
 

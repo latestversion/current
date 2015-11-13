@@ -34,11 +34,11 @@ _p.ConsistencyCheckDatabases = function(dbs,addmissing)
 {
   l1("Consistency check databases",LG_DB_CHECK)
 
-  var idb = dbs[Item.ENUM]
-  var cdb = dbs[Character.ENUM]
-  var rdb = dbs[Room.ENUM]
-  var rgndb = dbs[Region.ENUM]
-  var pdb = dbs[Portal.ENUM]
+  var idb = dbs[TypeEnums.Item]
+  var cdb = dbs[TypeEnums.Character]
+  var rdb = dbs[TypeEnums.Room]
+  var rgndb = dbs[TypeEnums.Region]
+  var pdb = dbs[TypeEnums.Portal]
 
   l1(dbs.length + " databases provided",LG_DB_CHECK)
 
@@ -94,17 +94,25 @@ _p.DoCommand = function(input,cid)
 {
   var args = input.split(" ")
   var cmdname = args.shift()
-  var c = cdb.Get(cid)
-  l1("Game.DoCommand: " + cmdname + " for char " + c.Name(),LG_CMDS)
+  var c = this.cdb.Get(cid)
+
+  if(!c)
+  {
+    l5("Could not find character " + cid,LG_CMDS)
+    return
+  }
+
+  l1("Game.DoCommand: " + cmdname + " for character " + c.Name(),LG_SPAM)
+  
   if(c.HasCommand(cmdname))
   {
     var cmd = c.GetCommand(cmdname)
-    l1("had command",LG_CMDS)
-    cmd.Execute(args)
+    l1("had command " + cmdname,LG_CMDS)
+    cmd.Execute(args,c)
   }
   else
   {
-    l5(c.Name() + " did not have command " + cmdname)
+    l5(c.Name() + " did not have command " + cmdname,LG_CMDS)
     c.DoAction(new Action("error",0,0,0,"I did not recognize command " + cmdname))
   }
 }

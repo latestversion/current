@@ -27,7 +27,7 @@ function Character()
   this.isplayer = false
 }
 
-Character.ENUM = 0
+TypeEnums.Character = 0
 
 var _p = Character.prototype
 

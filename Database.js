@@ -15,13 +15,13 @@ CopyPrototype(Entity,Database)
 _p.GetFreeID = function()
 {
   this.maxid += 1
-  l1("The max id is now " + this.maxid,LG_DB)
+  l1(this.Name() + ": "  + "The max id is now " + this.maxid,LG_DB)
   return this.maxid
 }
 
 _p.Add = function(e)
 {
-  l1("Added an entity to database: ("  + e.Name() + "," + e.ID() + ")",LG_DB)
+  l1(this.Name() + ": " + " Added an entity to database: ("  + e.Name() + "," + e.ID() + ")",LG_DB)
   this.database.push(e)
   if(e.ID() > this.maxid)
   {
@@ -96,6 +96,7 @@ _p.LoadFile = function(){}
 
 _p.Purge = function()
 {
+  l1(this.Name() + ": " + "Purging.",LG_DB)
   this.database = []
   this.maxid = 0
 }

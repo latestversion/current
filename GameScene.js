@@ -12,7 +12,6 @@ _p.Tick = function(input)
 	Game.Tick()
 	if(input)
 	{
-      l("Input: " + input)
     	Game.DoCommand(input,this.cid)
 	}
 }

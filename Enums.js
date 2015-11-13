@@ -1,6 +1,8 @@
-Character.ENUM = 0
-Item.ENUM = 1
-Room.ENUM = 2
-Portal.ENUM = 3
-Region.ENUM = 4
-Command.ENUM = 5
+TypeEnums = {}
+
+TypeEnums.Character = 0
+TypeEnums.Item      = 1
+TypeEnums.Room      = 2
+TypeEnums.Portal    = 3
+TypeEnums.Region    = 4
+TypeEnums.Command   = 5

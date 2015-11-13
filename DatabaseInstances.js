@@ -31,12 +31,12 @@ dbinstances = []
 
 // In a truly cool design with shared id pool and only non-specified entities,
 // these enums would not be here.
-dbinstances[Character.ENUM] = cdb
-dbinstances[Region.ENUM] = rgndb
-dbinstances[Room.ENUM] = rdb
-dbinstances[Item.ENUM] = idb
-dbinstances[Portal.ENUM] = pdb
-dbinstances[Command.ENUM] = pdb
+dbinstances[TypeEnums.Character] = cdb
+dbinstances[TypeEnums.Region] = rgndb
+dbinstances[TypeEnums.Room] = rdb
+dbinstances[TypeEnums.Item] = idb
+dbinstances[TypeEnums.Portal] = pdb
+dbinstances[TypeEnums.Command] = pdb
 
 
 function DatabaseInstanceBearer()

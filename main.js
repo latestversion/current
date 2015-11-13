@@ -20,6 +20,8 @@ if(PLATFORM_NODE == PLATFORM)
         return
       }
 
+      evaledFiles[file] = true
+
       if(typeof l1 !== "undefined")
       {
         l1("evaling file " + file,LG_EVAL)
@@ -33,7 +35,7 @@ if(PLATFORM_NODE == PLATFORM)
       {
         defaultscope.eval(s)
       }
-      evaledFiles[file] = true
+      
     }
 
 
@@ -50,6 +52,7 @@ if(PLATFORM_NODE == PLATFORM)
 
   this.eval = eval
   evalFile("log.js")
+  evalFile("Enums.js")
   evalFile("ArrayIterator.js")
   evalFile("Action.js")
   evalFile("CopyPrototype.js")

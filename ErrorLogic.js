@@ -17,7 +17,6 @@ _p.DoAction = function(a)
 {
 	if(a.name == this.Name())
 	{
-    l("eeeh")
 		var conn = this.player.Connection()
 		conn.putn(a.text)
 	}

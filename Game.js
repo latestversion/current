@@ -119,6 +119,9 @@ _p.DoCommand = function(input,cid)
 
 _p.DoAction = function(a)
 {
+
+  l1("e Game.DoAction with action " + a.name,LG_SPAM)
+
   if("enterrealm" == a.name)
   {
     var cid = a.arg1
@@ -139,8 +142,22 @@ _p.DoAction = function(a)
     }
 
     c.DoAction({name:"vision",text:r.Name() + "\n" + r.Description()})
-
   }
+
+
+  // "move" arg1 = cid, text = direction
+  if("move" == a.name)
+  {
+    var direction = a.text
+    var arg1 = a.arg1
+
+    // Get room
+
+    // Find portal with direction
+  }
+
+
+
 }
 
 _p.AddAction = function(action,timeoffset)

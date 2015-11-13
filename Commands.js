@@ -21,7 +21,17 @@ _p.Description = function(){return "Makes movement possible. Usage: 'go <directi
 _p.Execute = function(args,c)
 {
 	l1("Executing " + this.Name() + " with args " + args,LG_CMDS)
-	c.DoAction({name:"error",text:"You are going " + args + "!"})
+  
+  if(args[0])
+  {
+    c.DoAction({name:"error",text:"You are going " + args + "!"})
+    Game.DoAction({name:"move",cid:this.cid,text:args[0]})
+  }
+  else
+  {
+    l1("There was no direction to the go",LG_CMDS)
+    c.DoAction({name:"error",text:"Which direction?"})
+  }
 }
 
 

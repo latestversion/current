@@ -35,7 +35,7 @@ HasArray.getPrototypeInstance = function(items)
     this[items].push(id)
   }
 
-  _p["Del" + Item] = function(id)
+  _p["Remove" + Item] = function(id)
   {
     var idx = this[items].indexOf(id)
     if(-1 != idx)

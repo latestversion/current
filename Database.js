@@ -5,13 +5,13 @@ function Database(savefile,typeprototype)
   this.typeprototype = typeprototype
   this.database = []
   this.factory = {}
-  this.maxid = 0
+  this.maxid = 1
   this.loopidx = 0
 }
 
-var _p = Database.prototype
-
 CopyPrototype(Entity,Database)
+
+var _p = Database.prototype
 
 _p.GetFreeID = function()
 {
@@ -90,6 +90,7 @@ _p.LoadDirectory = function(dir,purge)
   for(var idx in parsed)
   {
     parsed[idx].__proto__ = this.typeprototype
+    parsed[idx].Revive()
     this.Add(parsed[idx])
   }
 }

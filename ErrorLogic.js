@@ -8,16 +8,15 @@ function ErrorLogic(player)
 	this.player = player
 }
 
-var _p = ErrorLogic.prototype
-
 CopyPrototype(Entity,ErrorLogic)
 
+var _p = ErrorLogic.prototype
 
 _p.DoAction = function(a)
 {
 	if(a.name == this.Name())
 	{
 		var conn = this.player.Connection()
-		conn.putn(a.text)
+		conn.putn(a.text+"\n")
 	}
 }

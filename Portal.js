@@ -7,30 +7,30 @@ function Portal()
   HasEntries.call(this)
 }
 
-var _p = Portal.prototype
-
 CopyPrototype(Entity,Portal)
 CopyPrototype(HasRegion,Portal)
 CopyPrototype(DataEntity,Portal)
 CopyPrototype(LogicEntity,Portal)
 CopyPrototype(HasEntries,Portal)
 
+var _p = Portal.prototype
 
-_p.HasEntryForRoomAndDirection = function(rid,direction)
+_p.DestinationRoomForStartRoomAndDirection = function(rid,direction)
 {
 	l1("Checking entries for rid,dir -> " + rid + "" + direction,LG_SPAM)
 	this.BeginEntries()
 	var entry
 	while(entry = this.NextEntry())
 	{
-		if(entry.startroom == rid && entry.direction == direction)
+		if(entry.StartRoom() == rid && entry.Direction() == direction)
 		{
-			return true
+			return entry.DestinationRoom()
 		}
 	}
 
 	return false
 }
+
 
 _p.Add = function()
 {
@@ -40,6 +40,16 @@ _p.Add = function()
 _p.Remove = function()
 {
 
+}
+
+_p.Revive = function()
+{
+  this.BeginEntries()
+  var entry
+  while(entry = this.NextEntry())
+  {
+    entry.__proto__ = PortalEntry.prototype
+  }
 }
 
 function PortalEntry(startroom,direction,destroom)

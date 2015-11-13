@@ -8,9 +8,7 @@ function Entity()
   this.type = this.constructor.name
 }
 
-
 var _p = Entity.prototype
-
 
 _p.Name = function()
 {return this.name}
@@ -32,3 +30,8 @@ _p.SetDescription = function(d)
 
 _p.SetID = function(id)
 {this.id = id}
+
+_p.Revive = function()
+{
+
+}

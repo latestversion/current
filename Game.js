@@ -69,14 +69,14 @@ _p.ConsistencyCheckDatabases = function(dbs,addmissing)
 
   // Portals found in rooms
   l1("Checking " + pdb.Size() + " portals",LG_DB_CHECK)
-  
+
   var portal, entry, pid
   pdb.Start()
   while(portal = pdb.Next())
   {
     pid = portal.ID()
     l1("pid " + pid + " has " + portal.NumEntries() + " entries",LG_DB_CHECK)
-    
+
     portal.BeginEntries()
 
     while(entry = portal.NextEntry())
@@ -99,11 +99,11 @@ _p.ConsistencyCheckDatabases = function(dbs,addmissing)
 
 }
 
-_p.LoadDatabases = function(dir)
+_p.LoadDatabases = function(dir,purge)
 {
   for(var k in this.dbs)
   {
-    this.dbs[k].LoadDirectory(dir)
+    this.dbs[k].LoadDirectory(dir,purge)
   }
 }
 
@@ -132,7 +132,7 @@ _p.DoCommand = function(input,cid)
   }
 
   l1("Game.DoCommand: " + cmdname + " for character " + c.Name(),LG_SPAM)
-  
+
   if(c.HasCommand(cmdname))
   {
     var cmd = c.GetCommand(cmdname)
@@ -181,13 +181,13 @@ _p.DoMoveAction = function(a)
 
   var character = this.cdb.Get(cid)
   if(!character){l5("No character for cid " + cid,LG_CMDS);return}
-  
+
   // Get room
   var room = this.rdb.Get(character.Room())
-  if(!room){l5("No room for rid " + character.GetRoom(),LG_CMDS);return}
-  
+  if(!room){l5("No room for rid " + character.Room(),LG_CMDS);return}
+
   // Find portal with direction
-  var pid,portal
+  var pid,portal,r2id
 
   room.BeginPortals()
   while(pid = room.NextPortal())
@@ -195,10 +195,14 @@ _p.DoMoveAction = function(a)
     portal = pdb.Get(pid)
     if(!portal){l5("No portal for pid " + pid,LG_CMDS);return}
 
-    if(portal.HasEntryForRoomAndDirection(rid,direction))
+    r2id = portal.DestinationRoomForStartRoomAndDirection(room.ID(),direction)
+
+    if(r2id)
     {
       break
     }
+    r2id = 0
+    portal = false
   }
 
   if(!portal)
@@ -208,8 +212,20 @@ _p.DoMoveAction = function(a)
     return
   }
 
-  character.DoAction({name:"error",text:"Found portal! Next up: Actually going that way!"})
+  room2 = this.rdb.Get(r2id)
+  if(!room2){l9("No room for rid " + r2id,LG_CMDS);return}
 
+
+
+
+  l1("All clear to move " + character.Name() + " " + direction,LG_SPAM)
+  room.RemoveCharacter(character.ID())
+  character.SetRoom(r2id)
+  room2.AddCharacter(character)
+  character.SetRegion(room2.Region())
+
+
+  character.DoAction({name:"vision",text:room2.Name() + "\n" + room2.Description()})
 }
 
 
@@ -221,7 +237,7 @@ _p.DoAction = function(a)
 
   if("enterrealm" == a.name)
   {
-    this.DoEnterRealmAction(a) 
+    this.DoEnterRealmAction(a)
   }
 
   if("move" == a.name)

@@ -4,7 +4,7 @@ function Portal()
   LogicEntity.call(this)
   DataEntity.call(this)
   HasRegion.call(this)
-  HasPortals.call(this)
+  HasEntries.call(this)
 }
 
 var _p = Portal.prototype
@@ -13,7 +13,7 @@ CopyPrototype(Entity,Portal)
 CopyPrototype(HasRegion,Portal)
 CopyPrototype(DataEntity,Portal)
 CopyPrototype(LogicEntity,Portal)
-CopyPrototype(HasPortals,Portal)
+CopyPrototype(HasEntries,Portal)
 
 _p.Add = function()
 {

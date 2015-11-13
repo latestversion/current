@@ -16,7 +16,17 @@ HasArray.getPrototypeInstance = function(items)
     return hasContainerPrototypes[items]
   }
 
-  var Item = items[0].toUpperCase() + items.substring(1,items.length-1)
+
+  var Item
+  if(-1 != items.indexOf('ies'))
+  {
+    Item = items[0].toUpperCase() + items.substring(1,items.length-3) + "y"
+  }
+  else
+  {
+    Item = items[0].toUpperCase() + items.substring(1,items.length-1)
+  }
+
   var Items = items[0].toUpperCase() + items.substring(1)
   var _p = {}
 

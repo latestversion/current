@@ -76,8 +76,8 @@ function ProduceNewGameState(dbs,savedir)
   var p = new Portal()
   p.SetID(1)
 
-  p.AddPortal(new PortalEntry(1,"north",2))
-  p.AddPortal(new PortalEntry(2,"south",1))
+  p.AddEntry(new PortalEntry(1,"north",2))
+  p.AddEntry(new PortalEntry(2,"south",1))
   pdb.Add(p)
 
   for (var k in dbs)

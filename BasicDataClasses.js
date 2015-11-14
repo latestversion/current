@@ -24,7 +24,6 @@ function HasRegion()
   this.region = 0
 }
 
-HasRegion.prototype
 var _p = HasRegion.prototype
 
 _p.Region = function()
@@ -35,6 +34,22 @@ _p.Region = function()
 _p.SetRegion = function(region)
 {this.region = region}
 
+
+
+function HasCharacter()
+{
+  this.character = 0
+}
+
+var _p = HasCharacter.prototype
+_p.SetCharacter = function(cid)
+{
+  this.character = cid
+}
+_p.Character = function()
+{
+  return this.character
+}
 
 /* HasTemplate */
 function HasTemplate()

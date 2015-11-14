@@ -40,10 +40,51 @@ _p.ConsistencyCheckDatabases = function(dbs,addmissing)
   var rgndb = dbs[TypeEnums.Region]
   var pdb = dbs[TypeEnums.Portal]
 
+
   l1(dbs.length + " databases provided",LG_DB_CHECK)
 
+  // Items
+  l1("Checking {0} items".format(idb.Size()),LG_DB_CHECK)
+  idb.Begin()
+  var item
+  while(item = idb.Next())
+  {
+    l1("Checking item {0}".format(item.Name()),LG_DB_CHECK)
+    if(item.Room())
+    {
+      var room = rdb.Get(item.Room())
+      if(!room.HasItem(item.ID()))
+      {
+        l9("Item '{0}' not in room '{1}'".format(item.Name(),room.Name()),LG_DB_CHECK)
+        if(addmissing)
+        {
+          l1("Adding {0} to {1}".format(item.Name(),room.Name()),LG_DB_CHECK)
+          room.AddItem(item.ID())
+        }
+      }
+    }
+  }
+
+  // Characters in rooms
+  l1("Checking {0} characters".format(cdb.Size()),LG_DB_CHECK)
+  cdb.Begin()
+  var charter
+  while(charter = cdb.Next())
+  {
+    var room = rdb.Get(charter.Room())
+    if(!room.HasCharacter(charter.ID()))
+      {
+        l9("Character '{0}' not in room '{1}'".format(charter.Name(),room.Name()),LG_DB_CHECK)
+        if(addmissing)
+        {
+          l1("Adding {0} to {1}".format(charter.Name(),room.Name()),LG_DB_CHECK)
+          room.AddCharacter(charter.ID())
+        }
+      }
+  }
+
   // Rooms
-  l1("Checking " + rdb.Size() + " rooms",LG_DB_CHECK)
+  l1("Checking {0} rooms".format(rdb.Size()),LG_DB_CHECK)
   var riter = rdb.Iterator()
   var room
   while(room = riter.Next())
@@ -166,7 +207,7 @@ _p.DoEnterRealmAction = function(a)
     return
   }
 
-  c.DoAction({name:"vision",text:r.Name() + "\n" + r.Description()})
+  this.DoLookRoomAction({cid:cid})
 }
 
 
@@ -216,18 +257,57 @@ _p.DoMoveAction = function(a)
   if(!room2){l9("No room for rid " + r2id,LG_CMDS);return}
 
 
-
-
   l1("All clear to move " + character.Name() + " " + direction,LG_SPAM)
   room.RemoveCharacter(character.ID())
   character.SetRoom(r2id)
-  room2.AddCharacter(character)
+  room2.AddCharacter(character.ID())
+  l1("{0} now has character {1}".format(room2.Name(),character.Name()),LG_SPAM)
   character.SetRegion(room2.Region())
+  l1("Old region {0}, new region {1}".format(room.Region(),room2.Region()),LG_SPAM)
 
-
-  character.DoAction({name:"vision",text:room2.Name() + "\n" + room2.Description()})
+  this.DoLookRoomAction({cid:character.ID()})
 }
 
+
+_p.DoLookRoomAction = function(a)
+{
+  var s = ""
+  l1("DoLookRoomAction for cid {0}".format(a.cid),LG_SPAM)
+  var character = cdb.Get(a.cid)
+  if(!character)
+  {
+    l9("No character for cid {0}".format(a.cid),LG_ACTIONS)
+  }
+  l1("DoLookRoomAction for character {0}".format(character.Name()),LG_SPAM)
+
+  var room = rdb.Get(character.Room())
+
+  s += room.Name() + "\n" + room.Description() + "\n"
+
+  room.BeginCharacters()
+  var cid
+  while(cid = room.NextCharacter())
+  {
+    l1("Room ({0},{1}) had a cid {2}".format(room.ID(),room.Name(),cid),LG_SPAM)
+    roomchar = cdb.Get(cid)
+    l1("Retrieved character {0}".format(roomchar.Name()),LG_SPAM)
+    if(roomchar.ID() != character.ID())
+    {
+      s += roomchar.Name() + " is here" + "\n"
+    }
+  }
+
+  room.BeginItems()
+  var iid
+  while(iid = room.NextItem())
+  {
+    var item = idb.Get(iid)
+    s += item.Name() + " is here" + "\n"
+  }
+
+  character.DoAction({name:"vision",text:s})
+
+}
 
 
 _p.DoAction = function(a)
@@ -243,6 +323,11 @@ _p.DoAction = function(a)
   if("move" == a.name)
   {
     this.DoMoveAction(a)
+  }
+
+  if("lookroom" == a.name)
+  {
+    this.DoLookRoomAction(a)
   }
 
 }

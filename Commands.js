@@ -6,6 +6,7 @@ CommandNames.Go = "go"
 CommandNames.Get = "get"
 CommandNames.Exit = "exit"
 CommandNames.Info = "info"
+CommandNames.Look = "look"
 
 
 function GoCommand(cid)
@@ -22,7 +23,7 @@ _p.Description = function(){return "Makes movement possible. Usage: 'go <directi
 _p.Execute = function(args,c)
 {
 	l1("Executing " + this.Name() + " with args " + args,LG_CMDS)
-  
+
   if(args[0])
   {
     Game.DoAction({name:"move",arg1:this.cid,text:args[0]})
@@ -91,6 +92,24 @@ _p.Execute = function(args,c)
   room = Game.rdb.Get(c.Room())
   c.DoAction({name:"error",text:JSON.stringify(room)})
   // Check arguments
+}
+
+
+function LookCommand(cid)
+{
+  Command.call(this,cid)
+}
+
+var _p = LookCommand.prototype
+CopyPrototype(Command,LookCommand)
+
+_p.Name = function(){return CommandNames.Look}
+_p.Description = function(){return "Your primary way of taking in your surroundings."}
+
+_p.Execute = function(args,c)
+{
+  l1("Executing " + this.Name(),LG_CMDS)
+  Game.DoAction({name:"lookroom",cid:c.ID()})
 }
 
 

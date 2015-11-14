@@ -44,7 +44,7 @@ _p.Get = function(id)
     }
   }
 
-  l5("Did not find an entity with ID " + id,LG_ERR)
+  l5("{0}: Did not find an entity with ID {1}".format(this.Name(),id),LG_ERR)
 
   return false
 }
@@ -106,6 +106,11 @@ _p.Purge = function()
 _p.Start = function()
 {
   this.loopidx = 0
+}
+
+_p.Begin = function()
+{
+  this.Start()
 }
 
 _p.Next = function()

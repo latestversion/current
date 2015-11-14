@@ -1,6 +1,8 @@
 
 defaultscope = this
 
+"use strict"
+
 PLATFORM_NODE = "node"
 PLATFORM_IOS = "ios"
 
@@ -35,7 +37,7 @@ if(PLATFORM_NODE == PLATFORM)
       {
         defaultscope.eval(s)
       }
-      
+
     }
 
 
@@ -51,6 +53,7 @@ if(PLATFORM_NODE == PLATFORM)
   }
 
   this.eval = eval
+  evalFile("String.js")
   evalFile("log.js")
   evalFile("Enums.js")
   evalFile("ArrayIterator.js")

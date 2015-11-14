@@ -15,8 +15,39 @@ function ProduceNewGameState(dbs,savedir)
   // Items
   l1("Adding items",LG_NGS)
   idb.Purge()
+  var id = 1
+  var i = new Item()
+  i.SetID(id++)
+  i.SetName("A figurine of the curious frog")
+  i.SetDescription("A curiosu frogu is a finu friend.")
+  i.SetRoom(1)
+  idb.Add(i)
+
+
+  var i = new Item()
+  i.SetID(id++)
+  i.SetName("A mediocre carrot")
+  i.SetDescription("It's a not so fine carrot.")
+  i.SetRoom(1)
+  idb.Add(i)
+
+  var i = new Item()
+  i.SetID(id++)
+  i.SetName("A damn fine carrot")
+  i.SetDescription("It's a DAMN fine carrot.")
+  i.SetRoom(1)
+  idb.Add(i)
+
+
   // Characters
   cdb.Purge()
+
+  var character = new Character()
+  character.SetName("Georgie Scrapneck")
+  character.SetDescription("Georgie looks like he's had a rough life. His coat is worn and his trousers threadbare. Luckily his coughing isn't bad enough to stop him from enjoying smoke or two.")
+  character.SetRoom(2)
+  character.SetID(cdb.GetFreeID())
+  cdb.Add(character)
 
   // Rooms
   l1("Adding rooms",LG_NGS)

@@ -16,4 +16,6 @@ _p.DoAction = function(a)
     var c = cdb.Get(this.cid)
     c.Connection().putn(a.text)
   }
+
+  return true
 }

@@ -19,4 +19,6 @@ _p.DoAction = function(a)
 		var conn = this.player.Connection()
 		conn.putn(a.text+"\n")
 	}
+
+  return true
 }

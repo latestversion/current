@@ -4,12 +4,29 @@ evalFile("Entity.js")
 function Item()
 {
   Entity.call(this)
+  LogicEntity.call(this)
   HasRoom.call(this)
   HasCharacter.call(this)
 }
 
 CopyPrototype(Entity,Item)
+CopyPrototype(LogicEntity,Item)
 CopyPrototype(HasRoom,Item)
 CopyPrototype(HasCharacter,Item)
 
 var _p = Item.prototype
+
+_p.Revive = function()
+{
+  l1("Item Revive",LG_SPAM)
+  l1("This item has {0} logics".format(this.logics.length),LG_SPAM)
+  var k
+  for (k in this.logics)
+  {
+    if(this.logics[k].type)
+    {
+      l1("Logic type: " + this.logics[k].type,LG_SPAM)
+      this.logics[k].__proto__  = global[this.logics[k].type].prototype
+    }
+  }
+}

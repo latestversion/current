@@ -40,6 +40,7 @@ _p.Tick = function(input)
 		room.AddCharacter(c.ID())
 		c.SetRegion(room.Region())
 		c.SetConnection(this.stream)
+
 		var logic = new ErrorLogic(c)
 		c.AddLogic(logic)
 		logic = new VisionLogic(c.ID())
@@ -55,6 +56,9 @@ _p.Tick = function(input)
 		c.AddCommand(cmd.Name(),cmd)
 
 		cmd = new LookCommand(c.ID())
+		c.AddCommand(cmd.Name(),cmd)
+
+		cmd = new GetCommand(c.ID())
 		c.AddCommand(cmd.Name(),cmd)
 
 		Game.cdb.Add(c)

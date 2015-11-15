@@ -23,6 +23,9 @@ function ProduceNewGameState(dbs,savedir)
   i.SetRoom(1)
   idb.Add(i)
 
+  var logic = new FigurineLogic()
+  i.AddLogic(logic)
+
 
   var i = new Item()
   i.SetID(id++)
@@ -109,6 +112,21 @@ function ProduceNewGameState(dbs,savedir)
 
   p.AddEntry(new PortalEntry(1,"north",2))
   p.AddEntry(new PortalEntry(2,"south",1))
+  pdb.Add(p)
+
+
+  var p = new Portal()
+  p.SetID(pdb.GetFreeID())
+
+  p.AddEntry(new PortalEntry(2,"north",3))
+  p.AddEntry(new PortalEntry(3,"south",2))
+  pdb.Add(p)
+
+  var p = new Portal()
+  p.SetID(pdb.GetFreeID())
+
+  p.AddEntry(new PortalEntry(3,"north",4))
+  p.AddEntry(new PortalEntry(4,"south",3))
   pdb.Add(p)
 
   for (var k in dbs)

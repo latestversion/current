@@ -257,6 +257,39 @@ _p.DoMoveAction = function(a)
   if(!room2){l9("No room for rid " + r2id,LG_CMDS);return}
 
 
+  // Check if characters in the room allow leaving
+  if(room.NumCharacters() > 1)
+  {
+    room.BeginCharacters()
+    var loopid
+    while(loopid = room.NextCharacter())
+    {
+      var charter = cdb.Get(loopid)
+      l1("next char: {0},{1} ".format(loopid,charter.Name()),LG_SPAM)
+      if(!charter.DoAction({name:"attemptmove",arg1:cid,arg2:TypeEnums.Character,text:direction}))
+      {
+        l1("Charter {0} did not allow move {1} for {2},{3}".format(charter.Name(),direction,cid,character.Name()),LG_SPAM)
+        return
+      }
+    }
+  }
+
+  // Check if items in the room allow leaving
+  room.BeginItems()
+  var loopid
+  while(loopid = room.NextItem())
+  {if(loopid == cid)
+    l1("next item: {0} ".format(loopid),LG_SPAM)
+    var item = idb.Get(loopid)
+    if(!item.DoAction({name:"attemptmove",arg1:cid,arg2:TypeEnums.Character,text:direction}))
+    {
+      l1("Item {0} did not allow move {1} for {2},{3}".format(item.Name(),direction,cid,character.Name()),LG_SPAM)
+      return
+    }
+  }
+
+
+
   l1("All clear to move " + character.Name() + " " + direction,LG_SPAM)
   room.RemoveCharacter(character.ID())
   character.SetRoom(r2id)
@@ -306,14 +339,40 @@ _p.DoLookRoomAction = function(a)
   }
 
   character.DoAction({name:"vision",text:s})
-
 }
+
+
+_p.DoGetItemAction = function(a)
+{
+  var cid = a.arg1
+  var charter = cdb.Get(cid)
+  var room = rdb.Get(charter.Room())
+
+  l1("DoGetItemAction for cid {0}".format(a.arg1),LG_SPAM)
+  l1("DoGetItemAction args " + a.text)
+
+  if(!charter)
+  {
+    l9("No character for cid {0}".format(charter.ID()),LG_ACTIONS)
+  }
+
+  room.BeginItems()
+  var id
+  while(id = room.NextItem())
+  {
+    l1("Room ({0},{1}) had an item {2}".format(room.ID(),room.Name(),id),LG_SPAM)
+    var item = idb.Get(id)
+  }
+
+  charter.DoAction({name:"vision",text:"You stretch out your hand to grasp " + a.text + ", but the get function is not yet fully implemented! What a bummer..."})
+}
+
 
 
 _p.DoAction = function(a)
 {
 
-  l1("e Game.DoAction with action " + a,LG_SPAM)
+  l1("e Game.DoAction with action " + JSON.stringify(a),LG_SPAM)
 
   if("enterrealm" == a.name)
   {
@@ -328,6 +387,11 @@ _p.DoAction = function(a)
   if("lookroom" == a.name)
   {
     this.DoLookRoomAction(a)
+  }
+
+  if("getitem" == a.name)
+  {
+    this.DoGetItemAction(a)
   }
 
 }

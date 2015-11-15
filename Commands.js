@@ -47,9 +47,17 @@ CopyPrototype(Command,GetCommand)
 _p.Name = function(){return CommandNames.Get}
 _p.Description = function(){return "Makes picking things up possible. Usage: 'get <item> <quantity>'"}
 
-_p.Execute = function(args,c)
+_p.Execute = function(args,charter)
 {
-  l1("Executing " + this.Name(),LG_CMDS)
+  l1("Executing command" + this.Name(),LG_CMDS)
+
+  if(!args.length)
+  {
+    charter.DoAction({name:"error",text:"Get what?"})
+    return
+  }
+
+Game.DoAction({name:"getitem",arg1:charter.ID(),text:args})
 
   // Check arguments
 }
@@ -111,6 +119,8 @@ _p.Execute = function(args,c)
   l1("Executing " + this.Name(),LG_CMDS)
   Game.DoAction({name:"lookroom",cid:c.ID()})
 }
+
+
 
 
 

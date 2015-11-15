@@ -5,6 +5,8 @@ evalFile("TickerClock.js",this)
 evalFile("EventScheduler.js",this)
 
 
+LG_STARTUP = "LG_STARTUP"
+
 function Game()
 {
   DatabaseInstanceBearer.call(this)
@@ -150,13 +152,18 @@ _p.LoadDatabases = function(dir,purge)
 
 _p.StartNewGame = function()
 {
-  l1("Starting new game")
+  l1("Starting new game",LG_STARTUP)
 	this.loaddir = "./newgamestate"
   this.savedir = "./savedgame_VIXEN"
 
   var purge = true
   this.LoadDatabases(this.loaddir,purge)
+  l1("Loaded databases",LG_STARTUP)
   this.ConsistencyCheckDatabases(this.dbs,true)
+  l1("Consistency checked databases",LG_STARTUP)
+
+  this.DoAction({name:"repeatedbroadcast"})
+  l1("Started broadcast repat",LG_STARTUP)
 }
 
 
@@ -367,7 +374,11 @@ _p.DoGetItemAction = function(a)
   charter.DoAction({name:"vision",text:"You stretch out your hand to grasp " + a.text + ", but the get function is not yet fully implemented! What a bummer..."})
 }
 
-
+_p.DoRepeatedBroadcastAction = function(a)
+{
+  l1("Simulation Time is now " + Game.Time(),LG_SPAM)
+  this.AddAction(a,4000)
+}
 
 _p.DoAction = function(a)
 {
@@ -394,34 +405,43 @@ _p.DoAction = function(a)
     this.DoGetItemAction(a)
   }
 
+  if("repeatedbroadcast" == a.name)
+  {
+    this.DoRepeatedBroadcastAction(a)
+  }
 }
+
 
 _p.AddAction = function(action,timeoffset)
 {
-  var schedtime = this.Time()+timeoffset
-  l1("Adding action " + action.Name() + " sched for time " + schedtime,LG_ACTIONS)
-  action.SetTimestamp(schedtime)
-  this.AddEvent(action)
+  var schedtime = this.Time() + timeoffset
+  l1("Adding action " + action.name + " sched for time " + schedtime,LG_ACTIONS)
+  var timedaction = new TimedAction(action,schedtime)
+  this.AddEvent(timedaction)
 }
 
 _p.AddActionAbsolute = function(action,absolutetime)
 {
-  l1("Adding absolute action " + action.Name() + " sched for time " + absolutetime,LG_ACTIONS)
-  action.SetTimestamp(absolutetime)
-  this.AddEvent(action)
+  l1("Adding absolute action " + action.name + " sched for time " + absolutetime,LG_ACTIONS)
+  var timedaction = new TimedAction(action,absolutetime)
+  this.AddEvent(timedaction)
 }
 
 _p.Tick = function()
 {
   this.TickTime()
 
-  var actions = this.GetPassedEvents(this.Time())
-  if(actions.length)
+  var timedactions = this.GetPassedEvents(this.Time())
+  if(timedactions.length)
   {
-    l1("I have " + actions.length + " actions to carry out",LG_ACTIONS)
+    l1("I have " + timedactions.length + " actions to carry out",LG_ACTIONS)
+    for (var k in timedactions)
+    {
+      var a = timedactions[k].Action()
+      l1("Timed action: " + JSON.stringify(a),LG_ACTIONS)
+      this.DoAction(a)
+    }
   }
-
-  // Check actions
 }
 
 var Game = new Game()

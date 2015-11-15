@@ -3,7 +3,7 @@ function TickerClock()
   this.tc = {}
   this.tc.t = 0
   this.tc.lastTick = 0
-  this.tc.maxdt = 1
+  this.tc.maxdt = 10
 }
 
 var _p = TickerClock.prototype
@@ -17,9 +17,8 @@ _p.TickTime = function()
   }
 
   var now = Date.now()
-  var dt = Date.now()-now
-  this.lastTick = now
-
+  var dt = now-this.tc.lastTick
+  this.tc.lastTick = now
 
   if (dt > this.maxdt)
   {

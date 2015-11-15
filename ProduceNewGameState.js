@@ -20,7 +20,7 @@ function ProduceNewGameState(dbs,savedir)
   i.SetID(id++)
   i.SetName("A figurine of the curious frog")
   i.SetDescription("A curiosu frogu is a finu friend.")
-  i.SetRoom(1)
+  i.SetRoom(3)
   idb.Add(i)
 
   var logic = new FigurineLogic()

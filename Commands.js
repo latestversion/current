@@ -7,6 +7,7 @@ CommandNames.Get = "get"
 CommandNames.Exit = "exit"
 CommandNames.Info = "info"
 CommandNames.Look = "look"
+CommandNames.Talk = "talk"
 
 
 function GoCommand(cid)
@@ -102,7 +103,6 @@ _p.Execute = function(args,c)
   // Check arguments
 }
 
-
 function LookCommand(cid)
 {
   Command.call(this,cid)
@@ -118,6 +118,31 @@ _p.Execute = function(args,c)
 {
   l1("Executing " + this.Name(),LG_CMDS)
   Game.DoAction({name:"lookroom",cid:c.ID()})
+}
+
+
+function TalkCommand(cid)
+{
+  Command.call(this,cid)
+}
+
+var _p = TalkCommand.prototype
+CopyPrototype(Command,TalkCommand)
+
+_p.Name = function(){return CommandNames.Talk}
+_p.Description = function(){return "Use to communicate with other characters. talk <character name>"}
+
+_p.Execute = function(args,charter)
+{
+  l1("Executing " + this.Name(),LG_CMDS)
+  if (!args.length)
+  {
+    charter.DoAction({name:"vision",text:"You talk and talk. If only words were pennies."})
+  }
+  else
+  {
+    Game.DoAction({name:"talk",arg1:charter.ID(),arg2:args})
+  }
 }
 
 

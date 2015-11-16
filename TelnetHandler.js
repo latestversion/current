@@ -36,9 +36,11 @@ _p.parse = function(s)
 		this.buffer = remaining
 		if(line)
 		{
+			// replace accidental double spaces etc
+			line = line.replace(/\s+/g," ")
 			// trim ws from right
-
-			this.lines.push(line.trim())
+			line = line.trim()
+			this.lines.push(line)
 		}
 		nidx = this.buffer.indexOf("\n")
 	}

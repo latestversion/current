@@ -11,9 +11,9 @@ _p.Match = function(reftext)
 }
 
 
-function PartialMatcher(text)
+function PartialMatcher(args)
 {
-  var inputtokens = text.split(" ")
+  var inputtokens = (typeof args == 'string') ? args.split(" ") : args
   var regex = ""
   regex = "((\\s+)|(^))" + inputtokens.shift()
   for (var k in inputtokens)

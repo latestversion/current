@@ -38,7 +38,7 @@ _p.parse = function(s)
 		{
 			// replace accidental double spaces etc
 			line = line.replace(/\s+/g," ")
-			// trim ws from right
+			// trim ws from right and left
 			line = line.trim()
 			this.lines.push(line)
 		}

@@ -1,4 +1,6 @@
 
+evalFile("GeorgieTalkLogic.js")
+
 
 LG_NGS = "LG_NGS"
 
@@ -51,6 +53,8 @@ function ProduceNewGameState(dbs,savedir)
   character.SetRoom(2)
   character.SetID(cdb.GetFreeID())
   cdb.Add(character)
+  var logic = new GeorgieTalkLogic()
+  character.AddLogic(logic)
 
   // Rooms
   l1("Adding rooms",LG_NGS)

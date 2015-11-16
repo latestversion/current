@@ -80,6 +80,19 @@ _p.SceneHandler = function()
   return this.scenehandler
 }
 
-
+_p.Revive = function()
+{
+  l1("Character Revive",LG_SPAM)
+  l1("This char has {0} logics".format(this.logics.length),LG_SPAM)
+  var k
+  for (k in this.logics)
+  {
+    if(this.logics[k].type)
+    {
+      l1("Logic type: " + this.logics[k].type,LG_SPAM)
+      this.logics[k].__proto__  = global[this.logics[k].type].prototype
+    }
+  }
+}
 
 

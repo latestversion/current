@@ -36,7 +36,9 @@ _p.parse = function(s)
 		this.buffer = remaining
 		if(line)
 		{
-			this.lines.push(line)
+			// trim ws from right
+
+			this.lines.push(line.trim())
 		}
 		nidx = this.buffer.indexOf("\n")
 	}

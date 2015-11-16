@@ -363,15 +363,33 @@ _p.DoGetItemAction = function(a)
     l9("No character for cid {0}".format(charter.ID()),LG_ACTIONS)
   }
 
+
+  var matcher = new PartialMatcher(a.text)
+  var matchingitems = []
+
   room.BeginItems()
   var id
   while(id = room.NextItem())
   {
     l1("Room ({0},{1}) had an item {2}".format(room.ID(),room.Name(),id),LG_SPAM)
     var item = idb.Get(id)
+    if(matcher.Match(item.Name()))
+    {
+      matchingitems.push(item)
+    }
   }
 
-  charter.DoAction({name:"vision",text:"You stretch out your hand to grasp " + a.text + ", but the get function is not yet fully implemented! What a bummer..."})
+  l1("The matching items are now " + JSON.stringify(matchingitems),LG_SPAM)
+
+  if(!matchingitems.length)
+  {
+    charter.DoAction({name:"error",text:"There is no '{0}' here.".format(a.text)})
+    return
+  }
+
+  var item = matchingitems[0]
+
+  charter.DoAction({name:"vision",text:"You want " + item.Name() + " so badly, but, alas, the get function is not implemented yet."})
 }
 
 _p.DoRepeatedBroadcastAction = function(a)

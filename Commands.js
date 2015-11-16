@@ -57,7 +57,7 @@ _p.Execute = function(args,charter)
     return
   }
 
-Game.DoAction({name:"getitem",arg1:charter.ID(),text:args})
+Game.DoAction({name:"getitem",arg1:charter.ID(),text:args.join(" ")})
 
   // Check arguments
 }

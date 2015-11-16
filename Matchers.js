@@ -5,7 +5,7 @@ function FullMatcher(text)
 
 var _p = FullMatcher.prototype
 
-_p.match = function(reftext)
+_p.Match = function(reftext)
 {
 
 }
@@ -13,7 +13,6 @@ _p.match = function(reftext)
 
 function PartialMatcher(text)
 {
-
   var inputtokens = text.split(" ")
   var regex = ""
   regex = "((\\s+)|(^))" + inputtokens.shift()
@@ -27,7 +26,7 @@ function PartialMatcher(text)
 
 var _p = PartialMatcher.prototype
 
-_p.match = function(reftext)
+_p.Match = function(reftext)
 {
   return this.reggie.exec(reftext)
 }

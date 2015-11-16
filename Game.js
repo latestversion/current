@@ -389,7 +389,79 @@ _p.DoGetItemAction = function(a)
 
   var item = matchingitems[0]
 
-  charter.DoAction({name:"vision",text:"You want " + item.Name() + " so badly, but, alas, the get function is not implemented yet."})
+
+  l1("Found a matching item: " + item.Name(),LG_SPAM)
+  // Ask permission
+
+  var action = {name:"getitem",arg1:charter.ID(),arg2:item.ID()}
+
+  // Ask room
+
+  if(!room.DoAction(action))
+  {
+    l1("Character {0} cancelled getitem ".format(room.Name()))
+      return
+  }
+
+  // Ask all characters
+
+  room.BeginCharacters()
+  var tcharter
+  while(tcharter = room.NextCharacter())
+  {
+    tcharter = cdb.Get(tcharter)
+    if(!tcharter.DoAction(action))
+    {
+      l1("Character {0} cancelled getitem ".format(tcharter.Name()))
+      return
+    }
+  }
+
+  // Ask all items
+
+  room.BeginItems()
+  var titem
+  while(titem = room.NextItem())
+  {
+    titem = idb.Get(titem)
+    if(!titem.DoAction(action))
+    {
+      l1("Item {0} cancelled getitem ".format(titem.Name()))
+      return
+    }
+  }
+
+
+  // Transfer ownership
+  room.RemoveItem(item.ID())
+  charter.AddItem(item.ID())
+
+  // Inform about the event
+
+  charter.DoAction({name:"vision",text:"You pick up " + item.Name()})
+
+  action.name = "didgetitem"
+
+  item.DoAction(action)
+
+  room.DoAction(action)
+
+  room.BeginCharacters()
+  var tcharter
+  while(tcharter = room.NextCharacter())
+  {
+    tcharter = cdb.Get(tcharter)
+    tcharter.DoAction(action)
+  }
+
+  room.BeginItems()
+  var titem
+  while(titem = room.NextItem())
+  {
+    titem = idb.Get(titem)
+    titem.DoAction(action)
+  }
+
 }
 
 _p.DoRepeatedBroadcastAction = function(a)

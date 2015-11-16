@@ -9,6 +9,7 @@ if (!String.prototype.format) {
     });
   };
 }
+
 // fearphage on StackOverflow
 
 /*if (!String.format) {
@@ -22,3 +23,10 @@ if (!String.prototype.format) {
     });
   };
 }*/
+
+
+// Steve Hansell on SO
+
+String.prototype.untitle = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+}

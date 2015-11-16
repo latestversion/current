@@ -23,7 +23,7 @@ function ProduceNewGameState(dbs,savedir)
   i.SetRoom(3)
   idb.Add(i)
 
-  var logic = new FigurineLogic()
+  var logic = new FigurineLogic(i.ID())
   i.AddLogic(logic)
 
 

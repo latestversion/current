@@ -50,6 +50,17 @@ if(PLATFORM_NODE == PLATFORM)
     {
       fs.writeFileSync(file, data)
     }
+
+    main_platform_wait = function(delay)
+    {
+      var startTime = Date.now()
+      var count = 0
+
+      while(Date.now() - startTime < delay)
+      {
+        count += 1
+      }
+    }
   }
 
   this.eval = eval

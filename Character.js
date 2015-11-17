@@ -60,6 +60,11 @@ _p.Connection = function()
   return this.connection
 }
 
+_p.Stream = function()
+{
+  return this.connection
+}
+
 _p.IsPlayer = function()
 {
   return this.isplayer

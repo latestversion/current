@@ -22,13 +22,13 @@ CopyPrototype(Scene,MenuScene)
 
 _p.Tick = function(input)
 {
-	if(!input)
+	/*if(!input)
 	{
 		return
-	}
+	}*/
 
 	var stream = this.stream
-	if(input == "1")
+	if(true) //input == "1")
 	{
 		stream.putn("I will start the game")
 		Game.StartNewGame()
@@ -39,7 +39,8 @@ _p.Tick = function(input)
 		var room = rdb.Get(1)
 		room.AddCharacter(c.ID())
 		c.SetRegion(room.Region())
-		c.SetConnection(this.stream)
+		c.SetConnection(this.Stream())
+		c.SetSceneHandler(this.SceneHandler())
 
 		var logic = new ErrorLogic(c)
 		c.AddLogic(logic)

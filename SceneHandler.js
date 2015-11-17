@@ -6,9 +6,9 @@ var SceneHandler = function(inputstream)
 
 var _p = SceneHandler.prototype
 
-_p.PushScene = function(Scene)
+_p.PushScene = function(scene)
 {
-	this.scenes.push(Scene);
+	this.scenes.push(scene);
 }
 _p.PopScene = function()
 {
@@ -42,5 +42,13 @@ _p.Tick = function()
 	if(currentScene)
 	{
 	  currentScene.Tick(input)
+	}
+}
+
+_p.VoidInput = function()
+{
+	while(this.stream.get())
+	{
+
 	}
 }

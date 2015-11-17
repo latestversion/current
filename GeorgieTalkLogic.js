@@ -1,3 +1,5 @@
+evalFile("GeorgieCutscene.js")
+
 function GeorgieTalkLogic(id)
 {
   Entity.call(this)
@@ -21,7 +23,8 @@ _p.DoAction = function(a)
     var c = cdb.Get(a.arg1)
     if(c.IsPlayer())
     {
-      c.DoAction({name:"vision",text:"'Bugger off' says Georgie.\n"})
+      //c.DoAction({name:"vision",text:"'Bugger off' says Georgie.\n"})
+      c.SceneHandler().PushScene(new GeorgieScene(c.SceneHandler(),c.Stream()))
       return false
     }
   }

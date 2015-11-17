@@ -15,7 +15,8 @@ function OptionInfo(name,presentation,nextnode)
 }
 
 var georgietree = {
-
+// Send in a  goddamn delegate to the functions so I won't have to type like a madman
+// also no need to bind...
       start:function(){
           var stream = this.stream
           stream.putn()
@@ -23,10 +24,11 @@ var georgietree = {
           stream.putn("***Georgie cutscene***")
           stream.putn()
           stream.putn()
-          stream.putn("G spits on the ground")
-          this.Wait(500)
           stream.putn("G is ready to speak.")
           this.Wait(1000)
+          this.Goto("ask")
+        },
+      ask:function(){
           this.GiveOptions("How about if you got me 10 carrots?",[
             new OptionInfo("1","Carrots it is!","accept_quest"),
             new OptionInfo("2","I think not...","deny_quest"),
@@ -34,21 +36,26 @@ var georgietree = {
         },
       accept_quest:function(){
         var stream = this.Stream()
-        stream.putn("Georgie puts some leaves in his pipe and smokes them. 'Good!' he manages to squeeze out before he succumbs to a nasty coughing fit.")
+        stream.putn()
+        stream.putn("Georgie puts some leaves in his pipe and smokes them.")
+        stream.putn("'Good!' he wheezes between his teeth before he succumbs to a nasty coughing fit.\n")
         stream.putn("'Then it's... cough!cough! ...settled.'")
-        this.AnyKey("exit")
+        this.Goto("exit")
       },
       deny_quest:function(){
         var stream = this.Stream()
         stream.putn("'That makes me sad...'")
-        this.AnyKey("exit")
+        this.Goto("exit")
       },
       ambivalent_quest:function(){
         var stream = this.Stream()
         stream.putn("'Make up your mind you mongrel from the gutter!'")
-        this.Goto("exit")
+        this.AnyKey("exit")
       },
-      exit:function(){this.SceneHandler().PopScene()}
+      exit:function(){
+        this.Wait(300)
+        this.stream.putn("*")
+        this.SceneHandler().PopScene()}
 }
 
 
@@ -131,6 +138,7 @@ _p.Tick = function(input)
 
   if(CutsceneState.DoNode == this.state)
   {
+    this.VoidInput()
     l1(this.state)
     l1("nextnode name: " + this.currentnode)
     l1("nextnode" + this.tree[this.currentnode])

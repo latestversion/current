@@ -60,6 +60,12 @@ _p.StartNewGame = function()
 
 _p.DoCommand = function(input,cid)
 {
+
+  if("\n" == input)
+  {
+    return
+  }
+
   var args = input.split(" ")
   var cmdname = args.shift()
   var c = this.cdb.Get(cid)

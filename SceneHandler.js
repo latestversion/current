@@ -37,18 +37,10 @@ _p.ReplaceCurrentScene = function(scene)
 
 _p.Tick = function()
 {
-  	var input = this.stream.get()
-	var currentScene = this.CurrentScene()
-	if(currentScene)
-	{
-	  currentScene.Tick(input)
-	}
-}
-
-_p.VoidInput = function()
-{
-	while(this.stream.get())
-	{
-
-	}
+  var input = this.stream.get()
+  var currentScene = this.CurrentScene()
+  if(currentScene)
+  {
+    currentScene.Tick(input)
+  }
 }

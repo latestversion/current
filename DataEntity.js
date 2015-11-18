@@ -9,7 +9,7 @@ var _p = DataEntity.prototype
 
 _p.GetAttribute = function(name)
 {
-  return this.data[d]
+  return this.data[name]
 }
 
 _p.SetAttribute = function(name,val)

@@ -1,5 +1,6 @@
 
 evalFile("GeorgieTalkLogic.js")
+evalFile("ItemFactory.js")
 
 
 LG_NGS = "LG_NGS"
@@ -17,31 +18,18 @@ function ProduceNewGameState(dbs,savedir)
   // Items
   l1("Adding items",LG_NGS)
   idb.Purge()
-  var id = 1
-  var i = new Item()
-  i.SetID(id++)
-  i.SetName("A figurine of the curious frog")
-  i.SetDescription("A curiosu frogu is a finu friend.")
+
+  var i  = idb.Create(ItemTemplateIDs.CuriousFrogFigurine)
   i.SetRoom(3)
-  idb.Add(i)
 
   var logic = new FigurineLogic(i.ID())
   i.AddLogic(logic)
 
-
-  var i = new Item()
-  i.SetID(id++)
-  i.SetName("A mediocre carrot")
-  i.SetDescription("It's a not so fine carrot.")
+  var i  = idb.Create(ItemTemplateIDs.MediocreCarrot)
   i.SetRoom(1)
-  idb.Add(i)
 
-  var i = new Item()
-  i.SetID(id++)
-  i.SetName("A damn fine carrot")
-  i.SetDescription("It's a DAMN fine carrot.")
+  var i = idb.Create(ItemTemplateIDs.DamnFineCarrot)
   i.SetRoom(1)
-  idb.Add(i)
 
 
   // Characters

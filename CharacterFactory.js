@@ -2,13 +2,11 @@
 
 evalFile("Character.js",this)
 
-
 CharacterTemplateIdCount = 0
 
 var CharacterTemplateIds = {}
 
 CharacterTemplateIds.TomFinkdorf = CharacterTemplateIdCount++
-
 
 CharacterFactory = {}
 

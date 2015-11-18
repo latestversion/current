@@ -4,7 +4,7 @@ function Database(savefile,typeprototype)
   this.defaultsavefile = savefile
   this.typeprototype = typeprototype
   this.database = []
-  this.factory = {}
+  this.factory = undefined
   this.maxid = 1
   this.loopidx = 0
 }
@@ -52,11 +52,18 @@ _p.Create = function(tid)
 {
   if(this.factory)
   {
-    return this.factory.Create(tid)
+    var entity = this.factory.Create(tid) 
+    if(!entity)
+    {
+      throw this.Name() + ": No entity made in call to factory.Create"
+    }
+    entity.SetID(this.GetFreeID())
+    this.Add(entity)
+    return entity
   }
   else
   {
-    throw "No factory in Create call for database, tid " + tid
+    throw this.Name() + ": No factory in Create call for database, tid " + tid
   }
 }
 _p.Size = function(){return this.database.length}

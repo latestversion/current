@@ -5,12 +5,14 @@ function Item()
 {
   Entity.call(this)
   LogicEntity.call(this)
+  HasTemplate.call(this)
   HasRoom.call(this)
   HasCharacter.call(this)
 }
 
 CopyPrototype(Entity,Item)
 CopyPrototype(LogicEntity,Item)
+CopyPrototype(HasTemplate,Item)
 CopyPrototype(HasRoom,Item)
 CopyPrototype(HasCharacter,Item)
 

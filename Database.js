@@ -52,18 +52,18 @@ _p.Create = function(tid)
 {
   if(this.factory)
   {
-    var entity = this.factory.Create(tid) 
+    var id = this.GetFreeID()
+    var entity = this.factory.Create(tid,id)
     if(!entity)
     {
-      throw this.Name() + ": No entity made in call to factory.Create"
+      l9(this.Name() + ": No entity made in call to factory.Create")
     }
-    entity.SetID(this.GetFreeID())
     this.Add(entity)
     return entity
   }
   else
   {
-    throw this.Name() + ": No factory in Create call for database, tid " + tid
+    l9(this.Name() + ": No factory in Create call for database, tid " + tid)
   }
 }
 _p.Size = function(){return this.database.length}

@@ -20,7 +20,7 @@ CopyPrototype(Entity,ItemFactory)
 
 var _p = ItemFactory.prototype
 
-_p.Create = function(tid)
+_p.Create = function(tid,id)
 {
 
 	l1(this.Name() + ": Creating tid " + tid)
@@ -33,6 +33,7 @@ _p.Create = function(tid)
 
   var i = new Item()
   i.SetTemplate(tid)
+  i.SetID(id)
 
   if (ItemTemplateIDs.MediocreCarrot == tid)
   {
@@ -48,6 +49,8 @@ _p.Create = function(tid)
   {
   	i.SetName("A figurine of the curious frog")
   	i.SetDescription("A curiosu frogu is a finu friend.")
+    var logic = new FigurineLogic(i.ID())
+    i.AddLogic(logic)
   }
   else
   {

@@ -10,7 +10,7 @@ CharacterTemplateIds.TomFinkdorf = CharacterTemplateIdCount++
 
 CharacterFactory = {}
 
-CharacterFactory.Create = function(tid)
+CharacterFactory.Create = function(tid,id)
 {
   var c = new Character()
   c.SetTemplate(tid)
@@ -19,6 +19,7 @@ CharacterFactory.Create = function(tid)
   {
     var name = "Tom Finkledorf"
     c.SetName(name)
+    c.SetID(id)
     c.SetDescription("His name is " + name + ". You get the picture.")
   }
 

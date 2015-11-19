@@ -25,6 +25,11 @@ Log.log = function(text,level,group)
     group = LG_SPAM
   }
 
+  if(9 == level)
+  {
+    throw text
+  }
+
   if(level >= Log.logLevel)
   {
     var d = new Date()

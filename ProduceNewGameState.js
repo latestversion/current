@@ -22,9 +22,6 @@ function ProduceNewGameState(dbs,savedir)
   var i  = idb.Create(ItemTemplateIDs.CuriousFrogFigurine)
   i.SetRoom(3)
 
-  var logic = new FigurineLogic(i.ID())
-  i.AddLogic(logic)
-
   var i  = idb.Create(ItemTemplateIDs.MediocreCarrot)
   i.SetRoom(1)
 

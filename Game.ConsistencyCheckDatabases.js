@@ -25,7 +25,7 @@ _p.ConsistencyCheckDatabases = function(dbs,addmissing)
       var room = rdb.Get(item.Room())
       if(!room.HasItem(item.ID()))
       {
-        l9("Item '{0}' not in room '{1}'".format(item.Name(),room.Name()),LG_DB_CHECK)
+        if(!addmissing){l9("Item '{0}' not in room '{1}'".format(item.Name(),room.Name()),LG_DB_CHECK)}
         if(addmissing)
         {
           l1("Adding {0} to {1}".format(item.Name(),room.Name()),LG_DB_CHECK)
@@ -44,7 +44,7 @@ _p.ConsistencyCheckDatabases = function(dbs,addmissing)
     var room = rdb.Get(charter.Room())
     if(!room.HasCharacter(charter.ID()))
       {
-        l9("Character '{0}' not in room '{1}'".format(charter.Name(),room.Name()),LG_DB_CHECK)
+        if(!addmissing){l9("Character '{0}' not in room '{1}'".format(charter.Name(),room.Name()),LG_DB_CHECK)}
         if(addmissing)
         {
           l1("Adding {0} to {1}".format(charter.Name(),room.Name()),LG_DB_CHECK)
@@ -64,12 +64,11 @@ _p.ConsistencyCheckDatabases = function(dbs,addmissing)
     var region = rgndb.Get(rgnid)
     if(!region)
     {
-      l9("No region for id " + rgnid)
-      throw("Fatal error no region for id " + rgnid)
+      l9("Fatal error no region for id " + rgnid)
     }
     if(!region.HasRoom(rid))
     {
-      l9("'" + room.Name()  + "' not in region '" +  region.Name() + "'")
+      if(!addmissing){l9("'" + room.Name()  + "' not in region '" +  region.Name() + "'")}
       if(addmissing)
       {
         region.AddRoom(rid)
@@ -94,11 +93,11 @@ _p.ConsistencyCheckDatabases = function(dbs,addmissing)
     {
       l1("entry " + JSON.stringify(entry),LG_SPAM)
       if(!entry)
-      {throw "wtf no entry " + JSON.stringify(entry)}
+      {l9("wtf no entry " + JSON.stringify(entry))}
       var room = rdb.Get(entry.StartRoom())
       if(!room.HasPortal(pid))
       {
-        l9("Portal pid " + pid + " not in room '" + room.Name() + "'")
+        if(!addmissing){l9("Portal pid " + pid + " not in room '" + room.Name() + "'")}
         if(addmissing)
         {
           room.AddPortal(pid)

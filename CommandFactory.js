@@ -47,7 +47,7 @@ CommandFactory.Create = function(cmdname,cid)
   }
 
   l9("Command '" + cmdname + "' constructor not found.",LG_CMD_FAC)
-  throw "Command '" + cmdname + "' constructor not found."
+
   return false
 }
 

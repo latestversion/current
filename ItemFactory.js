@@ -50,7 +50,7 @@ _p.Create = function(tid,id)
   	i.SetName("A figurine of the curious frog")
   	i.SetDescription("A curiosu frogu is a finu friend.")
     var logic = new FigurineLogic(i.ID())
-    i.AddLogic(logic)
+    i.AddExistingLogic(logic)
   }
   else
   {

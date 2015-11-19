@@ -5,13 +5,16 @@ function LogicEntity()
 
 var _p = LogicEntity.prototype
 
-_p.AddLogic = function(logic)
+_p.AddLogic = function(logicname)
 {
+  throw "MUAHAHAAHAH"
 	this.logics.push(logic)
 }
 
 _p.AddExistingLogic = function(logicinstance)
-{}
+{
+  this.logics.push(logicinstance)
+}
 
 _p.DelLogic = function()
 {}

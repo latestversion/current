@@ -39,7 +39,7 @@ function ProduceNewGameState(dbs,savedir)
   character.SetID(cdb.GetFreeID())
   cdb.Add(character)
   var logic = new GeorgieTalkLogic()
-  character.AddLogic(logic)
+  character.AddExistingLogic(logic)
 
   // Rooms
   l1("Adding rooms",LG_NGS)

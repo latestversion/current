@@ -42,9 +42,9 @@ _p.Tick = function(input)
 		c.SetSceneHandler(this.SceneHandler())
 
 		var logic = new ErrorLogic(c)
-		c.AddLogic(logic)
+		c.AddExistingLogic(logic)
 		logic = new VisionLogic(c.ID())
-		c.AddLogic(logic)
+		c.AddExistingLogic(logic)
 
 		c.AddCommand(CommandNames.Go)
 		c.AddCommand(CommandNames.Exit)

@@ -1,3 +1,5 @@
+
+
 var Log = {}
 
 Log.logLevel = 1
@@ -30,12 +32,19 @@ Log.log = function(text,level,group)
     throw text
   }
 
+  if(Log.logGroups.length && (-1 == Log.logGroups.indexOf(group)))
+  {
+    return
+  }
+
   if(level >= Log.logLevel)
   {
     var d = new Date()
     var timestamp = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds() + ":" + d.getMilliseconds() + " "
     Log.logFunc( timestamp + text)
   }
+
+
 }
 
 function addConvenienceLoggers(obj)

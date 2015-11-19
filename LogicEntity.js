@@ -7,8 +7,8 @@ var _p = LogicEntity.prototype
 
 _p.AddLogic = function(logicname)
 {
-  throw "MUAHAHAAHAH"
-	this.logics.push(logic)
+  l1("Adding logic {0} to {1} (id:{2})".format(logicname,this.Name(),this.ID()))
+  this.AddExistingLogic(LogicFactory.Create(logicname,this.ID()))
 }
 
 _p.AddExistingLogic = function(logicinstance)
@@ -39,8 +39,6 @@ _p.DoAction = function(action)
 
   return true
 }
-
-
 
 _p.DoActionObject = function(action)
 {}

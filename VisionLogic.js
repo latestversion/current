@@ -1,3 +1,5 @@
+evalFile("LogicFactory.js")
+
 function VisionLogic(id)
 {
   Entity.call(this)
@@ -19,3 +21,5 @@ _p.DoAction = function(a)
 
   return true
 }
+
+LogicFactory.RegisterLogic(VisionLogic.name,VisionLogic)

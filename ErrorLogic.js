@@ -1,11 +1,12 @@
 evalFile("Entity.js")
+evalFile("LogicFactory.js")
 
-function ErrorLogic(player)
+function ErrorLogic(id)
 {
 	Entity.call(this)
 	this.SetName("error")
 	this.SetDescription("Reports error strings.")
-	this.player = player
+	this.id = id
 }
 
 CopyPrototype(Entity,ErrorLogic)
@@ -16,9 +17,12 @@ _p.DoAction = function(a)
 {
 	if(a.name == this.Name())
 	{
-		var conn = this.player.Connection()
+		var player = cdb.Get(this.id)
+		var conn = player.Connection()
 		conn.putn(a.text+"\n")
 	}
 
   return true
 }
+
+LogicFactory.RegisterLogic(ErrorLogic.name,ErrorLogic)

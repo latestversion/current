@@ -47,6 +47,11 @@ CommandFactory.Create = function(cmdname,cid)
     newcmd = new InventoryCommand(cid)
   }
 
+  if(CommandNames.Say == cmdname)
+  {
+    newcmd = new SayCommand(cid)
+  }
+
   if(newcmd)
   {
     l1("Created command " + newcmd.Name(),LG_CMD_FAC)

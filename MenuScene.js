@@ -55,6 +55,7 @@ _p.Tick = function(input)
 		c.AddCommand(CommandNames.Get)
 		c.AddCommand(CommandNames.Talk)
 		c.AddCommand(CommandNames.Inventory)
+		c.AddCommand(CommandNames.Say)
 
 		this.stream.putn("You are " + c.Name())
 		this.stream.putn("Description: " + c.Description())

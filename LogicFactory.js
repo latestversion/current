@@ -33,4 +33,4 @@ LogicFactory.prototype.Create = function(logicname,arg)
 
 LogicFactory = new LogicFactory()
 
-Log.logGroups.push(LG_LOGIC_FTORY)
+//Log.logGroups.push(LG_LOGIC_FTORY)

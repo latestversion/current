@@ -9,6 +9,7 @@ CommandNames.Info = "info"
 CommandNames.Look = "look"
 CommandNames.Talk = "talk"
 CommandNames.Inventory = "inventory"
+CommandNames.Say = "say"
 
 
 function GoCommand(cid)
@@ -153,7 +154,7 @@ function InventoryCommand(cid)
 var _p = InventoryCommand.prototype
 CopyPrototype(Command,InventoryCommand)
 
-_p.Name = function(){return CommandNames.Talk}
+_p.Name = function(){return CommandNames.Inventory}
 _p.Description = function(){return "Use to list the items in your inventory."}
 
 _p.Execute = function(args,charter)
@@ -174,6 +175,29 @@ _p.Execute = function(args,charter)
 
 }
 
+function SayCommand(cid)
+{
+  Command.call(this,cid)
+}
+
+var _p = SayCommand.prototype
+CopyPrototype(Command,SayCommand)
+
+_p.Name = function(){return CommandNames.Say}
+_p.Description = function(){return "It's used to say things to everyone."}
+
+_p.Execute = function(args,charter)
+{
+  l1("Executing " + this.Name(),LG_CMDS)
+  if (!args.length)
+  {
+    charter.DoAction({name:"vision",text:"Say... what?\n"})
+  }
+  else
+  {
+    Game.DoAction({name:"say",arg1:charter.ID(),text:args})
+  }
+}
 
 
 

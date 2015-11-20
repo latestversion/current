@@ -318,8 +318,45 @@ _p.DoTalkAction = function(a)
   }
 
   talkee.DoAction({name:"talk",arg1:cid})
-
 }
+
+_p.DoSayAction = function(a)
+{
+  l1("DoSayAction for cid {0} and message {1}".format(a.cid,message))
+  var cid = a.arg1
+  var message = a.text.join(" ")
+
+  var charter = cdb.Get(cid)
+  var template = "{0} say{1}: '{2}'" 
+
+  var room = rdb.Get(charter.Room())
+
+  l1("Charter {0} wants to say '{1}' in room '{2}'".format(charter.Name(),message,room.Name()))
+
+  var s = template.format(charter.Name(),"s",message)
+  l1("Message: " + s)
+
+  var action = {name:"vision",arg1:cid,text:s}
+
+  room.BeginCharacters()
+  var tcid
+  while(tcid = room.NextCharacter())
+  {
+    if(tcid != cid)
+    {
+
+      tcharter = cdb.Get(tcid)
+      l1("Sending info to {0} ".format(tcharter.Name()))
+      tcharter.DoAction(action)
+    }
+  }
+
+  action.text = template.format("You","",message)
+
+  l1("Informing {0} that: {1}".format(charter.Name(),action.text))
+  charter.DoAction(action)
+}
+
 
 _p.DoAction = function(a)
 {
@@ -354,5 +391,10 @@ _p.DoAction = function(a)
   if("talk" == a.name)
   {
     this.DoTalkAction(a)
+  }
+
+  if("say" == a.name)
+  {
+    this.DoSayAction(a)
   }
 }

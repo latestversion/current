@@ -8,6 +8,7 @@ CommandNames.Exit = "exit"
 CommandNames.Info = "info"
 CommandNames.Look = "look"
 CommandNames.Talk = "talk"
+CommandNames.Inventory = "inventory"
 
 
 function GoCommand(cid)
@@ -120,7 +121,6 @@ _p.Execute = function(args,c)
   Game.DoAction({name:"lookroom",cid:c.ID()})
 }
 
-
 function TalkCommand(cid)
 {
   Command.call(this,cid)
@@ -143,6 +143,35 @@ _p.Execute = function(args,charter)
   {
     Game.DoAction({name:"talk",arg1:charter.ID(),arg2:args})
   }
+}
+
+function InventoryCommand(cid)
+{
+  Command.call(this,cid)
+}
+
+var _p = InventoryCommand.prototype
+CopyPrototype(Command,InventoryCommand)
+
+_p.Name = function(){return CommandNames.Talk}
+_p.Description = function(){return "Use to list the items in your inventory."}
+
+_p.Execute = function(args,charter)
+{
+  l1("Executing " + this.Name(),LG_CMDS)
+  charter.DoAction({name:"vision",text:"\n"})
+  if(charter.NumItems() == 0)
+  {
+    charter.DoAction({name:"vision",text:"Your inventory is empty\n"})
+  }
+  charter.BeginItems()
+  var i
+  while (i = charter.NextItem())
+  {
+    var item = idb.Get(i)
+    charter.DoAction({name:"vision",text:item.Name()})
+  }
+
 }
 
 

@@ -5,6 +5,8 @@ LG_CMD_FAC = "LG_CMD_FAC"
 
 CommandFactory = {}
 
+// omg this should be remade into something similar to the logics factory
+
 CommandFactory.Create = function(cmdname,cid)
 {
   l1("Creating command " + cmdname,LG_CMD_FAC)
@@ -38,6 +40,11 @@ CommandFactory.Create = function(cmdname,cid)
   if(CommandNames.Talk == cmdname)
   {
     newcmd = new TalkCommand(cid)
+  }
+
+  if(CommandNames.Inventory == cmdname)
+  {
+    newcmd = new InventoryCommand(cid)
   }
 
   if(newcmd)

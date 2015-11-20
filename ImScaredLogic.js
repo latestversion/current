@@ -17,8 +17,7 @@ _p.DoAction = function(a)
   {
     Game.AddAction({name:"say",arg1:a.arg1,text:"I'm scared..."},500)
   }
-
   return true
 }
 
-LogicFactory.RegisterLogic(ImScaredLogic.name,ImScaredLogic)
+LogicFactory.RegisterLogic(ImScaredLogic)

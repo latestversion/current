@@ -11,10 +11,10 @@ function LogicFactory()
 CopyPrototype(Entity,LogicFactory)
 
 
-LogicFactory.prototype.RegisterLogic = function(logicname,logicctor)
+LogicFactory.prototype.RegisterLogic = function(logic)
 {
-  l1(this.Name() + ": Registered ctor for logic " + logicname,LG_LOGIC_FTORY)
-  LogicCtors[logicname] = logicctor
+  l1(this.Name() + ": Registered ctor for logic " + logic.name,LG_LOGIC_FTORY)
+  LogicCtors[logic.name] = logic
 }
 
 LogicFactory.prototype.Create = function(logicname,arg)

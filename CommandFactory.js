@@ -35,4 +35,4 @@ CommandFactory = new CommandFactory()
 
 var RegisterCommand = CommandFactory.RegisterCommand.bind(CommandFactory)
 
-Log.logGroups.push(LG_CMD_FTORY)
+//Log.logGroups.push(LG_CMD_FTORY)

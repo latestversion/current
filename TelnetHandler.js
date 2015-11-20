@@ -46,9 +46,9 @@ _p.parse = function(s)
 		if(line)
 		{
 			// replace accidental double spaces etc (should be moved upwards in the layers)
-			//line = line.replace(/\s+/g," ")
+			line = line.replace(/\s+/g," ")
 			// trim ws from right and left
-			//line = line.trim()
+			line = line.trim()
 			this.lines.push(line)
 		}
 		nidx = this.buffer.indexOf("\n")

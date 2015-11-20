@@ -1,26 +1,19 @@
 
-LG_CMDS = "LG_CMDS"
+evalFile("Command.js")
+evalFile("CommandFactory.js")
 
-CommandNames = {}
-CommandNames.Go = "go"
-CommandNames.Get = "get"
-CommandNames.Exit = "exit"
-CommandNames.Info = "info"
-CommandNames.Look = "look"
-CommandNames.Talk = "talk"
-CommandNames.Inventory = "inventory"
-CommandNames.Say = "say"
+LG_CMDS = "LG_CMDS"
 
 
 function GoCommand(cid)
 {
   Command.call(this,cid)
+  this.SetName("go")
 }
 
 var _p = GoCommand.prototype
 CopyPrototype(Command,GoCommand)
 
-_p.Name = function(){return CommandNames.Go}
 _p.Description = function(){return "Makes movement possible. Usage: 'go <direction>'"}
 
 _p.Execute = function(args,c)
@@ -38,18 +31,19 @@ _p.Execute = function(args,c)
   }
 }
 
+RegisterCommand(GoCommand.name)
+
 
 function GetCommand(cid)
 {
   Command.call(this,cid)
+  this.SetName("get")
 }
 
 var _p = GetCommand.prototype
 CopyPrototype(Command,GetCommand)
 
-_p.Name = function(){return CommandNames.Get}
 _p.Description = function(){return "Makes picking things up possible. Usage: 'get <item> <quantity>'"}
-
 _p.Execute = function(args,charter)
 {
   l1("Executing command" + this.Name(),LG_CMDS)
@@ -65,16 +59,18 @@ Game.DoAction({name:"getitem",arg1:charter.ID(),text:args.join(" ")})
   // Check arguments
 }
 
+RegisterCommand(GetCommand.name)
+
 
 function ExitCommand(cid)
 {
   Command.call(this,cid)
+  this.SetName("exit")
 }
 
 var _p = ExitCommand.prototype
 CopyPrototype(Command,ExitCommand)
 
-_p.Name = function(){return CommandNames.Exit}
 _p.Description = function(){return "Exits the game."}
 
 _p.Execute = function(args,c)
@@ -85,16 +81,20 @@ _p.Execute = function(args,c)
   // Check arguments
 }
 
+RegisterCommand(ExitCommand.name)
+
+
+
 
 function InfoCommand(cid)
 {
   Command.call(this,cid)
+  this.SetName("info")
 }
 
 var _p = InfoCommand.prototype
 CopyPrototype(Command,InfoCommand)
 
-_p.Name = function(){return CommandNames.Info}
 _p.Description = function(){return "info"}
 
 _p.Execute = function(args,c)
@@ -105,15 +105,19 @@ _p.Execute = function(args,c)
   // Check arguments
 }
 
+RegisterCommand(InfoCommand.name)
+
+
+
 function LookCommand(cid)
 {
   Command.call(this,cid)
+  this.SetName("look")
 }
 
 var _p = LookCommand.prototype
 CopyPrototype(Command,LookCommand)
 
-_p.Name = function(){return CommandNames.Look}
 _p.Description = function(){return "Your primary way of taking in your surroundings."}
 
 _p.Execute = function(args,c)
@@ -122,15 +126,19 @@ _p.Execute = function(args,c)
   Game.DoAction({name:"lookroom",cid:c.ID()})
 }
 
+RegisterCommand(LookCommand.name)
+
+
+
 function TalkCommand(cid)
 {
   Command.call(this,cid)
+  this.SetName("talk")
 }
 
 var _p = TalkCommand.prototype
 CopyPrototype(Command,TalkCommand)
 
-_p.Name = function(){return CommandNames.Talk}
 _p.Description = function(){return "Use to communicate with other characters. talk <character name>"}
 
 _p.Execute = function(args,charter)
@@ -146,15 +154,20 @@ _p.Execute = function(args,charter)
   }
 }
 
+RegisterCommand(TalkCommand.name)
+
+
+
+
 function InventoryCommand(cid)
 {
   Command.call(this,cid)
+  this.SetName("inventory")
 }
 
 var _p = InventoryCommand.prototype
 CopyPrototype(Command,InventoryCommand)
 
-_p.Name = function(){return CommandNames.Inventory}
 _p.Description = function(){return "Use to list the items in your inventory."}
 
 _p.Execute = function(args,charter)
@@ -172,18 +185,21 @@ _p.Execute = function(args,charter)
     var item = idb.Get(i)
     charter.DoAction({name:"vision",text:item.Name()})
   }
-
 }
+
+RegisterCommand(InventoryCommand.name)
+
+
 
 function SayCommand(cid)
 {
   Command.call(this,cid)
+  this.SetName("say")
 }
 
 var _p = SayCommand.prototype
 CopyPrototype(Command,SayCommand)
 
-_p.Name = function(){return CommandNames.Say}
 _p.Description = function(){return "It's used to say things to everyone."}
 
 _p.Execute = function(args,charter)
@@ -199,6 +215,7 @@ _p.Execute = function(args,charter)
   }
 }
 
+RegisterCommand(SayCommand.name)
 
 
 

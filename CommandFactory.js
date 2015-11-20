@@ -1,65 +1,35 @@
+CommandCtors = {}
 
-evalFile("Commands.js")
+LG_COMMAND_FTORY = "LG_COMMAND_FTORY"
 
-LG_CMD_FAC = "LG_CMD_FAC"
-
-CommandFactory = {}
-
-// omg this should be remade into something similar to the logics factory
-
-CommandFactory.Create = function(cmdname,cid)
+function CommandFactory()
 {
-  l1("Creating command " + cmdname,LG_CMD_FAC)
-  var newcmd = false
-
-  if (CommandNames.Go == cmdname)
-  {
-    newcmd = new GoCommand(cid)
-  }
-
-  if(CommandNames.Get == cmdname)
-  {
-    newcmd = new GetCommand(cid)
-  }
-
-  if(CommandNames.Info == cmdname)
-  {
-    newcmd = new InfoCommand(cid)
-  }
-
-  if(CommandNames.Look == cmdname)
-  {
-    newcmd = new LookCommand(cid)
-  }
-
-  if(CommandNames.Exit == cmdname)
-  {
-    newcmd = new ExitCommand(cid)
-  }
-
-  if(CommandNames.Talk == cmdname)
-  {
-    newcmd = new TalkCommand(cid)
-  }
-
-  if(CommandNames.Inventory == cmdname)
-  {
-    newcmd = new InventoryCommand(cid)
-  }
-
-  if(CommandNames.Say == cmdname)
-  {
-    newcmd = new SayCommand(cid)
-  }
-
-  if(newcmd)
-  {
-    l1("Created command " + newcmd.Name(),LG_CMD_FAC)
-    return newcmd
-  }
-
-  l9("Command '" + cmdname + "' constructor not found.",LG_CMD_FAC)
-
-  return false
+  Entity.call(this)
+  this.SetName("CommandFactory")
 }
 
+CopyPrototype(Entity,CommandFactory)
+
+CommandFactory.prototype.RegisterCommand = function(name,commandctor)
+{
+  l1(this.Name() + ": Registered ctor for command " + name,LG_COMMAND_FTORY)
+  CommandCtors[name] = commandctor
+}
+
+CommandFactory.prototype.Create = function(name,arg)
+{
+  l1(this.Name() + ": Creating command {0} with arg {1}".format(name,arg),LG_COMMAND_FTORY)
+
+  if(undefined != CommandCtors[name])
+  {
+    l1(this.Name() + ": Found ctor for name " + name,LG_COMMAND_FTORY)
+    return new CommandCtors[name](arg)
+  }
+
+  l9(this.Name() + ": No ctor for command named " + name,LG_COMMAND_FTORY)
+  return undefined
+}
+
+CommandFactory = new CommandFactory()
+
+var RegisterCommand = CommandFactory.RegisterCommand

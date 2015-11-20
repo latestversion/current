@@ -1,3 +1,12 @@
+- remake commandfactory to be more like logicfactory. cf is clunky atm.
+- create directory newgamestate automatically if not exist
+carrot quest!
+- give command (remake command factory first)
+- quest logic
+- reward..?
+
+
+
 - logging framework. severity and groups. l("lla",1,LG_DB), l("muppmupp",4,LG_SAVE).
 - calling function traced automatically
 - ability to set outstream in loggin framework

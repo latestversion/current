@@ -101,8 +101,6 @@ _p.DoMoveAction = function(a)
     }
   }
 
-
-
   l1("All clear to move " + character.Name() + " " + direction,LG_SPAM)
   room.RemoveCharacter(character.ID())
   character.SetRoom(r2id)
@@ -110,6 +108,19 @@ _p.DoMoveAction = function(a)
   l1("{0} now has character {1}".format(room2.Name(),character.Name()),LG_SPAM)
   character.SetRegion(room2.Region())
   l1("Old region {0}, new region {1}".format(room.Region(),room2.Region()),LG_SPAM)
+
+  var newroom = room2
+  var oldroom = room
+
+  oldroom.DoAction({name:"didleaveroom",arg1:cid})
+
+  portal.DoAction({name:"didenterportal",arg1:cid})
+  portal.DoAction({name:"didleaveportal",arg1:cid})
+  
+  newroom.DoAction({name:"didenterroom",arg1:cid})
+
+  this.DoActionForCharactersInRoom(newroom,{name:"didenterroom",arg1:cid})
+  this.DoActionForItemsInRoom(newroom,{name:"didenterroom",arg1:cid})
 
   this.DoLookRoomAction({cid:character.ID()})
 }
@@ -276,6 +287,28 @@ _p.DoRepeatedBroadcastAction = function(a)
   this.AddAction(a,4000)
 }
 
+_p.DoActionForCharactersInRoom = function(room,action)
+{
+  room.BeginCharacters()
+  var tcharter
+  while(tcharter = room.NextCharacter())
+  {
+    tcharter = cdb.Get(tcharter)
+    tcharter.DoAction(action)
+  }
+}
+
+_p.DoActionForItemsInRoom = function(room,action)
+{
+  room.BeginItems()
+  var titem
+  while(titem = room.NextItem())
+  {
+    titem = idb.Get(titem)
+    titem.DoAction(action)
+  }
+}
+
 _p.MatchingCharactersInRoom = function(room,matchstring)
 {
   var filteredcharters = []
@@ -324,7 +357,12 @@ _p.DoSayAction = function(a)
 {
   l1("DoSayAction for cid {0} and message {1}".format(a.cid,message))
   var cid = a.arg1
-  var message = a.text.join(" ")
+  var message = a.text
+  if('undefined' != typeof a.text.join)
+  {
+    message = a.text.join(" ")
+  }
+  
 
   var charter = cdb.Get(cid)
   var template = "{0} say{1}: '{2}'" 

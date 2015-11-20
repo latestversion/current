@@ -11,8 +11,6 @@ function Room()
   HasRegion.call(this)
 }
 
-var _p = Room.prototype
-
 CopyPrototype(Entity,Room)
 CopyPrototype(LogicEntity,Room)
 CopyPrototype(DataEntity,Room)
@@ -21,3 +19,19 @@ CopyPrototype(HasItems,Room)
 CopyPrototype(HasPortals,Room)
 CopyPrototype(HasRegion,Room)
 
+var _p = Room.prototype
+
+_p.Revive = function()
+{
+  l1("RoomRevive",LG_SPAM)
+  l1("{0} has {1} logics".format(this.Name(),this.logics.length),LG_SPAM)
+  var k
+  for (k in this.logics)
+  {
+    if(this.logics[k].type)
+    {
+      l1("Logic type: " + this.logics[k].type,LG_SPAM)
+      this.logics[k].__proto__  = global[this.logics[k].type].prototype
+    }
+  }
+}

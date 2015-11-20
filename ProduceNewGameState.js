@@ -1,7 +1,7 @@
 
 evalFile("GeorgieTalkLogic.js")
 evalFile("ItemFactory.js")
-
+evalFile("ImScaredLogic.js")
 
 LG_NGS = "LG_NGS"
 
@@ -60,7 +60,10 @@ function ProduceNewGameState(dbs,savedir)
   r.SetName("Path to scary forest")
   r.SetDescription("A narrow scary path. It leads to the scary forest.")
   r.SetRegion(region)
+  r.AddLogic(ImScaredLogic.name)
   rdb.Add(r)
+
+
 
   var r = new Room()
   r.SetID(3)

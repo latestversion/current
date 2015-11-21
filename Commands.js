@@ -207,14 +207,14 @@ GiveCommand.prototype.Execute = function(args,charter)
 
   if(args.length == 2 && args[0].isNotNumber())
   {
-    charter.DoAction({name:"vision",text:"I'll give {0} to {1}".format(args[0],args[1])})
+    l1("I'll give {0} to {1}".format(args[0],args[1]))
     Game.DoAction({name:"giveitem",arg1:cid,arg2:1,arg3:args[0],arg4:args[1]})
     return
   }
 
   if(args.length >= 3 && args[0].isNumber())
   {
-    charter.DoAction({name:"vision",text:"I'll give {0} {1} to {2}".format(parseInt(args[0]),args[1],args[2])})
+    l1("I'll give {0} {1} to {2}".format(parseInt(args[0]),args[1],args[2]))
     Game.DoAction({name:"giveitem",arg1:cid,arg2:args[0],arg3:args[1],arg4:args[2]})
     return
   }

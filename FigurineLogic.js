@@ -41,5 +41,15 @@ _p.DoAction = function(a)
     }
   }
 
+  if(a.name == "attemptgiveitem" && a.arg2 == this.id)
+  {
+    var c = cdb.Get(a.arg1)
+    if(c.IsPlayer())
+    {
+      c.DoAction({name:"vision",text:"You reach for the Figurine, but your hand slows to a stop. Maybe you should hold on to it a while longer...\n"})
+      return false
+    }
+  }
+
   return true
 }

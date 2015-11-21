@@ -399,7 +399,24 @@ _p.DoGiveItemAction = function(a)
 
   l1(fncnme + "giver {0}, item {1}, receiver {2}".format(giver.Name(),quantity,item.Name(),receiver.Name()))
 
-  giver.DoAction({name:"error",text:"You will give {0} the tasty {1} soon.".format(receiver.Name(),item.Name())})
+  giver.RemoveItem(item.ID())
+  receiver.AddItem(item.ID())
+
+  var action = {name:"attemptgiveitem",arg1:giver.ID(),arg2:item.ID(),arg3:receiver.ID()}
+
+  if(!giver.DoAction(action) || !item.DoAction(action) || !receiver.DoAction(action) || !room.DoAction(action))
+  {
+    return
+  }
+
+  var action = {name:"didgiveitem",arg1:giver.ID(),arg2:item.ID(),arg3:receiver.ID()}
+
+  giver.DoAction(action)
+  receiver.DoAction(action)
+  room.DoAction(action)
+
+  giver.DoAction({name:"vision",text:"You give {0} {1}.".format(receiver.Name(),item.Name())})
+  receiver.DoAction({name:"vision",text:"{0} hands you {1}.".format(giver.Name(),item.Name())})
 }
 
 _p.DoDropItemAction = function(a)

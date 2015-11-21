@@ -31,5 +31,15 @@ _p.DoAction = function(a)
     }
   }
 
+  if(a.name == "attemptdropitem" && a.arg2 == this.id)
+  {
+    var c = cdb.Get(a.arg1)
+    if(c.IsPlayer())
+    {
+      c.DoAction({name:"vision",text:"You can't seem to get it out of your hand! The Figurine of the Curious Frog wants to stay.\n"})
+      return false
+    }
+  }
+
   return true
 }

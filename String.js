@@ -10,6 +10,19 @@ if (!String.prototype.format) {
   };
 }
 
+
+if (!String.prototype.nootNumber) {
+  String.prototype.isNotNumber = function() {
+    return isNaN(parseInt(this))
+  };
+}
+
+if (!String.prototype.probablyNumber) {
+  String.prototype.isNumber = function() {
+    return !isNaN(parseInt(this))
+  };
+}
+
 // fearphage on StackOverflow
 
 /*if (!String.format) {

@@ -165,7 +165,6 @@ InventoryCommand.prototype.Execute = function(args,charter)
     charter.DoAction({name:"vision",text:item.Name()})
   }
 }
-
 RegisterCommand(InventoryCommand)
 
 
@@ -176,9 +175,7 @@ function SayCommand(cid)
   this.SetName("say")
   this.SetDescription("It's used to say things to everyone.")
 }
-
 CopyPrototype(Command,SayCommand)
-
 SayCommand.prototype.Execute = function(args,charter)
 {
   l1("Executing " + this.Name(),LG_CMDS)
@@ -191,8 +188,67 @@ SayCommand.prototype.Execute = function(args,charter)
     Game.DoAction({name:"say",arg1:charter.ID(),text:args})
   }
 }
-
 RegisterCommand(SayCommand)
+
+
+function GiveCommand(cid)
+{
+  Command.call(this,cid)
+  this.SetName("give")
+  this.SetDescription("give (quantity) <ownitem> <character>")
+}
+CopyPrototype(Command,GiveCommand)
+
+GiveCommand.prototype.Execute = function(args,charter)
+{
+  l1("Executing " + this.Name(),LG_CMDS)
+
+  var cid = charter.ID()
+
+  if(args.length == 2 && args[0].isNotNumber())
+  {
+    charter.DoAction({name:"vision",text:"I'll give {0} to {1}".format(args[0],args[1])})
+    Game.DoAction({name:"giveitem",arg1:cid,arg2:1,arg3:args[0],arg4:args[1]})
+    return
+  }
+
+  if(args.length >= 3 && args[0].isNumber())
+  {
+    charter.DoAction({name:"vision",text:"I'll give {0} {1} to {2}".format(parseInt(args[0]),args[1],args[2])})
+    Game.DoAction({name:"giveitem",arg1:cid,arg2:args[0],arg3:args[1],arg4:args[2]})
+    return
+  }
+
+  charter.DoAction({name:"error",text:this.Description()})
+
+  //Game.DoAction({name:"give",arg1:charter.ID(),text:args})
+}
+RegisterCommand(GiveCommand)
+
+
+function DropCommand(cid)
+{
+  Command.call(this,cid)
+  this.SetName("drop")
+  this.SetDescription("drop <ownitem>")
+}
+CopyPrototype(Command,DropCommand)
+
+DropCommand.prototype.Execute = function(args,charter)
+{
+  l1("Executing " + this.Name(),LG_CMDS)
+
+  var cid = charter.ID()
+
+  if(!args.length)
+  {
+    charter.DoAction({name:"error",text:this.Description()})
+    return
+  }
+
+  Game.DoAction({name:"dropitem",arg1:charter.ID(),text:args.join(" ")})
+}
+RegisterCommand(DropCommand)
 
 
 

@@ -13,7 +13,7 @@ _p.AddEvent = function(event)
 	// O(n) ftw
 	l1("AddEvent: Events in queue: {0}, new event scheduled at {1}".format(this.events.length,event.Timestamp()),LG_ESCHED)
 	var i
-	for (i = 0; i < this.events.length; id++)
+	for (i = 0; i < this.events.length; i++)
 	{
 		if (event.Timestamp() <= this.events[i].Timestamp())
 		{

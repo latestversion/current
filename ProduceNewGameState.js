@@ -2,6 +2,7 @@
 evalFile("GeorgieTalkLogic.js")
 evalFile("ItemFactory.js")
 evalFile("ImScaredLogic.js")
+evalFile("CarrotQuestLogic.js")
 
 LG_NGS = "LG_NGS"
 
@@ -40,6 +41,7 @@ function ProduceNewGameState(dbs,savedir)
   cdb.Add(character)
   var logic = new GeorgieTalkLogic()
   character.AddExistingLogic(logic)
+  character.AddLogic(CarrotQuestLogic.name)
 
   // Rooms
   l1("Adding rooms",LG_NGS)

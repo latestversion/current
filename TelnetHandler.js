@@ -20,7 +20,6 @@ _p.onData = function(d)
 
 _p.parse = function(s)
 {
-	l1("data: " + s.charCodeAt(0) + " " + s.charCodeAt(1))
 	//console.log("TelnetHandler " + this.cid + " got data: " + s)
 	// RFC 1123 3.3.1. states clients should send either \r\0 or \r\n.
 	// (The mac default telnet seems to send 13 10)

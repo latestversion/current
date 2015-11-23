@@ -77,7 +77,6 @@ _p.ItemsForEntity = function(e)
   var titem
   while(titem = e.NextItem())
   {
-    l1("next item was: " + titem)
     titem = Game.Item(titem)
     items.push(titem)
   }

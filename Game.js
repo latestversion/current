@@ -90,6 +90,7 @@ _p.DoCommand = function(input,cid)
   }
 }
 
+evalFile("Game.Convenience.js")
 evalFile("Game.DoAction.js")
 
 

@@ -22,7 +22,7 @@ _p.AddEvent = function(event)
 	}
 
 	l1("AddEvent: Putting new event at index: {0}".format(i),LG_ESCHED)
-	this.events.splice(i,i,event)
+	this.events.splice(i,0,event)
 	l1("AddEvent: Events in queue: " + this.events.length,LG_ESCHED)
 }
 
@@ -37,5 +37,13 @@ _p.GetPassedEvents = function(currtime)
 		}
 	}
 
-	return this.events.splice(0,i)
+	var passedevents = this.events.splice(0,i)
+
+	if(passedevents.length)
+	{
+		l1("GetPassedEvents: Passedevents:" + passedevents.length,LG_ESCHED)
+		l1("GetPassedEvents: Events in queue: " + this.events.length,LG_ESCHED)
+	}
+
+	return passedevents
 }

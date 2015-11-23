@@ -20,4 +20,4 @@ _p.DoAction = function(a)
   return true
 }
 
-LogicFactory.RegisterLogic(ImScaredLogic)
+RegisterLogic(ImScaredLogic)

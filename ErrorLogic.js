@@ -25,4 +25,4 @@ _p.DoAction = function(a)
   return true
 }
 
-LogicFactory.RegisterLogic(ErrorLogic)
+RegisterLogic(ErrorLogic)

@@ -22,4 +22,4 @@ _p.DoAction = function(a)
   return true
 }
 
-LogicFactory.RegisterLogic(VisionLogic)
+RegisterLogic(VisionLogic)

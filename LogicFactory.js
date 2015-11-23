@@ -33,4 +33,6 @@ LogicFactory.prototype.Create = function(logicname,arg)
 
 LogicFactory = new LogicFactory()
 
+RegisterLogic = LogicFactory.RegisterLogic.bind(LogicFactory)
+
 //Log.logGroups.push(LG_LOGIC_FTORY)

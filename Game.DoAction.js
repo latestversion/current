@@ -314,13 +314,15 @@ _p.DoTalkAction = function(a)
 
 _p.DoSayAction = function(a)
 {
-  l1("DoSayAction for cid {0} and message {1}".format(a.cid,message))
+  
   var cid = a.arg1
   var message = a.text
   if('undefined' != typeof a.text.join)
   {
     message = a.text.join(" ")
   }
+
+  l1("DoSayAction for cid {0} and message {1}".format(a.cid,message))
 
 
   var charter = cdb.Get(cid)
@@ -477,6 +479,54 @@ _p.DoDropItemAction = function(a)
 
 }
 
+_p.GetEntity = function(typeenum,id)
+{
+  var entity
+  var db
+  switch(typeenum)
+  {
+    case TypeEnums.Character:
+      db = Game.cdb
+    break
+    case TypeEnums.Item:
+      db = Game.idb
+    break
+    case TypeEnums.Portal:
+      db = Game.pdb
+    break
+    case TypeEnums.Room:
+      db = Game.rdb
+    break
+    default:
+      l5("GetEntity: Did not find (typeenum,id): ({0},{1})".format(typeenum,id))
+    break
+  }
+
+  if(db)
+  {
+    return db.Get(id)
+  }
+
+  return undefined
+
+}
+
+_p.DoMessageLogicAction = function(a)
+{
+  l1("DoMessageLogicAction: ".format(JSON.stringify(a)))
+
+  var typeenum = a.arg1
+  var id = a.arg2
+
+  var entity
+  if(!(entity = this.GetEntity(typeenum,id)))
+  {
+    l5("DoMessageLogicAction: No entity for " + typeenum + ", " + id)
+    return
+  }
+
+  entity.DoAction(a)
+}
 
 _p.ItemsForCharter = function(charter)
 {
@@ -491,6 +541,23 @@ _p.ItemsForCharter = function(charter)
   }
 
   l1("ItemsForCharter: Charter {0} had {1} items".format(charter.Name(),items.length))
+
+  return items
+}
+
+_p.ItemsForEntity = function(e)
+{
+  l1("ItemsForHasItemsEntity: Searching among " + e.NumItems() + " items for entity" + e.Name())
+  var items = []
+  e.BeginItems()
+  var titem
+  while(titem = e.NextItem())
+  {
+    titem = idb.Get(titem)
+    items.push(titem)
+  }
+
+  l1("ItemsForCharter: Charter {0} had {1} items".format(e.Name(),items.length))
 
   return items
 }
@@ -602,5 +669,10 @@ _p.DoAction = function(a)
   if("dropitem" == a.name)
   {
     this.DoDropItemAction(a)
+  }
+
+  if("messagelogic" == a.name)
+  {
+    this.DoMessageLogicAction(a)
   }
 }

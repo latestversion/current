@@ -22,8 +22,6 @@ function Game()
   this.startRoom = 1
 
   this.dbs = dbinstances
-
-  ProduceNewGameState(this.dbs,"./newgamestate")
 }
 
 CopyPrototype(TickerClock,Game)
@@ -44,6 +42,7 @@ _p.LoadDatabases = function(dir,purge)
 _p.StartNewGame = function()
 {
   l1("Starting new game",LG_STARTUP)
+  ProduceNewGameState(this.dbs,"./newgamestate")
 	this.loaddir = "./newgamestate"
   this.savedir = "./savedgame_VIXEN"
 
@@ -127,5 +126,4 @@ _p.Tick = function()
 }
 
 var Game = new Game()
-
 

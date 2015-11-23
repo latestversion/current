@@ -3,6 +3,7 @@ evalFile("logics/GeorgieTalkLogic.js")
 evalFile("ItemFactory.js")
 evalFile("logics/ImScaredLogic.js")
 evalFile("logics/CarrotQuestLogic.js")
+evalFile("logics/SpawnCarrotsLogic.js")
 
 LG_NGS = "LG_NGS"
 
@@ -54,7 +55,10 @@ function ProduceNewGameState(dbs,savedir)
   r.SetName("A field of mud")
   r.SetDescription("So yeah, this is where cabbages come from.")
   r.SetRegion(region)
+  r.AddLogic(SpawnCarrotsLogic.name)
   rdb.Add(r)
+
+
 
   region = 2
   var r = new Room()

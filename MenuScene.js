@@ -2,8 +2,8 @@
 evalFile("CharacterFactory.js",this)
 evalFile("Scene.js")
 evalFile("GameScene.js")
-evalFile("ErrorLogic.js")
-evalFile("VisionLogic.js")
+evalFile("logics/ErrorLogic.js")
+evalFile("logics/VisionLogic.js")
 evalFile("Commands.js")
 evalFile("ItemFactory.js")
 

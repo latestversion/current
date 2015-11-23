@@ -1,8 +1,8 @@
 
-evalFile("GeorgieTalkLogic.js")
+evalFile("logics/GeorgieTalkLogic.js")
 evalFile("ItemFactory.js")
-evalFile("ImScaredLogic.js")
-evalFile("CarrotQuestLogic.js")
+evalFile("logics/ImScaredLogic.js")
+evalFile("logics/CarrotQuestLogic.js")
 
 LG_NGS = "LG_NGS"
 

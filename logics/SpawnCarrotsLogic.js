@@ -8,7 +8,7 @@ function SpawnCarrotsLogic(roomid)
 	this.SetName("spawncarrots")
 	this.SetDescription("Spawns carrots.")
 	this.id = roomid
-	this.spawntime = 1000
+	this.spawntime = 5000
 	this.spawntemplateids = [ItemTemplateIDs.MediocreCarrot,ItemTemplateIDs.DamnFineCarrot]
 	this.ScheduleAction()
 }
@@ -41,9 +41,11 @@ _p.ScheduleAction = function()
 
 _p.CheckCarrots = function()
 {
+	l1("Checking to respawn carrots.")
 	var room = Game.rdb.Get(this.id)
 	var items = Game.ItemsForEntity(room)
 	var torespawn = this.spawntemplateids.slice(0)
+
 	for(var i = 0; i < items.length; i++)
 	{
 		var idx = torespawn.indexOf(items[i].Template())
@@ -56,6 +58,9 @@ _p.CheckCarrots = function()
 		if(respawn)
 		{
 			l1("I am going to respawn an item with templateid " + respawn)
+			var item = Game.idb.Create(respawn)
+			room.AddItem(item.ID())
+			l1("Added item " + item.Name() + " to room " + room.Name())
 		}
 	}
 }

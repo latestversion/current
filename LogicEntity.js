@@ -27,10 +27,10 @@ _p.HasLogic = function()
 
 _p.DoAction = function(action)
 {
-  l1("DoAction for action " + action.name,LG_SPAM)
+  l1("DoAction: " + action.name.toUpperCase() + " " + this.Name() + ": ",LG_SPAM)
 	for (var k in this.logics)
 	{
-    l1("Checking with logic " + this.logics[k].Name(),LG_SPAM)
+    l1(" - " + this.logics[k].Name() + ": ",LG_SPAM)
 		if(!this.logics[k].DoAction(action))
     {
       return false

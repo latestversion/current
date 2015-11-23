@@ -399,10 +399,7 @@ _p.DoGiveItemAction = function(a)
     return
   }
 
-  l1(fncnme + "giver {0}, item {1}, receiver {2}".format(giver.Name(),quantity,item.Name(),receiver.Name()))
-
-  giver.RemoveItem(item.ID())
-  receiver.AddItem(item.ID())
+  l1(fncnme + "giver {0}, item {1}, receiver {2}".format(giver.Name(),item.Name(),receiver.Name()))
 
   var action = {name:"attemptgiveitem",arg1:giver.ID(),arg2:item.ID(),arg3:receiver.ID()}
 
@@ -410,6 +407,9 @@ _p.DoGiveItemAction = function(a)
   {
     return
   }
+
+  giver.RemoveItem(item.ID())
+  receiver.AddItem(item.ID())
 
   var action = {name:"didgiveitem",arg1:giver.ID(),arg2:item.ID(),arg3:receiver.ID()}
 
@@ -547,17 +547,18 @@ _p.ItemsForCharter = function(charter)
 
 _p.ItemsForEntity = function(e)
 {
-  l1("ItemsForHasItemsEntity: Searching among " + e.NumItems() + " items for entity" + e.Name())
+  l1("ItemsForEntity: Searching among " + e.NumItems() + " items for entity" + e.Name())
   var items = []
   e.BeginItems()
   var titem
   while(titem = e.NextItem())
   {
+    l1("next item was: " + titem)
     titem = idb.Get(titem)
     items.push(titem)
   }
 
-  l1("ItemsForCharter: Charter {0} had {1} items".format(e.Name(),items.length))
+  l1("ItemsForEntity: Item {0} had {1} items".format(e.Name(),items.length))
 
   return items
 }

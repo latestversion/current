@@ -30,9 +30,10 @@ _p.GetEntity = function(typeenum,id)
   return undefined
 }
 
-_p.Char = function(cid)
+
+_p.Character = function(cid)
 {
-  return this.cdb.Get(id)
+  return this.cdb.Get(cid)
 }
 
 _p.Item = function(iid)
@@ -51,7 +52,6 @@ _p.Room = function(rid)
   return this.rdb.Get(rid)
 }
 
-
 _p.ItemsForCharter = function(charter)
 {
   l1("Searching among " + charter.NumItems() + " items for charter " + charter.Name())
@@ -60,7 +60,7 @@ _p.ItemsForCharter = function(charter)
   var titem
   while(titem = charter.NextItem())
   {
-    titem = idb.Get(titem)
+    titem = Game.Item(titem)
     items.push(titem)
   }
 
@@ -78,7 +78,7 @@ _p.ItemsForEntity = function(e)
   while(titem = e.NextItem())
   {
     l1("next item was: " + titem)
-    titem = idb.Get(titem)
+    titem = Game.Item(titem)
     items.push(titem)
   }
 
@@ -112,7 +112,7 @@ _p.DoActionForCharactersInRoom = function(room,action)
   var tcharter
   while(tcharter = room.NextCharacter())
   {
-    tcharter = cdb.Get(tcharter)
+    tcharter = Game.Character(tcharter)
     tcharter.DoAction(action)
   }
 }
@@ -123,7 +123,7 @@ _p.DoActionForItemsInRoom = function(room,action)
   var titem
   while(titem = room.NextItem())
   {
-    titem = idb.Get(titem)
+    titem = Game.Item(titem)
     titem.DoAction(action)
   }
 }
@@ -136,7 +136,7 @@ _p.MatchingCharactersInRoom = function(room,matchstring)
   var charter
   while(charter = room.NextCharacter())
   {
-    charter = cdb.Get(charter)
+    charter = Game.Character(charter)
     if(matcher.Match(charter.Name()))
     {
       filteredcharters.push(charter)

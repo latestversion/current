@@ -8,7 +8,7 @@ function CarrotQuestLogic(id)
   this.SetName("CarrotQuestLogic")
 
   this.state = CarrotQuestLogic.StateEnums.Init
-  this.carrotsLeft = 8
+  this.carrotsLeft = 3
 }
 
 CarrotQuestLogic.StateEnums = {}
@@ -53,7 +53,11 @@ _p.DoAction = function(a)
       }
       else
       {
+        var charter = Game.Character(this.id)
+        var rid = charter.Room()
         Game.AddActionAbsolute({name:"say",arg1:this.id,text:"Nice! Tonight you shall feast in VALHALLA!".format(this.carrotsLeft)},0)
+        Game.AddActionAbsolute({name:"say",arg1:this.id,text:"And uh yeah, I'll open the little gate.".format(this.carrotsLeft)},0)
+        Game.AddAction({name:"event",arg1:rid,text:"carrotquestcompleted"},3000)
         this.state = CarrotQuestLogic.StateEnums.Finished
       }
     }
@@ -72,5 +76,3 @@ _p.DoAction = function(a)
 }
 
 RegisterLogic(CarrotQuestLogic)
-
-

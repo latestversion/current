@@ -34,4 +34,14 @@ _p.Revive = function()
       this.logics[k].__proto__  = global[this.logics[k].type].prototype
     }
   }
+
+  for (k in this.portals)
+  {
+    if(this.portals[k].type)
+    {
+      l1("Portal type: " + this.portals[k].type,LG_SPAM)
+      this.portals[k].__proto__  = global[this.portals[k].type].prototype
+    }
+  }
+
 }

@@ -4,6 +4,7 @@ evalFile("ItemFactory.js")
 evalFile("logics/ImScaredLogic.js")
 evalFile("logics/CarrotQuestLogic.js")
 evalFile("logics/SpawnCarrotsLogic.js")
+evalFile("logics/ClosedGateOpenOnEventLogic.js")
 
 LG_NGS = "LG_NGS"
 
@@ -119,17 +120,22 @@ function ProduceNewGameState(dbs,savedir)
 
   var p = new Portal()
   p.SetID(1)
-
   p.AddEntry(new PortalEntry(1,"north",2))
   p.AddEntry(new PortalEntry(2,"south",1))
-  p.AddEntry(new PortalEntry(1,"east",5))
-  p.AddEntry(new PortalEntry(5,"west",1))
+  var logic = new ClosedGateOpenOnEventLogic(p.ID())
+  logic.SetPassEvent("carrotquestcompleted")
+  p.AddExistingLogic(logic)
   pdb.Add(p)
 
 
   var p = new Portal()
   p.SetID(pdb.GetFreeID())
+  p.AddEntry(new PortalEntry(1,"east",5))
+  p.AddEntry(new PortalEntry(5,"west",1))
+  pdb.Add(p)
 
+  var p = new Portal()
+  p.SetID(pdb.GetFreeID())
   p.AddEntry(new PortalEntry(2,"north",3))
   p.AddEntry(new PortalEntry(3,"south",2))
   pdb.Add(p)

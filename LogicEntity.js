@@ -19,6 +19,26 @@ _p.AddExistingLogic = function(logicinstance)
 _p.DelLogic = function()
 {}
 
+_p.RemoveLogic = function(logic)
+{
+  l1("Removelogic: " + logic,LG_SPAM)
+  var i = false
+  for (var k in this.logics)
+  {
+    l1("Comparing to remove " + this.logics[k].Name() + ": ",LG_SPAM)
+    if(!this.logics[k].Name() == logic.name)
+    {
+      i = k
+    }
+  }
+
+  if(i)
+  {
+    l1("Removed logic at index " + i)
+    this.logics.splice(i,1)
+  }
+}
+
 _p.GetLogic = function()
 {}
 

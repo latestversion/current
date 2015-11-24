@@ -127,6 +127,18 @@ _p.DoActionForItemsInRoom = function(room,action)
   }
 }
 
+_p.DoActionForPortalsInRoom = function(room,action)
+{
+  room.BeginPortals()
+  var tentity
+  while(tentity = room.NextPortal())
+  {
+    tentity = Game.Portal(tentity)
+    tentity.DoAction(action)
+  }
+}
+
+
 _p.MatchingCharactersInRoom = function(room,matchstring)
 {
   var filteredcharters = []

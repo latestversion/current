@@ -50,6 +50,18 @@ _p.Revive = function()
   {
     entry.__proto__ = PortalEntry.prototype
   }
+
+   var k
+  
+  for (k in this.logics)
+  {
+    if(this.logics[k].type)
+    {
+      l1("Logic type: " + this.logics[k].type,LG_SPAM)
+      this.logics[k].__proto__  = global[this.logics[k].type].prototype
+    }
+  }
+
 }
 
 function PortalEntry(startroom,direction,destroom)

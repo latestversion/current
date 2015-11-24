@@ -68,6 +68,10 @@ _p.DoMoveAction = function(a)
   room2 = this.rdb.Get(r2id)
   if(!room2){l9("No room for rid " + r2id,LG_CMDS);return}
 
+  if(!portal.DoAction({name:"attemptenterportal",arg1:cid,text:direction}))
+  {
+    return
+  }
 
   // Check if characters in the room allow leaving
   if(room.NumCharacters() > 1)
@@ -498,6 +502,18 @@ _p.DoMessageLogicAction = function(a)
 }
 
 
+_p.DoEventAction = function(a)
+{
+  l1("DoEventAction: ".format(JSON.stringify(a)))
+
+  var rid = a.arg1
+  var room = Game.Room(rid)
+
+  this.DoActionForCharactersInRoom(room,a)
+  this.DoActionForItemsInRoom(room,a)
+  this.DoActionForPortalsInRoom(room,a)
+}
+
 
 _p.DoAction = function(a)
 {
@@ -552,5 +568,10 @@ _p.DoAction = function(a)
   if("messagelogic" == a.name)
   {
     this.DoMessageLogicAction(a)
+  }
+
+  if("event" == a.name)
+  {
+    this.DoEventAction(a)
   }
 }

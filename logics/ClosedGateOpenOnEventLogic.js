@@ -34,7 +34,7 @@ _p.DoAction = function(a)
 
   if(a.name == "event" && this.PassEvent() == a.text)
   {
-    
+    l1("ClosedGateLogic: Received event " + a.text + ". Removing logic.")
     var portal = Game.Portal(this.ID())
     portal.RemoveLogic(ClosedGateOpenOnEventLogic)
   }

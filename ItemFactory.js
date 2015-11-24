@@ -9,6 +9,7 @@ var ItemTemplateIDs = {}
 ItemTemplateIDs.MediocreCarrot = ItemTemplateIdCount++
 ItemTemplateIDs.DamnFineCarrot = ItemTemplateIdCount++
 ItemTemplateIDs.CuriousFrogFigurine = ItemTemplateIdCount++
+ItemTemplateIDs.Shovel = ItemTemplateIdCount++
 
 function ItemFactory()
 {
@@ -51,6 +52,11 @@ _p.Create = function(tid,id)
   	i.SetDescription("A curiosu frogu is a finu friend.")
     var logic = new FigurineLogic(i.ID())
     i.AddExistingLogic(logic)
+  }
+  else if(ItemTemplateIDs.Shovel == tid)
+  {
+    i.SetName("A rusty shovel")
+    i.SetDescription("This shovel is past its prime.")
   }
   else
   {

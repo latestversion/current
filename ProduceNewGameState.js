@@ -21,6 +21,10 @@ function ProduceNewGameState(dbs,savedir)
   l1("Adding items",LG_NGS)
   idb.Purge()
 
+
+  var i  = idb.Create(ItemTemplateIDs.Shovel)
+  i.SetRoom(5)
+
   var i  = idb.Create(ItemTemplateIDs.CuriousFrogFigurine)
   i.SetRoom(3)
 
@@ -56,6 +60,14 @@ function ProduceNewGameState(dbs,savedir)
   r.SetDescription("So yeah, this is where cabbages come from.")
   r.SetRegion(region)
   r.AddLogic(SpawnCarrotsLogic)
+  rdb.Add(r)
+
+  var region = 1
+  var r = new Room()
+  r.SetID(5)
+  r.SetName("Another field of mud")
+  r.SetDescription("You've spent a lot of time here, getting familiar with the cold, hard ground.")
+  r.SetRegion(region)
   rdb.Add(r)
 
 
@@ -110,6 +122,8 @@ function ProduceNewGameState(dbs,savedir)
 
   p.AddEntry(new PortalEntry(1,"north",2))
   p.AddEntry(new PortalEntry(2,"south",1))
+  p.AddEntry(new PortalEntry(1,"east",5))
+  p.AddEntry(new PortalEntry(5,"west",1))
   pdb.Add(p)
 
 

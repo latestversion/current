@@ -42,7 +42,7 @@ function ProduceNewGameState(dbs,savedir)
   cdb.Add(character)
   var logic = new GeorgieTalkLogic()
   character.AddExistingLogic(logic)
-  character.AddLogic(CarrotQuestLogic.name)
+  character.AddLogic(CarrotQuestLogic)
 
   // Rooms
   l1("Adding rooms",LG_NGS)
@@ -55,7 +55,7 @@ function ProduceNewGameState(dbs,savedir)
   r.SetName("A field of mud")
   r.SetDescription("So yeah, this is where cabbages come from.")
   r.SetRegion(region)
-  r.AddLogic(SpawnCarrotsLogic.name)
+  r.AddLogic(SpawnCarrotsLogic)
   rdb.Add(r)
 
 
@@ -66,7 +66,7 @@ function ProduceNewGameState(dbs,savedir)
   r.SetName("Path to scary forest")
   r.SetDescription("A narrow scary path. It leads to the scary forest.")
   r.SetRegion(region)
-  r.AddLogic(ImScaredLogic.name)
+  r.AddLogic(ImScaredLogic)
   rdb.Add(r)
 
 

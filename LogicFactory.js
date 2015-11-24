@@ -17,8 +17,9 @@ LogicFactory.prototype.RegisterLogic = function(logic)
   LogicCtors[logic.name] = logic
 }
 
-LogicFactory.prototype.Create = function(logicname,arg)
+LogicFactory.prototype.Create = function(logic,arg)
 {
+  var logicname = logic.name
   l1(this.Name() + ": Creating logic {0} with arg {1}".format(logicname,arg),LG_LOGIC_FTORY)
 
   if(undefined != LogicCtors[logicname])

@@ -49,6 +49,7 @@ function ProduceNewGameState(dbs,savedir)
   character.AddExistingLogic(logic)
   character.AddLogic(CarrotQuestLogic)
 
+
   // Rooms
   l1("Adding rooms",LG_NGS)
   rdb.Purge()
@@ -98,6 +99,47 @@ function ProduceNewGameState(dbs,savedir)
   r.SetRegion(region)
   rdb.Add(r)
 
+  var king = Game.cdb.Create(CharacterTemplateIds.GoblinKing)
+  king.SetRoom(4)
+
+
+  var r = new Room()
+  r.SetID(5)
+  r.SetName("Room of Silky Death")
+  r.SetDescription("From the trees the spun silk hangs, like a tapestry of death, where the many legged goes.")
+  r.SetRegion(region)
+  rdb.Add(r)
+
+  var charter = Game.cdb.Create(CharacterTemplateIds.GiantSpider)
+  charter.SetRoom(5)
+
+var p = new Portal()
+  p.SetID(pdb.GetFreeID())
+  p.AddEntry(new PortalEntry(5,"west",3))
+  p.AddEntry(new PortalEntry(3,"east",5))
+  p.AddExistingLogic(logic)
+  pdb.Add(p)
+
+
+  var r = new Room()
+  r.SetID(6)
+  r.SetName("The Temple")
+  r.SetDescription("Pillars of marble and steps of granite. The elders bow to the Goddess of Wisdom.")
+  r.SetRegion(region)
+  rdb.Add(r)
+
+  var charter = Game.cdb.Create(CharacterTemplateIds.WiseMan)
+  charter.SetRoom(6)
+
+var p = new Portal()
+  p.SetID(pdb.GetFreeID())
+  p.AddEntry(new PortalEntry(3,"west",6))
+  p.AddEntry(new PortalEntry(6,"east",3))
+  p.AddExistingLogic(logic)
+  pdb.Add(p)
+
+
+
   // Regions
   l1("Adding regions",LG_NGS)
   rgndb.Purge()
@@ -119,7 +161,7 @@ function ProduceNewGameState(dbs,savedir)
   pdb.Purge()
 
   var p = new Portal()
-  p.SetID(1)
+  p.SetID(pdb.GetFreeID())
   p.AddEntry(new PortalEntry(1,"north",2))
   p.AddEntry(new PortalEntry(2,"south",1))
   var logic = new ClosedGateOpenOnEventLogic(p.ID())

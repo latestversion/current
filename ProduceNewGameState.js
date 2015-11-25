@@ -21,7 +21,10 @@ function ProduceNewGameState(dbs,savedir)
   // Items
   l1("Adding items",LG_NGS)
   idb.Purge()
-
+  rgndb.Purge()
+  rdb.Purge()
+  cdb.Purge()
+  pdb.Purge()
 
   var i  = idb.Create(ItemTemplateIDs.Shovel)
   i.SetRoom(5)
@@ -37,7 +40,7 @@ function ProduceNewGameState(dbs,savedir)
 
 
   // Characters
-  cdb.Purge()
+
 
   var character = new Character()
   character.SetName("Georgie Scrapneck")
@@ -50,9 +53,10 @@ function ProduceNewGameState(dbs,savedir)
   character.AddLogic(CarrotQuestLogic)
 
 
+
   // Rooms
   l1("Adding rooms",LG_NGS)
-  rdb.Purge()
+
 
   var id = 1
   var region = 1
@@ -64,6 +68,7 @@ function ProduceNewGameState(dbs,savedir)
   r.AddLogic(SpawnCarrotsLogic)
   rdb.Add(r)
 
+
   var region = 1
   var r = new Room()
   r.SetID(5)
@@ -71,7 +76,6 @@ function ProduceNewGameState(dbs,savedir)
   r.SetDescription("You've spent a lot of time here, getting familiar with the cold, hard ground.")
   r.SetRegion(region)
   rdb.Add(r)
-
 
 
   region = 2
@@ -92,6 +96,8 @@ function ProduceNewGameState(dbs,savedir)
   r.SetRegion(region)
   rdb.Add(r)
 
+  var clearingintheforestroom = r
+
   var r = new Room()
   r.SetID(4)
   r.SetName("Throne of the Goblin King")
@@ -104,45 +110,42 @@ function ProduceNewGameState(dbs,savedir)
 
 
   var r = new Room()
-  r.SetID(5)
+  r.SetID(6)
   r.SetName("Room of Silky Death")
-  r.SetDescription("From the trees the spun silk hangs, like a tapestry of death, where the many legged goes.")
+  r.SetDescription("From the trees the spun silk hangs, like a tapestry of death, where the many legged one goes.")
   r.SetRegion(region)
   rdb.Add(r)
 
+  var spiderroom = r
+
   var charter = Game.cdb.Create(CharacterTemplateIds.GiantSpider)
-  charter.SetRoom(5)
+  charter.SetRoom(spiderroom.ID())
 
 var p = new Portal()
   p.SetID(pdb.GetFreeID())
-  p.AddEntry(new PortalEntry(5,"west",3))
-  p.AddEntry(new PortalEntry(3,"east",5))
+  p.AddEntry(new PortalEntry(clearingintheforestroom.ID(),"west",spiderroom.ID()))
+  p.AddEntry(new PortalEntry(spiderroom.ID(),"east",clearingintheforestroom.ID()))
   p.AddExistingLogic(logic)
   pdb.Add(p)
 
-
   var r = new Room()
-  r.SetID(6)
+  r.SetID(7)
   r.SetName("The Temple")
   r.SetDescription("Pillars of marble and steps of granite. The elders bow to the Goddess of Wisdom.")
   r.SetRegion(region)
   rdb.Add(r)
 
-  var charter = Game.cdb.Create(CharacterTemplateIds.WiseMan)
-  charter.SetRoom(6)
+  var templeroom = r
 
-var p = new Portal()
+  var charter = Game.cdb.Create(CharacterTemplateIds.WiseMan)
+  charter.SetRoom(templeroom.ID())
+
+  var p = new Portal()
   p.SetID(pdb.GetFreeID())
-  p.AddEntry(new PortalEntry(3,"west",6))
-  p.AddEntry(new PortalEntry(6,"east",3))
+  p.AddEntry(new PortalEntry(clearingintheforestroom.ID(),"east",templeroom.ID()))
+  p.AddEntry(new PortalEntry(templeroom.ID(),"west",clearingintheforestroom.ID()))
   p.AddExistingLogic(logic)
   pdb.Add(p)
-
-
-
-  // Regions
-  l1("Adding regions",LG_NGS)
-  rgndb.Purge()
 
   id = 1
 
@@ -155,10 +158,6 @@ var p = new Portal()
   r.SetName("Forest of the Goblin King")
   r.SetID(2)
   rgndb.Add(r)
-
-  // Portals
-  l1("Adding portals",LG_NGS)
-  pdb.Purge()
 
   var p = new Portal()
   p.SetID(pdb.GetFreeID())

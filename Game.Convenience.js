@@ -139,6 +139,19 @@ _p.DoActionForPortalsInRoom = function(room,action)
 }
 
 
+_p.ChartersInRoom = function(room)
+{
+  var charters = []
+  room.BeginCharacters()
+  var charter
+  while(charter = room.NextCharacter())
+  {
+    charters.push(charter)
+  }
+
+  return charter
+}
+
 _p.MatchingCharactersInRoom = function(room,matchstring)
 {
   var filteredcharters = []

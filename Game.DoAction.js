@@ -129,11 +129,42 @@ _p.DoMoveAction = function(a)
 }
 
 
+
+_p.CheckHasVisual = function(actor,entity)
+{
+  var actor = Game.GetEntity(entityenum,entitytid)
+  var entity = 
+
+  var room = Game.Room(charter.Room())
+
+  var action = {name:"attemptsee",arg1:actor,arg2:entity}
+  
+  if(!room.DoAction(action)) // screw it
+  {
+    return false
+  }
+
+  if(!actor.DoAction(action))
+  {
+    return false
+  }
+
+  if(!entity.DoAction(action))
+  {
+    return false
+  }
+
+
+  return true
+
+}
+
 _p.DoLookRoomAction = function(a)
 {
   var s = ""
   l1("DoLookRoomAction for cid {0}".format(a.cid),LG_SPAM)
   var character = cdb.Get(a.cid)
+  var actor = character
   if(!character)
   {
     l9("No character for cid {0}".format(a.cid),LG_ACTIONS)
@@ -141,8 +172,10 @@ _p.DoLookRoomAction = function(a)
   l1("DoLookRoomAction for character {0}".format(character.Name()),LG_SPAM)
 
   var room = rdb.Get(character.Room())
-
-  s += room.Name() + "\n" + room.Description() + "\n"
+  if(room.DoAction({name:"attemptlookroom",arg1:a.cid}))
+  {
+    s += room.Name() + "\n" + room.Description() + "\n"
+  }
 
   room.BeginCharacters()
   var cid
@@ -153,7 +186,10 @@ _p.DoLookRoomAction = function(a)
     l1("Retrieved character {0}".format(roomchar.Name()),LG_SPAM)
     if(roomchar.ID() != character.ID())
     {
-      s += roomchar.Name() + " is here" + "\n"
+      if(this.CheckHasVisual(actor,roomchar))
+      {
+        s += roomchar.Name() + " is here" + "\n"
+      }
     }
   }
 

@@ -122,6 +122,8 @@ function ProduceNewGameState(dbs,savedir)
 
   var charter = Game.cdb.Create(CharacterTemplateIds.GiantSpider)
   charter.SetRoom(spiderroom.ID())
+  var i  = idb.Create(ItemTemplateIDs.Shovel)
+  i.SetRoom(spiderroom.ID())
 
 var p = new Portal()
   p.SetID(pdb.GetFreeID())

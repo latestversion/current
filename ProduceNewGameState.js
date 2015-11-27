@@ -5,6 +5,7 @@ evalFile("logics/ImScaredLogic.js")
 evalFile("logics/CarrotQuestLogic.js")
 evalFile("logics/SpawnCarrotsLogic.js")
 evalFile("logics/ClosedGateOpenOnEventLogic.js")
+evalFile("logics/DarkRoomLogic.js")
 
 LG_NGS = "LG_NGS"
 
@@ -115,6 +116,7 @@ function ProduceNewGameState(dbs,savedir)
   r.SetDescription("From the trees the spun silk hangs, like a tapestry of death, where the many legged one goes.")
   r.SetRegion(region)
   rdb.Add(r)
+  r.AddLogic(DarkRoomLogic)
 
   var spiderroom = r
 

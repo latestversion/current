@@ -32,11 +32,10 @@ _p.Tick = function(input)
 	var stream = this.stream
 	if(true) //input == "1")
 	{
-		stream.putn("I will start the game")
 		Game.StartNewGame()
 		var c = Game.cdb.Create(CharacterTemplateIds.TomFinkdorf)
 		c.SetPlayer(true)
-		c.SetRoom(1)
+		c.SetRoom(6)
 		var room = rdb.Get(1)
 		room.AddCharacter(c.ID())
 		c.SetRegion(room.Region())
@@ -65,8 +64,8 @@ _p.Tick = function(input)
 		c.AddItem(item.ID())
 
 
-		this.stream.putn("You are " + c.Name())
-		this.stream.putn("Description: " + c.Description())
+		//this.stream.putn("You are " + c.Name())
+		//this.stream.putn("Description: " + c.Description())
 		this.SceneHandler().ReplaceCurrentScene(new GameScene(this.SceneHandler(),this.stream,c.ID()))
 		Game.DoAction({name:"enterrealm",arg1:c.ID()})
 	}

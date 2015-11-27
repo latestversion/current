@@ -42,8 +42,18 @@ _p.RemoveLogic = function(logic)
 _p.GetLogic = function()
 {}
 
-_p.HasLogic = function()
-{}
+_p.HasLogic = function(name)
+{
+  for (var k in this.logics)
+  {
+    if (this.logics[k].Name() == name)
+    {
+      return true
+    }
+  }
+
+  return false
+}
 
 _p.DoAction = function(action)
 {

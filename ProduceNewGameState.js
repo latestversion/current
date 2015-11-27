@@ -6,6 +6,7 @@ evalFile("logics/CarrotQuestLogic.js")
 evalFile("logics/SpawnCarrotsLogic.js")
 evalFile("logics/ClosedGateOpenOnEventLogic.js")
 evalFile("logics/DarkRoomLogic.js")
+evalFile("Logic.js")
 
 LG_NGS = "LG_NGS"
 
@@ -122,7 +123,16 @@ function ProduceNewGameState(dbs,savedir)
 
   var charter = Game.cdb.Create(CharacterTemplateIds.GiantSpider)
   charter.SetRoom(spiderroom.ID())
+
   var i  = idb.Create(ItemTemplateIDs.Shovel)
+  i.SetRoom(spiderroom.ID())
+
+  var i  = idb.Create(ItemTemplateIDs.Shovel)
+  var lightlogic = new Logic()
+  lightlogic.__proto__.DoAction = function(){return true}
+  lightlogic.SetName("selflight")
+  i.AddExistingLogic(lightlogic)
+  i.SetName("A rusty, glowing shovel")
   i.SetRoom(spiderroom.ID())
 
 var p = new Portal()

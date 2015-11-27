@@ -1,11 +1,11 @@
 evalFile("Entity.js")
 evalFile("DataEntity.js")
 
-function Logic()
+function Logic(id)
 {
   Entity.call(this)
   DataEntity.call(this)
-
+  this.SetID(id)
 }
 
 CopyPrototype(Entity,Logic)

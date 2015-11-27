@@ -129,28 +129,33 @@ _p.DoMoveAction = function(a)
 }
 
 
+LG_CHK_VISUAL = "LG_CHK_VISUAL"
 
-_p.CheckHasVisual = function(actor,entity)
+_p.CheckHasVisual = function(actorenum,actorid,targetenum,targetid)
 {
-  var actor = Game.GetEntity(entityenum,entitytid)
-  var entity = 
+  var actor = Game.Character(actorid)
+  var target = Game.GetEntity(targetenum,targetid)
+  var room = Game.Room(actor.Room())
 
-  var room = Game.Room(charter.Room())
+  l1("CheckHasVisual: Checking if {0} can see {1} in {2}".format(actor.Name(),target.Name(),room.Name()),LG_CHK_VISUAL)
 
-  var action = {name:"attemptsee",arg1:actor,arg2:entity}
-  
-  if(!room.DoAction(action)) // screw it
+  var action = {name:"attemptsee",arg1:actorenum,arg2:actorid,arg3:targetenum,arg4:targetid}
+
+  if(!room.DoAction(action))
   {
+    l1("CheckHasVisual: The room indicated {0} can not see {1}".format(actor.Name(),target.Name()),LG_CHK_VISUAL)
     return false
   }
 
   if(!actor.DoAction(action))
   {
+    l1("CheckHasVisual: The actor indicated {0} can not see {1}".format(actor.Name(),target.Name()),LG_CHK_VISUAL)
     return false
   }
 
-  if(!entity.DoAction(action))
+  if(!target.DoAction(action))
   {
+    l1("CheckHasVisual: The target indicated {0} can not see {1}".format(actor.Name(),target.Name()),LG_CHK_VISUAL)
     return false
   }
 
@@ -159,17 +164,19 @@ _p.CheckHasVisual = function(actor,entity)
 
 }
 
+LG_LK_RM = "LG_LK_RM"
+
 _p.DoLookRoomAction = function(a)
 {
   var s = ""
-  l1("DoLookRoomAction for cid {0}".format(a.cid),LG_SPAM)
+  l1("DoLookRoomAction for cid {0}".format(a.cid),LG_LK_RM)
   var character = cdb.Get(a.cid)
   var actor = character
   if(!character)
   {
     l9("No character for cid {0}".format(a.cid),LG_ACTIONS)
   }
-  l1("DoLookRoomAction for character {0}".format(character.Name()),LG_SPAM)
+  l1("DoLookRoomAction for character {0}".format(character.Name()),LG_LK_RM)
 
   var room = rdb.Get(character.Room())
   if(room.DoAction({name:"attemptlookroom",arg1:a.cid}))
@@ -186,8 +193,10 @@ _p.DoLookRoomAction = function(a)
     l1("Retrieved character {0}".format(roomchar.Name()),LG_SPAM)
     if(roomchar.ID() != character.ID())
     {
-      if(this.CheckHasVisual(actor,roomchar))
+      l1("Checking if {0} can see {1}".format(character.Name(),roomchar.Name()),LG_LK_RM)
+      if(this.CheckHasVisual(TypeEnums.Character,character.ID(),TypeEnums.Character,roomchar.ID()))
       {
+        l1("{0} could see {1}".format(character.Name(),roomchar.Name()),LG_LK_RM)
         s += roomchar.Name() + " is here" + "\n"
       }
     }
@@ -198,7 +207,12 @@ _p.DoLookRoomAction = function(a)
   while(iid = room.NextItem())
   {
     var item = idb.Get(iid)
-    s += item.Name() + " is here" + "\n"
+    l1("Checking if {0} can see {1}".format(character.Name(),item.Name()),LG_LK_RM)
+    if(this.CheckHasVisual(TypeEnums.Character,character.ID(),TypeEnums.Item,iid))
+    {
+      l1("{0} could indeed see {1}".format(character.Name(),item.Name()),LG_LK_RM)
+      s += item.Name() + " is here" + "\n"
+    }
   }
 
   character.DoAction({name:"vision",text:s})

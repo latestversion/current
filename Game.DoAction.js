@@ -47,7 +47,6 @@ _p.DoMoveAction = function(a)
   while(pid = room.NextPortal())
   {
     portal = pdb.Get(pid)
-    l1("Portal: " + JSON.stringify(portal))
     l1("Found portal with name " + portal.Name())
     if(!portal){l5("No portal for pid " + pid,LG_CMDS);return}
 

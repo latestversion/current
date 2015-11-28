@@ -52,7 +52,7 @@ _p.Revive = function()
   }
 
    var k
-  
+
   for (k in this.logics)
   {
     if(this.logics[k].type)

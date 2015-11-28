@@ -37,6 +37,7 @@ _p.DoMoveAction = function(a)
 
   // Get room
   var room = this.rdb.Get(character.Room())
+  l1("Room {0} has {1} portals.".format(room.Name(),room.NumPortals()))
   if(!room){l5("No room for rid " + character.Room(),LG_CMDS);return}
 
   // Find portal with direction
@@ -46,6 +47,8 @@ _p.DoMoveAction = function(a)
   while(pid = room.NextPortal())
   {
     portal = pdb.Get(pid)
+    l1("Portal: " + JSON.stringify(portal))
+    l1("Found portal with name " + portal.Name())
     if(!portal){l5("No portal for pid " + pid,LG_CMDS);return}
 
     r2id = portal.DestinationRoomForStartRoomAndDirection(room.ID(),direction)

@@ -20,103 +20,109 @@ function ProduceNewGameState(dbs,savedir)
   var rgndb = dbs[TypeEnums.Region]
   var pdb = dbs[TypeEnums.Portal]
 
-  // Items
-  l1("Adding items",LG_NGS)
+  l1("Purging databases",LG_NGS)
+
   idb.Purge()
   rgndb.Purge()
   rdb.Purge()
   cdb.Purge()
   pdb.Purge()
 
-  var i  = idb.Create(ItemTemplateIDs.Shovel)
-  i.SetRoom(5)
 
-  var i  = idb.Create(ItemTemplateIDs.CuriousFrogFigurine)
-  i.SetRoom(3)
-
-  var i  = idb.Create(ItemTemplateIDs.MediocreCarrot)
-  i.SetRoom(1)
-
-  var i = idb.Create(ItemTemplateIDs.DamnFineCarrot)
-  i.SetRoom(1)
+  var dummytid = 99
+  var dtid = dummytid
 
 
-  // Characters
+  // FIELDS OF MUD REGION
 
+  var r = rgndb.Create(dtid)
+  r.SetName("Fields of Mud")
+
+  var fieldsofmud = r
+
+
+  l1("Adding rooms to " + fieldsofmud.Name(),LG_NGS)
+
+  // FIELD OF MUD
+
+  var r = rdb.Create(dtid)
+  r.SetName("A field of mud")
+  r.SetDescription("So yeah, this is where cabbages come from.")
+  r.SetRegion(fieldsofmud.ID())
+ // r.AddLogic(SpawnCarrotsLogic)
+
+  var mudfield = r
 
   var character = new Character()
   character.SetName("Georgie Scrapneck")
   character.SetDescription("Georgie looks like he's had a rough life. His coat is worn and his trousers threadbare. Luckily his coughing isn't bad enough to stop him from enjoying smoke or two.")
-  character.SetRoom(1)
+  character.SetRoom(mudfield.ID())
   character.SetID(cdb.GetFreeID())
   cdb.Add(character)
   var logic = new GeorgieTalkLogic()
   character.AddExistingLogic(logic)
   character.AddLogic(CarrotQuestLogic)
 
+  var i = idb.Create(ItemTemplateIDs.MediocreCarrot)
+  i.SetRoom(mudfield.ID())
 
+  var i = idb.Create(ItemTemplateIDs.DamnFineCarrot)
+  i.SetRoom(mudfield.ID())
 
-  // Rooms
-  l1("Adding rooms",LG_NGS)
+  // ANOTHER FIELD OF MUD
 
-
-  var id = 1
-  var region = 1
-  var r = new Room()
-  r.SetID(1)
-  r.SetName("A field of mud")
-  r.SetDescription("So yeah, this is where cabbages come from.")
-  r.SetRegion(region)
-  r.AddLogic(SpawnCarrotsLogic)
-  rdb.Add(r)
-
-
-  var region = 1
-  var r = new Room()
-  r.SetID(5)
+  var r = rdb.Create(dtid)
   r.SetName("Another field of mud")
   r.SetDescription("You've spent a lot of time here, getting familiar with the cold, hard ground.")
-  r.SetRegion(region)
-  rdb.Add(r)
+  r.SetRegion(fieldsofmud.ID())
 
+  var mudfield2 = r
 
-  region = 2
-  var r = new Room()
-  r.SetID(2)
-  r.SetName("Path to scary forest")
-  r.SetDescription("A narrow scary path. It leads to the scary forest.")
-  r.SetRegion(region)
-  r.AddLogic(ImScaredLogic)
-  rdb.Add(r)
+  var i  = idb.Create(ItemTemplateIDs.Shovel)
+  i.SetRoom(mudfield2.ID())
 
 
 
-  var r = new Room()
-  r.SetID(3)
+  //  SCARY FOREST REGION
+
+  var r = rgndb.Create(dtid)
+  r.SetName("Forest of the Goblin King")
+
+  var forestregion = r
+
+
+  // CLEARING IN THE FOREST
+
+  var r = rdb.Create(dtid)
   r.SetName("Clearing in the forest")
   r.SetDescription("It's a clearing in the forest. The old bones of unfortunate adventurers aside, it's quite cozy.")
-  r.SetRegion(region)
-  rdb.Add(r)
+  r.SetRegion(forestregion.ID())
 
   var clearingintheforestroom = r
 
-  var r = new Room()
-  r.SetID(4)
+
+  // THRONE ROOM
+
+  var r = rdb.Create()
   r.SetName("Throne of the Goblin King")
   r.SetDescription("From his throne of skulls, the Goblin King rules his kingdom!")
-  r.SetRegion(region)
-  rdb.Add(r)
+  r.SetRegion(forestregion.ID())
+
+  var throneroom = r
 
   var king = Game.cdb.Create(CharacterTemplateIds.GoblinKing)
-  king.SetRoom(4)
+  king.SetRoom(r.ID())
+
+    var i  = idb.Create(ItemTemplateIDs.CuriousFrogFigurine)
+  i.SetRoom(throneroom.ID())
 
 
-  var r = new Room()
-  r.SetID(6)
+  // SPIDER DEN
+
+  var r = rdb.Create()
   r.SetName("Room of Silky Death")
   r.SetDescription("From the trees the spun silk hangs, like a tapestry of death, where the many legged one goes.")
-  r.SetRegion(region)
-  rdb.Add(r)
+  r.SetRegion(forestregion.ID())
   r.AddLogic(DarkRoomLogic)
 
   var spiderroom = r
@@ -129,78 +135,69 @@ function ProduceNewGameState(dbs,savedir)
 
   var i  = idb.Create(ItemTemplateIDs.Shovel)
   var lightlogic = new Logic()
-  lightlogic.__proto__.DoAction = function(){return true}
+  lightlogic.__proto__.DoAction = function(){return true} // sometimes you just want to test stuff
   lightlogic.SetName("selflight")
   i.AddExistingLogic(lightlogic)
   i.SetName("A rusty, glowing shovel")
   i.SetRoom(spiderroom.ID())
 
-var p = new Portal()
-  p.SetID(pdb.GetFreeID())
-  p.AddEntry(new PortalEntry(clearingintheforestroom.ID(),"west",spiderroom.ID()))
-  p.AddEntry(new PortalEntry(spiderroom.ID(),"east",clearingintheforestroom.ID()))
-  p.AddExistingLogic(logic)
-  pdb.Add(p)
 
-  var r = new Room()
-  r.SetID(7)
+  // THE TEMPLE
+
+  var r = rdb.Create()
   r.SetName("The Temple")
   r.SetDescription("Pillars of marble and steps of granite. The elders bow to the Goddess of Wisdom.")
-  r.SetRegion(region)
-  rdb.Add(r)
+  r.SetRegion(forestregion.ID())
 
   var templeroom = r
 
   var charter = Game.cdb.Create(CharacterTemplateIds.WiseMan)
   charter.SetRoom(templeroom.ID())
 
+
+ // Portal mudfield -> mudfield
   var p = new Portal()
+  p.SetName("EW field<->field")
+  p.SetID(pdb.GetFreeID())
+  p.AddEntry(new PortalEntry(mudfield.ID(),"east",mudfield2.ID()))
+  p.AddEntry(new PortalEntry(mudfield2.ID(),"west",mudfield.ID()))
+  pdb.Add(p)
+
+  var p = new Portal()
+  p.SetName("NS mudfield<->clearing")
+  p.SetID(pdb.GetFreeID())
+  p.AddEntry(new PortalEntry(mudfield.ID(),"north",clearingintheforestroom.ID()))
+  p.AddEntry(new PortalEntry(clearingintheforestroom.ID(),"south",mudfield.ID()))
+  var logic = new ClosedGateOpenOnEventLogic(p.ID())
+
+  logic.SetPassEvent("carrotquestcompleted")
+  p.AddExistingLogic(logic)
+  logic = null
+  pdb.Add(p)
+
+  var p = new Portal()
+  p.SetName("EW clearing<->temple")
   p.SetID(pdb.GetFreeID())
   p.AddEntry(new PortalEntry(clearingintheforestroom.ID(),"east",templeroom.ID()))
   p.AddEntry(new PortalEntry(templeroom.ID(),"west",clearingintheforestroom.ID()))
-  p.AddExistingLogic(logic)
-  pdb.Add(p)
-
-  id = 1
-
-  var r = new Region()
-  r.SetName("Fields of Mud")
-  r.SetID(1)
-  rgndb.Add(r)
-
-  r = new Region()
-  r.SetName("Forest of the Goblin King")
-  r.SetID(2)
-  rgndb.Add(r)
-
-  var p = new Portal()
-  p.SetID(pdb.GetFreeID())
-  p.AddEntry(new PortalEntry(1,"north",2))
-  p.AddEntry(new PortalEntry(2,"south",1))
-  var logic = new ClosedGateOpenOnEventLogic(p.ID())
-  logic.SetPassEvent("carrotquestcompleted")
-  p.AddExistingLogic(logic)
   pdb.Add(p)
 
 
   var p = new Portal()
+  p.SetName("NS clearing<->throne")
   p.SetID(pdb.GetFreeID())
-  p.AddEntry(new PortalEntry(1,"east",5))
-  p.AddEntry(new PortalEntry(5,"west",1))
+  p.AddEntry(new PortalEntry(clearingintheforestroom.ID(),"north",throneroom.ID()))
+  p.AddEntry(new PortalEntry(throneroom.ID(),"south",clearingintheforestroom.ID()))
   pdb.Add(p)
+
 
   var p = new Portal()
+  p.SetName("EW clearing<->spider")
   p.SetID(pdb.GetFreeID())
-  p.AddEntry(new PortalEntry(2,"north",3))
-  p.AddEntry(new PortalEntry(3,"south",2))
+  p.AddEntry(new PortalEntry(clearingintheforestroom.ID(),"west",spiderroom.ID()))
+  p.AddEntry(new PortalEntry(spiderroom.ID(),"east",clearingintheforestroom.ID()))
   pdb.Add(p)
 
-  var p = new Portal()
-  p.SetID(pdb.GetFreeID())
-
-  p.AddEntry(new PortalEntry(3,"north",4))
-  p.AddEntry(new PortalEntry(4,"south",3))
-  pdb.Add(p)
 
   for (var k in dbs)
   {

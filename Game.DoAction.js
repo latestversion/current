@@ -336,12 +336,6 @@ _p.DoGetItemAction = function(a)
 
 }
 
-_p.DoRepeatedBroadcastAction = function(a)
-{
-  l1("Simulation Time is now " + Game.Time(),LG_SPAM)
-  this.AddAction(a,4000)
-}
-
 _p.DoTalkAction = function(a)
 {
   var cid = a.arg1
@@ -590,11 +584,6 @@ _p.DoAction = function(a)
   if("getitem" == a.name)
   {
     this.DoGetItemAction(a)
-  }
-
-  if("repeatedbroadcast" == a.name)
-  {
-    this.DoRepeatedBroadcastAction(a)
   }
 
   if("talk" == a.name)

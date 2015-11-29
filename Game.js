@@ -57,9 +57,6 @@ _p.StartNewGame = function()
   l1("Loaded databases",LG_STARTUP)
   this.ConsistencyCheckDatabases(this.dbs,true)
   l1("Consistency checked databases",LG_STARTUP)
-
-  //this.DoAction({name:"repeatedbroadcast"})
-  //l1("Started broadcast repat",LG_STARTUP)
 }
 
 

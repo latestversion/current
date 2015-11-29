@@ -1,26 +1,8 @@
 
 _p.GetEntity = function(typeenum,id)
 {
-  var entity
-  var db
-  switch(typeenum)
-  {
-    case TypeEnums.Character:
-      db = Game.cdb
-    break
-    case TypeEnums.Item:
-      db = Game.idb
-    break
-    case TypeEnums.Portal:
-      db = Game.pdb
-    break
-    case TypeEnums.Room:
-      db = Game.rdb
-    break
-    default:
-      l5("GetEntity: Did not find (typeenum,id): ({0},{1})".format(typeenum,id))
-    break
-  }
+  var typeenum = IDBank.TypeForID(id)
+  var db = this.dbs[typeenum]
 
   if(db)
   {

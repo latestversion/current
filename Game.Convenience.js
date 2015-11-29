@@ -1,5 +1,5 @@
 
-_p.GetEntity = function(typeenum,id)
+_p.GetEntity = function(id)
 {
   var typeenum = IDBank.TypeForID(id)
   var db = this.dbs[typeenum]

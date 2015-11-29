@@ -136,7 +136,7 @@ LG_CHK_VISUAL = "LG_CHK_VISUAL"
 _p.CheckHasVisual = function(actorenum,actorid,targetenum,targetid)
 {
   var actor = Game.Character(actorid)
-  var target = Game.GetEntity(targetenum,targetid)
+  var target = Game.GetEntity(targetid)
   var room = Game.Room(actor.Room())
 
   l1("CheckHasVisual: Checking if {0} can see {1} in {2}".format(actor.Name(),target.Name(),room.Name()),LG_CHK_VISUAL)
@@ -544,7 +544,7 @@ _p.DoMessageLogicAction = function(a)
   var id = a.arg2
 
   var entity
-  if(!(entity = this.GetEntity(typeenum,id)))
+  if(!(entity = this.GetEntity(id)))
   {
     l5("DoMessageLogicAction: No entity for " + typeenum + ", " + id)
     return

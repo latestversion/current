@@ -133,15 +133,15 @@ _p.DoMoveAction = function(a)
 
 LG_CHK_VISUAL = "LG_CHK_VISUAL"
 
-_p.CheckHasVisual = function(actorenum,actorid,targetenum,targetid)
+_p.CheckHasVisual = function(actorid,targetid)
 {
-  var actor = Game.Character(actorid)
+  var actor = Game.GetEntity(actorid)
   var target = Game.GetEntity(targetid)
   var room = Game.Room(actor.Room())
 
   l1("CheckHasVisual: Checking if {0} can see {1} in {2}".format(actor.Name(),target.Name(),room.Name()),LG_CHK_VISUAL)
 
-  var action = {name:"attemptsee",arg1:actorenum,arg2:actorid,arg3:targetenum,arg4:targetid}
+  var action = {name:"attemptsee",arg1:actorid,arg2:targetid}
 
   if(!room.DoAction(action))
   {
@@ -196,7 +196,7 @@ _p.DoLookRoomAction = function(a)
     if(roomchar.ID() != character.ID())
     {
       l1("Checking if {0} can see {1}".format(character.Name(),roomchar.Name()),LG_LK_RM)
-      if(this.CheckHasVisual(TypeEnums.Character,character.ID(),TypeEnums.Character,roomchar.ID()))
+      if(this.CheckHasVisual(character.ID(),roomchar.ID()))
       {
         l1("{0} could see {1}".format(character.Name(),roomchar.Name()),LG_LK_RM)
         s += roomchar.Name() + " is here" + "\n"
@@ -210,7 +210,7 @@ _p.DoLookRoomAction = function(a)
   {
     var item = idb.Get(iid)
     l1("Checking if {0} can see {1}".format(character.Name(),item.Name()),LG_LK_RM)
-    if(this.CheckHasVisual(TypeEnums.Character,character.ID(),TypeEnums.Item,iid))
+    if(this.CheckHasVisual(character.ID(),iid))
     {
       l1("{0} could indeed see {1}".format(character.Name(),item.Name()),LG_LK_RM)
       s += item.Name() + " is here" + "\n"

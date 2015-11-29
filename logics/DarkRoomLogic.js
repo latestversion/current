@@ -31,8 +31,8 @@ _p.DoAction = function(a)
 
   if("attemptsee" == a.name)
   {
-    var actor = Game.GetEntity(a.arg2)
-    var target = Game.GetEntity(a.arg4)
+    var actor = Game.GetEntity(a.arg1)
+    var target = Game.GetEntity(a.arg2)
 
     var room = Game.Room(actor.Room())
 

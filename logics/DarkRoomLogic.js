@@ -29,7 +29,7 @@ _p.DoAction = function(a)
       return false
   }
 
-  if("attemptsee" == a.name)
+  if("checkvisual" == a.name)
   {
     var actor = Game.GetEntity(a.arg1)
     var target = Game.GetEntity(a.arg2)

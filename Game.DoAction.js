@@ -141,7 +141,7 @@ _p.CheckHasVisual = function(actorid,targetid)
 
   l1("CheckHasVisual: Checking if {0} can see {1} in {2}".format(actor.Name(),target.Name(),room.Name()),LG_CHK_VISUAL)
 
-  var action = {name:"attemptsee",arg1:actorid,arg2:targetid}
+  var action = {name:"checkvisual",arg1:actorid,arg2:targetid}
 
   if(!room.DoAction(action))
   {

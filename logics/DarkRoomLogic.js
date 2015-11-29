@@ -25,7 +25,7 @@ _p.DoAction = function(a)
         return true
       }
 
-      actor.DoAction({name:"error",text:"A Dark Room\nIt's pitch black...\n"})
+      actor.DoAction({name:"error",text:"A Dark Room\nIt's pitch black..."})
       return false
   }
 

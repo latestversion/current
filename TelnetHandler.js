@@ -76,6 +76,12 @@ _p.putn = function(line)
 
 _p.get = function()
 {
-	return this.lines.shift()
+	var line = this.lines.shift()
+	if(line)
+	{
+		this.putn()
+	}
+	return line
+
 }
 

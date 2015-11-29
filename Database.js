@@ -1,5 +1,10 @@
-function Database(savefile,typeprototype)
+function Database(savefile,typeprototype,idrange)
 {
+
+  if(idrange == undefined)
+  {
+    throw "missed one"
+  }
   Entity.call(this)
   this.defaultsavefile = savefile
   this.typeprototype = typeprototype
@@ -7,6 +12,7 @@ function Database(savefile,typeprototype)
   this.factory = undefined
   this.maxid = 1
   this.loopidx = 0
+  this.idrange = idrange
 }
 
 CopyPrototype(Entity,Database)
@@ -15,9 +21,9 @@ var _p = Database.prototype
 
 _p.GetFreeID = function()
 {
-  this.maxid += 1
-  l1(this.Name() + ": "  + "The max id is now " + this.maxid,LG_DB)
-  return this.maxid
+  var id = IDBank.GetFreeID(this.idrange)
+  l1(this.Name() + ": "  + " Got free id  " + id,LG_DB)
+  return id
 }
 
 _p.Add = function(e)
@@ -48,6 +54,23 @@ _p.Get = function(id)
 
   return false
 }
+
+_p.GetByName = function(name)
+{
+  this.Start()
+  var entity
+  while(entity = this.Next())
+  {
+    if(entity.Name() == name)
+    {
+      return entity
+    }
+  }
+
+  return undefined
+}
+
+
 _p.Create = function(tid)
 {
   if(this.factory)

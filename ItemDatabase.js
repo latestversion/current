@@ -5,7 +5,7 @@ evalFile("ItemFactory.js",this)
 
 function ItemDatabase()
 {
-  Database.call(this,"items.data",Item.prototype)
+  Database.call(this,"items.data",Item.prototype,TypeEnums.Item)
   this.SetName("ItemDB")
   this.SetFactory(ItemFactory)
 }

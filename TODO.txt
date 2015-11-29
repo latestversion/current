@@ -1,3 +1,13 @@
+
+- remove repeatedbroadcast
+- remove commented out stuff
+- create an information struct to tell game which is starting room (on new game, etc)
+- save scheduled events
+- think over the logic and command factories
+- logic: ownerid, ownid
+- aliases for commands, meh!
+
+
 - remake commandfactory to be more like logicfactory. cf is clunky atm.
 - create directory newgamestate automatically if not exist
 carrot quest!

@@ -1,6 +1,6 @@
 function CharacterDatabase()
 {
-  Database.call(this,"characters.data",Character.prototype)
+  Database.call(this,"characters.data",Character.prototype,TypeEnums.Character)
   this.SetName("CharacterDb")
   this.SetFactory(CharacterFactory)
 }

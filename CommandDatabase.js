@@ -3,7 +3,7 @@ evalFile("CommandFactory.js")
 
 function CommandDatabase()
 {
-  Database.call(this,"",Command.prototype)
+  Database.call(this,"",Command.prototype,TypeEnums.Command)
   this.SetName("CommandDatabase")
   this.SetFactory(CommandFactory)
 }

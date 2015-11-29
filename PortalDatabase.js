@@ -1,6 +1,6 @@
 function PortalDatabase()
 {
-  Database.call(this,"portals.data",Portal.prototype)
+  Database.call(this,"portals.data",Portal.prototype,TypeEnums.Portal)
   this.SetName("PortalDb")
 }
 

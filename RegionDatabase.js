@@ -3,7 +3,7 @@ evalFile("RegionFactory.js")
 
 function RegionDatabase()
 {
-  Database.call(this,"regions.data",Region.prototype)
+  Database.call(this,"regions.data",Region.prototype,TypeEnums.Region)
   this.SetName("RegionDb")
   this.SetFactory(new RegionFactory())
 }

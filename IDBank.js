@@ -80,7 +80,7 @@ function IDBank()
   var delta = 2000000
   for (var i = 0; i < TypeEnumsArray.length; i++)
   {
-    this.ranges[i] = new IDRange(i*delta+1,i*delta,TypeEnumsArray[i])
+    this.ranges[i] = new IDRange(i*delta+1,(i+1)*delta,TypeEnumsArray[i])
     l1("IDBank: Created idrange for key " + TypeEnumsArray[i],LG_ID_BNK)
     l1("IDBank: Idrange is  " + JSON.stringify(this.ranges[i]),LG_ID_BNK)
   }

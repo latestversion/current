@@ -19,7 +19,7 @@ function Game()
   this.maxdt = 1000
   this.lastTick = 0
 
-  this.startRoom = 1
+  this.startRoomName = "Clearing in the forest"
 
   this.dbs = dbinstances
 }
@@ -30,6 +30,12 @@ CopyPrototype(EventScheduler,Game)
 var _p = Game.prototype
 
 evalFile("Game.ConsistencyCheckDatabases.js")
+
+
+_p.StartRoomName = function()
+{
+  return this.startRoomName
+}
 
 _p.LoadDatabases = function(dir,purge)
 {

@@ -55,6 +55,11 @@ HasArray.getPrototypeInstance = function(items)
     return new ArrayIterator(this[container])
   }
 
+  _p[Items] = function()
+  {
+    return this[items]
+  }
+
 
   _p["Num" + Items] = function()
   {
@@ -66,6 +71,8 @@ HasArray.getPrototypeInstance = function(items)
   {
     this[items].idx = 0
   }
+
+
 
   _p["IsValid" + Item] = function()
   {

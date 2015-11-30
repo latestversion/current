@@ -226,6 +226,7 @@ GiveCommand.prototype.Execute = function(args,charter)
 RegisterCommand(GiveCommand)
 
 
+
 function DropCommand(cid)
 {
   Command.call(this,cid)
@@ -249,6 +250,33 @@ DropCommand.prototype.Execute = function(args,charter)
   Game.DoAction({name:"dropitem",arg1:charter.ID(),text:args.join(" ")})
 }
 RegisterCommand(DropCommand)
+
+
+function TriggerCommand(cid)
+{
+  Command.call(this,cid)
+  this.SetName("trig")
+  this.SetDescription("trig <event>")
+}
+CopyPrototype(Command,TriggerCommand)
+
+TriggerCommand.prototype.Execute = function(args,charter)
+{
+  l1("Executing " + this.Name(),LG_CMDS)
+
+  var cid = charter.ID()
+
+  if(!args.length)
+  {
+    charter.DoAction({name:"error",text:this.Description()})
+    return
+  }
+
+  Game.DoAction({name:"event",arg1:charter.Room(),text:args[0]})
+}
+RegisterCommand(TriggerCommand)
+
+
 
 
 

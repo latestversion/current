@@ -19,7 +19,7 @@ function Game()
   this.maxdt = 1000
   this.lastTick = 0
 
-  this.startRoomName = "Clearing in the forest"
+  this.startRoomName = "Frog Rehab"
 
   this.dbs = dbinstances
 }

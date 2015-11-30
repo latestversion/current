@@ -108,3 +108,6 @@ _p.ConsistencyCheckDatabases = function(dbs,addmissing)
   }
 
 }
+
+//Log.logGroups.push(LG_DB_CHECK)
+

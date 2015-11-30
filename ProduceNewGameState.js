@@ -199,9 +199,36 @@ function ProduceNewGameState(dbs,savedir)
   pdb.Add(p)
 
 
+
+  var r = rgndb.Create(dtid)
+  r.SetName("Area51")
+
+  var area51 = r
+
+  var room = rdb.Create()
+  room.SetName("Frog Rehab")
+  room.SetDescription("Frogs come here from all over the country, to get rid of their alcohol and narcotics addictions.")
+  room.SetRegion(area51.ID())
+
+  var frogrehab = room
+
+  var charter = Game.cdb.Create(CharacterTemplateIds.TalkativeFrog)
+  charter.SetRoom(frogrehab.ID())
+
+  var charter = Game.cdb.Create(CharacterTemplateIds.InvisibleTalkativeFrog)
+  charter.SetRoom(frogrehab.ID())
+
+  var p = new Portal()
+  p.SetName("EW temple<->frogrehab")
+  p.SetID(pdb.GetFreeID())
+  p.AddEntry(new PortalEntry(templeroom.ID(),"east",frogrehab.ID()))
+  p.AddEntry(new PortalEntry(frogrehab.ID(),"west",templeroom.ID()))
+  pdb.Add(p)
+
   for (var k in dbs)
   {
-    l("Saving database " + dbs[k].Name() + " to directory " + savedir)
+    l1(k)
+    l1("Saving database " + dbs[k].Name() + " to directory " + savedir)
     dbs[k].SaveToDirectory(savedir)
   }
 

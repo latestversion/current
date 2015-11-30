@@ -1,3 +1,6 @@
+
+evalFile("PhysicalEvent.js")
+
 var _p = Game.prototype
 
 LG_G_DOA = "LG_G_DOA"
@@ -526,7 +529,6 @@ _p.DoDropItemAction = function(a)
   charter.DoAction(action)
 
   charter.DoAction({name:"error",text:"You drop {0} to the ground.".format(item.Name())})
-
 }
 
 
@@ -560,10 +562,79 @@ _p.DoEventAction = function(a)
   this.DoActionForPortalsInRoom(room,a)
 }
 
+_p.DoPhysicalEventAction = function(a)
+{
+  l1("DoPhysicalEventAction: ".format(JSON.stringify(a)))
+
+  var purevisual = a.purevisual ? true : false
+
+  var rid = a.arg1
+  var room = Game.Room(rid)
+
+  l1("Physical even action in room " + room.Name())
+
+  var targetids = a.targets ? a.targets : room.Characters().slice(0)
+
+  l1("Physical event targets: " + targetids)
+
+  var actorids = a.actors ? a.actors : [room.ID()]
+
+  l1("Physical event actors: " + actorids)
+
+  var actors = []
+  for(var k in actorids)
+  {
+    var aid = actorids[k]
+    var idx = targetids.indexOf(aid)
+    if(-1 != idx)
+    {
+      targetids.splice(idx,1)
+    }
+
+    actors.push(Game.GetEntity(actorids[k]))
+  }
+
+  l1("Physical event targets after actors pruned: " + targetids)
+
+  var targets = []
+
+  for (var i in targetids)
+  {
+    targets[i] = Game.Character(targetids[i])
+  }
+
+  for (var targetidx in targets)
+  {
+    var hasvisibleactors = false
+    for (var actoridx in actors)
+    {
+      l1("Checking ")
+      if(this.CheckHasVisual(targets[targetidx],actors[actoridx]))
+      {
+        hasvisibleactors = true
+      }
+    }
+
+    if(visibleactors || !purevisual)
+    {
+      targets[k].DoAction({name:"info",text:a.text})
+    }
+  }
+
+
+  // No targets -> Tell all except actors
+  // No actors -> Just, ehm, go with it. Check target hasvisual vs room.
+
+  // Actors are always excluded from receving the event
+
+  var actorids = a.actors
+
+  // If no actors just check hasvisual vs room
+
+}
 
 _p.DoAction = function(a)
 {
-
   l1("e Game.DoAction with action " + JSON.stringify(a),LG_SPAM)
 
   if("enterrealm" == a.name)
@@ -614,5 +685,10 @@ _p.DoAction = function(a)
   if("event" == a.name)
   {
     this.DoEventAction(a)
+  }
+
+  if("physicalevent" == a.name)
+  {
+    this.DoPhysicalEventAction(a)
   }
 }

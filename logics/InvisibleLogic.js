@@ -34,7 +34,7 @@ _p.DoAction = function(a)
   {
     var entity = Game.GetEntity(this.ID())
     Game.AddAction({name:"say",arg1:this.ID(),text:"Im " + entity.Name() + " saying hello 'cause im invis"},40)
-    Game.AddAction({name:"physicalevent",arg1:entity.Room(),text:"Meh heh!"},50)
+    Game.AddAction({name:"physicalevent",purevisual:true,actors:[this.ID()],arg1:entity.Room(),text:"The frog power is increasing!!"},50)
   }
 
   return true

@@ -8,9 +8,15 @@ function DarkRoomLogic(id)
   this.SetName("DarkRoomLogic")
 }
 
+CopyPrototype(Entity,DarkRoomLogic)
+
 var _p = DarkRoomLogic.prototype
 
-CopyPrototype(Entity,DarkRoomLogic)
+
+_p.ActorCanSeeInRoom = function(actor,room)
+{
+
+}
 
 _p.DoAction = function(a)
 {
@@ -18,14 +24,18 @@ _p.DoAction = function(a)
   if(a.name == "attemptlookroom")
   {
       var room = Game.Room(this.id)
-      var actor = Game.Character(a.arg1)
+      var actor = Game.GetEntity(a.arg1)
 
       if(this.ActorHasDarkSight(actor) || this.RoomHasAoeLight(room))
       {
         return true
       }
 
-      actor.DoAction({name:"error",text:"A Dark Room\nIt's pitch black..."})
+      if(!a.mute)
+      {
+        actor.DoAction({name:"error",text:"A Dark Room\nIt's pitch black..."})
+      }
+
       return false
   }
 

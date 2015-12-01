@@ -34,6 +34,17 @@ _p.Room = function(rid)
   return this.rdb.Get(rid)
 }
 
+
+_p.EntitiesForIDs = function(ids)
+{
+  var ents = []
+  for (var i = 0; i < ids.length; i++)
+  {
+    ents.push(Game.GetEntity(ids[i]))
+  }
+  return ents
+}
+
 _p.ItemsForCharter = function(charter)
 {
   l1("Searching among " + charter.NumItems() + " items for charter " + charter.Name())

@@ -207,7 +207,7 @@ function ProduceNewGameState(dbs,savedir)
 
   var room = rdb.Create()
   room.SetName("Frog Rehab")
-  room.SetDescription("Frogs come here from all over the country, to get rid of their alcohol and narcotics addictions.")
+  room.SetDescription("Frogs come here from all over the country,\nto get rid of their alcohol and narcotics addictions.")
   room.SetRegion(area51.ID())
 
   var frogrehab = room

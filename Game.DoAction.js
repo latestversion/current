@@ -136,10 +136,10 @@ _p.DoMoveAction = function(a)
 
 LG_CHK_VISUAL = "LG_CHK_VISUAL"
 
-_p.CheckHasVisual = function(actorid,targetid)
+_p.CheckHasVisual = function(actor,target)
 {
-  var actor = Game.GetEntity(actorid)
-  var target = Game.GetEntity(targetid)
+  var actorid = actor.ID()
+  var targetid = target.ID()
   var room = Game.Room(actor.Room())
 
   l1("CheckHasVisual: Checking if {0} can see {1} in {2}".format(actor.Name(),target.Name(),room.Name()),LG_CHK_VISUAL)
@@ -184,7 +184,7 @@ _p.DoLookRoomAction = function(a)
   l1("DoLookRoomAction for character {0}".format(character.Name()),LG_LK_RM)
 
   var room = rdb.Get(character.Room())
-  if(room.DoAction({name:"attemptlookroom",arg1:a.cid}))
+  if(room.DoAction({name:"attemptlookroom",arg1:a.cid,silentcheck:true}))
   {
     s += room.Name() + "\n" + room.Description() + "\n"
   }
@@ -199,7 +199,7 @@ _p.DoLookRoomAction = function(a)
     if(roomchar.ID() != character.ID())
     {
       l1("Checking if {0} can see {1}".format(character.Name(),roomchar.Name()),LG_LK_RM)
-      if(this.CheckHasVisual(character.ID(),roomchar.ID()))
+      if(this.CheckHasVisual(character,roomchar))
       {
         l1("{0} could see {1}".format(character.Name(),roomchar.Name()),LG_LK_RM)
         s += roomchar.Name() + " is here" + "\n"
@@ -213,7 +213,7 @@ _p.DoLookRoomAction = function(a)
   {
     var item = idb.Get(iid)
     l1("Checking if {0} can see {1}".format(character.Name(),item.Name()),LG_LK_RM)
-    if(this.CheckHasVisual(character.ID(),iid))
+    if(this.CheckHasVisual(character,item))
     {
       l1("{0} could indeed see {1}".format(character.Name(),item.Name()),LG_LK_RM)
       s += item.Name() + " is here" + "\n"
@@ -571,17 +571,16 @@ _p.DoPhysicalEventAction = function(a)
   var rid = a.arg1
   var room = Game.Room(rid)
 
-  l1("Physical even action in room " + room.Name())
+  l1("Physical event action in room " + room.Name())
 
-  var targetids = a.targets ? a.targets : room.Characters().slice(0)
+  var targetids = a.targets ? a.targets.slice(0) : room.Characters().slice(0)
 
   l1("Physical event targets: " + targetids)
 
-  var actorids = a.actors ? a.actors : [room.ID()]
+  var actorids = a.actors ? a.actors : []
 
   l1("Physical event actors: " + actorids)
 
-  var actors = []
   for(var k in actorids)
   {
     var aid = actorids[k]
@@ -590,34 +589,54 @@ _p.DoPhysicalEventAction = function(a)
     {
       targetids.splice(idx,1)
     }
-
-    actors.push(Game.GetEntity(actorids[k]))
   }
 
   l1("Physical event targets after actors pruned: " + targetids)
 
-  var targets = []
 
-  for (var i in targetids)
-  {
-    targets[i] = Game.Character(targetids[i])
-  }
+  var actors = Game.EntitiesForIDs(actorids)
+  var targets = Game.EntitiesForIDs(targetids)
 
-  for (var targetidx in targets)
+  l1("Physical event num actors: " + actors.length)
+  l1("Physical event num targets: " + targets.length)
+
+  // Check how each target sees the actors
+  // If a target sees 0 actors and event is purely visual, the event is missed
+  for (var targetidx = 0; targetidx < targets.length; targetidx++)
   {
     var hasvisibleactors = false
-    for (var actoridx in actors)
+    var currenttarget = targets[targetidx]
+
+    if(actors.length)
     {
-      l1("Checking ")
-      if(this.CheckHasVisual(targets[targetidx],actors[actoridx]))
+      for (var actoridx = 0; actoridx < actors.length; actoridx++)
+      {
+        l1("Checking ")
+        var currentactor = actors[actoridx]
+        l1("Checking currnet actor / target : {0}/{1}".format(currenttarget.Name(),currentactor.Name()) )
+        if(this.CheckHasVisual(currenttarget,currentactor))
+        {
+          hasvisibleactors = true
+        }
+        else
+        {
+          // Replace actor with grammatical entity unknown ("someone", "something", etc)
+        }
+      }
+    }
+    else // No explicit actors - Check against general room sight
+    {
+      l1("No actors given, let's check if the room is a visible area to the target")
+      var action = {name:"attemptlookroom",arg1:currenttarget.ID(),mute:true}
+      if(room.DoAction(action))
       {
         hasvisibleactors = true
       }
     }
 
-    if(visibleactors || !purevisual)
+    if(hasvisibleactors || !purevisual)
     {
-      targets[k].DoAction({name:"info",text:a.text})
+      currenttarget.DoAction({name:"info",text:a.text})
     }
   }
 

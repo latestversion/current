@@ -88,8 +88,22 @@ CopyPrototype(Command,InfoCommand)
 InfoCommand.prototype.Execute = function(args,c)
 {
   l1("Executing " + this.Name(),LG_CMDS)
-  room = Game.rdb.Get(c.Room())
-  c.DoAction({name:"error",text:JSON.stringify(room)})
+
+  if(args.length)
+  {
+    var id = args[0]
+    var entity = Game.Entity(id)
+    //c.DoAction({name:"error",text:JSON.stringify(entity.SceneHandler())})
+    c.DoAction({name:"error",text:JSON.stringify(entity)})
+
+  }
+  else
+  {
+    room = Game.rdb.Get(c.Room())
+    c.DoAction({name:"error",text:JSON.stringify(room)})
+  }
+
+
 }
 
 RegisterCommand(InfoCommand)
@@ -275,6 +289,65 @@ TriggerCommand.prototype.Execute = function(args,charter)
   Game.DoAction({name:"event",arg1:charter.Room(),text:args[0]})
 }
 RegisterCommand(TriggerCommand)
+
+function ArmCommand(cid)
+{
+  Command.call(this,cid)
+  this.SetName("arm")
+  this.SetDescription("Attempts to equip an item. 'arm <inventoryitem>")
+}
+CopyPrototype(Command,ArmCommand)
+
+ArmCommand.prototype.Execute = function(args,charter)
+{
+  l1("Executing " + this.Name(),LG_CMDS)
+
+  var cid = charter.ID()
+
+  if(!args.length)
+  {
+    charter.DoAction({name:"error",text:this.Description()})
+    return
+  }
+
+  var itemname = args.join(" ")
+  l1("Asked to arm " + itemname,LG_CMDS)
+
+  var items = Game.FilterNamedsByString(charter.Items(),itemname,1)
+  if(!items.length)
+  {
+    charter.DoAction({name:"error",text:"I could not find this '" + itemname + "' that you speak of."})
+    return
+  }
+
+  var item = items[0]
+  if(charter.DoAction({name:"query",arg1:item.ID(),text:"canarm"}))
+  {
+    charter.DoAction({name:"error",text:"It seems {0} cannot be armed.".format(item.Name())})
+    return
+  }
+
+  charter.DoAction({name:"do",text:"arm",arg1:item.ID()})
+}
+RegisterCommand(ArmCommand)
+
+function DisarmCommand(cid)
+{
+  Command.call(this,cid)
+  this.SetName("disarm")
+  this.SetDescription("Attempts to unequip an item. 'disarm <armeditem>")
+}
+CopyPrototype(Command,DisarmCommand)
+
+DisarmCommand.prototype.Execute = function(args,charter)
+{
+  l1("Executing " + this.Name(),LG_CMDS)
+
+  var cid = charter.ID()
+
+  charter.DoAction({name:"do",text:"disarm"})
+}
+RegisterCommand(DisarmCommand)
 
 
 

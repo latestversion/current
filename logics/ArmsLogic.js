@@ -17,10 +17,10 @@ _p.DoAction = function(a)
 {
 
 
-  if(a.name == "query" && a.text="canarm")
+  if("query" == a.name && "canarm" == a.text)
   {
       var item = Game.Item(a.arg1)
-      if (1 == item.GetAttribute("arms"))
+      if (item.HasAttribute("arms"))
       {
         return false
       }
@@ -33,11 +33,20 @@ _p.DoAction = function(a)
     var item = Game.Item(a.arg1)
     this.Disarm()
     this.Arm(item)
+    return
   }
 
   if(a.name == "do" && "disarm" == a.text)
   {
+    var charter = Game.Character(this.ID())
+    var weaponid = charter.GetAttribute("weapon")
+    if(!weaponid)
+    {
+      charter.DoAction({name:"info",text:"There is nothing to disarm"})
+      return
+    }
     this.Disarm()
+    return
   }
 
   return true
@@ -50,11 +59,13 @@ _p.Arm = function(item)
   charter.DoAction({name:"info",text:"You wield " + item.Name()})
 }
 
-_P.Disarm = function()
+_p.Disarm = function()
 {
-  var charter = Game.Character(this.iD())
-  if(charter.HasAttribute("weapon"))
+  var charter = Game.Character(this.ID())
+  var weaponid = charter.GetAttribute("weapon")
+  if(weaponid)
   {
+    var item = Game.Item(weaponid)
     charter.SetAttribute("weapon",0)
     charter.DoAction({name:"info",text:"You stop using " + item.Name()})
   }

@@ -13,6 +13,11 @@ _p.GetEntity = function(id)
 }
 
 
+_p.Entity = function(id)
+{
+  return this.GetEntity(id)
+}
+
 _p.Character = function(cid)
 {
   return this.cdb.Get(cid)
@@ -77,6 +82,28 @@ _p.ItemsForEntity = function(e)
   l1("ItemsForEntity: Item {0} had {1} items".format(e.Name(),items.length))
 
   return items
+}
+
+
+_p.FilterNamedsByString = function(namedsids,matchstring)
+{
+  l1("Matching {0} nameds against {1}".format(namedsids.length, matchstring))
+
+  var nameds = Game.EntitiesForIDs(namedsids)
+  var filterednameds = []
+
+  var matcher = new PartialMatcher(matchstring)
+
+  for(var k = 0; k < nameds.length; k++)
+  {
+    var named = nameds[k]
+    if(matcher.Match(named.Name()))
+    {
+      filterednameds.push(named)
+    }
+  }
+
+  return filterednameds
 }
 
 _p.MatchingItemsForCharter = function(charter,matchstring)

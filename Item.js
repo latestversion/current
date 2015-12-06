@@ -1,10 +1,12 @@
 
 evalFile("Entity.js")
+evalFile("DataEntity.js")
 
 function Item()
 {
   Entity.call(this)
   LogicEntity.call(this)
+  DataEntity.call(this)
   HasTemplate.call(this)
   HasRoom.call(this)
   HasCharacter.call(this)
@@ -12,6 +14,7 @@ function Item()
 
 CopyPrototype(Entity,Item)
 CopyPrototype(LogicEntity,Item)
+CopyPrototype(DataEntity,Item)
 CopyPrototype(HasTemplate,Item)
 CopyPrototype(HasRoom,Item)
 CopyPrototype(HasCharacter,Item)

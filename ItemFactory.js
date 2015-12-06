@@ -40,6 +40,7 @@ _p.Create = function(tid,id)
   {
 	  i.SetName("A mediocre carrot")
 	  i.SetDescription("It's a not so fine carrot.")
+    i.SetAttribute("arms",1)
   }
   else if (ItemTemplateIDs.DamnFineCarrot == tid)
   {

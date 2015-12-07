@@ -1,4 +1,8 @@
-
+- think about how to make it all into an "engine" or framework. "include Game"
+  Provide initial game state, have separate logics, commands etc.
+- separate "engine" and adventure specific stuff
+- separate core logic and adventure specific logic
+- cant save player due to cyclic structure, json pukes
 - remove repeatedbroadcast
 - remove commented out stuff
 - create an information struct to tell game which is starting room (on new game, etc)

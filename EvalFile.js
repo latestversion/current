@@ -1,7 +1,8 @@
-defaultscope = this
-this.eval = eval
-var evaledFiles = {}
 
+var evaledFiles = {}
+var xeval = eval // want indirect call so that stuff goes to global scope
+// http://www.2ality.com/2014/01/eval.html
+// http://perfectionkills.com/global-eval-what-are-the-options/
 evalFile = function(file)
 {
   if(evaledFiles[file])
@@ -18,5 +19,5 @@ evalFile = function(file)
 
   var s = readFile(file,"ascii")
 
-  defaultscope.eval(s)
+  xeval(s)
 }

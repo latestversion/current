@@ -4,10 +4,24 @@ import UIKit
 import JavaScriptCore
 
 
+
 let ctx = JSContext()
 
+let platform = Platform()
 
-let a = ctx.evaluateScript("7")
+
+ctx.setObject(platform, forKeyedSubscript: "platform")
+
+ctx.exceptionHandler  = { context, exception in
+    print("JS Error: \(exception)")
+}
+
+var a = ctx.evaluateScript("this.platform.getFileContent('hej')")
+print(a)
+
+print("Muu")
+
+ a = ctx.evaluateScript("7;eval('hejsan=6677;function hepp(){}')")
 
 func evalFile(suffixfreename:String,context:JSContext)
 {
@@ -29,11 +43,11 @@ func evalFile(suffixfreename:String,context:JSContext)
 evalFile("CopyPrototype",context:ctx)
 evalFile("HasArray",context:ctx)
 
-ctx.exceptionHandler  = { context, exception in
-    print("JS Error: \(exception)")
-}
 
-ctx.evaluateScript("var roggo = new HasArray('bones');for(var k in roggo){})
 
+ctx.evaluateScript("var roggo = new HasArray('bones');")
+
+print("\(ctx.objectForKeyedSubscript("roggo"))")
+ctx.evaluateScript("JSON.stringify(roggo)")
 
 

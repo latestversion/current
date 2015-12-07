@@ -14,7 +14,7 @@ if(PLATFORM_NODE == PLATFORM)
   var net = require('net');
   var fs = require('fs')
   var evaledFiles = {}
-    evalFile = function(file,refscope){
+    evalFile = function(file,refscope)
     {
       //console.log(evaledFiles)
       if(evaledFiles[file])
@@ -101,7 +101,7 @@ if(PLATFORM_NODE == PLATFORM)
 
   var server = net.createServer(newConnectionHandler)
   server.listen(8124, function serverBoundHandler(){console.log('server bound')})
-}
+
 
 
 function loop()

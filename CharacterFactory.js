@@ -49,6 +49,7 @@ CharacterFactory.Create = function(tid,id)
   {
     c.SetName("A talkative frog")
     c.SetDescription("This frog likes to talk. Talk talk talk.")
+    c.AddLogic(CombatLogic)
   }
   else if(CharacterTemplateIds.InvisibleTalkativeFrog == tid)
   {

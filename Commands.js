@@ -153,7 +153,6 @@ TalkCommand.prototype.Execute = function(args,charter)
 RegisterCommand(TalkCommand)
 
 
-
 function InventoryCommand(cid)
 {
   Command.call(this,cid)
@@ -348,6 +347,57 @@ DisarmCommand.prototype.Execute = function(args,charter)
   charter.DoAction({name:"do",text:"disarm"})
 }
 RegisterCommand(DisarmCommand)
+
+function AttackCommand(cid)
+{
+  Command.call(this,cid)
+  this.SetName("attack")
+  this.SetDescription("Attempts to attack a character. 'attack <roomcharacter>")
+}
+CopyPrototype(Command,AttackCommand)
+
+AttackCommand.prototype.Execute = function(args,charter)
+{
+  l1("Executing " + this.Name(),LG_CMDS)
+
+  var cid = charter.ID()
+  var room = Game.Room(charter.Room())
+  var searchstring = args.join(" ")
+  var target = Game.FilterNamedsByString(room.Characters(),searchstring)[0]
+
+  if(!target && charter.IsPlayer())
+  {
+    charter.DoAction({name:"error",text:"There is no " + searchstring + " here that you can attack."})
+    return
+  }
+
+  if(target.DoAction({name:"query",arg1:cid,text:"canattack"}))
+  {
+    charter.DoAction({name:"info",text:"{0} isn't really compatible with fighting.".format(target.Name())})
+    return
+  }
+
+  charter.DoAction({name:"do",arg1:target.ID(),text:"initattack"})
+}
+RegisterCommand(AttackCommand)
+
+
+function BreakCommand(cid)
+{
+  Command.call(this,cid)
+  this.SetName("break")
+  this.SetDescription("Stops attacking your target.")
+}
+CopyPrototype(Command,BreakCommand)
+
+BreakCommand.prototype.Execute = function(args,charter)
+{
+  l1("Executing " + this.Name(),LG_CMDS)
+
+  charter.DoAction({name:"do",text:"breakattack"})
+}
+RegisterCommand(BreakCommand)
+
 
 
 

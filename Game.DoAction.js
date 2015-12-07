@@ -20,7 +20,7 @@ _p.DoEnterRealmAction = function(a)
   if(!r)
   {
     l1("rdb did not return valid room for rid  " + c.Room() + " for cid " + c.ID(),LG_CMDS)
-    c.DoAction(new Action("error",0,0,0,"You enter the V0iD..."))
+    c.DoAction(new Action("error",0,0,0,0,"You enter the V0iD..."))
     return
   }
 
@@ -652,6 +652,14 @@ _p.DoPhysicalEventAction = function(a)
 
 }
 
+_p.DoDoAction = function(a)
+{
+  l1("DoDoAction: Entity ID: " + a.arg1)
+  var entity = Game.Entity(a.arg1)
+  entity.DoAction(a)
+}
+
+
 _p.DoAction = function(a)
 {
   l1("e Game.DoAction with action " + JSON.stringify(a),LG_SPAM)
@@ -709,5 +717,10 @@ _p.DoAction = function(a)
   if("physicalevent" == a.name)
   {
     this.DoPhysicalEventAction(a)
+  }
+
+  if("do" == a.name)
+  {
+    this.DoDoAction(a)
   }
 }

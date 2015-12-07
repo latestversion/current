@@ -89,7 +89,7 @@ _p.DoCommand = function(input,cid)
   else
   {
     l5(c.Name() + " did not have command " + cmdname,LG_CMDS)
-    c.DoAction(new Action("error",0,0,0,"I did not recognize command " + cmdname))
+    c.DoAction(new Action("error",0,0,0,0,"I did not recognize command " + cmdname))
   }
 }
 

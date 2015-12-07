@@ -1,7 +1,4 @@
 
-defaultscope = this
-this.eval = eval
-
 PLATFORM_NODE = "node"
 PLATFORM_IOS = "ios"
 

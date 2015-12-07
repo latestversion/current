@@ -1,8 +1,9 @@
+defaultscope = this
+this.eval = eval
 var evaledFiles = {}
 
-evalFile = function(file,refscope)
+evalFile = function(file)
 {
-  //console.log(evaledFiles)
   if(evaledFiles[file])
   {
     return
@@ -14,15 +15,8 @@ evalFile = function(file,refscope)
   {
     l1("evaling file " + file,LG_EVAL)
   }
-  
+
   var s = readFile(file,"ascii")
 
-  if(refscope)
-  {
-    refscope.eval(s)
-  }
-  else
-  {
-    defaultscope.eval(s)
-  }
+  defaultscope.eval(s)
 }

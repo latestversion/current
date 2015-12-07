@@ -5,7 +5,7 @@ evalFile("logics/ImScaredLogic.js")
 evalFile("logics/CarrotQuestLogic.js")
 evalFile("logics/SpawnCarrotsLogic.js")
 evalFile("logics/ClosedGateOpenOnEventLogic.js")
-evalFile("logics/DarkRoomLogic.js")
+evalFile("corelogics/DarkRoomLogic.js")
 evalFile("Logic.js")
 
 LG_NGS = "LG_NGS"

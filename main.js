@@ -1,7 +1,6 @@
 
 defaultscope = this
-
-"use strict"
+this.eval = eval
 
 PLATFORM_NODE = "node"
 PLATFORM_IOS = "ios"
@@ -13,61 +12,37 @@ if(PLATFORM_NODE == PLATFORM)
 {
   var net = require('net');
   var fs = require('fs')
-  var evaledFiles = {}
-    evalFile = function(file,refscope)
-    {
-      //console.log(evaledFiles)
-      if(evaledFiles[file])
-      {
-        return
-      }
 
-      evaledFiles[file] = true
-
-      if(typeof l1 !== "undefined")
-      {
-        l1("evaling file " + file,LG_EVAL)
-      }
-      var s = fs.readFileSync(file,"ascii")
-      if(refscope)
-      {
-        refscope.eval(s)
-      }
-      else
-      {
-        defaultscope.eval(s)
-      }
-
-    }
-
-
-    readFile = function(file){
-      var s = fs.readFileSync(file,"ascii")
-      return s
-    }
-
-    writeFile = function(file,data)
-    {
-      fs.writeFileSync(file, data)
-    }
-
-    main_platform_wait = function(delay)
-    {
-      var startTime = Date.now()
-      var count = 0
-
-      while(Date.now() - startTime < delay)
-      {
-        count += 1
-      }
-    }
+  readFile = function(file){
+    var s = fs.readFileSync(file,"ascii")
+    return s
   }
 
-  this.eval = eval
+  writeFile = function(file,data)
+  {
+    fs.writeFileSync(file, data)
+  }
+
+  main_platform_wait = function(delay)
+  {
+    var startTime = Date.now()
+    var count = 0
+
+    while(Date.now() - startTime < delay)
+    {
+      count += 1
+    }
+  }
+}
+
+  console.log("Reading EvalFile.js")
+  var evalstring = readFile("EvalFile.js")
+  eval(evalstring)
+  
+  evalFile("log.js")
   evalFile("String.js")
   evalFile("Array.js")
   evalFile("Matchers.js")
-  evalFile("log.js")
   evalFile("Enums.js")
   evalFile("IDBank.js")
   evalFile("ArrayIterator.js")

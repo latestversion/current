@@ -9,20 +9,24 @@ let ctx = JSContext()
 
 let platform = Platform()
 
-
-ctx.setObject(platform, forKeyedSubscript: "platform")
-
 ctx.exceptionHandler  = { context, exception in
     print("JS Error: \(exception)")
 }
 
+
+ctx.setObject(platform, forKeyedSubscript: "platform")
+ctx.evaluateScript("readFile = platform.readFile.bind(platform)")
+ctx.evaluateScript("writeFile = platform.writeFile.bind(platform)")
+ctx.evaluateScript("console = platform")
+
+
 var a = ctx.evaluateScript("this.platform.getFileContent('hej')")
 print(a)
 
-print("Muu")
+// 1. Just eval main from context
+ctx.evaluateScript("var s = readFile('main.js');eval(s)")
 
- a = ctx.evaluateScript("7;eval('hejsan=6677;function hepp(){}')")
-
+// ... or, 2. eval it from here
 func evalFile(suffixfreename:String,context:JSContext)
 {
     // get path to the pagedown source file
@@ -39,15 +43,9 @@ func evalFile(suffixfreename:String,context:JSContext)
     
 }
 
-
-evalFile("CopyPrototype",context:ctx)
-evalFile("HasArray",context:ctx)
+evalFile("main", context: ctx)
 
 
 
-ctx.evaluateScript("var roggo = new HasArray('bones');")
-
-print("\(ctx.objectForKeyedSubscript("roggo"))")
-ctx.evaluateScript("JSON.stringify(roggo)")
 
 

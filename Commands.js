@@ -377,7 +377,7 @@ AttackCommand.prototype.Execute = function(args,charter)
     return
   }
 
-  charter.DoAction({name:"do",arg1:target.ID(),text:"initattack"})
+  charter.DoAction({name:"do",arg3:target.ID(),text:"initattack"})
 }
 RegisterCommand(AttackCommand)
 

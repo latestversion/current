@@ -54,18 +54,18 @@ _p.Character = function()
 /* HasTemplate */
 function HasTemplate()
 {
-  this.template = 0
+  this.templateid = 0
 }
 
 
 HasTemplate.prototype
 var _p = HasTemplate.prototype
 
-_p.Template = function()
+_p.TemplateID = function()
 {
-  return this.template
+  return this.templateid
 }
 
-_p.SetTemplate = function(template)
-{this.template = template}
+_p.SetTemplateID = function(templateid)
+{this.templateid = templateid}
 

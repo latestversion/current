@@ -34,7 +34,7 @@ _p.Create = function(tid,id)
 	}
 
   var i = new Item()
-  i.SetTemplate(tid)
+  i.SetTemplateID(tid)
   i.SetID(id)
 
   if (ItemTemplateIDs.MediocreCarrot == tid)

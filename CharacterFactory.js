@@ -17,7 +17,7 @@ CharacterFactory = {}
 CharacterFactory.Create = function(tid,id)
 {
   var c = new Character()
-  c.SetTemplate(tid)
+  c.SetTemplateID(tid)
   c.SetID(id)
 
   if (CharacterTemplateIds.TomFinkdorf == tid)

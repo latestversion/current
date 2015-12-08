@@ -50,29 +50,20 @@ HasArray.getPrototypeInstance = function(items)
     return idx > -1 ? true : false
   }
 
-  _p[Items + "Iterator"] = function()
-  {
-    return new ArrayIterator(this[container])
-  }
-
   _p[Items] = function()
   {
     return this[items]
   }
-
 
   _p["Num" + Items] = function()
   {
     return this[items].length
   }
 
-
   _p["Begin" + Items] = function()
   {
     this[items].idx = 0
   }
-
-
 
   _p["IsValid" + Item] = function()
   {
@@ -93,7 +84,6 @@ HasArray.getPrototypeInstance = function(items)
 
     return this[items][this[items].idx++]
   }
-
 
   hasContainerPrototypes[items] = _p
 

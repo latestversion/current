@@ -55,9 +55,9 @@ _p.ConsistencyCheckDatabases = function(dbs,addmissing)
 
   // Rooms
   l1("Checking {0} rooms".format(rdb.Size()),LG_DB_CHECK)
-  var riter = rdb.Iterator()
+  var riter = rdb.Start()
   var room
-  while(room = riter.Next())
+  while(room = rdb.Next())
   {
     var rid = room.ID()
     var rgnid = room.Region()

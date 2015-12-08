@@ -1,3 +1,66 @@
+DESIGN DOCUMENT
+-proof of concept-
+
+Real time text adventure
+Single player MUD
+
+Feature List:
+Quests
+Dialogues with choices
+Items
+Weapons
+Zones
+Dark rooms
+
+Commands:
+east
+west
+north
+south
+open
+use / wield
+remove
+get
+attack
+talk
+look
+
+
+THE KING OF GOBLIN FOREST
+
+Available characters:
+Tom Finkdorf
+Esma Blargle
+Goward Rotchest
+Frannie Beet
+
+he she it
+
+
+Grassland
+Player starts in grassland. Two rooms.
+One room has carrots and a shovel +1 something. And also potatoes that heal.
+The other has quest giver. QG wants two carrots. Quest completed -> opens fence to north. New exit: north
+
+Goblin forest
+Goblins run around, will fight.
+One room has wise old man. ”The goblin king can only be defeated by someone wearing the ring of blah blah”
+One room dark. When using lantern can find ring.
+One room with super strong spider. You can die for sure here.
+One room has goblin king. Defeating the goblin king leads to victory scene.
+
+Victory scene: Long lost father emerges from cage behind goblin king. ”Frannie, I am your father!”
+”But my name is Esma…”
+”Dad, I love you!”
+”Yep.”
+
+
+
+
+
+
+
+
 When the client starts the user decides whether to
 
 How to start a new game:
@@ -85,5 +148,36 @@ regions
 rooms
 characters
 
+- think about how to make it all into an "engine" or framework. "include Game"
+  Provide initial game state, have separate logics, commands etc.
+- separate "engine" and adventure specific stuff
+- separate core logic and adventure specific logic
+- cant save player due to cyclic structure, json pukes
+- remove repeatedbroadcast
+- remove commented out stuff
+- create an information struct to tell game which is starting room (on new game, etc)
+- save scheduled events
+- think over the logic and command factories
+- logic: ownerid, ownid
+- aliases for commands, meh!
 
+
+- remake commandfactory to be more like logicfactory. cf is clunky atm.
+- create directory newgamestate automatically if not exist
+carrot quest!
+- give command (remake command factory first)
+- quest logic
+- reward..?
+
+
+
+- logging framework. severity and groups. l("lla",1,LG_DB), l("muppmupp",4,LG_SAVE).
+- calling function traced automatically
+- ability to set outstream in loggin framework
+- create directory automatically (newgamestate etc) if missing
+- validity checkers. things that check valid databases.
+- somethign to save the name of the function that got the new operator on it in an object
+- possibly specific ctors for the databases
+-possibly create the databses in Game
+- portals
 

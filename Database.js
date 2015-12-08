@@ -147,8 +147,3 @@ _p.Next = function()
 {
   return this.database[this.loopidx++]
 }
-
-_p.Iterator = function()
-{
-  return new ArrayIterator(this.database)
-}

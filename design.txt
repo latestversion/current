@@ -148,6 +148,13 @@ regions
 rooms
 characters
 
+
+- Rework Logics to inherit from Logic and take ownerid + ownid (latter from idbank)
+- rework character & itemfactory to be more like commandfactory
+  (this would enable adding chars & items independent of factories,
+   -> easier to separate engine from specific game...)
+- maybe merge type/templateid... ?
+
 - think about how to make it all into an "engine" or framework. "include Game"
   Provide initial game state, have separate logics, commands etc.
 - separate "engine" and adventure specific stuff

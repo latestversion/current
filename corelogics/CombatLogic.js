@@ -82,6 +82,13 @@ _p.DoAction = function(a)
     {
       this.attackedlist.push(attackerid)
     }
+
+    if(!this.target)
+    {
+      this.target = attackerid
+      Game.AddAction({name:"do",arg1:this.ID(),text:"attack"},0)
+    }
+
     return
   }
 

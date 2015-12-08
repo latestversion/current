@@ -34,7 +34,7 @@ Choose your character:
 5. Ludo Bog
    Too fond of berries.
 6. Greta Fogeyes
-   Couldn't hit the side of a barn from within.
+   Couldn't hit the side of a barn from within it.
 7. Dick Dogwood
    Nudist.
 8. Fred Fishmonger
@@ -47,6 +47,28 @@ dope fiend - addicted to something
 clumsy - to hit reduction.
 Liked by cats - cats follow them. There is a prob of falling over cats. Hahaha.
 
+
+Damage
+
+<weapon> <verb> <targetname> for <x> damage
+Your puny hand tickles The mighty ox for 0 damage
+Your puny hand mildly inconveniences The mighty ox for 1 damage
+tickle
+pat
+mildly inconveniences
+slightly scratches
+sting
+hit
+slash
+sends <name> sprawling
+devastates
+destroys
+ultraslays
+überkills
+ULTRASLAYS
+*ULTRASLAYS*
+**ULTRASLAYS**
+***ULTRASLAYS***
 
 2 ->
 

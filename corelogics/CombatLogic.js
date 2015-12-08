@@ -33,8 +33,8 @@ _p.DoAction = function(a)
 
     var weapon = new Item()
     weapon.SetName("Fist of Fury!")
-    weapon.SetAttribute("mindamage",0)
-    weapon.SetAttribute("maxdamage",1)
+    weapon.SetAttribute("mindamage",10)
+    weapon.SetAttribute("maxdamage",100)
 
     var chancetohit = 50
 
@@ -132,7 +132,7 @@ _p.DoAction = function(a)
     return
   }
 
-  if("do" == name && data == "breakattack")
+  if("do" == name && text == "breakattack")
   {
     this.Break()
     return
@@ -160,7 +160,7 @@ _p.Break = function()
   // Kill action waiting in even scheduler!!!!!!111
   Game.AddAction({arg1:attacker.Room(),name:"physicalevent",actors:[this.ID(),target.ID()],text:"{0} stops attacking {1}!".format(attacker.Name(),target.Name()),purevisual:true},0)
   target.DoAction(new Action("do",0,0,0,0,"brokeattack"))
-  self.target = 0
+  this.target = 0
 }
 
 RegisterLogic(CombatLogic)

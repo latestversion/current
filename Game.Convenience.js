@@ -39,7 +39,6 @@ _p.Room = function(rid)
   return this.rdb.Get(rid)
 }
 
-
 _p.EntitiesForIDs = function(ids)
 {
   var ents = []

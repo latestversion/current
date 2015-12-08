@@ -344,7 +344,16 @@ DisarmCommand.prototype.Execute = function(args,charter)
 
   var cid = charter.ID()
 
-  charter.DoAction({name:"do",text:"disarm"})
+  if(!args.length)
+  {
+    args = false
+  }
+  else
+  {
+    args = args.join(" ")
+  }
+
+  charter.DoAction({name:"do",text:"disarm",args:args})
 }
 RegisterCommand(DisarmCommand)
 

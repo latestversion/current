@@ -1,5 +1,6 @@
 
 evalFile("Item.js",this)
+evalFile("ArmsTypes.js",this)
 
 
 ItemTemplateIdCount = 1
@@ -40,7 +41,7 @@ _p.Create = function(tid,id)
   {
 	  i.SetName("A mediocre carrot")
 	  i.SetDescription("It's a not so fine carrot.")
-    i.SetAttribute("arms",1)
+    i.SetAttribute("arms",ArmsTypes.Weapon)
   }
   else if (ItemTemplateIDs.DamnFineCarrot == tid)
   {
@@ -58,6 +59,7 @@ _p.Create = function(tid,id)
   {
     i.SetName("A rusty shovel")
     i.SetDescription("This shovel is past its prime.")
+    i.SetAttribute("arms",ArmsTypes.Weapon)
   }
   else
   {

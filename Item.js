@@ -2,7 +2,7 @@
 evalFile("Entity.js")
 evalFile("DataEntity.js")
 
-function Item()
+function Item(id,name,desc)
 {
   Entity.call(this)
   LogicEntity.call(this)
@@ -10,6 +10,9 @@ function Item()
   HasTemplate.call(this)
   HasRoom.call(this)
   HasCharacter.call(this)
+  this.SetID(id)
+  this.SetName(name)
+  this.SetDescription(desc)
 }
 
 CopyPrototype(Entity,Item)

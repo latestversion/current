@@ -13,7 +13,7 @@ _p._AddCommand = _p.AddCommand
 
 _p.AddCommand = function(command)
 {
-  l1("Add command {0} for cid {1}".format(command,this.ID()))
+  l1("Add command {0} for cid {1}".format(command.name,this.ID()))
 
   var command = CommandFactory.Create(command,this.ID())
 

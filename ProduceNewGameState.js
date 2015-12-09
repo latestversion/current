@@ -63,10 +63,10 @@ function ProduceNewGameState(dbs,savedir)
   character.AddExistingLogic(logic)
   character.AddLogic(CarrotQuestLogic)
 
-  var i = idb.Create(ItemTemplateIDs.MediocreCarrot)
+  var i = idb.Create(MediocreCarrot)
   i.SetRoom(mudfield.ID())
 
-  var i = idb.Create(ItemTemplateIDs.DamnFineCarrot)
+  var i = idb.Create(DamnFineCarrot)
   i.SetRoom(mudfield.ID())
 
   // ANOTHER FIELD OF MUD
@@ -78,7 +78,7 @@ function ProduceNewGameState(dbs,savedir)
 
   var mudfield2 = r
 
-  var i  = idb.Create(ItemTemplateIDs.Shovel)
+  var i  = idb.Create(Shovel)
   i.SetRoom(mudfield2.ID())
 
 
@@ -113,7 +113,7 @@ function ProduceNewGameState(dbs,savedir)
   var king = Game.cdb.Create(CharacterTemplateIds.GoblinKing)
   king.SetRoom(r.ID())
 
-    var i  = idb.Create(ItemTemplateIDs.CuriousFrogFigurine)
+    var i  = idb.Create(CuriousFrogFigurine)
   i.SetRoom(throneroom.ID())
 
 
@@ -130,10 +130,10 @@ function ProduceNewGameState(dbs,savedir)
   var charter = Game.cdb.Create(CharacterTemplateIds.GiantSpider)
   charter.SetRoom(spiderroom.ID())
 
-  var i  = idb.Create(ItemTemplateIDs.Shovel)
+  var i  = idb.Create(Shovel)
   i.SetRoom(spiderroom.ID())
 
-  var i  = idb.Create(ItemTemplateIDs.Shovel)
+  var i  = idb.Create(Shovel)
   var lightlogic = new Logic()
   lightlogic.__proto__.DoAction = function(){return true} // sometimes you just want to test stuff
   lightlogic.SetName("selflight")

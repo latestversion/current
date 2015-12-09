@@ -2,72 +2,41 @@
 evalFile("Item")
 evalFile("ArmsTypes")
 evalFile("logics/FigurineLogic")
+evalFile("CtorRegistry")
 
+ItemFactory = new CtorRegistry("ItemFactory")
 
-ItemTemplateIdCount = 1
+RegisterItem = ItemFactory.Register.bind(ItemFactory)
 
-var ItemTemplateIDs = {}
-
-ItemTemplateIDs.MediocreCarrot = ItemTemplateIdCount++
-ItemTemplateIDs.DamnFineCarrot = ItemTemplateIdCount++
-ItemTemplateIDs.CuriousFrogFigurine = ItemTemplateIdCount++
-ItemTemplateIDs.Shovel = ItemTemplateIdCount++
-
-function ItemFactory()
+function InheritAndRegisterItem(subclass)
 {
-	Entity.call(this)
-	this.SetName("ItemFactory")
+  CopyPrototype(Item,subclass)
+  RegisterItem(subclass)
 }
 
-CopyPrototype(Entity,ItemFactory)
-
-var _p = ItemFactory.prototype
-
-_p.Create = function(tid,id)
+function MediocreCarrot(id)
 {
-
-	l1(this.Name() + ": Creating tid " + tid)
-
-	if(tid >= ItemTemplateIdCount || tid <= 0)
-	{
-		l9("Item factory: template id out of range")
-		return undefined
-	}
-
-  var i = new Item()
-  i.SetTemplateID(tid)
-  i.SetID(id)
-
-  if (ItemTemplateIDs.MediocreCarrot == tid)
-  {
-	  i.SetName("A mediocre carrot")
-	  i.SetDescription("It's a not so fine carrot.")
-    i.SetAttribute("arms",ArmsTypes.Weapon)
-  }
-  else if (ItemTemplateIDs.DamnFineCarrot == tid)
-  {
-		i.SetName("A damn fine carrot")
-		i.SetDescription("It's a DAMN fine carrot.")
-  }
-  else if(ItemTemplateIDs.CuriousFrogFigurine == tid)
-  {
-  	i.SetName("A figurine of the curious frog")
-  	i.SetDescription("A curiosu frogu is a finu friend.")
-    i.AddLogic(FigurineLogic)
-  }
-  else if(ItemTemplateIDs.Shovel == tid)
-  {
-    i.SetName("A rusty shovel")
-    i.SetDescription("This shovel is past its prime.")
-    i.SetAttribute("arms",ArmsTypes.Weapon)
-  }
-  else
-  {
-  	l9(this.Name() + ": No fitting template for tid " + tid)
-  	return undefined
-  }
-
-  return i
+  Item.call(this,id,"A mediocre carrot","It's a not so fine carrot.")
+  this.SetAttribute("arms",ArmsTypes.Weapon)
 }
+InheritAndRegisterItem(MediocreCarrot)
 
-ItemFactory = new ItemFactory()
+function DamnFineCarrot(id)
+{
+  Item.call(this,id,"A damn fine carrot","It's a DAMN fine carrot.")
+}
+InheritAndRegisterItem(DamnFineCarrot)
+
+function CuriousFrogFigurine(id)
+{
+  Item.call(this,id,"A figurine of the curious frog","A curiosu frogu is a finu friend.")
+  this.AddLogic(FigurineLogic)
+}
+InheritAndRegisterItem(CuriousFrogFigurine)
+
+function Shovel(id)
+{
+  Item.call(this,id,"A rusty shovel","This shovel is past its prime.")
+  this.SetAttribute("arms",ArmsTypes.Weapon)
+}
+InheritAndRegisterItem(Shovel)

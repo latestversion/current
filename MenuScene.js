@@ -36,7 +36,7 @@ _p.Tick = function(input)
 	if(true) //input == "1")
 	{
 		Game.StartNewGame()
-		var c = Game.cdb.Create(CharacterTemplateIds.TomFinkdorf)
+		var c = Game.cdb.Create(TomFinkledorf)
 		c.SetPlayer(true)
 		var room = Game.rdb.GetByName(Game.StartRoomName())
 		c.SetRoom(room.ID())

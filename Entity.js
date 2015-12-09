@@ -31,6 +31,11 @@ _p.SetDescription = function(d)
 _p.SetID = function(id)
 {this.id = id}
 
+_p.Type = function()
+{
+	return this.type
+}
+
 _p.Revive = function()
 {
 

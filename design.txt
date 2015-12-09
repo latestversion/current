@@ -148,6 +148,10 @@ regions
 rooms
 characters
 
+- TemplateID should be set in Entity.
+- create should take either string or ctor and function should check for
+  type and get ctor for string. hm I think, at least. Consider respawn
+  logics.
 
 - Rework Logics to inherit from Logic and take ownerid + ownid (latter from idbank)
 - rework character & itemfactory to be more like commandfactory

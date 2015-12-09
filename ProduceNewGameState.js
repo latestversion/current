@@ -110,7 +110,7 @@ function ProduceNewGameState(dbs,savedir)
 
   var throneroom = r
 
-  var king = Game.cdb.Create(CharacterTemplateIds.GoblinKing)
+  var king = Game.cdb.Create(GoblinKing)
   king.SetRoom(r.ID())
 
     var i  = idb.Create(CuriousFrogFigurine)
@@ -127,7 +127,7 @@ function ProduceNewGameState(dbs,savedir)
 
   var spiderroom = r
 
-  var charter = Game.cdb.Create(CharacterTemplateIds.GiantSpider)
+  var charter = Game.cdb.Create(GiantSpider)
   charter.SetRoom(spiderroom.ID())
 
   var i  = idb.Create(Shovel)
@@ -151,7 +151,7 @@ function ProduceNewGameState(dbs,savedir)
 
   var templeroom = r
 
-  var charter = Game.cdb.Create(CharacterTemplateIds.WiseMan)
+  var charter = Game.cdb.Create(WiseMan)
   charter.SetRoom(templeroom.ID())
 
 
@@ -212,10 +212,10 @@ function ProduceNewGameState(dbs,savedir)
 
   var frogrehab = room
 
-  var charter = Game.cdb.Create(CharacterTemplateIds.TalkativeFrog)
+  var charter = Game.cdb.Create(TalkativeFrog)
   charter.SetRoom(frogrehab.ID())
 
-  var charter = Game.cdb.Create(CharacterTemplateIds.InvisibleTalkativeFrog)
+  var charter = Game.cdb.Create(InvisibleTalkativeFrog)
   charter.SetRoom(frogrehab.ID())
 
   var p = new Portal()

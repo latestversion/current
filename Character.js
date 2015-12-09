@@ -5,7 +5,7 @@ evalFile("DataEntity.js",this)
 evalFile("LogicEntity.js",this)
 evalFile("HasCommands.js",this)
 
-function Character()
+function Character(id,name,description)
 {
   Entity.call(this)
   LogicEntity.call(this)
@@ -16,6 +16,11 @@ function Character()
   HasItems.call(this)
   HasTemplate.call(this)
 
+  this.SetID(id)
+  this.SetTemplateID(this.type)
+  this.SetName(name)
+  this.SetDescription(description)
+  this.SetTemplateID(this.Type())
 
   this.account = 0
   this.quiet = false

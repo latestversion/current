@@ -10,9 +10,11 @@ function Item(id,name,desc)
   HasTemplate.call(this)
   HasRoom.call(this)
   HasCharacter.call(this)
+
   this.SetID(id)
   this.SetName(name)
   this.SetDescription(desc)
+  this.SetTemplateID(this.Type())
 }
 
 CopyPrototype(Entity,Item)

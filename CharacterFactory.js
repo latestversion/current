@@ -1,65 +1,54 @@
 
-evalFile("Character.js",this)
+evalFile("Character")
+evalFile("CtorRegistry")
 
-CharacterTemplateIdCount = 0
+CharacterFactory = new CtorRegistry("CharacterFactory")
+RegisterCharacter = CharacterFactory.Register.bind(CharacterFactory)
 
-var CharacterTemplateIds = {}
 
-CharacterTemplateIds.TomFinkdorf = CharacterTemplateIdCount++
-CharacterTemplateIds.GoblinKing = CharacterTemplateIdCount++
-CharacterTemplateIds.GiantSpider = CharacterTemplateIdCount++
-CharacterTemplateIds.WiseMan = CharacterTemplateIdCount++
-CharacterTemplateIds.TalkativeFrog = CharacterTemplateIdCount++
-CharacterTemplateIds.InvisibleTalkativeFrog = CharacterTemplateIdCount++
-
-CharacterFactory = {}
-
-CharacterFactory.Create = function(tid,id)
+function InheritAndRegisterCharacter(subclass)
 {
-  var c = new Character()
-  c.SetTemplateID(tid)
-  c.SetID(id)
-
-  if (CharacterTemplateIds.TomFinkdorf == tid)
-  {
-    var name = "Tom Finkledorf"
-    c.SetName(name)
-    c.SetDescription("His name is " + name + ". You get the picture.")
-  }
-  else if(CharacterTemplateIds.GoblinKing == tid)
-  {
-    var name = "The *Goblin King*"
-    c.SetName(name)
-    c.SetDescription("The Goblin King has smiles like a razor's edge when he plots your demise.")
-  }
-  else if(CharacterTemplateIds.GiantSpider == tid)
-  {
-
-    var name = "A GIANT SPIDER"
-    c.SetName(name)
-    c.SetDescription("This spider is the stuff of nightmares. Its many eyes reflect the image of a dead adventurer.")
-  }
-  else if(CharacterTemplateIds.WiseMan == tid)
-  {
-    var name = "The wise old hermit"
-    c.SetName(name)
-    c.SetDescription("This man is very smart, becuase he's lived in a cave his entire life.")
-  }
-  else if(CharacterTemplateIds.TalkativeFrog == tid)
-  {
-    c.SetName("A talkative frog")
-    c.SetDescription("This frog likes to talk. Talk talk talk.")
-    c.AddLogic(CombatLogic)
-  }
-  else if(CharacterTemplateIds.InvisibleTalkativeFrog == tid)
-  {
-    c.SetName("An invisible frog")
-    c.SetDescription("This frog likes to talk. And is VERY hard to see.")
-    c.AddExistingLogic(new InvisibleLogic(c.ID()))
-  }
-
-  return c
+  CopyPrototype(Character,subclass)
+  RegisterCharacter(subclass)
 }
 
+function TomFinkledorf(id)
+{
+  var name = "Tom Finkledorf"
+  Character.call(this,id,name,"His name is " + name + ". You get the picture.")
+}
+InheritAndRegisterCharacter(TomFinkledorf)
+
+function GoblinKing(id)
+{
+  Character.call(this,id,"The *Goblin King*","The Goblin King has smiles like a razor's edge when he plots your demise.")
+}
+InheritAndRegisterCharacter(GoblinKing)
+
+function GiantSpider(id)
+{
+  Character.call(this,id,"A GIANT SPIDER","This spider is the stuff of nightmares. Its many eyes reflect the image of a dead adventurer.")
+}
+InheritAndRegisterCharacter(GiantSpider)
+
+function WiseMan(id)
+{
+  Character.call(this,id,"The wise old hermit","This woman is very smart, because she's lived in a cave her entire life.")
+}
+InheritAndRegisterCharacter(WiseMan)
+
+function TalkativeFrog(id)
+{
+  Character.call(this,id,"A talkative frog","This frog likes to talk. Talk talk talk.")
+  this.AddLogic(CombatLogic)
+}
+InheritAndRegisterCharacter(TalkativeFrog)
+
+function InvisibleTalkativeFrog(id)
+{
+  Character.call(this,id,"An invisible frog","This frog likes to talk. And is VERY hard to see.")
+  this.AddExistingLogic(new InvisibleLogic(this.ID()))
+}
+InheritAndRegisterCharacter(InvisibleTalkativeFrog)
 
 

@@ -62,6 +62,7 @@ _p.Tick = function(input)
 		c.AddCommand(DisarmCommand.name)
 		c.AddCommand(AttackCommand.name)
 		c.AddCommand(BreakCommand.name)
+		c.AddCommand(EvalCommand.name)
 
 		var item = Game.idb.Create(ItemTemplateIDs.MediocreCarrot)
 		c.AddItem(item.ID())

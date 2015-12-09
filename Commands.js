@@ -407,7 +407,21 @@ BreakCommand.prototype.Execute = function(args,charter)
 }
 RegisterCommand(BreakCommand)
 
+function EvalCommand(cid)
+{
+  Command.call(this,cid)
+  this.SetName("eval")
+  this.SetDescription("Be a god.")
+}
+CopyPrototype(Command,EvalCommand)
 
+EvalCommand.prototype.Execute = function(args,charter)
+{
+  l1("Executing " + this.Name(),LG_CMDS)
+
+  eval(args.join(" "))
+}
+RegisterCommand(EvalCommand)
 
 
 

@@ -5,6 +5,12 @@ var xeval = eval // want indirect call so that stuff goes to global scope
 // http://perfectionkills.com/global-eval-what-are-the-options/
 evalFile = function(file)
 {
+
+  if(-1 == file.indexOf(".js"))
+  {
+    file += ".js"
+  }
+
   if(evaledFiles[file])
   {
     return

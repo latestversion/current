@@ -36,6 +36,11 @@ _p.Type = function()
 	return this.type
 }
 
+_p.TypeName = function()
+{
+  return this.type
+}
+
 _p.Revive = function()
 {
 

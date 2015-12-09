@@ -148,7 +148,10 @@ regions
 rooms
 characters
 
+TODOs:
+
 - TemplateID should be set in Entity.
+- TemplateID should be replaced by Type
 - create should take either string or ctor and function should check for
   type and get ctor for string. hm I think, at least. Consider respawn
   logics.
@@ -168,27 +171,16 @@ characters
 - remove commented out stuff
 - create an information struct to tell game which is starting room (on new game, etc)
 - save scheduled events
-- think over the logic and command factories
 - logic: ownerid, ownid
 - aliases for commands, meh!
 
-
-- remake commandfactory to be more like logicfactory. cf is clunky atm.
 - create directory newgamestate automatically if not exist
 carrot quest!
-- give command (remake command factory first)
-- quest logic
 - reward..?
 
-
-
-- logging framework. severity and groups. l("lla",1,LG_DB), l("muppmupp",4,LG_SAVE).
-- calling function traced automatically
+- calling function printout in log (check node and javascriptcore both have
+  callee functionality)
 - ability to set outstream in loggin framework
 - create directory automatically (newgamestate etc) if missing
 - validity checkers. things that check valid databases.
-- somethign to save the name of the function that got the new operator on it in an object
-- possibly specific ctors for the databases
--possibly create the databses in Game
-- portals
 

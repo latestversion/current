@@ -154,6 +154,9 @@ function ProduceNewGameState(dbs,savedir)
   var charter = Game.cdb.Create(WiseMan)
   charter.SetRoom(templeroom.ID())
 
+  var i  = idb.Create(Lantern)
+  i.SetRoom(templeroom.ID())
+
 
  // Portal mudfield -> mudfield
   var p = new Portal()

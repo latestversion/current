@@ -12,24 +12,27 @@ CopyPrototype(Entity,DarkRoomLogic)
 
 var _p = DarkRoomLogic.prototype
 
-
-_p.ActorCanSeeInRoom = function(actor,room)
-{
-
-}
-
 _p.DoAction = function(a)
 {
-
   if(a.name == "attemptlookroom")
   {
       var room = Game.Room(this.id)
       var actor = Game.GetEntity(a.arg1)
 
-      if(this.ActorHasDarkSight(actor) || this.RoomHasAoeLight(room))
+      l1("{0} attempts to look at room {1}".format(actor.Name(),room.Name()))
+      if(this.ActorHasDarkSight(actor))
       {
         return true
       }
+
+      l1("The actor did not have darksight")
+
+      if(this.RoomHasAoeLight(room))
+      {
+        return true
+      }
+
+      l1("The room did not have aoelight")
 
       if(!a.mute)
       {
@@ -80,11 +83,12 @@ _p.ActorHasDarkSight = function(actor)
 
 _p.RoomHasAoeLight = function(room)
 {
-  var charters = Game.ChartersInRoom(room)
-  for (var k in charters)
+  var charters = Game.EntitiesForIDs(room.Characters())
+  for (var k = 0; k <  charters.length; k++)
   {
     var charter = charters[k]
-    if (actor.HasLogic("aoelight") || !charter.DoAction({name:"query",text:"aoelight"}) )
+    l1("DarkRoomLogic: RoomHasAoeLight: Querying char " + charter.Name() + " for aoelight")
+    if (charter.HasLogic("aoelight") || !charter.DoAction({name:"query",text:"aoelight"}) )
     {
       return true
     }

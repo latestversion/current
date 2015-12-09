@@ -63,7 +63,7 @@ _p.DoAction = function(a)
 
       this.Disarm(disarmitem.GetAttribute("arms"))
     }
-    
+
     return
   }
 
@@ -76,7 +76,7 @@ _p.Arm = function(item)
   charter.SetAttribute(item.GetAttribute("arms"),item.ID())
   l1("{0} set arms type attribute {1} to item {2} ".format(charter.Name(),item.GetAttribute("arms"),item.Name()))
   charter.DoAction({name:"info",text:"You use " + item.Name()})
-  item.DoAction(new Action("didarm",charter.ID(),item.ID()))
+  item.DoAction(new Action("didarmitem",charter.ID(),item.ID()))
 }
 
 _p.Disarm = function(armstype)
@@ -88,7 +88,7 @@ _p.Disarm = function(armstype)
     var item = Game.Item(armid)
     charter.SetAttribute(armstype,0)
     charter.DoAction({name:"info",text:"You stop using " + item.Name()})
-    item.DoAction(new Action("diddisarm",charter.ID(),item.ID()))
+    item.DoAction(new Action("diddisarmitem",charter.ID(),item.ID()))
   }
 }
 

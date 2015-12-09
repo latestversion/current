@@ -2,6 +2,7 @@
 evalFile("Item")
 evalFile("ArmsTypes")
 evalFile("logics/FigurineLogic")
+evalFile("corelogics/LanternLogic")
 evalFile("CtorRegistry")
 
 ItemFactory = new CtorRegistry("ItemFactory")
@@ -14,16 +15,25 @@ function InheritAndRegisterItem(subclass)
   RegisterItem(subclass)
 }
 
+
+function Weaponify(item,mindam,maxdam)
+{
+  item.SetAttribute("arms",ArmsTypes.Weapon)
+  item.SetAttribute("mindamage",mindam)
+  item.SetAttribute("maxdamage",maxdam)
+}
+
 function MediocreCarrot(id)
 {
   Item.call(this,id,"A mediocre carrot","It's a not so fine carrot.")
-  this.SetAttribute("arms",ArmsTypes.Weapon)
+  Weaponify(this,1,1)
 }
 InheritAndRegisterItem(MediocreCarrot)
 
 function DamnFineCarrot(id)
 {
   Item.call(this,id,"A damn fine carrot","It's a DAMN fine carrot.")
+  Weaponify(this,10,20)
 }
 InheritAndRegisterItem(DamnFineCarrot)
 
@@ -37,6 +47,16 @@ InheritAndRegisterItem(CuriousFrogFigurine)
 function Shovel(id)
 {
   Item.call(this,id,"A rusty shovel","This shovel is past its prime.")
-  this.SetAttribute("arms",ArmsTypes.Weapon)
+  Weaponify(this,0,2)
 }
 InheritAndRegisterItem(Shovel)
+
+function Lantern(id)
+{
+  Item.call(this,id,"A big lantern","It will illuminate your path.")
+  this.AddLogic(LanternLogic)
+  this.SetAttribute("arms",ArmsTypes.Light)
+}
+InheritAndRegisterItem(Lantern)
+
+

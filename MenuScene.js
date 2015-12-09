@@ -72,6 +72,7 @@ _p.Tick = function(input)
 		c.AddItem(item.ID())
 		var item = Game.idb.Create(CuriousFrogFigurine)
 		c.AddItem(item.ID())
+		c.AddItem(Game.idb.Create(Lantern).ID())
 
 		this.SceneHandler().ReplaceCurrentScene(new GameScene(this.SceneHandler(),this.stream,c.ID()))
 		Game.DoAction({name:"enterrealm",arg1:c.ID()})

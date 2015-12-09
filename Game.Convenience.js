@@ -168,7 +168,7 @@ _p.ChartersInRoom = function(room)
     charters.push(charter)
   }
 
-  return charter
+  return charters
 }
 
 _p.MatchingCharactersInRoom = function(room,matchstring)

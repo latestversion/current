@@ -35,7 +35,7 @@ _p.Revive = function()
   {
     if(this.logics[k].type)
     {
-      l1("Logic type: " + this.logics[k].type,LG_SPAM)
+      l1("Item: Revive: Logic type: " + this.logics[k].type,LG_SPAM)
       this.logics[k].__proto__  = global[this.logics[k].type].prototype
     }
   }

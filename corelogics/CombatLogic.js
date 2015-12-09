@@ -31,10 +31,20 @@ _p.DoAction = function(a)
     l1("{0} is to attack {1}".format(attacker.Name(),target.Name()))
     Game.AddAction(new Action("do",this.ID(),0,0,0,"attack"),3000)
 
-    var weapon = new Item()
-    weapon.SetName("Fist of Fury!")
-    weapon.SetAttribute("mindamage",10)
-    weapon.SetAttribute("maxdamage",100)
+    var wepid,weapon
+    wepid = attacker.GetAttribute(ArmsTypes.Weapon)
+
+    if(!wepid)
+    {
+      weapon = new Item()
+      weapon.SetName("Fist of Fury!")
+      weapon.SetAttribute("mindamage",10)
+      weapon.SetAttribute("maxdamage",100)
+    }
+    else
+    {
+      weapon = Game.Item(wepid)
+    }
 
     var chancetohit = 50
 

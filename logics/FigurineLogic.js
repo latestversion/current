@@ -53,3 +53,5 @@ _p.DoAction = function(a)
 
   return true
 }
+
+RegisterLogic(FigurineLogic)

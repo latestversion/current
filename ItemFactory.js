@@ -1,6 +1,7 @@
 
-evalFile("Item.js",this)
-evalFile("ArmsTypes.js",this)
+evalFile("Item")
+evalFile("ArmsTypes")
+evalFile("logics/FigurineLogic")
 
 
 ItemTemplateIdCount = 1
@@ -52,8 +53,7 @@ _p.Create = function(tid,id)
   {
   	i.SetName("A figurine of the curious frog")
   	i.SetDescription("A curiosu frogu is a finu friend.")
-    var logic = new FigurineLogic(i.ID())
-    i.AddExistingLogic(logic)
+    i.AddLogic(FigurineLogic)
   }
   else if(ItemTemplateIDs.Shovel == tid)
   {

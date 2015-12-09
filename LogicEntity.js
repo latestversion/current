@@ -1,3 +1,6 @@
+evalFile("LogicFactory")
+
+
 function LogicEntity()
 {
   this.logics = []

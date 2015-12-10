@@ -41,6 +41,7 @@ function GetCommand(cid)
   Command.call(this,cid)
   this.SetName("get")
   this.SetDescription("Makes picking things up possible. Usage: 'get <item> <quantity>'")
+  this.AddAlias(new Alias("g","get"))
 }
 
 CopyPrototype(Command,GetCommand)
@@ -67,6 +68,7 @@ function ExitCommand(cid)
   Command.call(this,cid)
   this.SetName("exit")
   this.SetDescription("Exits the game.")
+  this.AddAlias(new Alias("ex","exit"))
 }
 CopyPrototype(Command,ExitCommand)
 
@@ -86,6 +88,7 @@ function InfoCommand(cid)
   Command.call(this,cid)
   this.SetName("info")
   this.SetDescription("info")
+  this.AddAlias(new Alias("i","info"))
 }
 CopyPrototype(Command,InfoCommand)
 
@@ -119,6 +122,7 @@ function LookCommand(cid)
   Command.call(this,cid)
   this.SetName("look")
   this.SetDescription("Your primary way of taking in your surroundings.")
+  this.AddAlias(new Alias("l","look"))
 }
 CopyPrototype(Command,LookCommand)
 
@@ -162,6 +166,7 @@ function InventoryCommand(cid)
   Command.call(this,cid)
   this.SetName("inventory")
   this.SetDescription("Use to list the items in your inventory.")
+  this.AddAlias(new Alias("inv","inventory"))
 }
 
 CopyPrototype(Command,InventoryCommand)
@@ -213,6 +218,7 @@ function GiveCommand(cid)
   Command.call(this,cid)
   this.SetName("give")
   this.SetDescription("give (quantity) <ownitem> <character>")
+  this.AddAlias(new Alias("gi","give"))
 }
 CopyPrototype(Command,GiveCommand)
 
@@ -298,6 +304,7 @@ function ArmCommand(cid)
   Command.call(this,cid)
   this.SetName("arm")
   this.SetDescription("Attempts to equip an item. 'arm <inventoryitem>")
+  this.AddAlias(new Alias("a","arm"))
 }
 CopyPrototype(Command,ArmCommand)
 
@@ -339,6 +346,7 @@ function DisarmCommand(cid)
   Command.call(this,cid)
   this.SetName("disarm")
   this.SetDescription("Attempts to unequip an item. 'disarm <armeditem>")
+  this.AddAlias(new Alias("da","disarm"))
 }
 CopyPrototype(Command,DisarmCommand)
 

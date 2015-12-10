@@ -10,6 +10,10 @@ function GoCommand(cid)
   Command.call(this,cid)
   this.SetName("go")
   this.SetDescription("Makes movement possible. Usage: 'go <direction>'")
+  this.AddAlias(new Alias("e","go east"))
+  this.AddAlias(new Alias("w","go west"))
+  this.AddAlias(new Alias("n","go north"))
+  this.AddAlias(new Alias("s","go south"))
 }
 
 CopyPrototype(Command,GoCommand)

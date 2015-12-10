@@ -85,12 +85,45 @@ _p.DoCommand = function(input,cid)
     var cmd = c.GetCommand(cmdname)
     l1("had command " + cmdname,LG_CMDS)
     cmd.Execute(args,c)
+    return
   }
-  else
+
+  // Check for aliases
+  var iter = c.CommandsIterator()
+  var command
+  while(command = iter.Next())
   {
-    l5(c.Name() + " did not have command " + cmdname,LG_CMDS)
-    c.DoAction(new Action("error",0,0,0,0,"I did not recognize command " + cmdname))
+    l1(command)
+    if(command.HasAliasName(cmdname))
+    {
+      l1("Found alias " + cmdname)
+      var aliasdescription = command.AliasDescription(cmdname)
+      l1("Alais description: " + aliasdescription)
+      var newargs = aliasdescription.split(" ")
+      var cmdname = newargs.shift()
+      var length = newargs.length
+      while(length)
+      {
+        args.unshift(newargs.pop())
+        length--
+      }
+
+      if(c.HasCommand(cmdname))
+      {
+        var cmd = c.GetCommand(cmdname)
+        l1("had command " + cmdname,LG_CMDS)
+        cmd.Execute(args,c)
+        return
+      }
+    }
   }
+
+  
+  l5(c.Name() + " did not have command " + cmdname,LG_CMDS)
+
+
+  c.DoAction(new Action("error",0,0,0,0,"I did not recognize command " + cmdname))
+  
 }
 
 evalFile("Game.Convenience.js")

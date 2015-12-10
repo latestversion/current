@@ -4,6 +4,7 @@ function MapIterator(map)
 {
   this.map = map
   this.array = Object.keys(map)
+  l1("MapIterator ctor: this.array: " + this.array)
   this.idx = 0
 }
 
@@ -26,7 +27,6 @@ var hasMapPrototypes = {}
 function HasMap(items)
 {
   this[items] = {}
-  this[items]["_count"] = 0
 }
 
 // NOT FINISHED
@@ -47,13 +47,11 @@ HasMap.getPrototypeInstance = function(items)
   _p["Add" + Item] = function(key,value)
   {
     this[items][key] = value
-    this[items]["_count"]++
   }
 
   _p["Del" + Item] = function(key)
   {
       delete this[items][key]
-      this[items]["_count"]--
   }
 
   _p[Items + "Iterator"] = function()
@@ -64,7 +62,7 @@ HasMap.getPrototypeInstance = function(items)
 
   _p["Num" + Items] = function()
   {
-    return this[items]["_count"]
+    return Object.keys(this[items]).length
   }
 
   _p["Has" + Item] = function(key)

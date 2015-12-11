@@ -3,7 +3,7 @@ evalFile("Logic")
 
 function DarkRoomLogic(ownerid)
 {
-  Logic.call(this,IDBank.GetFreeID(TypeEnums.Logic),ownerid)
+  Logic.call(this,ownerid)
   this.SetName("DarkRoomLogic")
 }
 

@@ -3,7 +3,7 @@ evalFile("Logic.js")
 
 function LanternLogic(ownerid)
 {
-  Logic.call(this,IDBank.GetFreeID(TypeEnums.Logic),ownerid)
+  Logic.call(this,ownerid)
   this.SetName("LanternLogic")
   this.createdlogichandle = 0
 }

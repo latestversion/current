@@ -1,13 +1,13 @@
 evalFile("Entity.js")
 evalFile("DataEntity.js")
 
-function Logic(id,ownerid)
+function Logic(ownerid)
 {
   Entity.call(this)
   DataEntity.call(this)
   this.ownerid = ownerid
   this.handle = 0
-  this.SetID(id)
+  this.SetID(IDBank.GetFreeID(TypeEnums.Logic))
 }
 
 CopyPrototype(Entity,Logic)

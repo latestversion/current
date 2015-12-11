@@ -4,7 +4,7 @@ evalFile("LogicFactory.js")
 
 function ReporterLogic(ownerid)
 {
-  Logic.call(this,IDBank.GetFreeID(TypeEnums.Logic),ownerid)
+  Logic.call(this,ownerid)
   this.SetName("reporter")
   this.createdlogichandle = 0
   this.SetDescription("Reports different messages back to player.")

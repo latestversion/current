@@ -1,14 +1,13 @@
-evalFile("ItemFactory.js")
+evalFile("ItemFactory")
+evalFile("Logic")
 
-
-function DarkRoomLogic(id)
+function DarkRoomLogic(ownerid)
 {
-  Entity.call(this)
-  this.id = id
+  Logic.call(this,IDBank.GetFreeID(TypeEnums.Logic),ownerid)
   this.SetName("DarkRoomLogic")
 }
 
-CopyPrototype(Entity,DarkRoomLogic)
+CopyPrototype(Logic,DarkRoomLogic)
 
 var _p = DarkRoomLogic.prototype
 
@@ -16,7 +15,7 @@ _p.DoAction = function(a)
 {
   if(a.name == "attemptlookroom")
   {
-      var room = Game.Room(this.id)
+      var room = Game.Room(this.OwnerID())
       var actor = Game.GetEntity(a.arg1)
 
       l1("{0} attempts to look at room {1}".format(actor.Name(),room.Name()))

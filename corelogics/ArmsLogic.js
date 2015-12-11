@@ -1,14 +1,14 @@
 evalFile("ItemFactory.js")
+evalFile("Logic.js")
 evalFile("ArmsTypes.js")
 
-function ArmsLogic(id)
+function ArmsLogic(ownerid)
 {
-  Entity.call(this)
-  this.id = id
+  Logic.call(this,IDBank.GetFreeID(TypeEnums.Logic),ownerid)
   this.SetName("ArmsLogic")
 }
 
-CopyPrototype(Entity,ArmsLogic)
+CopyPrototype(Logic,ArmsLogic)
 
 var _p = ArmsLogic.prototype
 
@@ -38,7 +38,7 @@ _p.DoAction = function(a)
 
   if(a.name == "do" && "disarm" == a.text)
   {
-    var charter = Game.Character(this.ID())
+    var charter = Game.Character(this.OwnerID())
     if(!a.args)
     {
       var weaponid = charter.GetAttribute(ArmsTypes.Weapon)
@@ -72,7 +72,7 @@ _p.DoAction = function(a)
 
 _p.Arm = function(item)
 {
-  var charter = Game.Character(this.ID())
+  var charter = Game.Character(this.OwnerID())
   charter.SetAttribute(item.GetAttribute("arms"),item.ID())
   l1("{0} set arms type attribute {1} to item {2} ".format(charter.Name(),item.GetAttribute("arms"),item.Name()))
   charter.DoAction({name:"info",text:"You use " + item.Name()})
@@ -81,7 +81,7 @@ _p.Arm = function(item)
 
 _p.Disarm = function(armstype)
 {
-  var charter = Game.Character(this.ID())
+  var charter = Game.Character(this.OwnerID())
   var armid = charter.GetAttribute(armstype)
   if(armid)
   {

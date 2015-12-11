@@ -12,6 +12,7 @@ _p.AddLogic = function(logic)
 {
   l1("Adding logic {0} to {1} (id:{2})".format(logic.name,this.Name(),this.ID()))
   this.AddExistingLogic(LogicFactory.Create(logic,this.ID()))
+  // Hmmm. This is a bit unnecessary. Could as well just call the ctor.
 }
 
 _p.AddExistingLogic = function(logicinstance)

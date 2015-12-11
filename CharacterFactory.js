@@ -16,6 +16,8 @@ function TomFinkledorf(id)
 {
   var name = "Tom Finkledorf"
   Character.call(this,id,name,"His name is " + name + ". You get the picture.")
+  this.SetAttribute("maxhitpoints",50)
+  this.SetAttribute("hitpoints",50)
 }
 InheritAndRegisterCharacter(TomFinkledorf)
 
@@ -41,6 +43,8 @@ function TalkativeFrog(id)
 {
   Character.call(this,id,"A talkative frog","This frog likes to talk. Talk talk talk.")
   this.AddLogic(CombatLogic)
+  this.SetAttribute("maxhitpoints",10)
+  this.SetAttribute("hitpoints",4)
 }
 InheritAndRegisterCharacter(TalkativeFrog)
 

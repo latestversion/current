@@ -59,4 +59,12 @@ function Lantern(id)
 }
 InheritAndRegisterItem(Lantern)
 
+function Ring(id)
+{
+  Item.call(this,id,"Ring of Quickness","This ring will make you quick enough to slay even a goblin!")
+  this.SetAttribute("arms",ArmsTypes.Ring)
+}
+InheritAndRegisterItem(Ring)
+
+
 

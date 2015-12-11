@@ -1,7 +1,6 @@
 
 evalFile("logics/GeorgieTalkLogic.js")
 evalFile("ItemFactory.js")
-evalFile("logics/ImScaredLogic.js")
 evalFile("logics/CarrotQuestLogic.js")
 evalFile("logics/SpawnCarrotsLogic.js")
 evalFile("logics/ClosedGateOpenOnEventLogic.js")
@@ -100,6 +99,20 @@ function ProduceNewGameState(dbs,savedir)
 
   var clearingintheforestroom = r
 
+  // ROOM WITH RING
+
+  r = rdb.Create(dtid)
+  r.SetName("Among the trees")
+  r.SetDescription("Thick and thorny the forest stands. Murky roots have long since closed off the paths of old.")
+  r.SetRegion(forestregion.ID())
+
+  var roomwithringroom = r
+
+  r.AddLogic(DarkRoomLogic)
+
+  var i = idb.Create(Ring)
+  i.SetRoom(roomwithringroom.ID())
+
 
   // THRONE ROOM
 
@@ -177,6 +190,16 @@ function ProduceNewGameState(dbs,savedir)
   p.AddExistingLogic(logic)
   logic = null
   pdb.Add(p)
+
+
+
+  var p = new Portal()
+  p.SetName("EW throne<->ringroom")
+  p.SetID(pdb.GetFreeID())
+  p.AddEntry(new PortalEntry(throneroom.ID(),"east",roomwithringroom.ID()))
+  p.AddEntry(new PortalEntry(roomwithringroom.ID(),"west",throneroom.ID()))
+  pdb.Add(p)
+
 
   var p = new Portal()
   p.SetName("EW clearing<->temple")

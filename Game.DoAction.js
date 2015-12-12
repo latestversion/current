@@ -660,6 +660,26 @@ _p.DoDoAction = function(a)
 }
 
 
+_p.DoDestroyCharacterAction = function(a)
+{
+  // This is just for "pointer" reasons, not for game logic and fun trigger action stuff
+  l1("DoDoAction: Entity ID: " + a.arg1)
+  var charter = Game.Entity(a.arg1)
+  var a = {name:"destroy"}
+  charter.DoAction(a)
+  charter.BeginItems()
+  var id
+  while(id = charter.NextItem())
+  {
+    var item = Game.Item(id)
+    item.DoAction(a)
+  }
+  var room = Game.Room(charter.Room())
+  room.RemoveCharacter(charter.ID())
+  cdb.Remove(charter.ID())
+}
+
+
 _p.DoAction = function(a)
 {
   l1("e Game.DoAction with action " + JSON.stringify(a),LG_SPAM)
@@ -723,4 +743,10 @@ _p.DoAction = function(a)
   {
     this.DoDoAction(a)
   }
+
+  if("destroycharacter" == a.name)
+  {
+    this.DoDestroyCharacterAction(a)
+  }
+
 }

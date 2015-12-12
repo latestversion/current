@@ -118,12 +118,12 @@ _p.DoCommand = function(input,cid)
     }
   }
 
-  
+
   l5(c.Name() + " did not have command " + cmdname,LG_CMDS)
 
 
   c.DoAction(new Action("error",0,0,0,0,"I did not recognize command " + cmdname))
-  
+
 }
 
 evalFile("Game.Convenience.js")
@@ -136,6 +136,7 @@ _p.AddAction = function(action,timeoffset)
   l1("Adding action " + action.name + " sched for time " + schedtime,LG_ACTIONS)
   var timedaction = new TimedAction(action,schedtime)
   this.AddEvent(timedaction)
+  return timedaction.ID()
 }
 
 _p.AddActionAbsolute = function(action,absolutetime)
@@ -143,11 +144,20 @@ _p.AddActionAbsolute = function(action,absolutetime)
   l1("Adding absolute action " + action.name + " sched for time " + absolutetime,LG_ACTIONS)
   var timedaction = new TimedAction(action,absolutetime)
   this.AddEvent(timedaction)
+  return timedaction.ID()
 }
 
 _p.Tick = function()
 {
   this.TickTime()
+
+  var timedaction
+  // Not retrieving all passed events at once since some of them might be canceled due to character terminal illness etc
+ /* while(timedaction = this.GetFirstPassedEvent(this.Time()))
+  {
+    this.DoAction(timedaction.Action())
+  }*/
+
 
   var timedactions = this.GetPassedEvents(this.Time())
   if(timedactions.length)
@@ -155,8 +165,12 @@ _p.Tick = function()
     l1("I have " + timedactions.length + " actions to carry out",LG_ACTIONS)
     for (var k in timedactions)
     {
+      l1("TimedAction id " + timedactions[k].ID(),LG_ACTIONS)
+    }
+    for (var k in timedactions)
+    {
       var a = timedactions[k].Action()
-      l1("Timed action: " + JSON.stringify(a),LG_ACTIONS)
+      l1("Action for Timed action: " + JSON.stringify(a),LG_ACTIONS)
       this.DoAction(a)
     }
   }

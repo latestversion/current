@@ -31,7 +31,8 @@ _p.DoAction = function(a)
     var attacker = Game.Character(this.OwnerID())
     var target = Game.Character(this.target)
     l1("{0} do attack {1}".format(attacker.Name(),target.Name()),LG_COMBAT_LOGIC)
-    Game.AddAction(new Action("do",this.OwnerID(),0,0,0,"attack"),3000)
+    var handle = Game.AddAction(new Action("do",this.OwnerID(),0,0,0,"attack"),3000)
+    this.SetEventID(handle)
 
     var wepid,weapon
     wepid = attacker.GetAttribute(ArmsTypes.Weapon)
@@ -63,7 +64,7 @@ _p.DoAction = function(a)
       Game.AddAction({arg1:attacker.Room(),name:"physicalevent",actors:[this.OwnerID(),target.ID()],text:"{0} hits {1} with {2} for {3} damage!".format(attacker.Name(),target.Name(),weapon.Name(),damage),purevisual:true},0)
       attacker.DoAction({name:"info",text:"You hit " + target.Name() + " for " + damage + " damage!"})
       target.DoAction({name:"info",text: attacker.Name() + " slashes you for " + damage + " damage!"})
-      target.DoAction({name:"info",text: "{0} / {1}".format(target.GetAttribute("hitpoints"),target.GetAttribute("maxhitpoints"))})
+      //target.DoAction({name:"info",text: "{0} / {1}".format(target.GetAttribute("hitpoints"),target.GetAttribute("maxhitpoints"))})
       target.DoAction(new Action("modifyattribute",target.ID(),-1*damage,0,0,"hitpoints"))
       return
     }
@@ -73,22 +74,21 @@ _p.DoAction = function(a)
 
   if("modifyattribute" == name && "hitpoints" == text && a.arg1 == this.OwnerID())
   {
-    var target = Game.Character(a.arg1)
-    var hp = target.GetAttribute("hitpoints") + a.arg2
-    l1("CombatLogic: " + target.Name() + " got hp modified by " + a.arg2,LG_COMBAT_LOGIC)
-    target.SetAttribute("hitpoints",hp)
+    var hp = me.GetAttribute("hitpoints") + a.arg2
+    l1("CombatLogic: " + me.Name() + " got hp modified by " + a.arg2,LG_COMBAT_LOGIC)
+    me.SetAttribute("hitpoints",hp)
     if(hp < 0)
     {
-      l1("CombatLogic: " + target.Name() + " got hp reduced to below zero.",LG_COMBAT_LOGIC)
-      target.DoAction(new Action("do",0,0,0,0,"died"))
+      l1("CombatLogic: " + me.Name() + " got hp reduced to below zero.",LG_COMBAT_LOGIC)
+      me.DoAction(new Action("do",0,0,0,0,"died"))
     }
     return
   }
 
   if("do" == name && "died" == text)
   {
+    l1("do died for " + me.Name(),LG_COMBAT_LOGIC)
     this.Break()
-    var me = Game.Character(this.OwnerID())
     Game.AddAction({arg1:me.Room(),name:"physicalevent",actors:[me.ID()],text:"{0} drops to the ground as the last of their life force is drained from them...".format(me.Name()),purevisual:true},0)
     var alist = this.attackedlist.slice(0)
     for (var i = alist.length - 1; i >= 0; i--)
@@ -218,6 +218,8 @@ _p.DoAction = function(a)
 
 _p.Break = function()
 {
+  var me = Game.Character(this.OwnerID())
+  l1("Breaking combat for " + me.Name(),LG_COMBAT_LOGIC)
   if (this.target == 0)
   {
     return
@@ -225,7 +227,7 @@ _p.Break = function()
 
   var attacker = Game.Character(this.OwnerID())
   var target = Game.Character(this.target)
-  // Kill action waiting in even scheduler!!!!!!111
+  Game.CancelEvent(this.EventID())
   Game.AddAction({arg1:attacker.Room(),name:"physicalevent",actors:[this.OwnerID(),target.ID()],text:"{0} stops attacking {1}".format(attacker.Name(),target.Name()),purevisual:true},0)
   target.DoAction(new Action("do",0,0,0,0,"brokeattack"))
   this.target = 0

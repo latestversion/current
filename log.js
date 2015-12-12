@@ -3,7 +3,7 @@
 var Log = {}
 
 Log.logLevel = 1
-Log.logGroups = []
+Log.loggroups = []
 Log.logFunc = console.log
 
 LG_SPAM = "LG_SPAM"
@@ -32,7 +32,7 @@ Log.log = function(text,level,group)
     throw text
   }
 
-  if(Log.logGroups.length && (-1 == Log.logGroups.indexOf(group)))
+  if(Log.loggroups.length && (-1 == Log.loggroups.indexOf(group)))
   {
     return
   }

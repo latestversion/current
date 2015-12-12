@@ -6,7 +6,7 @@ function Logic(ownerid)
   Entity.call(this)
   DataEntity.call(this)
   this.ownerid = ownerid
-  this.handle = 0
+  this.eventid = 0
   this.SetID(IDBank.GetFreeID(TypeEnums.Logic))
 }
 
@@ -20,14 +20,14 @@ _p.OwnerID = function()
   return this.ownerid
 }
 
-_p.Handle = function()
+_p.EventID = function()
 {
-  return this.handle
+  return this.eventid
 }
 
-_p.SetHandle = function(handle)
+_p.SetEventID = function(eventid)
 {
-  return this.handle = handle
+  return this.eventid = eventid
 }
 
 _p.DoAction = function()

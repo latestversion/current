@@ -10,7 +10,6 @@ function Database(savefile,typeprototype,idrange)
   this.typeprototype = typeprototype
   this.database = []
   this.factory = undefined
-  this.maxid = 1
   this.loopidx = 0
   this.idrange = idrange
 }
@@ -30,11 +29,24 @@ _p.Add = function(e)
 {
   l1(this.Name() + ": " + " Added an entity to database: ("  + e.Name() + "," + e.ID() + ")",LG_DB)
   this.database.push(e)
-  if(e.ID() > this.maxid)
-  {
-    this.maxid = e.ID()
-  }
   l1("The db size is now " + this.Size(),LG_DB)
+}
+
+_p.Remove = function(id)
+{
+  l1(this.Name() + ": Removing an entity with id " + id,LG_DB)
+  for (var i = 0; i < this.database.length; i++)
+  {
+    if (this.database[i] == id)
+    {
+      var e = this.database[i]
+      l1(this.Name() + ": Removed an entity from database: ("  + e.Name() + "," + e.ID() + ")",LG_DB)
+      this.database.splice(i,1)
+      l1("The db size is now " + this.Size(),LG_DB)
+      return
+    }
+  }
+  l1(this.Name() + ": Did not find entity to remove wih id " + id,LG_DB)
 }
 
 

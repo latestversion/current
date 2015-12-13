@@ -93,12 +93,11 @@ _p.DoCommand = function(input,cid)
   var command
   while(command = iter.Next())
   {
-    l1(command)
     if(command.HasAliasName(cmdname))
     {
       l1("Found alias " + cmdname)
       var aliasdescription = command.AliasDescription(cmdname)
-      l1("Alais description: " + aliasdescription)
+      l1("Alias description: " + aliasdescription)
       var newargs = aliasdescription.split(" ")
       var cmdname = newargs.shift()
       var length = newargs.length
@@ -153,26 +152,10 @@ _p.Tick = function()
 
   var timedaction
   // Not retrieving all passed events at once since some of them might be canceled due to character terminal illness etc
- /* while(timedaction = this.GetFirstPassedEvent(this.Time()))
+  while(timedaction = this.GetFirstPassedEvent(this.Time()))
   {
+    l1("Timed action: id, action name: {0},{1}".format(timedaction.ID(),timedaction.Action().name),LG_ACTIONS)
     this.DoAction(timedaction.Action())
-  }*/
-
-
-  var timedactions = this.GetPassedEvents(this.Time())
-  if(timedactions.length)
-  {
-    l1("I have " + timedactions.length + " actions to carry out",LG_ACTIONS)
-    for (var k in timedactions)
-    {
-      l1("TimedAction id " + timedactions[k].ID(),LG_ACTIONS)
-    }
-    for (var k in timedactions)
-    {
-      var a = timedactions[k].Action()
-      l1("Action for Timed action: " + JSON.stringify(a),LG_ACTIONS)
-      this.DoAction(a)
-    }
   }
 }
 

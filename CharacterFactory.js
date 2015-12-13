@@ -30,6 +30,9 @@ InheritAndRegisterCharacter(GoblinKing)
 function GiantSpider(id)
 {
   Character.call(this,id,"A GIANT SPIDER","This spider is the stuff of nightmares. Its many eyes reflect the image of a dead adventurer.")
+  this.AddLogic(CombatLogic)
+  this.SetAttribute("maxhitpoints",40)
+  this.SetAttribute("hitpoints",40)
 }
 InheritAndRegisterCharacter(GiantSpider)
 
@@ -44,7 +47,7 @@ function TalkativeFrog(id)
   Character.call(this,id,"A talkative frog","This frog likes to talk. Talk talk talk.")
   this.AddLogic(CombatLogic)
   this.SetAttribute("maxhitpoints",10)
-  this.SetAttribute("hitpoints",4)
+  this.SetAttribute("hitpoints",3)
 }
 InheritAndRegisterCharacter(TalkativeFrog)
 

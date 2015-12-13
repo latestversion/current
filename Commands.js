@@ -374,6 +374,7 @@ function AttackCommand(cid)
   Command.call(this,cid)
   this.SetName("attack")
   this.SetDescription("Attempts to attack a character. 'attack <roomcharacter>")
+  this.AddAlias(new Alias("att","attack"))
 }
 CopyPrototype(Command,AttackCommand)
 

@@ -673,12 +673,37 @@ _p.DoDestroyCharacterAction = function(a)
   {
     var item = Game.Item(id)
     item.DoAction(a)
+    Game.idb.Remove(item.ID())
   }
   var room = Game.Room(charter.Room())
   room.RemoveCharacter(charter.ID())
-  cdb.Remove(charter.ID())
+  Game.cdb.Remove(charter.ID())
 }
 
+
+_p.DoDeathTransportAction = function(a)
+{
+  var charter = Game.Character(a.arg1)
+  if(!charter.IsPlayer())
+  {
+    Game.DoAction(new Action("destroycharacter",charter.ID()),0)
+    return
+  }
+
+  var room = Game.Room(me.Room())
+  var region = Game.Region(room.Region())
+
+  if(charter.DoAction(a))
+  {
+    if(room.DoAction(a))
+    {
+      if(region.DoAction(a))
+      {
+        Game.DoAction(a)
+      }
+    }
+  }
+}
 
 _p.DoAction = function(a)
 {
@@ -747,6 +772,11 @@ _p.DoAction = function(a)
   if("destroycharacter" == a.name)
   {
     this.DoDestroyCharacterAction(a)
+  }
+
+  if("deathtransport" == a.name)
+  {
+    this.DoDeathTransportAction(a)
   }
 
 }

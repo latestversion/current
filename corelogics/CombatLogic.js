@@ -25,7 +25,6 @@ _p.DoAction = function(a)
   var text = a.text
   var me = Game.Character(this.OwnerID())
 
-
   if("do" == name && "attack" == text)
   {
     var attacker = Game.Character(this.OwnerID())
@@ -99,28 +98,9 @@ _p.DoAction = function(a)
     this.attackedlist = []
     // drop items or whatever
 
-    if(!me.IsPlayer())
-    {
-      Game.AddActionAbsolute(new Action("destroycharacter",me.ID()),0)
-    }
-    else
-    {
-      var daction = new Action("deathtransport",me.ID())
-      var room = Game.Room(me.Room())
-      var region = Game.Region(room.Region())
+    var daction = new Action("deathtransport",me.ID())
 
-      if(me.DoAction(a))
-      {
-        if(room.DoAction(a))
-        {
-          if(region.DoAction(a))
-          {
-            Game.DoAction(a)
-          }
-        }
-      }
-
-    }
+    Game.AddActionAbsolute(daction,0)
 
     return
   }

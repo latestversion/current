@@ -17,7 +17,6 @@ CopyPrototype(Logic,CombatLogic)
 
 var _p = CombatLogic.prototype
 
-
 _p.DoAction = function(a)
 {
 
@@ -33,19 +32,27 @@ _p.DoAction = function(a)
     var handle = Game.AddAction(new Action("do",this.OwnerID(),0,0,0,"attack"),3000)
     this.SetEventID(handle)
 
-    var wepid,weapon
-    wepid = attacker.GetAttribute(ArmsTypes.Weapon)
 
-    if(!wepid)
+    var wepid,weapon
+    if(attacker.HasAttribute(ArmsTypes.Weapon))
     {
+      wepid = attacker.GetAttribute(ArmsTypes.Weapon)
+      weapon = Game.Item(wepid)
+      l1("Attacker {0} had a weapon attribute: {1}".format(attacker.Name(),weapon.Name()),LG_COMBAT_LOGIC)
+    }
+    else if(attacker.HasAttribute(ArmsTypes.DefaultWeapon))
+    {
+      wepid = attacker.GetAttribute(ArmsTypes.DefaultWeapon)
+      weapon = Game.Item(wepid)
+      l1("Attacker {0} had a defaultweapon attribute: {1}".format(attacker.Name(),weapon.Name()),LG_COMBAT_LOGIC)
+    }
+    else
+    {
+      l1("Attacker {0} apparently had neitehr weapon nor defaultweapon",LG_COMBAT_LOGIC)
       weapon = new Item()
       weapon.SetName("Fist of Fury!")
       weapon.SetAttribute("mindamage",1)
       weapon.SetAttribute("maxdamage",2)
-    }
-    else
-    {
-      weapon = Game.Item(wepid)
     }
 
     var chancetohit = 99
@@ -62,7 +69,7 @@ _p.DoAction = function(a)
       var damage = RNG.RandomInt(weapon.GetAttribute("mindamage"),weapon.GetAttribute("maxdamage"))
       Game.AddAction({arg1:attacker.Room(),name:"physicalevent",actors:[this.OwnerID(),target.ID()],text:"{0} hits {1} with {2} for {3} damage!".format(attacker.Name(),target.Name(),weapon.Name(),damage),purevisual:true},0)
       attacker.DoAction({name:"info",text:"You hit " + target.Name() + " for " + damage + " damage!"})
-      target.DoAction({name:"info",text: attacker.Name() + " slashes you for " + damage + " damage!"})
+      target.DoAction({name:"info",text: attacker.Name() + " slashes you for " + damage + " damage with " + weapon.Name() + "!"})
       //target.DoAction({name:"info",text: "{0} / {1}".format(target.GetAttribute("hitpoints"),target.GetAttribute("maxhitpoints"))})
       target.DoAction(new Action("modifyattribute",target.ID(),-1*damage,0,0,"hitpoints"))
       return

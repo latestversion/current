@@ -8,8 +8,8 @@ LG_G_DOA = "LG_G_DOA"
 _p.DoEnterRealmAction = function(a)
 {
   var cid = a.arg1
-  var c = cdb.Get(a.arg1)
-  var r = rdb.Get(c.Room())
+  var c = Game.Character(a.arg1)
+  var r = Game.Room(c.Room())
 
   if(!c)
   {
@@ -690,7 +690,7 @@ _p.DoDeathTransportAction = function(a)
     return
   }
 
-  var room = Game.Room(me.Room())
+  var room = Game.Room(charter.Room())
   var region = Game.Region(room.Region())
 
   if(charter.DoAction(a))
@@ -699,7 +699,10 @@ _p.DoDeathTransportAction = function(a)
     {
       if(region.DoAction(a))
       {
-        Game.DoAction(a)
+        charter.SetAttribute("hitpoints",0.7 * charter.GetAttribute("maxhitpoints"))
+        charter.SetRoom(Game.rdb.GetByName(Game.StartRoomName()))
+        charter.DoAction({name:"info",text:"You slowly regain consciousness..."})
+        Game.DoAction({name:"enterrealm",arg1:charter.ID()})
       }
     }
   }

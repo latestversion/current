@@ -66,5 +66,13 @@ function Ring(id)
 }
 InheritAndRegisterItem(Ring)
 
+function Pincer(id)
+{
+  Item.call(this,id,"Venomous pincer","The exoskeletal blade drips with poision...")
+  this.SetAttribute("arms",ArmsTypes.Weapon)
+  Weaponify(this,100,200)
+}
+InheritAndRegisterItem(Pincer)
+
 
 

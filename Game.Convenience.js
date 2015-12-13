@@ -33,6 +33,10 @@ _p.Portal = function(pid)
   return this.pdb.Get(pid)
 }
 
+_p.Region = function(rgnid)
+{
+  return this.rgndb.Get(rgnid)
+}
 
 _p.Room = function(rid)
 {

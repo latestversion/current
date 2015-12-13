@@ -16,14 +16,14 @@ function TomFinkledorf(id)
 {
   var name = "Tom Finkledorf"
   Character.call(this,id,name,"His name is " + name + ". You get the picture.")
-  this.SetAttribute("maxhitpoints",50)
-  this.SetAttribute("hitpoints",50)
+  this.SetAttribute("maxhitpoints",20)
+  this.SetAttribute("hitpoints",20)
 }
 InheritAndRegisterCharacter(TomFinkledorf)
 
 function GoblinKing(id)
 {
-  Character.call(this,id,"The *Goblin King*","The Goblin King has smiles like a razor's edge when he plots your demise.")
+  Character.call(this,id,"The *Goblin King*","The Goblin King smiles like a razor's edge when he plots your demise.")
 }
 InheritAndRegisterCharacter(GoblinKing)
 
@@ -33,6 +33,9 @@ function GiantSpider(id)
   this.AddLogic(CombatLogic)
   this.SetAttribute("maxhitpoints",40)
   this.SetAttribute("hitpoints",40)
+  var i = idb.Create(Pincer)
+  this.SetAttribute(ArmsTypes.DefaultWeapon,i.ID())
+  i.SetCharacter(this.ID())
 }
 InheritAndRegisterCharacter(GiantSpider)
 

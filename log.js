@@ -1,22 +1,14 @@
 
 
-var Log = {}
-
-Log.logLevel = 1
-Log.loggroups = []
-Log.logFunc = console.log
-
-LG_SPAM = "LG_SPAM"
-LG_ERR = "LG_ERR"
-LG_DB_CHECK = "LG_DB_CHECK"
-LG_DB = "LG_DB"
-LG_TIME = "LG_TIME"
-LG_EVAL = "LG_EVAL"
-LG_ACTIONS = "LG_ACTIONS"
-
-Log.log = function(text,level,group)
+function Log()
 {
+  this.loglevel = 1
+  this.loggroups = []
+  this.logfunc = console.log
+}
 
+Log.prototype.log = function(text,level,group)
+{
   if(!level)
   {
     level = 0
@@ -32,20 +24,28 @@ Log.log = function(text,level,group)
     throw text
   }
 
-  if(Log.loggroups.length && (-1 == Log.loggroups.indexOf(group)))
+  if(this.loggroups.length && (-1 == this.loggroups.indexOf(group)))
   {
     return
   }
 
-  if(level >= Log.logLevel)
+  if(level >= this.loglevel)
   {
     var d = new Date()
     var timestamp = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds() + ":" + d.getMilliseconds() + " "
-    Log.logFunc( timestamp + text)
+    this.logfunc( timestamp + text)
   }
-
-
 }
+
+LG_SPAM = "LG_SPAM"
+LG_ERR = "LG_ERR"
+LG_DB_CHECK = "LG_DB_CHECK"
+LG_DB = "LG_DB"
+LG_TIME = "LG_TIME"
+LG_EVAL = "LG_EVAL"
+LG_ACTIONS = "LG_ACTIONS"
+
+var Log = new Log()
 
 function addConvenienceLoggers(obj)
 {
@@ -64,6 +64,4 @@ function addConvenienceLoggers(obj)
 
 addConvenienceLoggers(global)
 
-
-
-l1("Yay ftw")
+l1("Yay, Log ftw!")

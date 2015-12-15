@@ -24,6 +24,50 @@ _p.DoAction = function(a)
   var text = a.text
   var me = Game.Character(this.OwnerID())
 
+  if("do" == name && "initattack" == text)
+  {
+    if(this.OwnerID() == a.arg3)
+    {
+      return
+    }
+
+    if (0 != this.target)
+    {
+      var target = Game.Character(this.target)
+      target.DoAction({name:"do",text:"brokeattack",arg3:this.OwnerID()})
+    }
+    else
+    {
+      Game.AddAction({name:"do",arg1:this.OwnerID(),text:"attack"},0)
+    }
+
+    this.target = a.arg3
+    var target = Game.Character(a.arg3)
+    var attacker = Game.Character(this.OwnerID())
+    target.DoAction(new Action("do",0,0,this.OwnerID(),0,"attacked"))
+    Game.AddAction({arg1:attacker.Room(),name:"physicalevent",actors:[this.OwnerID(),target.ID()],text:"{0} attacks {1}!".format(attacker.Name(),target.Name()),purevisual:true},0)
+    attacker.DoAction({name:"info",text:"You attack " + target.Name()})
+
+    return
+  }
+
+  if("do" == name && "attacked" == text)
+  {
+    var attackerid = a.arg3
+    if(this.attackedlist.indexOf(attackerid) == -1)
+    {
+      this.attackedlist.push(attackerid)
+    }
+
+    if(!this.target)
+    {
+      this.target = attackerid
+      Game.AddAction({name:"do",arg1:this.OwnerID(),text:"attack"},0)
+    }
+
+    return
+  }
+
   if("do" == name && "attack" == text)
   {
     var attacker = Game.Character(this.OwnerID())
@@ -130,22 +174,6 @@ _p.DoAction = function(a)
     return
   }
 
-  if("do" == name && "attacked" == text)
-  {
-    var attackerid = a.arg3
-    if(this.attackedlist.indexOf(attackerid) == -1)
-    {
-      this.attackedlist.push(attackerid)
-    }
-
-    if(!this.target)
-    {
-      this.target = attackerid
-      Game.AddAction({name:"do",arg1:this.OwnerID(),text:"attack"},0)
-    }
-
-    return
-  }
 
 
   if("do" == name && "brokeattack" == text)
@@ -160,32 +188,7 @@ _p.DoAction = function(a)
   }
 
 
-  if("do" == name && "initattack" == text)
-  {
-    if(this.OwnerID() == a.arg3)
-    {
-      return
-    }
 
-    if (0 != this.target)
-    {
-      var target = Game.Character(this.target)
-      target.DoAction({name:"do",text:"brokeattack",arg3:this.OwnerID()})
-    }
-    else
-    {
-      Game.AddAction({name:"do",arg1:this.OwnerID(),text:"attack"},0)
-    }
-
-    this.target = a.arg3
-    var target = Game.Character(a.arg3)
-    var attacker = Game.Character(this.OwnerID())
-    target.DoAction(new Action("do",0,0,this.OwnerID(),0,"attacked"))
-    Game.AddAction({arg1:attacker.Room(),name:"physicalevent",actors:[this.OwnerID(),target.ID()],text:"{0} attacks {1}!".format(attacker.Name(),target.Name()),purevisual:true},0)
-    attacker.DoAction({name:"info",text:"You attack " + target.Name()})
-
-    return
-  }
 
   if("do" == name && text == "breakattack")
   {

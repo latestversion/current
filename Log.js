@@ -37,6 +37,11 @@ Log.prototype.log = function(text,level,group)
   }
 }
 
+Log.prototype.AddGroup = function(group)
+{
+  this.loggroups.push(group)
+}
+
 LG_SPAM = "LG_SPAM"
 LG_ERR = "LG_ERR"
 LG_DB_CHECK = "LG_DB_CHECK"

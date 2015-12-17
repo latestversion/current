@@ -13,16 +13,17 @@ _p.AddEvent = function(event)
 	// O(n) ftw
 	l1("AddEvent: Events in queue: {0}, new event with id {2} scheduled at {1}".format(this.events.length,event.Timestamp(),event.ID()),LG_ESCHED)
 	var i
-	for (i = 0; i < this.events.length; i++)
+	for (i = this.events.length-1; i >= 0; i--)
 	{
-		if (event.Timestamp() <= this.events[i].Timestamp())
+		if (event.Timestamp() >= this.events[i].Timestamp())
 		{
 			break
 		}
 	}
 
-	l1("AddEvent: Putting new event at index: {0}".format(i),LG_ESCHED)
-	this.events.splice(i,0,event)
+	var indextoput = i + 1
+	l1("AddEvent: Putting new event at index: {0}".format(indextoput),LG_ESCHED)
+	this.events.splice(indextoput,0,event)
 	l1("AddEvent: Events in queue: " + this.events.length,LG_ESCHED)
 }
 
@@ -73,7 +74,7 @@ _p.GetFirstPassedEvent = function(currtime)
 	if(firstevent && (firstevent.Timestamp() <= currtime))
 	{
 		this.events.shift()
-		l1("GetFirstPassedEvent: Returnign an event ")
+		l1("GetFirstPassedEvent: Returning an event ")
 		l1("GetFirstPassedEvent: Events in queue: " + this.events.length, LG_ESCHED)
 		return firstevent
 	}
@@ -81,4 +82,5 @@ _p.GetFirstPassedEvent = function(currtime)
 	return false
 }
 
+Log.AddGroup(LG_ESCHED)
 

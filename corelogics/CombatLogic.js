@@ -53,16 +53,19 @@ _p.DoAction = function(a)
 
   if("do" == name && "attacked" == text)
   {
+
     var attackerid = a.arg3
+    l1(me.Name() +": holy shit, I got attacked",LG_COMBAT_LOGIC)
     if(this.attackedlist.indexOf(attackerid) == -1)
     {
+      l1(me.Name() + ": New attacker: " + attackerid,LG_COMBAT_LOGIC)
       this.attackedlist.push(attackerid)
     }
 
     if(!this.target)
     {
       this.target = attackerid
-      Game.AddAction({name:"do",arg1:this.OwnerID(),text:"attack"},0)
+      this.SetEventID(Game.AddAction({name:"do",arg1:this.OwnerID(),text:"attack"},0))
     }
 
     return
@@ -72,6 +75,8 @@ _p.DoAction = function(a)
   {
     var attacker = Game.Character(this.OwnerID())
     var target = Game.Character(this.target)
+    l1(me.Name() + ": I am going to attack: " + target.Name(),LG_COMBAT_LOGIC)
+    target.DoAction(new Action("do",0,0,me.ID(),0,"attacked"))
     l1("{0} do attack {1}".format(attacker.Name(),target.Name()),LG_COMBAT_LOGIC)
     var handle = Game.AddAction(new Action("do",this.OwnerID(),0,0,0,"attack"),3000)
     this.SetEventID(handle)
@@ -138,9 +143,11 @@ _p.DoAction = function(a)
   if("do" == name && "died" == text)
   {
     l1("do died for " + me.Name(),LG_COMBAT_LOGIC)
+    l1("I FUCKING DIED says " + me.Name(),LG_COMBAT_LOGIC)
     this.Break()
     Game.AddAction({arg1:me.Room(),name:"physicalevent",actors:[me.ID()],text:"{0} drops to the ground as the last of their life force is drained from them...".format(me.Name()),purevisual:true},0)
     var alist = this.attackedlist.slice(0)
+    l1("My attackedlist is : " + JSON.stringify(alist),LG_COMBAT_LOGIC)
     for (var i = alist.length - 1; i >= 0; i--)
     {
       var charter = Game.Character(alist[i])
@@ -198,6 +205,7 @@ _p.DoAction = function(a)
 
   if (name == "do" && text == "killed")
   {
+    l1(me.Name() + ": Huh, looks like I killed my adversary.",LG_COMBAT_LOGIC)
     this.Break()
     return
   }
@@ -217,6 +225,7 @@ _p.Break = function()
 
   var attacker = Game.Character(this.OwnerID())
   var target = Game.Character(this.target)
+  l1(me.Name() + ": Going to cancel my sched event",LG_COMBAT_LOGIC)
   Game.CancelEvent(this.EventID())
   Game.AddAction({arg1:attacker.Room(),name:"physicalevent",actors:[this.OwnerID(),target.ID()],text:"{0} stops attacking {1}".format(attacker.Name(),target.Name()),purevisual:true},0)
   target.DoAction(new Action("do",0,0,0,0,"brokeattack"))
@@ -224,3 +233,5 @@ _p.Break = function()
 }
 
 RegisterLogic(CombatLogic)
+
+Log.AddGroup(LG_COMBAT_LOGIC)

@@ -31,6 +31,23 @@ _p.DestinationRoomForStartRoomAndDirection = function(rid,direction)
 	return false
 }
 
+_p.DirectionsAndDestinationsForStartRoom = function(rid)
+{
+  l1("Gathering dirs and dests for rid {0}".format(rid),LG_SPAM)
+  this.BeginEntries()
+  var entry
+  descs = []
+  while(entry = this.NextEntry())
+  {
+    if(entry.StartRoom() == rid)
+    {
+      descs.push({destination:entry.DestinationRoom(), direction:entry.Direction()})
+    }
+  }
+
+  return descs
+}
+
 
 _p.Add = function()
 {

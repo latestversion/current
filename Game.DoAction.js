@@ -220,6 +220,28 @@ _p.DoLookRoomAction = function(a)
     }
   }
 
+  // Exits
+  s += "Exits: \n"
+  room.BeginPortals()
+  var pid
+  while(pid = room.NextPortal())
+  {
+    portal = pdb.Get(pid)
+    l1("Found portal with name " + portal.Name())
+    if(!portal){l5("No portal for pid " + pid,LG_CMDS);return}
+
+    var list = portal.DirectionsAndDestinationsForStartRoom(room.ID())
+
+    for(var i = 0; i < list.length;i++)
+    {
+      // {direction:,destination:}
+      var l = list[i]
+      var looprid = l.destination
+      var looproom = Game.Room(looprid)
+      s += "{0} - {1}\n".format(l.direction,looproom.Name())
+    }
+  }
+
   character.DoAction({name:"vision",text:s})
 }
 
@@ -414,11 +436,11 @@ _p.DoLookAction = function(a)
   var fncnme = "DoLookAction: "
   var lookerid = a.arg1
   var args = a.text
-  
-  l1(fncnme + "cid {0}, args {1}".format(lookerid,args)) 
+
+  l1(fncnme + "cid {0}, args {1}".format(lookerid,args))
 
   var looker = Game.Entity(lookerid)
-  
+
   // Items in inventory
 
   var matches = this.MatchingItemsForCharter(looker,args)
@@ -443,7 +465,7 @@ _p.DoLookAction = function(a)
   if(matches.length)
   {
     looker.DoAction({name:"info",text:"{0}: {1}".format(matches[0].Name(),matches[0].Description())})
-    return 
+    return
   }
 
 }

@@ -27,7 +27,7 @@ _p.RemoveLogic = function(logic)
 {
   l1("Removelogic: " + logic,LG_SPAM)
   var k = 0
-  for (;k < this.logcs.length; k++)
+  for (;k < this.logics.length; k++)
   {
     l1("Comparing to remove " + this.logics[k].Name(),LG_SPAM)
     if(this.logics[k].Name() == logic.name)

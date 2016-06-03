@@ -436,6 +436,21 @@ EvalCommand.prototype.Execute = function(args,charter)
 }
 RegisterCommand(EvalCommand)
 
+function HelpCommand(cid)
+{
+  Command.call(this,cid)
+  this.SetName("help")
+  this.SetDescription("Lists the commands available.")
+}
+CopyPrototype(Command,HelpCommand)
+
+HelpCommand.prototype.Execute = function(args,charter)
+{
+  l1("Executing " + this.Name(),LG_CMDS)
+
+  Game.DoAction({name:"help",arg1:charter.ID()})
+}
+RegisterCommand(HelpCommand)
 
 
 

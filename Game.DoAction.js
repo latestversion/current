@@ -708,6 +708,26 @@ _p.DoDeathTransportAction = function(a)
   }
 }
 
+_p.DoHelpAction = function(a)
+{
+  var charter = Game.Entity(a.arg1)
+  if(!charter.IsPlayer())
+  {
+    return
+  }
+
+  var iter = charter.CommandsIterator()
+  var cmd
+  var text = ""
+  while (cmd = iter.Next())
+  {
+    text += "{0} - {1}\n".format(cmd.Name(),cmd.Description())
+    
+  }
+
+  charter.DoAction({name:"info",text:text})
+}
+
 _p.DoAction = function(a)
 {
   l1("e Game.DoAction with action " + JSON.stringify(a),LG_SPAM)
@@ -780,6 +800,11 @@ _p.DoAction = function(a)
   if("deathtransport" == a.name)
   {
     this.DoDeathTransportAction(a)
+  }
+
+  if("help" == a.name)
+  {
+    this.DoHelpAction(a)
   }
 
 }

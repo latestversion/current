@@ -191,3 +191,20 @@ _p.MatchingCharactersInRoom = function(room,matchstring)
   }
   return filteredcharters
 }
+
+_p.MatchingItemsInRoom = function(room,matchstring)
+{
+  var filtereditems = []
+  var matcher = new PartialMatcher(matchstring)
+  room.BeginItems()
+  var itemid
+  while(itemid = room.NextItem())
+  {
+    var item = Game.Item(itemid)
+    if(matcher.Match(item.Name()))
+    {
+      filtereditems.push(item)
+    }
+  }
+  return filtereditems
+}

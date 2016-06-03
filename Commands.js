@@ -129,11 +129,19 @@ CopyPrototype(Command,LookCommand)
 LookCommand.prototype.Execute = function(args,c)
 {
   l1("Executing " + this.Name(),LG_CMDS)
-  Game.DoAction({name:"lookroom",cid:c.ID()})
+  if(!args.length)
+  {
+    l1("No args for look command",LG_CMDS)
+    Game.DoAction({name:"lookroom",cid:c.ID()})
+  }
+  else
+  {
+    l1("args for look command: " + args)
+    Game.DoAction({name:"look",arg1:c.ID(),text:args.join(" ")})
+  }
+  
 }
-
 RegisterCommand(LookCommand)
-
 
 
 function TalkCommand(cid)

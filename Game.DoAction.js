@@ -409,6 +409,45 @@ _p.DoSayAction = function(a)
   charter.DoAction(action)
 }
 
+_p.DoLookAction = function(a)
+{
+  var fncnme = "DoLookAction: "
+  var lookerid = a.arg1
+  var args = a.text
+  
+  l1(fncnme + "cid {0}, args {1}".format(lookerid,args)) 
+
+  var looker = Game.Entity(lookerid)
+  
+  // Items in inventory
+
+  var matches = this.MatchingItemsForCharter(looker,args)
+  if(matches.length)
+  {
+    looker.DoAction({name:"info",text:"{0}: {1}".format(matches[0].Name(),matches[0].Description())})
+    return
+  }
+
+  // Charters in room
+  var room = rdb.Get(looker.Room())
+  var matches = this.MatchingCharactersInRoom(room,args)
+  var receiver
+  if(matches.length)
+  {
+    looker.DoAction({name:"info",text:"{0}: {1}".format(matches[0].Name(),matches[0].Description())})
+    return
+  }
+
+  // Items in room
+  matches = this.MatchingItemsInRoom(room,args)
+  if(matches.length)
+  {
+    looker.DoAction({name:"info",text:"{0}: {1}".format(matches[0].Name(),matches[0].Description())})
+    return 
+  }
+
+}
+
 _p.DoGiveItemAction = function(a)
 {
   var fncnme = "DoGiveItemAction: "
@@ -817,5 +856,11 @@ _p.DoAction = function(a)
   {
     this.DoHelpAction(a)
   }
+
+  if("look" == a.name)
+  {
+    this.DoLookAction(a)
+  }
+
 
 }

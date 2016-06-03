@@ -153,6 +153,7 @@ function ProduceNewGameState(dbs,savedir)
   i.AddExistingLogic(lightlogic)
   i.SetName("A rusty, glowing shovel")
   i.SetRoom(spiderroom.ID())
+  i.SetDescription("The rusty shovel emanates a magic *glow*!")
 
 
   // THE TEMPLE

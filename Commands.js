@@ -68,7 +68,7 @@ function ExitCommand(cid)
   Command.call(this,cid)
   this.SetName("exit")
   this.SetDescription("Exits the game.")
-  this.AddAlias(new Alias("ex","exit"))
+  this.AddAlias(new Alias("x","exit"))
 }
 CopyPrototype(Command,ExitCommand)
 
@@ -441,6 +441,7 @@ function HelpCommand(cid)
   Command.call(this,cid)
   this.SetName("help")
   this.SetDescription("Lists the commands available.")
+  this.AddAlias(new Alias("h","help"))
 }
 CopyPrototype(Command,HelpCommand)
 

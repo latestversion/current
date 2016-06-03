@@ -82,5 +82,5 @@ _p.GetFirstPassedEvent = function(currtime)
 	return false
 }
 
-Log.AddGroup(LG_ESCHED)
+//Log.AddGroup(LG_ESCHED)
 

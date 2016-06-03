@@ -234,4 +234,4 @@ _p.Break = function()
 
 RegisterLogic(CombatLogic)
 
-Log.AddGroup(LG_COMBAT_LOGIC)
+//Log.AddGroup(LG_COMBAT_LOGIC)

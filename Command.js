@@ -45,5 +45,10 @@ _p.AliasDescription = function(name)
 	return this.aliases[name].Description()
 }
 
+_p.AliasIterator = function()
+{
+	return new MapIterator(this.aliases)
+}
+
 
 

@@ -721,8 +721,19 @@ _p.DoHelpAction = function(a)
   var text = ""
   while (cmd = iter.Next())
   {
-    text += "{0} - {1}\n".format(cmd.Name(),cmd.Description())
-    
+    var aliasiter = cmd.AliasIterator()
+    var aliastext = ""
+    var alias
+    while(alias = aliasiter.Next())
+    {
+      if(aliastext.length > 0)
+      {
+        aliastext += "/"
+      }
+      aliastext += alias.Name()
+    }
+    aliastext = aliastext.length > 0 ? " ({0}) ".format(aliastext):" "
+    text += "{0}{1}- {2}\n".format(cmd.Name(),aliastext, cmd.Description(),aliastext)
   }
 
   charter.DoAction({name:"info",text:text})

@@ -1,8 +1,27 @@
 DESIGN DOCUMENT
--proof of concept-
 
-Real time text adventure
-Single player MUD
+
+Epic PORTING: Get a full game going and port to iOS. Remove most complicating matters (sense deprivation etc.).
+
+Epic GOSMALL: Provide an empty start project with only core logics that will enable feature list below and a minimal world to build on. 
+
+GOSMALL
+TODO:
+- rebuild world from scratch
+- only five or so rooms
+- remove dark rooms
+- remove checkhasvisual etc
+- make platform layer setup in main.js as modular as possible
+- design platform API, formalize, make pretty etc.
+- look over all reporter stuff, info, vision, that sort of thing
+- decide what would be best place to put files, what with folders on iOS?
+- Rooms with the same name - OK? Start room should be by rid I think yeah tyvm.
+- region loading/unloading to not have 10000 events going at the same time.
+
+Open issues:
+Auto exits - good or not?
+Should perhaps display portal description/name instead. Would probably be better....
+
 
 Feature List:
 Quests
@@ -10,15 +29,17 @@ Dialogues with choices
 Items
 Weapons
 Zones
-Dark rooms
+(Grammar)
+
 
 Commands:
 east
 west
 north
 south
-open
-use / wield
+(open)
+arm
+use <invitem> <invitem|roomitem|roomcharter>
 remove
 get
 attack

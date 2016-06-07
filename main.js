@@ -1,41 +1,4 @@
 
-PLATFORM_NODE = "node"
-PLATFORM_IOS = "ios"
-
-PLATFORM = PLATFORM_NODE
-
-
-if(PLATFORM_NODE == PLATFORM)
-{
-  var net = require('net');
-  var fs = require('fs')
-
-  readFile = function(file){
-    var s = fs.readFileSync(file,"ascii")
-    return s
-  }
-
-  writeFile = function(file,data)
-  {
-    fs.writeFileSync(file, data)
-  }
-
-  main_platform_wait = function(delay)
-  {
-    var startTime = Date.now()
-    var count = 0
-
-    while(Date.now() - startTime < delay)
-    {
-      count += 1
-    }
-  }
-}
-
-  console.log("Reading EvalFile.js")
-  var evalstring = readFile("EvalFile.js")
-  eval(evalstring)
-
   evalFile("log.js")
   evalFile("String.js")
   evalFile("Matchers.js")
@@ -52,7 +15,6 @@ if(PLATFORM_NODE == PLATFORM)
   evalFile("HasItems.js")
   evalFile("HasPortals.js")
   evalFile("HasEntries.js")
-  evalFile("TelnetHandler.js")
   evalFile("MenuScene.js")
   evalFile("LoginHandler.js")
   evalFile("DatabaseInstances.js")
@@ -61,22 +23,17 @@ if(PLATFORM_NODE == PLATFORM)
 
   var scenehandler = ""
 
-  function newConnectionHandler(c)
-  {
-    l("Client connected.")
-    var stream = new TelnetHandler(c)
-    scenehandler = new SceneHandler(stream)
-    scenehandler.PushScene(new MenuScene(scenehandler,stream))
-  }
+function streamCallback(stream)
+{
+  scenehandler = new SceneHandler(stream)
+  scenehandler.PushScene(new MenuScene(scenehandler,stream))
+}
 
-  var server = net.createServer(newConnectionHandler)
-  server.listen(8124, function serverBoundHandler(){console.log('server bound')})
-
+setupStream(streamCallback)
 
 
 function loop()
 {
-
   if(scenehandler)
   {
     scenehandler.Tick()

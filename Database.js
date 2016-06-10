@@ -79,6 +79,8 @@ _p.GetByName = function(name)
     }
   }
 
+  l9("{0}: Did not find an entity with name {1}".format(this.Name(),name),LG_ERR)  
+
   return undefined
 }
 

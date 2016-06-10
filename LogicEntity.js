@@ -38,7 +38,7 @@ _p.RemoveLogic = function(logic)
 
   if(k != this.logics.length)
   {
-    l1("Removed logic at index " + i)
+    l1("Removed logic at index " + k)
     this.logics.splice(k,1)
   }
 }

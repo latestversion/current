@@ -40,7 +40,7 @@ _p.DoAction = function(a)
     {
       var iid = a.arg2
       item = Game.idb.Get(iid)
-      if (item.TemplateID() == ItemTemplateIDs.MediocreCarrot || item.TemplateID() == ItemTemplateIDs.DamnFineCarrot)
+      if (item.Type() == MediocreCarrot.name || item.Type() == DamnFineCarrot.name)
       {
        this.carrotsLeft -= 1
       }

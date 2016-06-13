@@ -27,8 +27,10 @@ function ProduceNewGameState(dbs,savedir)
   cdb.Purge()
   pdb.Purge()
 
-
-  var dummytid = 99
+  // the room and region factories do not require a tid.
+  // Passing a dummy tid
+  // Sigh, this is a bit soupy.
+  var dummytid = 99 
   var dtid = dummytid
 
 

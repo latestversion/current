@@ -17,6 +17,7 @@ TODO:
 - decide what would be best place to put files, what with folders on iOS?
 - Rooms with the same name - OK? Start room should be by rid I think yeah tyvm.
 - region loading/unloading to not have 10000 events going at the same time.
+- save idbank together with dbs and stuff. As it needs to reflect what is in the dbs.
 
 Open issues:
 Auto exits - good or not?

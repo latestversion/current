@@ -13,6 +13,10 @@ function ProduceNewGameState(dbs,savedir)
 {
   l1("Producing the new game state")
 
+  // What assery is this? Global databases out of the blue?
+  // Game().Databases()
+  // Or better yet... DatabasesWithIdRangeThingaMojig()
+
   var idb = dbs[TypeEnums.Item]
   var cdb = dbs[TypeEnums.Character]
   var rdb = dbs[TypeEnums.Room]
@@ -34,23 +38,19 @@ function ProduceNewGameState(dbs,savedir)
 
   // FIELDS OF MUD REGION
 
-  var r = rgndb.Create(dtid)
-  r.SetName("Fields of Mud")
+  // Template ID not relevant for rooms and regions
+  var fieldsofmudregion = rgndb.Create(dtid)
+  fieldsofmudregion.SetName("Fields of Mud")
 
-  var fieldsofmud = r
 
-
-  l1("Adding rooms to " + fieldsofmud.Name(),LG_NGS)
+  l1("Adding rooms to " + fieldsofmudregion.Name(),LG_NGS)
 
   // FIELD OF MUD
 
-  var r = rdb.Create(dtid)
-  r.SetName("A field of mud")
-  r.SetDescription("So yeah, this is where cabbages come from.")
-  r.SetRegion(fieldsofmud.ID())
- // r.AddLogic(SpawnCarrotsLogic)
-
-  var mudfield = r
+  var mudfield = rdb.Create(dtid)
+  mudfield.SetName("A field of mud")
+  mudfield.SetDescription("So yeah, this is where cabbages come from. Or would have, if anyone had planted any. Now it's just mud. Mud and mud again.")
+  mudfield.SetRegion(fieldsofmudregion.ID())
 
   var character = new Character()
   character.SetName("Georgie Scrapneck")
@@ -58,9 +58,17 @@ function ProduceNewGameState(dbs,savedir)
   character.SetRoom(mudfield.ID())
   character.SetID(cdb.GetFreeID())
   cdb.Add(character)
-  var logic = new GeorgieTalkLogic()
-  character.AddExistingLogic(logic)
+  character.AddExistingLogic(new GeorgieTalkLogic())
   character.AddLogic(CarrotQuestLogic)
+
+
+  character = new Character()
+  character.SetName("Bill Bugle")
+  character.SetDescription("Bill is a small boy with dirty clothes. He looks as sad as his clothes look worn.")
+  character.SetRoom(mudfield.ID())
+  character.SetID(cdb.GetFreeID())
+  cdb.Add(character)
+
 
   var i = idb.Create(MediocreCarrot)
   i.SetRoom(mudfield.ID())
@@ -73,7 +81,7 @@ function ProduceNewGameState(dbs,savedir)
   var r = rdb.Create(dtid)
   r.SetName("Another field of mud")
   r.SetDescription("You've spent a lot of time here, getting familiar with the cold, hard ground.")
-  r.SetRegion(fieldsofmud.ID())
+  r.SetRegion(fieldsofmudregion.ID())
 
   var mudfield2 = r
 

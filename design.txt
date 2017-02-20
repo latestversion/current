@@ -1,9 +1,65 @@
 DESIGN DOCUMENT
 
+Fun stuff:
+ing-addendum: Bill Bugle is here, gazing at the sky.
+moreinfo: A shovel is here. It glows with a faint light.
+nothereinfo: a soap rests on the floor
+matchname: rusty shovel
+grammar: she, he
+first name second name
+
+<Restroom>
+- This is a very nice restroom with toilets of gold and sinks of marble.-
+* Roggadoff Bork is here
+* a vicious rat is here
+: a soap rests on the floor (but what if you drop it on the ground, or on lava? bc you have lavawalk...)
+: a garden hose lies abandoned in a corner.
+
+
+Bill Bugle is here. Bill looks depressed.
+Dotty Falthorpe is here, aimlessly digging in the mud.
+"I hope we get supper today..."
+"I was supposed to get the beets for today's supper. But Im so afraid of the
+rat. Oh the overseer will have me for this!"
+
+Gatekeeper sleeping. Pour water on to wake. Needs to be bribed to open gate.
+give potato gatekeeper.
+"He yeah... a single tatoe is not the business i'm interested in yknow.
+gotta get me apiece of soe bigger business yknow? wouldnt mind a sack o tatoes."
+
+it begins to rain
+the rain intensifies
+it's pouring down
+the sky turns slightly more gray.
+
+the sad pig sighs
+the pig says oink...
+slush slush sush go your feet in the wet mud
+
+kill rat
+get shovel from bill (thx for killing the rat)
+get empty keg from gatekeeper
+fill keg water through
+wake gatekeeper with water ("oh the faint smell of beer")
+attack pig to scare it - overseer comes looking
+get sack from where gatekeeper was
+use shovel i field to dig tatoes
+put tatoes in sack
+give sack to gatekeeper
+gate opens
+You have run away from the orphanage!
+
+elf guard
+Oh I do declare that I love kittens
+You need not say that twice!
+So cute and cuddly!
+
+
+
 
 Epic PORTING: Get a full game going and port to iOS. Remove most complicating matters (sense deprivation etc.).
 
-Epic GOSMALL: Provide an empty start project with only core logics that will enable feature list below and a minimal world to build on. 
+Epic GOSMALL: Provide an empty start project with only core logics that will enable feature list below and a minimal world to build on.
 
 GOSMALL
 TODO:
@@ -16,6 +72,7 @@ TODO:
 - look over all reporter stuff, info, vision, that sort of thing
 - decide what would be best place to put files, what with folders on iOS?
 - Rooms with the same name - OK? Start room should be by rid I think yeah tyvm.
+  (otoh should not be hard to keep start area unique...?)
 - region loading/unloading to not have 10000 events going at the same time.
 
 Open issues:

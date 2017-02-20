@@ -19,7 +19,7 @@ function Game()
   this.maxdt = 1000
   this.lastTick = 0
 
-  this.startRoomName = "Room of Silky Death" //"Frog Rehab"
+  this.startRoomName = "A field of mud" //"Room of Silky Death" //"Frog Rehab"
 
   this.dbs = dbinstances
 }

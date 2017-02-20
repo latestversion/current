@@ -47,4 +47,5 @@ function newConnectionHandler(c)
 evalFile("main.js")
 
 var server = net.createServer(newConnectionHandler)
-server.listen(8124, function serverBoundHandler(){console.log('server bound')})
+var port = 8124
+server.listen(port, function serverBoundHandler(){console.log('server bound ' + port)})

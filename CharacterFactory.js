@@ -21,6 +21,36 @@ function TomFinkledorf(id)
 }
 InheritAndRegisterCharacter(TomFinkledorf)
 
+function BillBugle(id)
+{
+  var name = "Bill Bugle"
+  Character.call(this,id,name,"Bill is a small boy with dirty clothes.")
+}
+InheritAndRegisterCharacter(BillBugle)
+
+function DottyFalthorpe(id)
+{
+  var name = "Dotty Falthorpe"
+  Character.call(this,id,name,"Dotty stares vacantly into the distance. \"I had a mom once... \"")
+}
+InheritAndRegisterCharacter(DottyFalthorpe)
+
+
+function GeorgieScrapneck(id)
+{
+  var name = "Georgie Scrapneck"
+  Character.call(this,id,name,"Georgie looks like he's had a rough life. His coat is worn and his trousers threadbare. Luckily his coughing isn't bad enough to stop him from enjoying a smoke or two.")
+}
+InheritAndRegisterCharacter(GeorgieScrapneck)
+
+
+function RoryHardknuckle(id)
+{
+  var name = "Rory Hardknuckle"
+  Character.call(this,id,name,"Rory is the caretaker of the orphanage and responsible for the wellbeing of the children. If you're not feeling well, he'll treat you with a slap to the face or a fist in your back.")
+}
+InheritAndRegisterCharacter(RoryHardknuckle)
+
 function GoblinKing(id)
 {
   Character.call(this,id,"The *Goblin King*","The Goblin King smiles like a razor's edge when he plots your demise.")

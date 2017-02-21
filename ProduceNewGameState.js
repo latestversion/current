@@ -47,34 +47,105 @@ function ProduceNewGameState(dbs,savedir)
 
   // FIELD OF MUD
 
-  var mudfield = rdb.Create(dtid)
-  mudfield.SetName("A field of mud")
-  mudfield.SetDescription("So yeah, this is where cabbages come from. Or would have, if anyone had planted any. Now it's just mud. Mud and mud again.")
-  mudfield.SetRegion(fieldsofmudregion.ID())
+  var mudfieldroom = rdb.Create(dtid)
+  mudfieldroom.SetName("A field of mud")
+  mudfieldroom.SetDescription("So yeah, this is where cabbages come from. Or would have, if anyone had planted any. Now it's just mud. Mud and mud again.")
+  mudfieldroom.SetRegion(fieldsofmudregion.ID())
+
+  var mudfieldroom2 = rdb.Create(dtid)
+  mudfieldroom2.SetName("Central field of mud")
+  mudfieldroom2.SetDescription("You've spent a lot of time here, getting familiar with the mud.")
+  mudfieldroom2.SetRegion(fieldsofmudregion.ID())
+
+  var potatofieldroom = rdb.Create(dtid)
+  potatofieldroom.SetName("Potato field")
+  potatofieldroom.SetDescription("In this muddy place there is a small patch of slightly less muddy ground where the orphans grow potatoes.")
+  potatofieldroom.SetRegion(fieldsofmudregion.ID())
+
+  var beetfieldroom = rdb.Create(dtid)
+  beetfieldroom.SetName("Beets field")
+  beetfieldroom.SetDescription("Scrawny looking trees frame a small patch of land where beets are grown.")
+  beetfieldroom.SetRegion(fieldsofmudregion.ID())
+
+  var gateroom = rdb.Create(dtid)
+  gateroom.SetName("End of Orphan Road")
+  gateroom.SetDescription("The ground here is weirdly hard and feels strange to feet used to the sensation of mud. A small path goes north, away from the orphanage and its sad agricultural endeavours. Some say that the path leads to the village.")
+  //But what would you know, you've never been outside the grounds of the orphanage. Except for when you lived with your father of course. But those days are long gone and hard to remember.
+  gateroom.SetRegion(fieldsofmudregion.ID())
+
+  var orphanroom = rdb.Create(dtid)
+  orphanroom.SetName("Outside the orphanage")
+  orphanroom.SetDescription("When your dad disappeared they took you to the orphanage. Oh how you hate the orphanage.")
+  orphanroom.SetRegion(fieldsofmudregion.ID())
+
+
+  // Portals added to rooms in Game.ConsistencyCheckDatabases...
+  var p = new Portal()
+  p.SetName("NS field<->field")
+  p.SetID(pdb.GetFreeID())
+  p.AddEntry(new PortalEntry(mudfieldroom.ID(),"north",mudfieldroom2.ID()))
+  p.AddEntry(new PortalEntry(mudfieldroom2.ID(),"south",mudfieldroom.ID()))
+  pdb.Add(p)
+
+  var p = new Portal()
+  p.SetName("EW field<->orphanage")
+  p.SetID(pdb.GetFreeID())
+  p.AddEntry(new PortalEntry(mudfieldroom.ID(),"east",orphanroom.ID()))
+  p.AddEntry(new PortalEntry(orphanroom.ID(),"west",mudfieldroom.ID()))
+  pdb.Add(p)
+
+  p = new Portal()
+  p.SetName("NS field<->gate")
+  p.SetID(pdb.GetFreeID())
+  p.AddEntry(new PortalEntry(mudfieldroom2.ID(),"north",gateroom.ID()))
+  p.AddEntry(new PortalEntry(gateroom.ID(),"south",mudfieldroom2.ID()))
+  pdb.Add(p)
+
+  p = new Portal()
+  p.SetName("WE potato<->field")
+  p.SetID(pdb.GetFreeID())
+  p.AddEntry(new PortalEntry(mudfieldroom2.ID(),"west",potatofieldroom.ID()))
+  p.AddEntry(new PortalEntry(potatofieldroom.ID(),"east",mudfieldroom2.ID()))
+  pdb.Add(p)
+
+  p = new Portal()
+  p.SetName("WE beets<->field")
+  p.SetID(pdb.GetFreeID())
+  p.AddEntry(new PortalEntry(mudfieldroom2.ID(),"east",beetfieldroom.ID()))
+  p.AddEntry(new PortalEntry(beetfieldroom.ID(),"west",mudfieldroom2.ID()))
+  pdb.Add(p)
+
+  var c = cdb.Create(BillBugle)
+  c.SetRoom(mudfieldroom2.ID())
+
+  var c = cdb.Create(DottyFalthorpe)
+  c.SetRoom(mudfieldroom2.ID())
+
+  var c = cdb.Create(RoryHardknuckle)
+  c.SetRoom(orphanroom.ID())
+
+  var c = cdb.Create(GeorgieScrapneck)
+  c.SetRoom(gateroom.ID())
+
+/*
+
 
   var character = new Character()
   character.SetName("Georgie Scrapneck")
   character.SetDescription("Georgie looks like he's had a rough life. His coat is worn and his trousers threadbare. Luckily his coughing isn't bad enough to stop him from enjoying smoke or two.")
-  character.SetRoom(mudfield.ID())
+  character.SetRoom(mudfieldroom.ID())
   character.SetID(cdb.GetFreeID())
   cdb.Add(character)
   character.AddExistingLogic(new GeorgieTalkLogic())
   character.AddLogic(CarrotQuestLogic)
 
 
-  character = new Character()
-  character.SetName("Bill Bugle")
-  character.SetDescription("Bill is a small boy with dirty clothes. He looks as sad as his clothes look worn.")
-  character.SetRoom(mudfield.ID())
-  character.SetID(cdb.GetFreeID())
-  cdb.Add(character)
-
 
   var i = idb.Create(MediocreCarrot)
-  i.SetRoom(mudfield.ID())
+  i.SetRoom(mudfieldroom.ID())
 
   var i = idb.Create(DamnFineCarrot)
-  i.SetRoom(mudfield.ID())
+  i.SetRoom(mudfieldroom.ID())
 
   // ANOTHER FIELD OF MUD
 
@@ -184,15 +255,15 @@ function ProduceNewGameState(dbs,savedir)
   var p = new Portal()
   p.SetName("EW field<->field")
   p.SetID(pdb.GetFreeID())
-  p.AddEntry(new PortalEntry(mudfield.ID(),"east",mudfield2.ID()))
-  p.AddEntry(new PortalEntry(mudfield2.ID(),"west",mudfield.ID()))
+  p.AddEntry(new PortalEntry(mudfieldroom.ID(),"east",mudfield2.ID()))
+  p.AddEntry(new PortalEntry(mudfield2.ID(),"west",mudfieldroom.ID()))
   pdb.Add(p)
 
   var p = new Portal()
   p.SetName("NS mudfield<->clearing")
   p.SetID(pdb.GetFreeID())
-  p.AddEntry(new PortalEntry(mudfield.ID(),"north",clearingintheforestroom.ID()))
-  p.AddEntry(new PortalEntry(clearingintheforestroom.ID(),"south",mudfield.ID()))
+  p.AddEntry(new PortalEntry(mudfieldroom.ID(),"north",clearingintheforestroom.ID()))
+  p.AddEntry(new PortalEntry(clearingintheforestroom.ID(),"south",mudfieldroom.ID()))
   var logic = new ClosedGateOpenOnEventLogic(p.ID())
 
   logic.SetPassEvent("carrotquestcompleted")
@@ -259,6 +330,8 @@ function ProduceNewGameState(dbs,savedir)
   p.AddEntry(new PortalEntry(templeroom.ID(),"east",frogrehab.ID()))
   p.AddEntry(new PortalEntry(frogrehab.ID(),"west",templeroom.ID()))
   pdb.Add(p)
+
+  */
 
   for (var k in dbs)
   {

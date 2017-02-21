@@ -9,12 +9,13 @@ grammar: she, he
 first name second name
 
 <Restroom>
-- This is a very nice restroom with toilets of gold and sinks of marble.-
+- This is a very nice restroom with toilets of gold and sinks of marble. -
 * Roggadoff Bork is here
 * a vicious rat is here
 : a soap rests on the floor (but what if you drop it on the ground, or on lava? bc you have lavawalk...)
 : a garden hose lies abandoned in a corner.
 
+"Leave the pig alone! It's going to grow into a big fat ham... " Rory drools.
 
 Bill Bugle is here. Bill looks depressed.
 Dotty Falthorpe is here, aimlessly digging in the mud.

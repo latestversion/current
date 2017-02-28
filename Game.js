@@ -3,6 +3,7 @@ evalFile("DatabaseInstances.js",this)
 evalFile("ProduceNewGameState.js",this)
 evalFile("TickerClock.js",this)
 evalFile("EventScheduler.js",this)
+evalFile("Actions")
 
 
 LG_STARTUP = "LG_STARTUP"
@@ -45,6 +46,21 @@ _p.LoadDatabases = function(dir,purge)
   }
 }
 
+_p.SendWorldStartEvent = function()
+{
+  // Send to regions only for now
+
+  this.rgndb.Begin()
+
+  var region
+  while (region = rgndb.Next())
+  {
+    var a = new WorldDidStartAction()
+    region.DoAction(a)
+    l1("worldstartevent to region" + region.Name(),LG_STARTUP)
+  }
+}
+
 _p.StartNewGame = function()
 {
   l1("Starting new game",LG_STARTUP)
@@ -57,6 +73,7 @@ _p.StartNewGame = function()
   l1("Loaded databases",LG_STARTUP)
   this.ConsistencyCheckDatabases(this.dbs,true)
   l1("Consistency checked databases",LG_STARTUP)
+  this.SendWorldStartEvent()
 }
 
 

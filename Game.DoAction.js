@@ -186,7 +186,7 @@ _p.DoLookRoomAction = function(a)
   var room = rdb.Get(character.Room())
   if(room.DoAction({name:"attemptlookroom",arg1:a.cid,silentcheck:true}))
   {
-    s += room.Name() + "\n" + room.Description() + "\n"
+    s += "< " + room.Name() + " >" + "\n" + room.Description() + "\n"
   }
 
   room.BeginCharacters()

@@ -175,6 +175,22 @@ _p.ChartersInRoom = function(room)
   return charters
 }
 
+_p.DoActionForChartersInRegion = function(action, region)
+{
+  region.BeginRooms()
+  var roomid
+  while(roomid = region.NextRoom())
+  {
+    room = Game.Room(roomid)
+    var charters = Game.ChartersInRoom(room)
+    for (var k in charters)
+    {
+      var charter = Game.Character(charters[k])
+      charter.DoAction(action)
+    }
+  }
+}
+
 _p.MatchingCharactersInRoom = function(room,matchstring)
 {
   var filteredcharters = []
@@ -207,4 +223,17 @@ _p.MatchingItemsInRoom = function(room,matchstring)
     }
   }
   return filtereditems
+}
+
+_p.TellPlayers = function(msg)
+{
+  this.cdb.Begin()
+  var charter
+  while(charter = this.cdb.Next())
+  {
+    if(charter.IsPlayer())
+    {
+      charter.DoAction({name:"info",text:msg})
+    }
+  }
 }

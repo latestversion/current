@@ -6,6 +6,7 @@ evalFile("logics/SpawnCarrotsLogic.js")
 evalFile("logics/ClosedGateOpenOnEventLogic.js")
 evalFile("corelogics/DarkRoomLogic.js")
 evalFile("Logic.js")
+evalFile("mudquest/MudfieldRegionWeatherLogic")
 
 LG_NGS = "LG_NGS"
 
@@ -41,6 +42,11 @@ function ProduceNewGameState(dbs,savedir)
   // Template ID not relevant for rooms and regions
   var fieldsofmudregion = rgndb.Create(dtid)
   fieldsofmudregion.SetName("Fields of Mud")
+
+  // as opposed to AddLogic(MudfieldRegionWeatherLogic)
+  var logic = new MudfieldRegionWeatherLogic(fieldsofmudregion.ID())
+  fieldsofmudregion.AddExistingLogic(logic)
+  l1("fieldsofmudregion.ID(): {0} wlogic.ID(): {1}, wlogic.ownerid: {2} ".format(fieldsofmudregion.ID(),logic.ID(),logic.OwnerID()))
 
 
   l1("Adding rooms to " + fieldsofmudregion.Name(),LG_NGS)

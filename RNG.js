@@ -19,3 +19,9 @@ RNG.RandomInt = function(a,b)
 
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
+
+RNG.D100 = function(percentchance)
+{
+  var die = RNG.RandomInt(99)+1
+  return (die<=percentchance)
+}

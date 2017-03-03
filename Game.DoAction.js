@@ -202,7 +202,7 @@ _p.DoLookRoomAction = function(a)
       if(this.CheckHasVisual(character,roomchar))
       {
         l1("{0} could see {1}".format(character.Name(),roomchar.Name()),LG_LK_RM)
-        s += roomchar.Name() + " is here" + "\n"
+        s += "* " + roomchar.Name() + " is here" + "\n"
       }
     }
   }
@@ -216,7 +216,7 @@ _p.DoLookRoomAction = function(a)
     if(this.CheckHasVisual(character,item))
     {
       l1("{0} could indeed see {1}".format(character.Name(),item.Name()),LG_LK_RM)
-      s += item.Name() + " is here" + "\n"
+      s += ": " + item.Name() + " is here" + "\n"
     }
   }
 

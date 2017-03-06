@@ -1,5 +1,25 @@
 DESIGN DOCUMENT
 
+PUT
+put <invitem> <invitem>
+put <invitem> <grounditem>
+get <containeritem> <invitem|grounditem>
+look <containerinvitem>
+Make all items HasItems. Only put items in it if has ContainerLogic.
+Items in containers not asked for doAction.
+attemptlookinsidecontainer
+didlookinsidecontainer
+attemptput
+didput
+attemptgetcontaineritem
+didgetcontaineritem
+
+USE
+use <invitem> <grounditem|invitem>
+
+
+
+
 Fun stuff:
 ing-addendum: Bill Bugle is here, gazing at the sky.
 moreinfo: A shovel is here. It glows with a faint light.

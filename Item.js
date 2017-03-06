@@ -1,6 +1,7 @@
 
 evalFile("Entity.js")
 evalFile("DataEntity.js")
+evalFile("HasItems")
 
 function Item(id,name,desc)
 {
@@ -10,6 +11,8 @@ function Item(id,name,desc)
   HasTemplate.call(this)
   HasRoom.call(this)
   HasCharacter.call(this)
+  HasItems.call(this)
+  HasItem.call(this)
 
   this.SetID(id)
   this.SetName(name)
@@ -23,6 +26,9 @@ CopyPrototype(DataEntity,Item)
 CopyPrototype(HasTemplate,Item)
 CopyPrototype(HasRoom,Item)
 CopyPrototype(HasCharacter,Item)
+CopyPrototype(HasItems,Item)
+CopyPrototype(HasItem,Item)
+
 
 var _p = Item.prototype
 

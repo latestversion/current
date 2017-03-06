@@ -101,7 +101,7 @@ _p.DoCommand = function(input,cid)
   {
     var cmd = c.GetCommand(cmdname)
     l1("had command " + cmdname,LG_CMDS)
-    cmd.Execute(args,c)
+    cmd.Execute(args,c) // args is an array
     return
   }
 

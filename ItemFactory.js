@@ -3,6 +3,7 @@ evalFile("Item")
 evalFile("ArmsTypes")
 evalFile("logics/FigurineLogic")
 evalFile("corelogics/LanternLogic")
+evalFile("corelogics/ContainerLogic")
 evalFile("CtorRegistry")
 
 ItemFactory = new CtorRegistry("ItemFactory")
@@ -65,6 +66,13 @@ function Ring(id)
   this.SetAttribute("arms",ArmsTypes.Ring)
 }
 InheritAndRegisterItem(Ring)
+
+function SackOfTheOrphanage(id)
+{
+  Item.call(this,id,"A sack","This worn sack looks like it could carry a few vegetables.")
+  this.AddLogic(ContainerLogic)
+}
+InheritAndRegisterItem(SackOfTheOrphanage)
 
 function Pincer(id)
 {

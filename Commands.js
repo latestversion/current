@@ -36,33 +36,6 @@ GoCommand.prototype.Execute = function(args,c)
 RegisterCommand(GoCommand)
 
 
-function GetCommand(cid)
-{
-  Command.call(this,cid)
-  this.SetName("get")
-  this.SetDescription("Makes picking things up possible. Usage: 'get <item> <quantity>'")
-  this.AddAlias(new Alias("g","get"))
-}
-
-CopyPrototype(Command,GetCommand)
-
-GetCommand.prototype.Execute = function(args,charter)
-{
-  l1("Executing command" + this.Name(),LG_CMDS)
-
-  if(!args.length)
-  {
-    charter.DoAction({name:"error",text:"Get what?"})
-    return
-  }
-
-Game.DoAction({name:"getitem",arg1:charter.ID(),text:args.join(" ")})
-}
-
-RegisterCommand(GetCommand)
-
-
-
 function ExitCommand(cid)
 {
   Command.call(this,cid)
@@ -139,7 +112,7 @@ LookCommand.prototype.Execute = function(args,c)
     l1("args for look command: " + args)
     Game.DoAction({name:"look",arg1:c.ID(),text:args.join(" ")})
   }
-  
+
 }
 RegisterCommand(LookCommand)
 
@@ -197,8 +170,6 @@ InventoryCommand.prototype.Execute = function(args,charter)
 }
 RegisterCommand(InventoryCommand)
 
-
-
 function SayCommand(cid)
 {
   Command.call(this,cid)
@@ -219,7 +190,6 @@ SayCommand.prototype.Execute = function(args,charter)
   }
 }
 RegisterCommand(SayCommand)
-
 
 function GiveCommand(cid)
 {
@@ -462,5 +432,269 @@ HelpCommand.prototype.Execute = function(args,charter)
 RegisterCommand(HelpCommand)
 
 
+function GetCommand(cid)
+{
+  Command.call(this,cid)
+  this.SetName("get")
+  this.SetDescription("'get <grounditem> or 'get <item> <from|_from_> <invitem>'")
+  this.AddAlias(new Alias("g","get"))
+}
+CopyPrototype(Command,GetCommand)
+GetCommand.prototype.Execute = function(args,charter)
+{
+  l1("Executing command" + this.Name(),LG_CMDS)
+
+  if(!args.length)
+  {
+    charter.DoAction({name:"error",text:"Get what?"})
+    return
+  }
+
+
+  var fromidx = args.indexOf("_from_")
+  if( -1 == fromidx)
+  {
+    fromidx = args.indexOf("from")
+  }
+
+  if(-1 == fromidx)
+  {
+    Game.DoAction({name:"getitem",arg1:charter.ID(),args:args,text:args.join(" ")})
+    return
+  }
+
+  // get from container
+  var itemtogetstring
+  var containerstring
+  var idx = fromidx
+
+  containerstring = (args.splice(idx+1,args.length-(idx+1))).join(" ")
+  itemtogetstring = (args.splice(0,idx)).join(" ")
+
+  if(!containerstring || !itemtogetstring)
+  {
+    charter.DoAction({name:"info",text:"Eh... get what from what?\n"})
+    return
+  }
+
+  l1(charter.Name() + " wants to get '{0}' from '{1}'".format(itemtogetstring,containerstring),LG_SPAM)
+
+  // Check if charter has container
+
+  var charteritems = Game.FilterNamedsByString(charter.Items(),containerstring,1)
+
+  if(!charteritems.length)
+  {
+    charter.DoAction(new InfoAction("You don't seem to have '{0}' in your inventory!".format(containerstring)))
+    return
+  }
+
+  var container = charteritems[0]
+
+
+  if(container.DoAction(new QueryContainerAction()))
+  {
+    charter.DoAction(new InfoAction("'{0}' is not a container!".format(container.Name())))
+    return
+  }
+
+
+  var containeritems = Game.FilterNamedsByString(container.Items(),itemtogetstring,1)
+
+  if(!containeritems.length)
+  {
+    charter.DoAction(new InfoAction("There is no '{0}' in {1}!".format(itemtogetstring,container.Name())))
+    return
+  }
+
+  var item = containeritems[0]
+
+  // Transfer ownership
+  container.RemoveItem(item.ID())
+  item.SetCharacter(charter.ID())
+  item.SetItem(0)
+  charter.AddItem(item.ID())
+
+  charter.DoAction(new InfoAction("You retrieve {0} from {1}.".format(item.Name(),container.Name())))
+
+  l1("{0} {1} did get {2} {3} from {4} {5}".format(charter.Name(),charter.ID,item.Name(),item.ID(),container.Name(),container.ID()),LG_SPAM)
+
+}
+RegisterCommand(GetCommand)
+
+
+function PutCommand(cid)
+{
+  Command.call(this,cid)
+  this.SetName("put")
+  this.SetDescription("Put items in other items. put <invitem> <invitem>.")
+}
+CopyPrototype(Command,PutCommand)
+PutCommand.prototype.Execute = function(args,charter)
+{
+  // args is an array
+  l1("Executing " + this.Name(),LG_CMDS)
+  // put <invitem> [in|_in_] <invitem>
+
+  if (args.length < 2)
+  {
+    charter.DoAction({name:"info",text:"Put what in what?\n"})
+    return
+  }
+
+  var inidx = args.indexOf("_in_")
+  if( -1 == inidx)
+  {
+    inidx = args.indexOf("in")
+  }
+
+  var itemtoputstring
+  var containerstring
+
+  if (-1 != inidx)
+  {
+    containerstring = (args.splice(inidx+1,args.length-(inidx+1))).join(" ")
+    itemtoputstring = (args.splice(0,inidx)).join(" ")
+    if(!containerstring || !itemtoputstring)
+    {
+      charter.DoAction({name:"info",text:"Eh... put what in what?\n"})
+      return
+    }
+  }
+  else
+  {
+    itemtoputstring = args[0]
+    containerstring = args[1]
+  }
+
+  l1(charter.Name() + " wants to put '{0}' in '{1}'".format(itemtoputstring,containerstring),LG_SPAM)
+
+  var items = Game.FilterNamedsByString(charter.Items(),itemtoputstring,1)
+
+  if(!items.length)
+  {
+    charter.DoAction(new InfoAction("You don't seem to have a '{0}' in your inventory!".format(itemtoputstring)))
+    return
+  }
+
+  var item = items[0]
+
+  var containeritems = Game.FilterNamedsByString(charter.Items(),containerstring,1)
+
+  if(!containeritems.length)
+  {
+    charter.DoAction(new InfoAction("You don't seem to have a '{0}' in your inventory!".format(containerstring)))
+    return
+  }
+
+  var container = containeritems[0]
+
+  if(container.DoAction(new QueryContainerAction()))
+  {
+    charter.DoAction(new InfoAction("'{0}' is not a container!".format(container.Name())))
+    return
+  }
+
+  if(item.ID() == container.ID())
+  {
+    charter.DoAction(new InfoAction("You can't put {0} in itself!".format(item.ID())))
+    return
+  }
+
+  var attemptaction = new AttemptPutItemInContainerAction(this.cid,item.ID(),container.ID())
+  if(!item.DoAction(attemptaction) || !container.DoAction(attemptaction))
+  {
+    return
+  }
+
+  // Transfer ownership
+  charter.RemoveItem(item.ID())
+  item.SetCharacter(0)
+  item.SetItem(container.ID())
+  container.AddItem(item.ID())
+
+  var didputitemaction = new DidPutItemInContainerAction(this.cid,item.ID(),container.ID())
+
+  item.DoAction(didputitemaction)
+  container.DoAction(didputitemaction)
+
+  charter.DoAction(new InfoAction("You put {0} in {1}.".format(item.Name(),container.Name())))
+
+  l1("{0} {1} did put {2} {3} in {4} {5}".format(charter.Name(),charter.ID,item.Name(),item.ID(),container.Name(),container.ID()),LG_SPAM)
+
+  //Game.DoAction({name:"put",arg1:charter.ID(),arg2:args[0],arg3:args[1]})
+
+}
+RegisterCommand(PutCommand)
+
+
+function LookInCommand(cid)
+{
+  Command.call(this,cid)
+  this.SetName("lookin")
+  this.SetDescription("Look in items. lookin <invitem>.")
+}
+CopyPrototype(Command,LookInCommand)
+LookInCommand.prototype.Execute = function(args,charter)
+{
+  // args is an array
+  l1("Executing " + this.Name(),LG_CMDS)
+  // put <invitem> [in|_in_] <invitem>
+
+  if (args.length < 1)
+  {
+    charter.DoAction({name:"info",text:"Look in what?\n"})
+    return
+  }
+
+
+  var containerstring = args.join(" ")
+
+  l1(charter.Name() + " wants to look in '{0}'".format(containerstring),LG_SPAM)
+
+  var containeritems = Game.FilterNamedsByString(charter.Items(),containerstring,1)
+
+  if(!containeritems.length)
+  {
+    charter.DoAction(new InfoAction("You don't seem to have a '{0}' in your inventory!".format(containerstring)))
+    return
+  }
+
+  var container = containeritems[0]
+
+  if(container.DoAction(new QueryContainerAction()))
+  {
+    charter.DoAction(new InfoAction("'{0}' is not a container!".format(container.Name())))
+    return
+  }
+
+  /*var attemptaction = new AttemptLookInContainerAction(charter.ID(),container.ID())
+
+  if(!container.DoAction(attemptaction))
+  {
+    return
+  }*/
+
+  if(!container.NumItems())
+  {
+    charter.DoAction(new InfoAction("{0} is empty.".format(container.Name())))
+    return
+  }
+
+
+  var s = container.Name() + " holds the following items:\n"
+  container.BeginItems()
+  var iid
+  if(iid = container.NextItem())
+  {
+    var item = Game.Item(iid)
+    s += "{0}\n".format(item.Name())
+  }
+
+  s += "\n"
+
+  charter.DoAction(new InfoAction(s))
+}
+RegisterCommand(LookInCommand)
 
 

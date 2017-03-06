@@ -84,6 +84,9 @@ function ProduceNewGameState(dbs,savedir)
   orphanroom.SetDescription("When your dad disappeared they took you to the orphanage. Oh how you hate the orphanage.")
   orphanroom.SetRegion(fieldsofmudregion.ID())
 
+  var i  = idb.Create(SackOfTheOrphanage)
+  i.SetRoom(orphanroom.ID())
+
 
   // Portals added to rooms in Game.ConsistencyCheckDatabases...
   var p = new Portal()

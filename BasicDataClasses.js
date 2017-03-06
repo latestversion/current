@@ -1,5 +1,24 @@
 // All of these for storing ids
 
+/* HasIte*/
+
+function HasItem()
+{
+  this.item = 0
+}
+
+HasItem.prototype
+var _p = HasItem.prototype
+
+_p.Item = function()
+{
+  return this.item
+}
+
+_p.SetItem = function(item)
+{this.item = item}
+
+
 /* HasRoom */
 function HasRoom()
 {

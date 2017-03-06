@@ -1,3 +1,4 @@
+evalFile("HasArray")
 function HasItems()
 {
   HasArray.call(this,"items")

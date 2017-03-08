@@ -1,26 +1,43 @@
-
-evalFile("DatabaseInstances.js",this)
-evalFile("ProduceNewGameState.js",this)
-evalFile("TickerClock.js",this)
-evalFile("EventScheduler.js",this)
+evalFile("log.js")
+evalFile("String.js")
+evalFile("Matchers.js")
+evalFile("Enums.js")
+evalFile("IDBank.js")
+evalFile("Action.js")
+evalFile("TimedAction.js")
+evalFile("CopyPrototype.js")
+evalFile("Entity.js")
+evalFile("HasArray.js")
+evalFile("HasCharacters.js")
+evalFile("HasItems.js")
+evalFile("HasPortals.js")
+evalFile("HasEntries.js")
+evalFile("MenuScene.js")
+evalFile("LoginHandler.js")
+evalFile("DatabaseInstances.js")
+evalFile("SceneHandler.js")
+evalFile("DatabaseInstances.js")
+evalFile("TickerClock.js")
+evalFile("EventScheduler.js")
 evalFile("Actions")
 
 
 LG_STARTUP = "LG_STARTUP"
 
-function Game()
+function Game(mudname)
 {
   DatabaseInstanceBearer.call(this)
   TickerClock.call(this)
   EventScheduler.call(this)
 
+  this.mudname = mudname
 	this.loadpath = ""
 	this.savepath = ""
   this.t = 0
   this.maxdt = 1000
   this.lastTick = 0
 
-  this.startRoomName = "A field of mud" //"Room of Silky Death" //"Frog Rehab"
+  this.startRoomName = "A field of mud"
 
   this.dbs = dbinstances
 }
@@ -32,6 +49,11 @@ var _p = Game.prototype
 
 evalFile("Game.ConsistencyCheckDatabases.js")
 
+
+_p.MudName = function()
+{
+  return this.mudname
+}
 
 _p.StartRoomName = function()
 {
@@ -64,8 +86,9 @@ _p.SendWorldStartEvent = function()
 _p.StartNewGame = function()
 {
   l1("Starting new game",LG_STARTUP)
-  ProduceNewGameState(this.dbs,"./newgamestate")
-	this.loaddir = "./newgamestate"
+  evalFile(this.MudName() + "/ProduceNewGameState")
+  ProduceNewGameState(this.dbs,"./" + this.MudName() + "/newgamestate")
+	this.loaddir = "./" + this.MudName() + "/newgamestate"
   this.savedir = "./savedgame_VIXEN"
 
   var purge = true
@@ -175,6 +198,4 @@ _p.Tick = function()
     this.DoAction(timedaction.Action())
   }
 }
-
-var Game = new Game()
 

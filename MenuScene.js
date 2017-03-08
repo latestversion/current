@@ -1,14 +1,12 @@
 
-evalFile("CharacterFactory.js",this)
+evalFile("mudquest/Characters.js")
 evalFile("Scene.js")
 evalFile("GameScene.js")
-//evalFile("logics/ErrorLogic.js")
-//evalFile("logics/VisionLogic.js")
 evalFile("corelogics/ReporterLogic.js")
 evalFile("corelogics/ArmsLogic.js")
 evalFile("corelogics/CombatLogic.js")
 evalFile("Commands.js")
-evalFile("ItemFactory.js")
+evalFile("mudquest/Items.js")
 
 function MenuScene(scenehandler,stream)
 {

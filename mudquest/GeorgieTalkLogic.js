@@ -1,4 +1,4 @@
-evalFile("GeorgieCutscene.js")
+evalFile("mudquest/GeorgieCutscene.js")
 
 function GeorgieTalkLogic(id)
 {

@@ -1,10 +1,11 @@
 
-evalFile("logics/GeorgieTalkLogic.js")
-evalFile("ItemFactory.js")
-evalFile("logics/CarrotQuestLogic.js")
-evalFile("logics/SpawnCarrotsLogic.js")
-evalFile("logics/ClosedGateOpenOnEventLogic.js")
+evalFile("mudquest/GeorgieTalkLogic.js")
+evalFile("mudquest/Items.js")
+evalFile("mudquest/CarrotQuestLogic.js")
+evalFile("mudquest/SpawnCarrotsLogic.js")
+evalFile("mudquest/ClosedGateOpenOnEventLogic.js")
 evalFile("corelogics/DarkRoomLogic.js")
+evalFile("mudquest/Characters.js")
 evalFile("Logic.js")
 evalFile("mudquest/MudfieldRegionWeatherLogic")
 

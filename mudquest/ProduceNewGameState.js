@@ -8,6 +8,9 @@ evalFile("corelogics/DarkRoomLogic.js")
 evalFile("mudquest/Characters.js")
 evalFile("Logic.js")
 evalFile("mudquest/MudfieldRegionWeatherLogic")
+evalFile("mudquest/RoryNoSackLogic")
+evalFile("mudquest/RoryPigSaverLogic")
+evalFile("mudquest/OrphanPigLogic")
 
 LG_NGS = "LG_NGS"
 
@@ -85,8 +88,9 @@ function ProduceNewGameState(dbs,savedir)
   orphanroom.SetDescription("When your dad disappeared they took you to the orphanage. Oh how you hate the orphanage.")
   orphanroom.SetRegion(fieldsofmudregion.ID())
 
-  var i  = idb.Create(SackOfTheOrphanage)
-  i.SetRoom(orphanroom.ID())
+  var orphansack  = idb.Create(SackOfTheOrphanage)
+  orphansack.SetRoom(orphanroom.ID())
+
 
 
   // Portals added to rooms in Game.ConsistencyCheckDatabases...
@@ -131,8 +135,19 @@ function ProduceNewGameState(dbs,savedir)
   var c = cdb.Create(DottyFalthorpe)
   c.SetRoom(mudfieldroom2.ID())
 
+  var c = cdb.Create(MudfieldOrphanPig)
+  c.SetRoom(mudfieldroom.ID())
+  var piglogic = new OrphanPigLogic(c.ID())
+  c.AddExistingLogic(piglogic)
+
   var c = cdb.Create(RoryHardknuckle)
   c.SetRoom(orphanroom.ID())
+
+  var rorynosacklogic = new RoryNoSackLogic(c.ID(),orphansack.ID())
+  c.AddExistingLogic(rorynosacklogic)
+
+  var rorypigsaverlogic = new RoryPigSaverLogic(c.ID())
+  c.AddExistingLogic(rorypigsaverlogic)
 
   var c = cdb.Create(GeorgieScrapneck)
   c.SetRoom(gateroom.ID())

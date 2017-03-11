@@ -53,6 +53,20 @@ _p.ConsistencyCheckDatabases = function(dbs,addmissing)
       }
   }
 
+
+  l1("Checking characters' regions",LG_DB_CHECK)
+  cdb.Begin()
+  var charter
+  while(charter = cdb.Next())
+  {
+    if(!charter.Region())
+    {
+      l1(charter.Name() + "missing region, assigning to room's region",LG_DB_CHECK)
+      var room = rdb.Get(charter.Room())
+      charter.SetRegion(room.Region())
+    }
+  }
+
   // Rooms
   l1("Checking {0} rooms".format(rdb.Size()),LG_DB_CHECK)
   var riter = rdb.Start()

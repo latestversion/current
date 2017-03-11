@@ -99,8 +99,7 @@ _p.DoMoveAction = function(a)
   room.BeginItems()
   var loopid
   while(loopid = room.NextItem())
-  {if(loopid == cid)
-    l1("next item: {0} ".format(loopid),LG_SPAM)
+  {
     var item = idb.Get(loopid)
     if(!item.DoAction({name:"attemptmove",arg1:cid,arg2:TypeEnums.Character,text:direction}))
     {
@@ -109,13 +108,18 @@ _p.DoMoveAction = function(a)
     }
   }
 
+
   l1("All clear to move " + character.Name() + " " + direction,LG_SPAM)
   room.RemoveCharacter(character.ID())
+  l1(JSON.stringify(room))
+
+  // Inform
+  Game.DoActionForCharactersInRoom(room, new InfoAction(character.Name() + " leaves " + direction))
+  Game.DoActionForCharactersInRoom(room2, new InfoAction("{0} arrives.".format(character.Name())))
+
   character.SetRoom(r2id)
   room2.AddCharacter(character.ID())
-  l1("{0} now has character {1}".format(room2.Name(),character.Name()),LG_SPAM)
   character.SetRegion(room2.Region())
-  l1("Old region {0}, new region {1}".format(room.Region(),room2.Region()),LG_SPAM)
 
   var newroom = room2
   var oldroom = room
@@ -290,7 +294,7 @@ _p.DoGetItemAction = function(a)
   l1("Found a matching item: " + item.Name(),LG_SPAM)
   // Ask permission
 
-  var action = {name:"getitem",arg1:charter.ID(),arg2:item.ID()}
+  var action = new AttemptGetItemAction(charter.ID(),item.ID())
 
   // Ask room
 
@@ -611,16 +615,58 @@ _p.DoMessageLogicAction = function(a)
 }
 
 
-_p.DoEventAction = function(a)
+_p.DoRoomEventAction = function(a)
 {
-  l1("DoEventAction: ".format(JSON.stringify(a)))
-
   var rid = a.arg1
   var room = Game.Room(rid)
 
   this.DoActionForCharactersInRoom(room,a)
   this.DoActionForItemsInRoom(room,a)
   this.DoActionForPortalsInRoom(room,a)
+}
+
+_p.DoEventAction = function(a)
+{
+  l1("DoEventAction: ".format(JSON.stringify(a)))
+
+  if(!a.scope)
+  {
+    a.scope = ScopeEnums.Room
+  }
+
+  if (TypeEnums.Room == a.scope)
+  {
+    this.DoRoomEventAction(a)
+    return
+  }
+
+  if(TypeEnums.Region == a.scope)
+  {
+    this.DoRegionEventAction(a)
+    return
+  }
+
+  l5("Unknown scope for event action: " + JSON.stringify(a),LG_ACTIONS)
+}
+
+_p.DoRegionEventAction = function(a)
+{
+  l1("DoRegionEventAction: ".format(JSON.stringify(a)))
+
+  var rgnid = a.arg1
+  var region = Game.Region(rgnid)
+
+  region.BeginRooms()
+
+  var rid
+
+  while(rid = region.NextRoom())
+  {
+    var room = Game.Room(rid)
+    this.DoActionForCharactersInRoom(room,a)
+    this.DoActionForItemsInRoom(room,a)
+    this.DoActionForPortalsInRoom(room,a)
+  }
 }
 
 _p.DoPhysicalEventAction = function(a)
@@ -800,6 +846,29 @@ _p.DoHelpAction = function(a)
   charter.DoAction({name:"info",text:text})
 }
 
+_p.DoShoutAction = function(a)
+{
+  var cid = a.cid
+  var text = a.text
+  var character = Game.Character(cid)
+
+  l1("{0} wants to shout {1}".format(character.Name(),text),LG_ACTIONS)
+
+  var template = "{0} shout{1}: '{2}'"
+
+  if(character.IsPlayer())
+  {
+    character.DoAction(new InfoAction(template.format("You","",text)))
+  }
+
+  var infoaction = new InfoAction(template.format(character.Name(),"s",text))
+
+  var rgnid = character.Region()
+  var region = Game.Region(rgnid)
+  l1("Shouting in region {0}".format(rgnid),LG_ACTIONS)
+  Game.DoActionForChartersInRegion(infoaction,region,[cid])
+}
+
 _p.DoAction = function(a)
 {
   l1("e Game.DoAction with action " + JSON.stringify(a),LG_SPAM)
@@ -807,82 +876,111 @@ _p.DoAction = function(a)
   if("enterrealm" == a.name)
   {
     this.DoEnterRealmAction(a)
+    return
   }
 
   if("move" == a.name)
   {
     this.DoMoveAction(a)
+    return
   }
 
   if("lookroom" == a.name)
   {
     this.DoLookRoomAction(a)
+    return
   }
 
   if("getitem" == a.name)
   {
     this.DoGetItemAction(a)
+    return
   }
 
   if("talk" == a.name)
   {
     this.DoTalkAction(a)
+    return
   }
 
   if("say" == a.name)
   {
     this.DoSayAction(a)
+    return
   }
 
   if("giveitem" == a.name)
   {
     this.DoGiveItemAction(a)
+    return
   }
 
   if("dropitem" == a.name)
   {
     this.DoDropItemAction(a)
+    return
   }
 
   if("messagelogic" == a.name)
   {
     this.DoMessageLogicAction(a)
+    return
   }
 
   if("event" == a.name)
   {
     this.DoEventAction(a)
+    return
+  }
+
+  if("regionevent" == a.name)
+  {
+    this.DoRegionEventAction(a)
+    return
   }
 
   if("physicalevent" == a.name)
   {
     this.DoPhysicalEventAction(a)
+    return
   }
 
   if("do" == a.name)
   {
     this.DoDoAction(a)
+    return
   }
 
   if("destroycharacter" == a.name)
   {
     this.DoDestroyCharacterAction(a)
+    return
   }
 
   if("deathtransport" == a.name)
   {
     this.DoDeathTransportAction(a)
+    return
   }
 
   if("help" == a.name)
   {
     this.DoHelpAction(a)
+    return
   }
 
   if("look" == a.name)
   {
     this.DoLookAction(a)
+    return
   }
 
+  if("shout" == a.name)
+  {
+    this.DoShoutAction(a)
+    return
+  }
+
+  l5("Game.DoAction: Unknown action received: " + JSON.stringify(a))
 
 }

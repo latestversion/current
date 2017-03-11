@@ -371,13 +371,16 @@ AttackCommand.prototype.Execute = function(args,charter)
     return
   }
 
-  if(target.DoAction({name:"query",arg1:cid,text:"canattack"}))
+  if(target.DoAction(new QueryCanAttackAction(charter.ID())))
   {
     charter.DoAction({name:"info",text:"{0} isn't really compatible with fighting.".format(target.Name())})
     return
   }
 
-  charter.DoAction({name:"do",arg3:target.ID(),text:"initattack"})
+  if(target.DoAction(new AttemptAttackAction(cid,target.ID())))
+  {
+    charter.DoAction({name:"do",arg3:target.ID(),text:"initattack"})
+  }
 }
 RegisterCommand(AttackCommand)
 

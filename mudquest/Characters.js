@@ -45,6 +45,12 @@ function GoblinKing(id)
 }
 InheritAndRegisterCharacter(GoblinKing)
 
+function MudfieldOrphanPig(id)
+{
+  Character.call(this,id,"Orphan Pig","Orhpan Pig is a medium sized pig. It seems to be quite enjoying the mud.")
+}
+InheritAndRegisterCharacter(MudfieldOrphanPig)
+
 function GiantSpider(id)
 {
   Character.call(this,id,"A GIANT SPIDER","This spider is the stuff of nightmares. Its many eyes reflect the image of a dead adventurer.")

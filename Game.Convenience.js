@@ -128,14 +128,20 @@ _p.MatchingItemsForCharter = function(charter,matchstring)
   return filtereditems
 }
 
-_p.DoActionForCharactersInRoom = function(room,action)
+_p.DoActionForCharactersInRoom = function(room,action,exceptions)
 {
+  l1("DoActionForCharactersInRoom")
   room.BeginCharacters()
-  var tcharter
-  while(tcharter = room.NextCharacter())
+  var cid
+  while(cid = room.NextCharacter())
   {
-    tcharter = Game.Character(tcharter)
-    tcharter.DoAction(action)
+    if(exceptions && (-1 != exceptions.indexOf(cid)))
+    {
+      continue
+    }
+
+    var charter = Game.Character(cid)
+    charter.DoAction(action)
   }
 }
 
@@ -175,17 +181,25 @@ _p.ChartersInRoom = function(room)
   return charters
 }
 
-_p.DoActionForChartersInRegion = function(action, region)
+_p.DoActionForChartersInRegion = function(action, region, exceptions)
 {
+  l1("DoActionForChartersInRegion: action: " + JSON.stringify(action),LG_SPAM)
   region.BeginRooms()
   var roomid
   while(roomid = region.NextRoom())
   {
-    room = Game.Room(roomid)
-    var charters = Game.ChartersInRoom(room)
-    for (var k in charters)
+    var room = Game.Room(roomid)
+
+    room.BeginCharacters()
+    var cid
+    while(cid = room.NextCharacter())
     {
-      var charter = Game.Character(charters[k])
+      if(exceptions && (-1 != exceptions.indexOf(cid)))
+      {
+        continue
+      }
+
+      var charter = Game.Character(cid)
       charter.DoAction(action)
     }
   }
